@@ -1,11 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activity.AddSeqActivity"
+    android:orientation="horizontal"
     tools:showIn="@layout/activity_add_seq">
 
-</android.support.constraint.ConstraintLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:id="@+id/tvInputSeq"
+        android:layout_width="400dp"
+        android:layout_height="350dp"
+        android:hint="In Qty"
+        android:textSize="60sp"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tvwc3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="workcenterrrrrrr"/>
+</LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp">
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="100dp"
+        android:layout_height="90dp"
+        android:text="1"
+        android:onClick="btn1Clicked"
+        android:textSize="60sp"/>
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_toRightOf="@id/btn1"
+            android:text="2"
+            android:onClick="btn2Clicked"
+            android:textSize="60sp"/>
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_toRightOf="@id/btn2"
+            android:text="3"
+            android:onClick="btn3Clicked"
+            android:textSize="60sp"/>
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_below="@id/btn1"
+            android:text="4"
+            android:onClick="btn4Clicked"
+            android:textSize="60sp"/>
+        <Button
+            android:id="@+id/btn5"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_below="@id/btn2"
+            android:layout_toRightOf="@id/btn4"
+            android:text="5"
+            android:onClick="btn5Clicked"
+            android:textSize="60sp"/>
+        <Button
+            android:id="@+id/btn6"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_below="@id/btn3"
+            android:layout_toRightOf="@id/btn5"
+            android:text="6"
+            android:onClick="btn6Clicked"
+            android:textSize="60sp"/>
+        <Button
+            android:id="@+id/btn7"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_below="@id/btn4"
+            android:text="7"
+            android:onClick="btn7Clicked"
+            android:textSize="60sp"/>
+        <Button
+            android:id="@+id/btn8"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_below="@id/btn5"
+            android:layout_toRightOf="@id/btn7"
+            android:text="8"
+            android:onClick="btn8Clicked"
+            android:textSize="60sp"/>
+        <Button
+            android:id="@+id/btn9"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_below="@id/btn6"
+            android:layout_toRightOf="@id/btn8"
+            android:text="9"
+            android:onClick="btn9Clicked"
+            android:textSize="60sp"/>
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_below="@id/btn7"
+            android:text="Clear"
+            android:onClick="btnclearClicked"
+            android:textSize="20sp"/>
+        <Button
+            android:id="@+id/btn0"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_below="@id/btn8"
+            android:layout_toRightOf="@id/btnClear"
+            android:text="0"
+            android:onClick="btn0Clicked"
+            android:textSize="60sp"/>
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="100dp"
+            android:layout_height="90dp"
+            android:layout_below="@id/btn9"
+            android:layout_toRightOf="@id/btn0"
+            android:text="Back"
+            android:textSize="20sp"/>
+    </RelativeLayout>
+
+     <TextView
+       android:id="@+id/tvnmprod7"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="prodname7"/>
+   <TextView
+       android:id="@+id/tvprod7"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="prodno"/>
+   <TextView
+       android:id="@+id/tvstsprod7"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="statusprod"/>
+
+   <TextView
+       android:id="@+id/tvdocnum7"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="docnum"/>
+   <TextView
+       android:id="@+id/tvprodcode7"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="prodcode7"/>
+
+   <TextView
+       android:id="@+id/tvroutecode7"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="routecode"/>
+
+    <!--<TextView
+        android:id="@+id/tvroutename7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="route name"/>-->
+
+    <!--<TextView
+        android:id="@+id/tvprodplanqty7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="prodplanqty"/>-->
+    <TextView
+        android:id="@+id/tvsequence7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sequence"/>
+
+    <!--<TextView
+        android:id="@+id/tvsequenceqty7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sequenceqty"/>-->
+    <!--<TextView
+        android:id="@+id/tvtglmulai7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tglmulai"/>-->
+    <TextView
+        android:id="@+id/tvinqty7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="input qty"/>
+
+    <TextView
+        android:id="@+id/tvjammulai7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="jam mulai"/>
+
+    <TextView
+        android:id="@+id/tvsequenceqty7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sequenceqty"/>
+
+    <TextView
+        android:id="@+id/tvtglmulai7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tglmulai"/>
+
+    <TextView
+        android:id="@+id/tvroutename7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="route name"/>
+
+    <TextView
+        android:id="@+id/tvprodplanqty7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="prodplanqty"/>
+
+    <TextView
+        android:id="@+id/tvstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="status"/>
+
+
+
+
+
+
+</LinearLayout>
