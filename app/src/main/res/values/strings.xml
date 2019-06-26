@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ShopFloor</string>
+
+    <string name="please_wait_onprocess">Sedang Prosess</string>
+    <string name="tgl_dokumen">Tgl. Dokumen</string>
+    <string name="tanggal">04-03-2019</string>
+    <string name="no_produksi">No. Produksi</string>
+    <string name="no_dokumen">No Dokumen</string>
+    <string name="produk">Produk</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="searc_producorder">Cari Productorder</string>
+    <string name="jam_mulai">Jam Mulai</string>
+    <string name="title_activity_add_seq">AddSeqActivity</string>
+</resources>

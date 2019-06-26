@@ -1,14 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.RejectListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/lineReject"
+        android:layout_width="400dp"
+        android:layout_height="350dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvReject2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Choose Reject : "
+        android:gravity="center_horizontal"
+        />
+
+        <TextView
+            android:id="@+id/tvReject3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Reject"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            />
+
+        <Button
+            android:id="@+id/btnReject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pilih Reject"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/btnSimpan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="SIMPAN"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relinputRej"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/lineReject">
+
+        <TextView
+            android:id="@+id/tvRejectQty"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Reject Qty"
+            android:textSize="20sp"
+            android:gravity="center"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvRejectQty"
+            android:layout_marginLeft="10dp">
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:text="1"
+            android:textSize="40sp"
+            android:onClick="btn1Clicked"/>
+
+        <Button
+            android:id="@+id/btn2"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_toRightOf="@id/btn1"
+            android:text="2"
+            android:textSize="40sp"
+            android:onClick="btn2Clicked"/>
+
+        <Button
+            android:id="@+id/btn3"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_toRightOf="@id/btn2"
+            android:text="3"
+            android:textSize="40sp"
+            android:onClick="btn3Clicked"/>
+
+        <Button
+            android:id="@+id/btn4"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/btn1"
+            android:text="4"
+            android:textSize="40sp"
+            android:onClick="btn4Clicked"/>
+
+        <Button
+            android:id="@+id/btn5"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/btn2"
+            android:layout_toRightOf="@id/btn4"
+            android:text="5"
+            android:textSize="40sp"
+            android:onClick="btn5Clicked"/>
+
+        <Button
+            android:id="@+id/btn6"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/btn3"
+            android:layout_toRightOf="@id/btn5"
+            android:text="6"
+            android:textSize="40sp"
+            android:onClick="btn6Clicked"/>
+
+        <Button
+            android:id="@+id/btn7"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/btn4"
+            android:text="7"
+            android:textSize="40sp"
+            android:onClick="btn7Clicked"/>
+
+        <Button
+            android:id="@+id/btn8"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/btn5"
+            android:layout_toRightOf="@id/btn7"
+            android:text="8"
+            android:textSize="40sp"
+            android:onClick="btn8Clicked"/>
+
+        <Button
+            android:id="@+id/btn9"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/btn6"
+            android:layout_toRightOf="@id/btn8"
+            android:text="9"
+            android:textSize="40sp"
+            android:onClick="btn9Clicked"/>
+
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/btn7"
+            android:text="Clear"
+            android:textSize="20sp"
+            android:onClick="btnClearClic"
+            />
+
+        <Button
+            android:id="@+id/btn0"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/btn8"
+            android:layout_toRightOf="@id/btnClear"
+            android:text="0"
+            android:textSize="40sp"
+            android:onClick="btn0Click"
+            />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/btn9"
+            android:layout_toRightOf="@id/btn0"
+            android:text="Back"
+            android:textSize="20sp"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

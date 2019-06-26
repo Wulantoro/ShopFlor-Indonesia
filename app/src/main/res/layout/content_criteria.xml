@@ -1,6 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/activity_criteria">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/dashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:id="@+id/tvnoprod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No. Produksi : "/>
+
+        <TextView
+            android:id="@+id/tvnoprod1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ini no produksi"/>
+
+        <TextView
+            android:id="@+id/tvnmprod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Nama Produk"/>
+        <TextView
+            android:id="@+id/tvnmprod1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ini nama produk"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Sequence"/>
+        <TextView
+            android:id="@+id/tvsequence1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ini sequence"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Sequence Qty"/>
+        <TextView
+            android:id="@+id/tvseqqty1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ini sequence qty"/>
+
+        <TextView
+            android:id="@+id/tvtglsel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Tanggal Selesai :"/>
+        <TextView
+            android:id="@+id/tvtglsel1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="iin tanggal selesai"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Jam Selesai"/>
+        <TextView
+            android:id="@+id/tvjamsel1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ini jam selesai"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Doc.Status"/>
+        <TextView
+            android:id="@+id/tvdocsts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ini doc status"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/RootContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@id/dashboard">
+
+        <RelativeLayout
+            android:id="@+id/content1"
+            android:layout_width="150dp"
+            android:layout_height="70dp">
+
+            <TextView
+                android:id="@+id/tvInputQty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Input Quantity"/>
+            <TextView
+                android:id="@+id/tvInputQty1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvInputQty"
+                android:text="ini input quantity"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/content2"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            >
+            <TextView
+                android:id="@+id/tvOutputQty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Output Quantity"/>
+            <TextView
+                android:id="@+id/tvOutputQty1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvOutputQty"
+                android:text="ini output quantity"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvWorkcenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvOutputQty"
+            android:text="workcemter"/>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/dashboard"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/RootContent"
+        >
+
+        <TextView
+            android:id="@+id/tvCrit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Criteria"
+            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvActualCrit"
+            android:layout_below="@id/tvCrit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

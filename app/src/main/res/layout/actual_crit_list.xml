@@ -1,6 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="5dp"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardUseCompatPadding="true"
+    android:clickable="true">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/line4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvcriteria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Criteria : "
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:id="@+id/tvcritdesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvcriteria"
+            android:text="Criteria Description : "
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:id="@+id/tvvaluetype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvcritdesc"
+            android:text="Value Type : "
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:id="@+id/tvstandard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvvaluetype"
+            android:text="Standard : "
+            android:textStyle="bold"/>
+
+
+        <TextView
+            android:id="@+id/tvactual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvstandard"
+            android:layout_marginTop="20dp"
+            android:text="Actual : "
+            android:textStyle="bold"/>
+
+
+
+        <TextView
+            android:id="@+id/tvremarks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvactual"
+            android:layout_marginTop="20dp"
+            android:text="Remarks : "
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_toRightOf="@id/tvcriteria"
+            android:id="@+id/tvcriteria1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ini criteria"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvcritdesc1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvcriteria1"
+            android:layout_toRightOf="@id/tvcritdesc"
+            android:text="ini crit decs"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvvaluetype1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvvaluetype"
+            android:layout_below="@id/tvcritdesc1"
+            android:text="ini value type"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvstandard1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvstandard"
+            android:layout_below="@id/tvvaluetype1"
+            android:text="ini standard"
+            android:textStyle="bold"/>
+
+
+
+            <EditText
+                android:id="@+id/txactual"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:imeOptions="flagNoExtractUi"
+                android:layout_toRightOf="@id/tvactual"
+                android:layout_below="@id/tvstandard1"
+                android:hint="Actual"/>
+
+
+
+            <EditText
+                android:id="@+id/txremarks"
+                android:layout_width="250dp"
+                android:imeOptions="flagNoExtractUi"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/tvremarks"
+                android:layout_below="@id/txactual"
+                android:hint="Remarks"/>
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
