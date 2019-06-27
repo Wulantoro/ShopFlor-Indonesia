@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,6 +42,7 @@ public class Open_DocActivity extends AppCompatActivity {
     private Calendar calendar;
     private int year, month, day;
     private TextView dateView;
+    private TextView tvworkcenter0;
 
     private RecyclerView rv;
     private OpenDocAdapter adapter;
@@ -48,6 +50,7 @@ public class Open_DocActivity extends AppCompatActivity {
     private List<Header> list;
     private Header header;
     private Context context;
+    private SharedPreferences prf;
 
 
     @Override
@@ -55,6 +58,11 @@ public class Open_DocActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open__doc);
 
+        tvworkcenter0 = findViewById(R.id.tvworkcenter0);
+
+        TextView tvworkcenter = findViewById(R.id.tvworkcenter0);
+        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
+        tvworkcenter.setText(prf.getString("workcenter", null));
 
         dateView = (TextView) findViewById(R.id.tvtanggal1);
         calendar = Calendar.getInstance();
@@ -87,7 +95,7 @@ public class Open_DocActivity extends AppCompatActivity {
         if (adapter != null) {
             adapter.clearAll();
 
-            AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/simpanheader")
+            AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/simpanheader?workCenter="+prf.getString("workcenter", null))
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {

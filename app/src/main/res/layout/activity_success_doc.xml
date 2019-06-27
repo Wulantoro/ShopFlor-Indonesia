@@ -7,43 +7,46 @@
     tools:context=".Activity.SuccessDocActivity">
 
     <TextView
+        android:id="@+id/text0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/text1"
         android:text="Daftar Dokument Shopfloor"
         android:textSize="18sp"
         android:layout_marginTop="10dp"
         android:textStyle="bold"
         android:gravity="center_horizontal"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/tvtanggalsuccess"
-        android:layout_below="@+id/text1"
-        android:text="Tanggal : "
+    <LinearLayout
+        android:id="@+id/line0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text0"
         android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvtanggalsuccess"
+        android:layout_marginLeft="20dp"
+        android:text="Tanggal : "
         android:textSize="18sp"
         android:textStyle="bold"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvtanggal1success"
         android:text="2019-03-28"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:layout_below="@id/text1"
-        android:paddingTop="10dp"
-        android:layout_marginLeft="80dp"/>
+        android:layout_marginLeft="20dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnPlhtglsuccess"
-        android:layout_below="@id/text1"
         android:text="PILIH TANGGAL"
-        android:layout_marginLeft="190dp"
+        android:layout_marginLeft="20dp"
         android:onClick="setDate"/>
 
     <Button
@@ -51,24 +54,28 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnSmatglsuccess"
         android:text="SEMUA TANGGAL"
-        android:layout_below="@id/text1"
-        android:layout_marginLeft="340dp"/>
+        android:layout_marginLeft="5dp"/>
 
-   <!-- <Button
-        android:id="@+id/btnCoba"
+    <TextView
+        android:id="@+id/tvworkcenter4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="coba"
-        android:layout_below="@id/text1"
-        android:layout_marginLeft="500dp"/>-->
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:textSize="30dp"
+        android:layout_toRightOf="@id/btnSmatglsuccess"
+        android:textColor="@color/blue_A700"
+        android:text="ini workcenter"
+        />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvtanggal1success">
+        android:layout_below="@id/line0">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvWorkcenterList"
+            android:id="@+id/rvSuccDocList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
