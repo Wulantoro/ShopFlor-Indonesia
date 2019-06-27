@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(ANError anError) {
-                        Toast.makeText(getApplicationContext(), "Gagal Login", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Gagal Login", Toast.LENGTH_LONG).show();
                     }
                 });
     }

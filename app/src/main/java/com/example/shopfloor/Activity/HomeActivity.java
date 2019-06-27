@@ -18,6 +18,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.WorkcenterAdapter;
+import com.example.shopfloor.Models.User;
 import com.example.shopfloor.Models.Workcenter;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
@@ -42,6 +43,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView dateView1;
     private TextView tvWCtampil1;
     private TextView tvusername0;
+    private TextView tvdivisi0;
 
     public static TextView tvNo_Prod1;
     public static TextView tvprod1;
@@ -63,6 +65,12 @@ public class HomeActivity extends AppCompatActivity {
         tvWCtampil1 = findViewById(R.id.tvWCtampil1);
         tvNm_prod1 = findViewById(R.id.tvNm_prod1);
         tvusername0 = findViewById(R.id.tvusername0);
+        tvdivisi0 = findViewById(R.id.tvdivisi0);
+
+        User user = new User();
+
+         TextView tvdivisi = findViewById(R.id.tvdivisi0);
+        tvdivisi.setText(String.valueOf(user.getDept()));
 
         TextView tvusername = findViewById(R.id.tvusername0);
         prf = getSharedPreferences("username", MODE_PRIVATE);
@@ -121,8 +129,17 @@ public class HomeActivity extends AppCompatActivity {
                 btnOpendoc.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent iOpen = new Intent(getApplicationContext(), Open_DocActivity.class);
-                        startActivity(iOpen);
+                        if (tvWCtampil1.length() != 0) {
+                            pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+                            Intent iOpen = new Intent(HomeActivity.this, Open_DocActivity.class);
+                            String wc1 = tvWCtampil1.getText().toString();
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("workcenter", wc1);
+                            editor.commit();
+                            startActivity(iOpen);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Pilih Workcenter dahulu", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
@@ -130,15 +147,54 @@ public class HomeActivity extends AppCompatActivity {
                 btnSucDoc.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent iSuc = new Intent(getApplicationContext(), SuccessDocActivity.class);
-                        startActivity(iSuc);
+
+                        if (tvWCtampil1.length() != 0) {
+                            pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+                            Intent iSuc = new Intent(getApplicationContext(), SuccessDocActivity.class);
+                            String wc2 = tvWCtampil1.getText().toString();
+                            SharedPreferences.Editor editor1 = pref.edit();
+                            editor1.putString("workcenter", wc2);
+                            editor1.commit();
+                            startActivity(iSuc);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Pilih Workcenter dahulu", Toast.LENGTH_SHORT).show();
+                        }
                     }
+
                 });
             }
+
 
             //tampil tanggal home
             public void showDate(int year, int month, int day) {
                 dateView1.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
+            }
+
+            private void userLogin() {
+                   AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/loginuser?U_STEM_Username="+prf.getString("etusername", null))
+                           .setPriority(Priority.MEDIUM)
+                           .build()
+                           .getAsJSONObject(new JSONObjectRequestListener() {
+                               @Override
+                               public void onResponse(JSONObject response) {
+                                   try {
+                                       Log.e("tampil user", response.toString(1));
+                                       String message = response.getString("message");
+
+                                       if (message.equals("User ketemu")) {
+                                           String records = response.getString("data");
+                                       }
+                                   }catch (JSONException e) {
+                                       e.printStackTrace();
+                                   }
+                               }
+
+                               @Override
+                               public void onError(ANError anError) {
+
+                               }
+                           });
+
             }
 
 

@@ -161,13 +161,14 @@
             android:layout_below="@+id/tvRoute_Code1"
             android:layout_marginLeft="170dp"
             android:layout_marginTop="20dp"
-            android:text="ini qty renc prod"/>
+            android:text=""/>
 
         <TextView
             android:id="@+id/tvwc1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvQty_rencProd"
+            android:textColor="@color/white"
             android:text="ini mworkcenter"/>
     </RelativeLayout>
 
