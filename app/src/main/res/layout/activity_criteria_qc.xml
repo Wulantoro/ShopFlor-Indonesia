@@ -273,6 +273,13 @@
             android:textColor="@color/white"
             android:text="jammulai"/>
 
+        <TextView
+            android:id="@+id/tvposted6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvjammulai1"
+            android:text="posted"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvActualCrit"
             android:layout_below="@id/tvCrit"

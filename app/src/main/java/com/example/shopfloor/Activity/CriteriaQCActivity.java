@@ -46,6 +46,8 @@ public class CriteriaQCActivity extends AppCompatActivity {
     private TextView tvOutputQty1;
     private TextView tvWorkcenter;
     private TextView tvstatus2;
+    private TextView tvdocsts;
+    private TextView tvposted6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,8 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvOutputQty1 = findViewById(R.id.tvOutputQty1);
         tvWorkcenter = findViewById(R.id.tvWorkcenter);
         tvstatus2 = findViewById(R.id.tvstatus2);
+        tvdocsts = findViewById(R.id.tvdocsts);
+        tvposted6 = findViewById(R.id.tvposted6);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -145,9 +149,14 @@ public class CriteriaQCActivity extends AppCompatActivity {
         TextView tvstatus = findViewById(R.id.tvstatus2);
         tvstatus.setText("Completed");
 
+        TextView tvposted = findViewById(R.id.tvdocsts);
+        tvposted.setText("Pending1");
+
+        TextView tvposted1 = findViewById(R.id.tvposted6);
+        tvposted1.setText("1");
+
 
         //tanggal selesai
-//        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         TextView tglsel = findViewById(R.id.tvtglsel1);
         tglsel.setText(date);
@@ -183,6 +192,8 @@ public class CriteriaQCActivity extends AppCompatActivity {
             jsonObject.put("tanggalSelesai",tvtglsel1.getText().toString());
             jsonObject.put("jamSelesai", tvjamsel1.getText().toString());
             jsonObject.put("status", tvstatus2.getText().toString());
+            jsonObject.put("posted", tvposted6.getText().toString());
+            jsonObject.put("UploadTime", tvjamsel1.getText().toString());
 //            Log.e("data3=-=====",tvInputQty1.getText().toString());
 
         } catch (JSONException e) {

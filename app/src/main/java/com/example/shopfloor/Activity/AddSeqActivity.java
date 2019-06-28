@@ -64,6 +64,7 @@ public class AddSeqActivity extends AppCompatActivity {
     private TextView tvjammulai7;
     private TextView tvwc3;
     private TextView tvstatus;
+    private TextView tvposted3;
     private Button btnBack;
 
 
@@ -97,6 +98,7 @@ public class AddSeqActivity extends AppCompatActivity {
         tvjammulai7 = findViewById(R.id.tvjammulai7);
         tvwc3 = findViewById(R.id.tvwc3);
         tvstatus = findViewById(R.id.tvstatus);
+        tvposted3 = findViewById(R.id.tvposted3);
 
         tvInputSeq = findViewById(R.id.tvInputSeq);
         pref = getSharedPreferences("inQty", MODE_PRIVATE);
@@ -161,11 +163,15 @@ public class AddSeqActivity extends AppCompatActivity {
         TextView tvstatus = findViewById(R.id.tvstatus);
         tvstatus.setText("0");
 
+        TextView tvposted = findViewById(R.id.tvposted3);
+        tvposted.setText("0");
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle(null);
         Toolbar topToolBar = findViewById(R.id.toolbar);
         setSupportActionBar(topToolBar);
+
         Log.e("Date 2 " ,tvtglmulai7.getText().toString());
 
     }
@@ -175,10 +181,16 @@ public class AddSeqActivity extends AppCompatActivity {
         return true;
     }
 
-    /*private void destroy() {
-        SharedPreferences sharedPreferences = getSharedPreferences("Noprod", Context.MODE_PRIVATE);
-        sharedPreferences.c
-    }*/
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_upHeader && tvInputSeq.length() != 0) {
+            upHeader();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private void upHeader() {
         JSONObject jsonObject = new JSONObject();
@@ -201,11 +213,11 @@ public class AddSeqActivity extends AppCompatActivity {
             jsonObject.put("inQty", tvInputSeq.getText().toString());
             jsonObject.put("workCenter", tvwc3.getText().toString());
             jsonObject.put("status", tvstatus.getText().toString());
+            jsonObject.put("posted", tvposted3.getText().toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-//        AndroidNetworking.put(GlobalVars.BASE_IP +"index.php/simpanheader?id")
         AndroidNetworking.post(GlobalVars.BASE_IP +"index.php/simpanheader")
                 .addJSONObjectBody(jsonObject)
                 .setPriority(Priority.MEDIUM)
@@ -231,37 +243,6 @@ public class AddSeqActivity extends AppCompatActivity {
                 });
     }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-//        switch (item.getItemId()) {
-//            case R.id.action_upHeader :
-//                upHeader();
-//                break;
-//            case R.id.action_seq1 :
-//                String inqty = tvInputSeq.getText().toString();
-//                SharedPreferences.Editor editor = pref.edit();
-//                editor.putString("inqty", inqty);
-//                editor.commit();
-//                startActivity(new Intent(getApplicationContext(), AddSeq1Activity.class));
-//        }
-//
-        if (id == R.id.action_upHeader && tvInputSeq.length() != 0) {
-            upHeader();
-        }
-
-        /*if (id == R.id.action_seq1 && tvInputSeq.length() != 0) {
-            String inqty = tvInputSeq.getText().toString();
-            SharedPreferences.Editor editor = pref.edit();
-            editor.putString("inqty", inqty);
-            editor.commit();
-            startActivity(new Intent(getApplicationContext(), AddSeq1Activity.class));
-        }*/
-//        else {
-//            Toast.makeText(getApplicationContext(), "Input Quantity tidak boleh kosong", Toast.LENGTH_SHORT).show();
-//        }
-        return super.onOptionsItemSelected(item);
-    }
 
     public void btn1Clicked(View v) {
         insert(1);

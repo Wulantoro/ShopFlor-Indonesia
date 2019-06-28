@@ -178,6 +178,15 @@
                 android:layout_below="@id/tvdocentry1"
                 android:textColor="@color/white"
                 android:text="ini statyus"/>
+
+            <TextView
+                android:id="@+id/tvposted4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvdocentry1"
+                android:layout_toRightOf="@id/tvstatus"
+                android:text="statusss"
+                />
         </RelativeLayout>
 
         <RelativeLayout

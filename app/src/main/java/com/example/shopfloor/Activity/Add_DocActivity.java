@@ -405,7 +405,7 @@ public class Add_DocActivity extends AppCompatActivity {
 
             /*********shift***********************/
 
-//            if (jam >= String.valueOf(jam("07:00") )) {
+//            if (tvJam_mulai1.length() != 07.00) {
 //                TextView shift = findViewById(R.id.tvShift1);
 //                shift.setText("Shift 1");
 //            }
