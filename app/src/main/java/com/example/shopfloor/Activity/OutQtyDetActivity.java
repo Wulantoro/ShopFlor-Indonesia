@@ -40,6 +40,7 @@ public class OutQtyDetActivity extends AppCompatActivity {
     private TextView tvtglmulai0;
     private TextView tvjammulai0;
     private TextView tvstatus1;
+    private TextView tvposted5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,7 @@ public class OutQtyDetActivity extends AppCompatActivity {
         tvtglmulai0 = findViewById(R.id.tvtglmulai0);
         tvjammulai0 = findViewById(R.id.tvjammulai0);
         tvstatus1 = findViewById(R.id.tvstatus1);
+        tvposted5 = findViewById(R.id.tvposted5);
 
         TextView tvdocnum6 = findViewById(R.id.tvdocnum6);
         prf = getSharedPreferences("docNum", MODE_PRIVATE);
@@ -134,6 +136,10 @@ public class OutQtyDetActivity extends AppCompatActivity {
         TextView tvstatus = findViewById(R.id.tvstatus1);
         prf = getSharedPreferences("status", MODE_PRIVATE);
         tvstatus.setText(prf.getString("tvstatus", null));
+
+        TextView tvposted = findViewById(R.id.tvposted5);
+        prf = getSharedPreferences("posted", MODE_PRIVATE);
+        tvposted.setText(prf.getString("tvposted", null));
 
     }
 
@@ -217,6 +223,12 @@ public class OutQtyDetActivity extends AppCompatActivity {
             SharedPreferences.Editor editor11 = pref.edit();
             editor11.putString("tvjammulai", tvjammulai);
             editor11.commit();
+
+            pref = getSharedPreferences("posted", MODE_PRIVATE);
+            String tvposted = tvposted5.getText().toString();
+            SharedPreferences.Editor editor12 = pref.edit();
+            editor12.putString("tvposted", tvposted);
+            editor12.commit();
 
             startActivity(new Intent(getApplicationContext(), CriteriaQCActivity.class));
         } else {

@@ -45,6 +45,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
     private TextView tvworkcenter3;
     private TextView tvdocentry1;
     private TextView tvstatus;
+    private TextView tvposted4;
     private OpenDocAdapter adapter;
     private Header header;
 
@@ -73,6 +74,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvworkcenter3 = findViewById(R.id.tvworkcenter3);
         tvdocentry1 = findViewById(R.id.tvdocentry1);
         tvstatus = findViewById(R.id.tvstatus);
+        tvposted4 = findViewById(R.id.tvposted4);
 
         adapter = new OpenDocAdapter(this);
 
@@ -95,6 +97,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvworkcenter3.setText(header.getWorkCenter());
         tvdocentry1.setText(String.valueOf(header.getDocEntry()));
         tvstatus.setText(header.getStatus());
+        tvposted4.setText(String.valueOf(header.getPosted()));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -225,6 +228,12 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         SharedPreferences.Editor editor15 = pref.edit();
         editor15.putString("tvstatus", tvstatusp);
         editor15.commit();
+
+        pref = getSharedPreferences("posted", MODE_PRIVATE);
+        String tvposted = tvposted4.getText().toString();
+        SharedPreferences.Editor editor16 = pref.edit();
+        editor16.putString("tvposted", tvposted);
+        editor16.commit();
 
         startActivity(new Intent(getApplicationContext(), OutQtyDetActivity.class));
         return true;
