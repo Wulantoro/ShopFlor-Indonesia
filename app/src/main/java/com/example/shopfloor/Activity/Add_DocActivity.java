@@ -75,6 +75,8 @@ public class Add_DocActivity extends AppCompatActivity {
     SharedPreferences prf;
     private TextView tvShift1;
     private TextView tvTgl_mulai1;
+    private TextView tvusername2;
+    private TextView tvdocnum1;
 
 
 
@@ -110,6 +112,7 @@ public class Add_DocActivity extends AppCompatActivity {
         tvTgl_mulai1 = findViewById(R.id.tvTgl_mulai1);
         tvJam_mulai1 = findViewById(R.id.tvJam_mulai1);
         tvwc1 = findViewById(R.id.tvwc1);
+        tvusername2 = findViewById(R.id.tvusername2);
 
 
         tvSquence1 = findViewById(R.id.tvSquence1);
@@ -121,6 +124,10 @@ public class Add_DocActivity extends AppCompatActivity {
         TextView tvwc = findViewById(R.id.tvwc1);
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
         tvwc.setText(prf.getString("workcenter", null));
+
+        TextView tvuserid = findViewById(R.id.tvusername2);
+        prf = getSharedPreferences("userId", MODE_PRIVATE);
+        tvuserid.setText(prf.getString("tvuserid", null));
 
         /*******************tanggal mulai***********************/
         /*calendar = Calendar.getInstance();
@@ -167,11 +174,11 @@ public class Add_DocActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Pilih Produksi Terlebih dahulu", Toast.LENGTH_LONG).show();
 
                 } else {
-                    pref = getSharedPreferences("Docnum", MODE_PRIVATE);
-                    String docnum = tvNo_prod1.getText().toString();
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("docnum", docnum);
-                    editor.commit();
+//                    pref = getSharedPreferences("Docnum", MODE_PRIVATE);
+//                    String docnum = tvNo_prod1.getText().toString();
+//                    SharedPreferences.Editor editor = pref.edit();
+//                    editor.putString("docnum", docnum);
+//                    editor.commit();
                     showDialog(Add_DocActivity.this);
 
                 }
@@ -330,23 +337,33 @@ public class Add_DocActivity extends AppCompatActivity {
         if (adapter != null)
             adapter.clearAll();
 
-        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
-        prf.getString("workcenter", null);
+//        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
+//        prf.getString("workcenter", null);
+//        Log.e("workcenterrrrrrrr",  prf.getString("workcenter", null));
 
 //        cobadocnum = findViewById(R.id.cobadocnum);
 //        TextView docnum = findViewById(R.id.cobadocnum);
 //        prf = getSharedPreferences("Docnum", MODE_PRIVATE);
 //        docnum.setText(prf.getString("docnum", null));
-//        Log.e("docnum = ", prf.getString("docnum", null));
+//        Log.e("docnum ==== ", prf.getString("docnum", null));
 
-       AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null))
+        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
+        Log.e("workcenter30",  "check workcenter " + prf.getString("workcenter", null));
+
+        prf = getSharedPreferences("Docnum", MODE_PRIVATE);
+        Log.e("docnum30 == ", "check docnum = " + prf.getString("docnum", null));
+
+//       AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null)+"&&docnum="+prf.getString("docnum", null))
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null))
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?docnum="+prf.getString("docnum", null))
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null))
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
                         List<Sequence> result = new ArrayList<>();
                         try {
-                            Log.e("resp", response.toString(1));
+                            Log.e("sequenceeeeeeeeeeee", response.toString(1));
 
                             if (result != null)
                                 result.clear();
@@ -360,6 +377,9 @@ public class Add_DocActivity extends AppCompatActivity {
 
                                 if (dataArr.length() > 0) {
                                     for (int i = 0; i < dataArr.length(); i++) {
+
+                                        System.out.println("res "+dataArr.getJSONObject(i).toString());
+
                                         Sequence sequence = gson.fromJson(dataArr.getJSONObject(i).toString(), Sequence.class);
                                         result.add(sequence);
                                     }
@@ -490,6 +510,12 @@ public class Add_DocActivity extends AppCompatActivity {
             editor12.putString("workcenter", tvwc);
             editor12.commit();
 
+            pref = getSharedPreferences("userId", MODE_PRIVATE);
+            String tvuserid = tvusername2.getText().toString();
+            SharedPreferences.Editor editor13 = pref.edit();
+            editor13.putString("tvuserid", tvuserid);
+            editor13.commit();
+
             /*pref = getSharedPreferences("Nmprod", MODE_PRIVATE); //prodname
             pref = getSharedPreferences("Sequence", MODE_PRIVATE);
             pref = getSharedPreferences("SequenceQty", MODE_PRIVATE);
@@ -500,6 +526,8 @@ public class Add_DocActivity extends AppCompatActivity {
             pref = getSharedPreferences("RouteCode", MODE_PRIVATE);
             pref = getSharedPreferences("RouteName", MODE_PRIVATE);
             pref = getSharedPreferences("TglMulai", MODE_PRIVATE);
+            pref = getSharedPreferences("jamMulai", MODE_PRIVATE);
+            pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
 
             String tvnmprod = tvNm_prod1.getText().toString();
             String tvnoprod = tvNo_Prod1.getText().toString();
@@ -512,9 +540,11 @@ public class Add_DocActivity extends AppCompatActivity {
             String tvroutecode = tvRoute_Code1.getText().toString();
             String tvroutename = tvRoute_Code2.getText().toString();
             String tvtglmulai = tvTgl_mulai1.getText().toString();
+            String tvjammulai = tvJam_mulai1.getText().toString();
+            String tvwc = tvwc1.getText().toString();
 
 
-            SharedPreferences.Editor editor10 = pref.edit();
+            SharedPreferences.Editor editor = pref.edit();
             editor.putString("tvnoprod", tvnoprod);
             editor.putString("tvnmprod", tvnmprod);
             editor.putString("tvsequence", tvsequence);
@@ -525,8 +555,10 @@ public class Add_DocActivity extends AppCompatActivity {
             editor.putString("tvstsprod", tvstsprod);
             editor.putString("tvroutecode", tvroutecode);
             editor.putString("tvroutename", tvroutename);
-            editor10.putString("tvtglmulai", tvtglmulai);
-            editor10.commit();*/
+            editor.putString("tvtglmulai", tvtglmulai);
+            editor.putString("tvjammulai", tvjammulai);
+            editor.putString("workcenter", tvwc);
+            editor.commit();*/
             startActivity(new Intent(getApplicationContext(), AddSeqActivity.class));
 
         } else {

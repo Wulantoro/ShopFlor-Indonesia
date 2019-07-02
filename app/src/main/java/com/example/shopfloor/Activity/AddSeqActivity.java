@@ -65,6 +65,7 @@ public class AddSeqActivity extends AppCompatActivity {
     private TextView tvwc3;
     private TextView tvstatus;
     private TextView tvposted3;
+    private TextView tvusername3;
     private Button btnBack;
 
 
@@ -99,6 +100,7 @@ public class AddSeqActivity extends AppCompatActivity {
         tvwc3 = findViewById(R.id.tvwc3);
         tvstatus = findViewById(R.id.tvstatus);
         tvposted3 = findViewById(R.id.tvposted3);
+        tvusername3 = findViewById(R.id.tvusername3);
 
         tvInputSeq = findViewById(R.id.tvInputSeq);
         pref = getSharedPreferences("inQty", MODE_PRIVATE);
@@ -160,6 +162,10 @@ public class AddSeqActivity extends AppCompatActivity {
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
         tvwc.setText(prf.getString("workcenter", null));
 
+        TextView tvuserid = findViewById(R.id.tvusername3);
+        prf = getSharedPreferences("userId", MODE_PRIVATE);
+        tvuserid.setText(prf.getString("tvuserid", null));
+
         TextView tvstatus = findViewById(R.id.tvstatus);
         tvstatus.setText("0");
 
@@ -214,6 +220,10 @@ public class AddSeqActivity extends AppCompatActivity {
             jsonObject.put("workCenter", tvwc3.getText().toString());
             jsonObject.put("status", tvstatus.getText().toString());
             jsonObject.put("posted", tvposted3.getText().toString());
+            jsonObject.put("userId", tvusername3.getText().toString());
+
+            Log.e("Username 1===========" ,tvusername3.getText().toString());
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

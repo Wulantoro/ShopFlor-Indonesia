@@ -37,9 +37,6 @@
             android:name=".Activity.ProductorderListActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Activity.DetailSuccDocActivity"
-            android:screenOrientation="landscape" />
-        <activity
             android:name=".Activity.DetailOpenDocActivity"
             android:screenOrientation="landscape" />
         <activity

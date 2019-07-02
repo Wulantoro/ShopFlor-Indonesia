@@ -46,6 +46,7 @@ public class OpenDocAdapter extends RecyclerView.Adapter<OpenDocAdapter.ViewHold
         holder.tvworkcenter2.setText(header.getWorkCenter());
         holder.tvdocentry.setText(String.valueOf(header.getDocEntry()));
         holder.tvposted1.setText(header.getStatus());
+        holder.tvusername4.setText(header.getUserId());
 
 
         // itemview jika di klik
@@ -117,6 +118,7 @@ public class OpenDocAdapter extends RecyclerView.Adapter<OpenDocAdapter.ViewHold
         public TextView tvoutputqty2;
         public TextView tvworkcenter2;
         public TextView tvdocentry;
+        public TextView tvusername4;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -130,6 +132,7 @@ public class OpenDocAdapter extends RecyclerView.Adapter<OpenDocAdapter.ViewHold
             tvoutputqty2 = itemView.findViewById(R.id.tvoutputqty2);
             tvworkcenter2 = itemView.findViewById(R.id.tvworkcenter2);
             tvdocentry = itemView.findViewById(R.id.tvdocentry);
+            tvusername4 = itemView.findViewById(R.id.tvusername4);
         }
     }
 }
