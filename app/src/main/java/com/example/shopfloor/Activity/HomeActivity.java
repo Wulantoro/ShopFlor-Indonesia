@@ -117,6 +117,13 @@ public class HomeActivity extends AppCompatActivity {
                                   SharedPreferences.Editor editor = pref.edit();
                                   editor.putString("workcenter", wc);
                                   editor.commit();
+
+                                  pref = getSharedPreferences("userId", MODE_PRIVATE);
+                                  String tvuserid = tvusername0.getText().toString();
+                                  SharedPreferences.Editor editor1 = pref.edit();
+                                  editor1.putString("tvuserid", tvuserid);
+                                  editor1.commit();
+
                                   startActivity(iStart);
                               } else {
                                   Toast.makeText(getApplicationContext(), "Workcenter tidak boleh kosong", Toast.LENGTH_SHORT).show();
@@ -136,6 +143,12 @@ public class HomeActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = pref.edit();
                             editor.putString("workcenter", wc1);
                             editor.commit();
+
+                            pref = getSharedPreferences("Qcname", MODE_PRIVATE);
+                            String tvqcname = tvusername0.getText().toString();
+                            SharedPreferences.Editor editor1 = pref.edit();
+                            editor1.putString("tvqcname", tvqcname);
+                            editor1.commit();
                             startActivity(iOpen);
                         } else {
                             Toast.makeText(getApplicationContext(), "Pilih Workcenter dahulu", Toast.LENGTH_SHORT).show();
@@ -183,6 +196,11 @@ public class HomeActivity extends AppCompatActivity {
 
                                        if (message.equals("User ketemu")) {
                                            String records = response.getString("data");
+                                           JSONArray dataArr = new JSONArray(records);
+
+                                           Gson gson = new Gson();
+                                           User user = gson.fromJson(dataArr.getJSONObject(0).toString(), User.class);
+                                           tvdivisi0.setText(user.getDept());
                                        }
                                    }catch (JSONException e) {
                                        e.printStackTrace();

@@ -185,8 +185,26 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvdocentry1"
                 android:layout_toRightOf="@id/tvstatus"
+                android:textColor="@color/white"
                 android:text="statusss"
                 />
+
+            <TextView
+                android:id="@+id/tvqcname1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvdocentry1"
+                android:layout_toRightOf="@id/tvposted4"
+                android:text="qcname"/>
+
+            <TextView
+                android:id="@+id/tvusername5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvdocentry1"
+                android:layout_toRightOf="@id/tvqcname1"
+                android:layout_marginLeft="5dp"
+                android:text="username"/>
         </RelativeLayout>
 
         <RelativeLayout

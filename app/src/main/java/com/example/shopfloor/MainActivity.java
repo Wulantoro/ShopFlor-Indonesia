@@ -7,9 +7,11 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -17,8 +19,11 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Activity.HomeActivity;
+import com.example.shopfloor.Models.User;
 import com.example.shopfloor.Utils.GlobalVars;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText etpassword0;
     private ConnectivityManager conMgr;
     private ProgressDialog pDialog;
-    public SharedPreferences pref;
+    public SharedPreferences pref, prf;
     public final static String TAG_USERNAME = "U_STEM_Username";
     public final static String TAG_PASSWORD = "U_STEM_Password";
 
@@ -62,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 if (username.trim().length() > 0 && password.trim().length() > 0) {
                     if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable() && conMgr.getActiveNetworkInfo().isConnected()) {
                         checkLogin(username, password);
+
                     }else {
                         Toast.makeText(getApplicationContext(), "Kolom tidak boleh kosong", Toast.LENGTH_SHORT).show();
                     }
@@ -125,6 +131,46 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    /*private void userLogin() {
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/loginuser")
+//                U_STEM_Username="+prf.getString("etusername", null))
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Log.e("tampil user", response.toString(1));
+                            String message = response.getString("message");
+
+                            if (message.equals("User ketemu")) {
+                                String records = response.getString("data");
+                                JSONArray dataArr = new JSONArray(records);
+
+
+                                if (dataArr.length() > 0) {
+                                    for (int i = 0; i < dataArr.length(); i++) {
+
+                                        Gson gson = new Gson();
+                                        User user = gson.fromJson(dataArr.getJSONObject(0).toString(), User.class);
+                                        TextView tvdept = findViewById(R.id.tvdivisi0);
+                                        tvdept.setText(user.getDept());
+                                    }
+                                }
+                            }
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
+
+    }*/
     private void showDialog() {
         if (!pDialog.isShowing())
             pDialog.isShowing();

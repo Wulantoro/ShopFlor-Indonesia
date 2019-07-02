@@ -48,6 +48,8 @@ public class CriteriaQCActivity extends AppCompatActivity {
     private TextView tvstatus2;
     private TextView tvdocsts;
     private TextView tvposted6;
+    private TextView tvqcname3;
+    private TextView tvusername7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,8 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvstatus2 = findViewById(R.id.tvstatus2);
         tvdocsts = findViewById(R.id.tvdocsts);
         tvposted6 = findViewById(R.id.tvposted6);
+        tvqcname3 = findViewById(R.id.tvqcname3);
+        tvusername7 = findViewById(R.id.tvusername7);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -146,6 +150,14 @@ public class CriteriaQCActivity extends AppCompatActivity {
         prf = getSharedPreferences("jamMulai", MODE_PRIVATE);
         tvjammulai.setText(prf.getString("tvjammulai", null));
 
+        TextView tvqcname = findViewById(R.id.tvqcname3);
+        prf = getSharedPreferences("Qcname", MODE_PRIVATE);
+        tvqcname.setText(prf.getString("tvqcname", null));
+
+        TextView tvusername = findViewById(R.id.tvusername7);
+        prf = getSharedPreferences("Username", MODE_PRIVATE);
+        tvusername.setText(prf.getString("tvusername", null));
+
         TextView tvstatus = findViewById(R.id.tvstatus2);
         tvstatus.setText("Completed");
 
@@ -194,7 +206,9 @@ public class CriteriaQCActivity extends AppCompatActivity {
             jsonObject.put("status", tvstatus2.getText().toString());
             jsonObject.put("posted", tvposted6.getText().toString());
             jsonObject.put("UploadTime", tvjamsel1.getText().toString());
-//            Log.e("data3=-=====",tvInputQty1.getText().toString());
+            jsonObject.put("QcName", tvqcname3.getText().toString());
+            jsonObject.put("userId", tvusername7.getText().toString());
+
 
         } catch (JSONException e) {
             e.printStackTrace();

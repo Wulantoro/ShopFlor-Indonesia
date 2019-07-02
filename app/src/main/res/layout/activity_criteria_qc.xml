@@ -280,9 +280,24 @@
             android:layout_toRightOf="@id/tvjammulai1"
             android:text="posted"/>
 
+        <TextView
+            android:id="@+id/tvqcname3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvCrit"
+            android:text="qcname"/>
+
+        <TextView
+            android:id="@+id/tvusername7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvCrit"
+            android:layout_toRightOf="@id/tvqcname3"
+            android:text="username"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvActualCrit"
-            android:layout_below="@id/tvCrit"
+            android:layout_below="@id/tvqcname3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 

@@ -31,7 +31,7 @@ public class Header implements Parcelable
     private String outQty;
     private Object remarks;
     private String userId;
-    private String mobileId;
+    private String QcName;
     private int posted;
     private int targetEntry;
     private String uploadTime;
@@ -78,7 +78,7 @@ public class Header implements Parcelable
         this.outQty = ((String) in.readValue((String.class.getClassLoader())));
         this.remarks = ((Object) in.readValue((Object.class.getClassLoader())));
         this.userId = ((String) in.readValue((String.class.getClassLoader())));
-        this.mobileId = ((String) in.readValue((String.class.getClassLoader())));
+        this.QcName = ((String) in.readValue((String.class.getClassLoader())));
         this.posted = ((int) in.readValue((int.class.getClassLoader())));
         this.targetEntry = ((int) in.readValue((int.class.getClassLoader())));
         this.uploadTime = ((String) in.readValue((String.class.getClassLoader())));
@@ -273,12 +273,12 @@ public class Header implements Parcelable
         this.userId = userId;
     }
 
-    public String getMobileId() {
-        return mobileId;
+    public String getQcName() {
+        return QcName;
     }
 
-    public void setMobileId(String mobileId) {
-        this.mobileId = mobileId;
+    public void setQcName(String mobileId) {
+        this.QcName = QcName;
     }
 
     public int getPosted() {
@@ -345,7 +345,7 @@ public class Header implements Parcelable
         dest.writeValue(outQty);
         dest.writeValue(remarks);
         dest.writeValue(userId);
-        dest.writeValue(mobileId);
+        dest.writeValue(QcName);
         dest.writeValue(posted);
         dest.writeValue(targetEntry);
         dest.writeValue(uploadTime);

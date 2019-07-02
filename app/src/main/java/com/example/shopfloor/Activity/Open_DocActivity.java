@@ -43,6 +43,7 @@ public class Open_DocActivity extends AppCompatActivity {
     private int year, month, day;
     private TextView dateView;
     private TextView tvworkcenter0;
+    private TextView tvqcname0;
 
     private RecyclerView rv;
     private OpenDocAdapter adapter;
@@ -50,7 +51,7 @@ public class Open_DocActivity extends AppCompatActivity {
     private List<Header> list;
     private Header header;
     private Context context;
-    private SharedPreferences prf;
+    private SharedPreferences prf, pref;
 
 
     @Override
@@ -59,6 +60,11 @@ public class Open_DocActivity extends AppCompatActivity {
         setContentView(R.layout.activity_open__doc);
 
         tvworkcenter0 = findViewById(R.id.tvworkcenter0);
+        tvqcname0 = findViewById(R.id.tvqcname0);
+
+        TextView tvqcname = findViewById(R.id.tvqcname0);
+        prf = getSharedPreferences("Qcname", MODE_PRIVATE);
+        tvqcname.setText(prf.getString("tvqcname", null));
 
         TextView tvworkcenter = findViewById(R.id.tvworkcenter0);
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
@@ -81,6 +87,12 @@ public class Open_DocActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(linearLayoutManager);
         rv.setAdapter(adapter);
+
+        pref = getSharedPreferences("Qcname", MODE_PRIVATE);
+        String tvqcname1 = tvqcname0.getText().toString();
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("tvqcname", tvqcname1);
+        editor.commit();
         loadData();
 
     }

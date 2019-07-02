@@ -46,6 +46,8 @@ public class DetailOpenDocActivity extends AppCompatActivity {
     private TextView tvdocentry1;
     private TextView tvstatus;
     private TextView tvposted4;
+    private TextView tvqcname1;
+    private TextView tvusername5;
     private OpenDocAdapter adapter;
     private Header header;
 
@@ -75,6 +77,8 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvdocentry1 = findViewById(R.id.tvdocentry1);
         tvstatus = findViewById(R.id.tvstatus);
         tvposted4 = findViewById(R.id.tvposted4);
+        tvqcname1 = findViewById(R.id.tvqcname1);
+        tvusername5 = findViewById(R.id.tvusername5);
 
         adapter = new OpenDocAdapter(this);
 
@@ -98,6 +102,12 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvdocentry1.setText(String.valueOf(header.getDocEntry()));
         tvstatus.setText(header.getStatus());
         tvposted4.setText(String.valueOf(header.getPosted()));
+        tvusername5.setText(header.getUserId());
+
+
+        TextView tvqcname = findViewById(R.id.tvqcname1);
+        prf = getSharedPreferences("Qcname", MODE_PRIVATE);
+        tvqcname.setText(prf.getString("tvqcname", null));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -234,6 +244,18 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         SharedPreferences.Editor editor16 = pref.edit();
         editor16.putString("tvposted", tvposted);
         editor16.commit();
+
+        pref = getSharedPreferences("Qcname", MODE_PRIVATE);
+        String tvqcname = tvqcname1.getText().toString();
+        SharedPreferences.Editor editor17 = pref.edit();
+        editor17.putString("tvqcname", tvqcname);
+        editor17.commit();
+
+        pref = getSharedPreferences("Username", MODE_PRIVATE);
+        String tvusername = tvusername5.getText().toString();
+        SharedPreferences.Editor editor18 = pref.edit();
+        editor18.putString("tvusername", tvusername);
+        editor18.commit();
 
         startActivity(new Intent(getApplicationContext(), OutQtyDetActivity.class));
         return true;

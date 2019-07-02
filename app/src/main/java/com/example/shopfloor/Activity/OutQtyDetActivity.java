@@ -41,6 +41,8 @@ public class OutQtyDetActivity extends AppCompatActivity {
     private TextView tvjammulai0;
     private TextView tvstatus1;
     private TextView tvposted5;
+    private TextView tvqcname2;
+    private TextView tvusername6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,8 @@ public class OutQtyDetActivity extends AppCompatActivity {
         tvjammulai0 = findViewById(R.id.tvjammulai0);
         tvstatus1 = findViewById(R.id.tvstatus1);
         tvposted5 = findViewById(R.id.tvposted5);
+        tvqcname2 = findViewById(R.id.tvqcname2);
+        tvusername6 = findViewById(R.id.tvusername6);
 
         TextView tvdocnum6 = findViewById(R.id.tvdocnum6);
         prf = getSharedPreferences("docNum", MODE_PRIVATE);
@@ -140,6 +144,14 @@ public class OutQtyDetActivity extends AppCompatActivity {
         TextView tvposted = findViewById(R.id.tvposted5);
         prf = getSharedPreferences("posted", MODE_PRIVATE);
         tvposted.setText(prf.getString("tvposted", null));
+
+        TextView tvqcname = findViewById(R.id.tvqcname2);
+        prf = getSharedPreferences("Qcname", MODE_PRIVATE);
+        tvqcname.setText(prf.getString("tvqcname", null));
+
+        TextView tvusername = findViewById(R.id.tvusername6);
+        prf = getSharedPreferences("Username", MODE_PRIVATE);
+        tvusername.setText(prf.getString("tvusername", null));
 
     }
 
@@ -229,6 +241,18 @@ public class OutQtyDetActivity extends AppCompatActivity {
             SharedPreferences.Editor editor12 = pref.edit();
             editor12.putString("tvposted", tvposted);
             editor12.commit();
+
+            pref = getSharedPreferences("Qcname", MODE_PRIVATE);
+            String tvqcname = tvqcname2.getText().toString();
+            SharedPreferences.Editor editor13 = pref.edit();
+            editor13.putString("tvqcname", tvqcname);
+            editor13.commit();
+
+            pref = getSharedPreferences("Username", MODE_PRIVATE);
+            String tvusername = tvusername6.getText().toString();
+            SharedPreferences.Editor editor14 = pref.edit();
+            editor14.putString("tvusername", tvusername);
+            editor14.commit();
 
             startActivity(new Intent(getApplicationContext(), CriteriaQCActivity.class));
         } else {

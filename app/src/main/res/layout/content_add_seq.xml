@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,12 +9,14 @@
     android:orientation="horizontal"
     tools:showIn="@layout/activity_add_seq">
 
+
+
 <LinearLayout
+    android:id="@+id/line7"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-
+    android:orientation="vertical"
+    >
 
     <TextView
         android:id="@+id/tvInputSeq"
@@ -25,12 +27,6 @@
         android:layout_gravity="center"
         android:gravity="center"/>
 
-    <TextView
-        android:id="@+id/tvwc3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="workcenterrrrrrr"/>
 </LinearLayout>
 
 
@@ -38,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/line7"
         android:layout_marginTop="10dp">
 
     <Button
@@ -142,38 +139,156 @@
             android:textSize="20sp"/>
     </RelativeLayout>
 
-     <TextView
-       android:id="@+id/tvnmprod7"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="prodname7"/>
-   <TextView
-       android:id="@+id/tvprod7"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="prodno"/>
-   <TextView
-       android:id="@+id/tvstsprod7"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="statusprod"/>
+    <RelativeLayout
+        android:id="@+id/line6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-   <TextView
-       android:id="@+id/tvdocnum7"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="docnum"/>
-   <TextView
-       android:id="@+id/tvprodcode7"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="prodcode7"/>
+        <TextView
+            android:id="@+id/tvdocnum7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:text="docnum"/>
+        <TextView
+            android:id="@+id/tvprod7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/tvdocnum7"
+            android:text="prodno"/>
+        <TextView
+            android:id="@+id/tvprodcode7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/tvprod7"
+            android:text="prodcode"/>
+        <TextView
+            android:id="@+id/tvnmprod7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/tvprodcode7"
+            android:text="prodname7"/>
+        <TextView
+            android:id="@+id/tvprodplanqty7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/tvnmprod7"
+            android:text="prodplanqty"/>
+        <TextView
+            android:id="@+id/tvstsprod7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/tvprodplanqty7"
+            android:text="statusprod"/>
+        <TextView
+            android:id="@+id/tvroutecode7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/tvstsprod7"
+            android:text="routecode"/>
+        <TextView
+            android:id="@+id/tvroutename7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvroutecode7"
+            android:textColor="@color/white"
 
-   <TextView
-       android:id="@+id/tvroutecode7"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="routecode"/>
+            android:layout_marginLeft="5dp"
+            android:text="route name"/>
+        <TextView
+            android:id="@+id/tvsequence7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/tvroutename7"
+            android:text="sequence"/>
+        <TextView
+            android:id="@+id/tvtglmulai7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/tvsequence7"
+            android:text="tglmulai"/>
+        <TextView
+            android:id="@+id/tvjammulai7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:layout_below="@id/tvprod7"
+            android:text="jam mulai"/>
+
+        <TextView
+            android:id="@+id/tvsequenceqty7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@id/tvprod7"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/tvjammulai7"
+            android:text="sequenceqty"/>
+        <TextView
+            android:id="@+id/tvstatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@id/tvprod7"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/tvsequenceqty7"
+            android:text="status"/>
+        <TextView
+            android:id="@+id/tvposted3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@id/tvprod7"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/tvstatus"
+            android:text="posted"/>
+        <TextView
+            android:id="@+id/tvwc3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvprod7"
+            android:textColor="@color/white"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/tvposted3"
+            android:text="workcenterrrrrrr"/>
+
+        <TextView
+            android:id="@+id/tvusername3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/tvwc3"
+            android:layout_below="@id/tvprod7"
+            android:text="username"/>
+
+    </RelativeLayout>
+
+
+
+
+
+
+
 
     <!--<TextView
         android:id="@+id/tvroutename7"
@@ -186,11 +301,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="prodplanqty"/>-->
-    <TextView
-        android:id="@+id/tvsequence7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="sequence"/>
+
 
     <!--<TextView
         android:id="@+id/tvsequenceqty7"
@@ -202,55 +313,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="tglmulai"/>-->
-    <TextView
-        android:id="@+id/tvinqty7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="input qty"/>
-
-    <TextView
-        android:id="@+id/tvjammulai7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="jam mulai"/>
-
-    <TextView
-        android:id="@+id/tvsequenceqty7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="sequenceqty"/>
-
-    <TextView
-        android:id="@+id/tvtglmulai7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="tglmulai"/>
-
-    <TextView
-        android:id="@+id/tvroutename7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="route name"/>
-
-    <TextView
-        android:id="@+id/tvprodplanqty7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="prodplanqty"/>
-
-    <TextView
-        android:id="@+id/tvstatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="status"/>
-
-    <TextView
-        android:id="@+id/tvposted3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="posted"/>
 
 
 
 
-</LinearLayout>
+
+
+
+
+
+
+
+
+
+</RelativeLayout>
