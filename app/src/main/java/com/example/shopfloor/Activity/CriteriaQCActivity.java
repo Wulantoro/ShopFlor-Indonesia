@@ -3,10 +3,14 @@ package com.example.shopfloor.Activity;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,14 +18,20 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.shopfloor.Adapter.CriteriaAdapter;
+import com.example.shopfloor.Models.Criteria;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class CriteriaQCActivity extends AppCompatActivity {
@@ -50,6 +60,11 @@ public class CriteriaQCActivity extends AppCompatActivity {
     private TextView tvposted6;
     private TextView tvqcname3;
     private TextView tvusername7;
+    private RecyclerView rv;
+    private CriteriaAdapter adapter;
+    private Gson gson;
+    private Criteria criteria;
+    private List<Criteria> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +94,20 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvposted6 = findViewById(R.id.tvposted6);
         tvqcname3 = findViewById(R.id.tvqcname3);
         tvusername7 = findViewById(R.id.tvusername7);
+        /*************************************************************/
+
+        /*******************Ambil data criteria************************/
+        gson = new Gson();
+        list = new ArrayList<>();
+        rv = findViewById(R.id.rvActualCrit);
+        adapter = new CriteriaAdapter(this);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rv.setLayoutManager(linearLayoutManager);
+        rv.setItemAnimator(new DefaultItemAnimator());
+        rv.setAdapter(adapter);
+        loadData();
+        /*******************************************************************/
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -177,6 +206,8 @@ public class CriteriaQCActivity extends AppCompatActivity {
         String jam = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
         TextView jamsel = findViewById(R.id.tvjamsel1);
         jamsel.setText(jam);
+
+
 }
 
     public void editHeader() {  //kurang shift
@@ -232,6 +263,45 @@ public class CriteriaQCActivity extends AppCompatActivity {
                     @Override
                     public void onError(ANError anError) {
                         Toast.makeText(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    private void loadData() {
+        if (adapter != null)
+            adapter.clearAll();
+
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        List<Criteria> results = new ArrayList<>();
+                        try {
+                            if (results != null)
+                                results.clear();
+                            String message = response.getString("message");
+                            if (message.equals("Criteria were found")) {
+                                String records = response.getString("data");
+                                JSONArray dataArr = new JSONArray(records);
+
+                                if (dataArr.length() > 0) {
+                                    for (int i = 0; i < dataArr.length(); i++) {
+                                        Criteria criteria = gson.fromJson(dataArr.getJSONObject(i).toString(), Criteria.class);
+                                        results.add(criteria);
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        adapter.addAll(results);
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
                     }
                 });
     }
