@@ -44,7 +44,6 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
 
         holder.tvcriteria1.setText(criteria.getUCriteria());
         holder.tvcritdesc1.setText(String.valueOf(criteria.getUCriteriaName()));
-        holder.tvvaluetype1.setText(criteria.getUValueType());
         holder.tvstandard1.setText(criteria.getUStandard());
     }
 
@@ -106,7 +105,6 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
             super(itemView);
             tvcriteria1 = itemView.findViewById(R.id.tvcriteria1);
             tvcritdesc1 = itemView.findViewById(R.id.tvcritdesc1);
-            tvvaluetype1 = itemView.findViewById(R.id.tvvaluetype1);
             tvstandard1 = itemView.findViewById(R.id.tvstandard1);
 
         }
