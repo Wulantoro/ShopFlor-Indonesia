@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -184,6 +185,13 @@ public class Add_DocActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    //ketika klik back loncat ke home activity
+    public void onBackPressed(){
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        startActivity(intent);
     }
 
     //showDialog

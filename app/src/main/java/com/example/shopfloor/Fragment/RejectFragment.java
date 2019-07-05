@@ -13,12 +13,6 @@ import com.example.shopfloor.R;
 
 public class RejectFragment extends Fragment {
 
-    public static  RejectFragment newInstance() {
-        // Required empty public constructor
-        return new RejectFragment();
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

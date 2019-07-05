@@ -5,14 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.InfoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+   <LinearLayout
+       android:id="@+id/line5"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
     <TextView
         android:id="@+id/tvNo_doc_Frag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_dokumen"
         android:paddingTop="20dp"
-        android:paddingLeft="40dp"
+        android:layout_marginLeft="70dp"
         />
 
     <TextView
@@ -20,8 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="S20190304001"
+        android:layout_marginLeft="10dp"
         android:paddingTop="20dp"
-        android:paddingLeft="140dp"
         android:textStyle="bold"/>
 
     <TextView
@@ -30,7 +34,7 @@
         android:layout_height="wrap_content"
         android:text="@string/no_produksi"
         android:paddingTop="20dp"
-        android:paddingLeft="250dp"
+        android:layout_marginLeft="20dp"
         />
 
     <TextView
@@ -39,7 +43,7 @@
         android:layout_height="wrap_content"
         android:text="10015637"
         android:paddingTop="20dp"
-        android:paddingLeft="340dp"
+        android:layout_marginLeft="10dp"
         android:textStyle="bold"/>
 
     <TextView
@@ -48,7 +52,7 @@
         android:layout_height="wrap_content"
         android:text="@string/tgl_dokumen"
         android:paddingTop="20dp"
-        android:paddingLeft="420dp"/>
+        android:layout_marginLeft="20dp"/>
 
     <TextView
         android:id="@+id/tv_tglDoc_frag1"
@@ -56,156 +60,172 @@
         android:layout_height="wrap_content"
         android:text="@string/tanggal"
         android:paddingTop="20dp"
-        android:paddingLeft="520dp"
+        android:layout_marginLeft="10dp"
         android:textStyle="bold"/>
+   </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_prodFrag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/produk"
-        android:layout_below="@+id/tv_tglDoc_frag"
-        android:paddingTop="20dp"
-        />
+<LinearLayout
+    android:id="@+id/line8"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/line5"
+    android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_prodFrag1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="6-01-0029"
-        android:layout_below="@id/tvNo_doc_Frag"
-        android:paddingTop="20dp"
-        android:paddingLeft="130dp"
-        android:textStyle="bold"/>
+    <!--kiri-->
+    <RelativeLayout
+        android:id="@+id/rel0"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/line5"
+        android:layout_weight="8">
 
-    <TextView
-        android:id="@+id/tv_nmProd_frag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nama Produk"
-        android:layout_below="@id/tv_prodFrag"
-        android:paddingTop="15dp"
-        />
+        <TextView
+            android:id="@+id/tv_prodFrag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="Produk" />
 
-    <TextView
-        android:id="@+id/tv_nmProd_frag1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BAK STEMPEL-RING HERO 2001"
-        android:textStyle="bold"
-        android:layout_below="@id/tv_prodFrag1"
-        android:paddingTop="15dp"
-        android:paddingLeft="130dp"/>
+        <TextView
+            android:id="@+id/tv_prodFrag1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="130dp"
+            android:paddingTop="20dp"
+            android:text="6-01-0029"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_qty_rencana"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Qty Rencana Prod"
-        android:layout_below="@id/tv_nmProd_frag"
-        android:paddingTop="15dp"/>
+        <TextView
+            android:id="@+id/tv_nmProd_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_prodFrag"
+            android:paddingTop="15dp"
+            android:text="Nama Produk" />
 
-    <TextView
-        android:id="@+id/tv_qty_rencana1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="3,500"
-        android:layout_below="@id/tv_nmProd_frag1"
-        android:paddingTop="15dp"
-        android:paddingLeft="130dp"
-        android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_nmProd_frag1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_prodFrag1"
+            android:paddingLeft="130dp"
+            android:paddingTop="15dp"
+            android:text="BAK STEMPEL-RING HERO 2001"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_sts_prod"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Status Produksi"
-        android:layout_below="@+id/tv_qty_rencana"
-        android:paddingTop="15dp"
-        />
-    <TextView
-        android:id="@+id/tv_sts_prod1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="R"
-        android:layout_below="@+id/tv_qty_rencana1"
-        android:paddingTop="15dp"
-        android:paddingLeft="130dp"
-        android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_qty_rencana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_nmProd_frag"
+            android:paddingTop="15dp"
+            android:text="Qty Rencana Prod" />
 
-    <TextView
-        android:id="@+id/tv_route"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Route Code"
-        android:layout_below="@+id/tv_sts_prod"
-        android:paddingTop="15dp"
-        />
+        <TextView
+            android:id="@+id/tv_qty_rencana1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_nmProd_frag1"
+            android:paddingLeft="130dp"
+            android:paddingTop="15dp"
+            android:text="3,500"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_route1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="R005 INJ120"
-        android:layout_below="@+id/tv_sts_prod1"
-        android:paddingTop="15dp"
-        android:paddingLeft="130dp"
-        android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_sts_prod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_qty_rencana"
+            android:paddingTop="15dp"
+            android:text="Status Produksi" />
 
-    <TextView
-        android:id="@+id/tv_inQty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="In Qty"
-        android:layout_below="@+id/tv_route"
-        android:paddingTop="15dp" />
+        <TextView
+            android:id="@+id/tv_sts_prod1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_qty_rencana1"
+            android:paddingLeft="130dp"
+            android:paddingTop="15dp"
+            android:text="R"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_inQty1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="3,500"
-        android:layout_below="@+id/tv_route"
-        android:paddingTop="15dp"
-        android:paddingLeft="130dp"
-        android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_route"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_sts_prod"
+            android:paddingTop="15dp"
+            android:text="Route Code" />
 
-    <TextView
-        android:id="@+id/tv_outQty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Out Qty"
-        android:layout_below="@+id/tv_inQty"
-        android:paddingTop="15dp" />
+        <TextView
+            android:id="@+id/tv_route1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_sts_prod1"
+            android:paddingLeft="130dp"
+            android:paddingTop="15dp"
+            android:text="R005 INJ120"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_outQty1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="3,500"
-        android:layout_below="@+id/tv_inQty"
-        android:paddingTop="15dp"
-        android:paddingLeft="130dp"
-        android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tv_inQty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_route"
+            android:paddingTop="15dp"
+            android:text="In Qty" />
 
+        <TextView
+            android:id="@+id/tv_inQty1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_route"
+            android:paddingLeft="130dp"
+            android:paddingTop="15dp"
+            android:text="3,500"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_outQty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_inQty"
+            android:paddingTop="15dp"
+            android:text="Out Qty" />
+
+        <TextView
+            android:id="@+id/tv_outQty1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_inQty"
+            android:paddingLeft="130dp"
+            android:paddingTop="15dp"
+            android:text="3,500"
+            android:textStyle="bold" />
+    </RelativeLayout>
+    <!--kiri-->
+
+    <!--kanan-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="20">
     <TextView
         android:id="@+id/tv_seq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Squence"
-        android:layout_below="@id/tvNo_doc_Frag"
         android:paddingTop="20dp"
-        android:paddingLeft="360dp"
         />
 
     <TextView
         android:id="@+id/tv_seq1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_seq"
+        android:layout_marginLeft="40dp"
         android:text="1"
-        android:layout_below="@id/tvNo_doc_Frag"
         android:paddingTop="20dp"
-        android:paddingLeft="480dp"
         android:textStyle="bold"
         />
 
@@ -216,17 +236,17 @@
         android:text="Squence Qty"
         android:layout_below="@id/tv_seq1"
         android:paddingTop="15dp"
-        android:paddingLeft="360dp"
         />
 
     <TextView
         android:id="@+id/tv_seq_qty1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_seq_qty"
+        android:layout_marginLeft="20dp"
         android:text="3,505"
         android:layout_below="@id/tv_seq1"
         android:paddingTop="15dp"
-        android:paddingLeft="480dp"
         android:textStyle="bold"
         />
 
@@ -237,7 +257,6 @@
         android:text="Shift"
         android:layout_below="@id/tv_seq_qty"
         android:paddingTop="15dp"
-        android:paddingLeft="360dp"
         />
 
     <TextView
@@ -245,9 +264,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SS3 - Senin-Shift 3"
+        android:layout_toRightOf="@id/tv_shift"
+        android:layout_marginLeft="50dp"
         android:layout_below="@id/tv_seq_qty1"
         android:paddingTop="15dp"
-        android:paddingLeft="480dp"
         android:textStyle="bold"
         />
 
@@ -258,17 +278,17 @@
         android:text="Tgl Mulai"
         android:layout_below="@id/tv_shift1"
         android:paddingTop="15dp"
-        android:paddingLeft="360dp"
         />
 
     <TextView
         android:id="@+id/tv_tglMulai1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_tglMulai"
+        android:layout_marginLeft="40dp"
         android:text="04-03-2019"
         android:layout_below="@id/tv_shift1"
         android:paddingTop="15dp"
-        android:paddingLeft="480dp"
         android:textStyle="bold"
         />
 
@@ -279,17 +299,17 @@
         android:text="Tgl Selesai"
         android:layout_below="@id/tv_tglMulai"
         android:paddingTop="15dp"
-        android:paddingLeft="360dp"
         />
 
     <TextView
         android:id="@+id/tv_tglSelesai1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_tglSelesai"
+        android:layout_marginLeft="30dp"
         android:text="04-03-2019"
         android:layout_below="@id/tv_tglMulai"
         android:paddingTop="15dp"
-        android:paddingLeft="480dp"
         android:textStyle="bold"
         />
 
@@ -300,17 +320,17 @@
         android:text="jam Mulai"
         android:layout_below="@id/tv_tglSelesai"
         android:paddingTop="15dp"
-        android:paddingLeft="360dp"
         />
 
     <TextView
         android:id="@+id/tv_jamMulai1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="03:26"
+       android:text="03:26"
+        android:layout_toRightOf="@id/tv_jamMulai"
+        android:layout_marginLeft="40dp"
         android:layout_below="@id/tv_tglSelesai"
         android:paddingTop="15dp"
-        android:paddingLeft="480dp"
         android:textStyle="bold"
         />
 
@@ -321,19 +341,21 @@
         android:text="jam Selesai"
         android:layout_below="@id/tv_jamMulai"
         android:paddingTop="15dp"
-        android:paddingLeft="360dp"
         />
 
     <TextView
         android:id="@+id/tv_jamSelesai1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_jamSelesai"
+        android:layout_marginLeft="30dp"
         android:text="03:26"
         android:layout_below="@id/tv_jamMulai"
         android:paddingTop="15dp"
-        android:paddingLeft="480dp"
         android:textStyle="bold"
         />
+    </RelativeLayout>
+</LinearLayout>
 
 
 </RelativeLayout>

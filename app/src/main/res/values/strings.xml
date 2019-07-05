@@ -7,6 +7,9 @@
     <string name="no_produksi">No. Produksi</string>
     <string name="no_dokumen">No Dokumen</string>
     <string name="produk">Produk</string>
+    <string name="reject">Reject</string>
+    <string name="info">Info</string>
+    <string name="criteria">Criteria</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -13,11 +13,6 @@ import com.example.shopfloor.R;
 
 public class CriteriaFragment extends Fragment {
 
-    public static CriteriaFragment newInstance() {
-        // Required empty public constructor
-        return new CriteriaFragment();
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

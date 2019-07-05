@@ -192,6 +192,7 @@ public class AddSeqActivity extends AppCompatActivity {
 
         if (id == R.id.action_upHeader && tvInputSeq.length() != 0) {
             upHeader();
+            startActivity(new Intent(getApplicationContext(), Add_DocActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
