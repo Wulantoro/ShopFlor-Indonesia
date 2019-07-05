@@ -18,6 +18,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.WorkcenterAdapter;
+import com.example.shopfloor.MainActivity;
 import com.example.shopfloor.Models.User;
 import com.example.shopfloor.Models.Workcenter;
 import com.example.shopfloor.R;
@@ -175,6 +176,11 @@ public class HomeActivity extends AppCompatActivity {
                     }
 
                 });
+            }
+
+            public void onBackPressed() {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
             }
 
 

@@ -1,6 +1,7 @@
 package com.example.shopfloor.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.shopfloor.Activity.DetailSuccDocActivity;
+import com.example.shopfloor.Fragment.InfoFragment;
+import com.example.shopfloor.Fragment.RejectFragment;
 import com.example.shopfloor.Models.Header;
 import com.example.shopfloor.R;
 
@@ -22,6 +26,10 @@ public class SuccDocAdapter extends RecyclerView.Adapter<SuccDocAdapter.ViewHold
         this.context = context;
         list_item = new ArrayList<>();
     }
+
+    public SuccDocAdapter(InfoFragment infoFragment) {
+    }
+
     @NonNull
     @Override
     public SuccDocAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,8 +43,22 @@ public class SuccDocAdapter extends RecyclerView.Adapter<SuccDocAdapter.ViewHold
         final Header header = list_item.get(holder.getAdapterPosition());
 
         holder.tvdate2.setText(header.getDocDate().substring(0, 10));
+        holder.tvdocnum0.setText(header.getDocNum());
+        holder.tvposted2.setText(String.valueOf(header.getPosted()));
+        holder.tvworkcenter5.setText(header.getWorkCenter());
+        holder.tvprodno2.setText(header.getProdNo());
+        holder.tvsequence4.setText(header.getSequence());
+        holder.tvinputqty4.setText(header.getInQty());
+        holder.tvoutputqty2.setText(header.getOutQty());
 
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, DetailSuccDocActivity.class);
+                intent.putExtra("key_succ", header);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -89,11 +111,25 @@ public class SuccDocAdapter extends RecyclerView.Adapter<SuccDocAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvdate2;
+        public TextView tvdocnum0;
+        public TextView tvposted2;
+        public TextView tvworkcenter5;
+        public TextView tvprodno2;
+        public TextView tvsequence4;
+        public TextView tvinputqty4;
+        public TextView tvoutputqty2;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvdate2 = itemView.findViewById(R.id.tvdate2);
+            tvdocnum0 = itemView.findViewById(R.id.tvdocnum0);
+            tvposted2 = itemView.findViewById(R.id.tvposted2);
+            tvworkcenter5 = itemView.findViewById(R.id.tvworkcenter5);
+            tvprodno2 = itemView.findViewById(R.id.tvprodno2);
+            tvsequence4 = itemView.findViewById(R.id.tvsequence4);
+            tvinputqty4 = itemView.findViewById(R.id.tvinputqty4);
+            tvoutputqty2 = itemView.findViewById(R.id.tvoutputqty2);;
 
         }
     }
