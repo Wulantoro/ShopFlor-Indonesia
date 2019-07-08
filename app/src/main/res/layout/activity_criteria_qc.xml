@@ -34,7 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_weight="8">
+            android:layout_weight="6"
+            >
 
             <TextView
                 android:id="@+id/tvnoprod"
@@ -127,7 +128,7 @@
                 android:layout_marginTop="10dp"
                 android:text="Doc.Status"/>
             <TextView
-                android:id="@+id/tvdocsts"
+                android:id="@+id/tvdocsts1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvdocsts0"
@@ -141,7 +142,8 @@
         <RelativeLayout
             android:id="@+id/dashboard2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            >
 
             <RelativeLayout
                 android:id="@+id/content1"
@@ -371,7 +373,8 @@
                     android:id="@+id/rvActualCrit"
                     android:layout_below="@id/tvqcname3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/actual_crit_list">
 
                 </android.support.v7.widget.RecyclerView>
 

@@ -1,5 +1,6 @@
 package com.example.shopfloor.Activity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.CriteriaAdapter;
 import com.example.shopfloor.Models.Criteria;
+import com.example.shopfloor.Models.Reject;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
 import com.google.gson.Gson;
@@ -60,11 +62,17 @@ public class CriteriaQCActivity extends AppCompatActivity {
     private TextView tvposted6;
     private TextView tvqcname3;
     private TextView tvusername7;
+    private TextView tvdocsts1;
     private RecyclerView rv;
     private CriteriaAdapter adapter;
     private Gson gson;
     private Criteria criteria;
     private List<Criteria> list;
+
+    private static final String TAG = "MyActivity";
+
+    /***************criteria********/
+    public static TextView tvcriteria1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +102,8 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvposted6 = findViewById(R.id.tvposted6);
         tvqcname3 = findViewById(R.id.tvqcname3);
         tvusername7 = findViewById(R.id.tvusername7);
+        tvcriteria1 = findViewById(R.id.tvcriteria1);
+        tvdocsts1 = findViewById(R.id.tvdocsts1);
         /*************************************************************/
 
         /*******************Ambil data criteria************************/
@@ -190,7 +200,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
         TextView tvstatus = findViewById(R.id.tvstatus2);
         tvstatus.setText("Completed");
 
-        TextView tvposted = findViewById(R.id.tvdocsts);
+        TextView tvposted = findViewById(R.id.tvdocsts1);
         tvposted.setText("Pending1");
 
         TextView tvposted1 = findViewById(R.id.tvposted6);
@@ -306,6 +316,47 @@ public class CriteriaQCActivity extends AppCompatActivity {
                 });
     }
 
+    public void upCriteria() {
+        JSONObject jsonObject = new JSONObject();
+        CriteriaAdapter criteriaAdapter = new CriteriaAdapter(this);
+        List<Criteria> data = adapter.getData();
+
+        try {
+            jsonObject.put("docEntry", tvdocentry3.getText().toString());
+
+            jsonObject.put("criteria", tvcriteria1.toString());
+            jsonObject.put("criteriaDesc", criteria.getUCriteriaName());
+            jsonObject.put("valueType", criteria.getUValueType());
+            jsonObject.put("standard", criteria.getUStandard());
+
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        AndroidNetworking.post(GlobalVars.BASE_IP +"index/criteria")
+                .addJSONObjectBody(jsonObject)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String message = response.getString("message");
+                            Toast.makeText(getApplicationContext(),message, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "JSONExceptions"+e, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Toast.makeText(getApplicationContext(), "Gagal menambah criteria", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.update_header, menu);
         return true;
@@ -315,8 +366,95 @@ public class CriteriaQCActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.update_header) {
-            editHeader();
+//            editHeader();
+//            upCriteria();
 
+            List<Criteria> data = adapter.getData();
+
+            if (data != null) {
+                for (Criteria x: data) {
+                    Log.e(TAG,"onOptionsItemSelected: " + x.getUCriteria() + x.getUCriteriaName() + x.getUValueType() + x.getUStandard() );
+                    JSONObject jsonObject = new JSONObject();
+                    List<Criteria> crit = adapter.getData();
+//                    try {
+//                        jsonObject.put("docEntry", tvdocentry3.getText().toString());
+//                        jsonObject.put("criteria", criteria.getUCriteria());
+//                        jsonObject.put("criteria", tvcriteria1.toString());
+//                        jsonObject.put("criteriaDesc", criteria.getUCriteriaName());
+//                        jsonObject.put("valueType", criteria.getUValueType());
+//                        jsonObject.put("standard", criteria.getUStandard());
+//
+//                    }catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+                    AndroidNetworking.post(GlobalVars.BASE_IP +"index/criteria")
+                            .addJSONObjectBody(jsonObject)
+                            .setPriority(Priority.MEDIUM)
+                            .build()
+                            .getAsJSONObject(new JSONObjectRequestListener() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    try {
+                                        String message = response.getString("message");
+//                                        Toast.makeText(getApplicationContext(),message, Toast.LENGTH_SHORT).show();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                        Toast.makeText(getApplicationContext(), "JSONExceptions"+e, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onError(ANError anError) {
+                                    Toast.makeText(getApplicationContext(), "Gagal menambah criteria", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                }
+            }
+            pref = getSharedPreferences("Docentry", MODE_PRIVATE);
+            String tvdocentry = tvdocentry3.getText().toString();
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("tvdocentry", tvdocentry);
+            editor.commit();
+
+            pref = getSharedPreferences("Jamsel", MODE_PRIVATE);
+            String tvjamsel = tvjamsel1.getText().toString();
+            SharedPreferences.Editor editor1 = pref.edit();
+            editor1.putString("tvjamsel", tvjamsel);
+            editor1.commit();
+
+            pref = getSharedPreferences("Tglsel", MODE_PRIVATE);
+            String tvtglsel = tvtglsel1.getText().toString();
+            SharedPreferences.Editor editor2 = pref.edit();
+            editor2.putString("tvtglsel", tvtglsel);
+            editor2.commit();
+
+            pref = getSharedPreferences("Namaprod", MODE_PRIVATE);
+            String tvnamaprod = tvnmprod1.getText().toString();
+            SharedPreferences.Editor editor3 = pref.edit();
+            editor3.putString("tvnamaprod", tvnamaprod);
+            editor3.commit();
+
+            pref = getSharedPreferences("Docsts", MODE_PRIVATE);
+            String tvdocsts = tvdocsts1.getText().toString();
+            SharedPreferences.Editor editor4 = pref.edit();
+            editor4.putString("tvdocsts", tvdocsts);
+            editor4.commit();
+
+            pref = getSharedPreferences("Inqty", MODE_PRIVATE);
+            String tvinqty = tvInputQty3.getText().toString();
+            SharedPreferences.Editor editor5 = pref.edit();
+            editor5.putString("tvinqty", tvinqty);
+            editor5.commit();
+
+            pref = getSharedPreferences("Outqty", MODE_PRIVATE);
+            String tvoutqty = tvOutputQty1.getText().toString();
+            SharedPreferences.Editor editor6 = pref.edit();
+            editor6.putString("tvoutqty", tvoutqty);
+            editor6.commit();
+
+//            Intent intent = new Intent(getApplicationContext(), RejectActivity.class);
+            startActivity(new Intent(getApplicationContext(), RejectActivity.class));
         }
     return super.onOptionsItemSelected(item);
     }

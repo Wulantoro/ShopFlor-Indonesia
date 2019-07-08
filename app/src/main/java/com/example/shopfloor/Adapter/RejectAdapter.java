@@ -99,17 +99,19 @@ public class RejectAdapter extends RecyclerView.Adapter<RejectAdapter.ViewHolder
     class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvCodeR;
         public TextView tvNameR;
+        public TextView tvcodereject0;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvCodeR = itemView.findViewById(R.id.tvCodeR);
             tvNameR = itemView.findViewById(R.id.tvNameR);
-
+            tvcodereject0 = itemView.findViewById(R.id.tvcodereject0);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     RespRejectFragActivity.tvReject3.setText(list_item.get(getAdapterPosition()).getName());
+                    RespRejectFragActivity.tvcodereject0.setText(list_item.get(getAdapterPosition()).getCode());
                     RespRejectFragActivity.dialog.dismiss();
                 }
             });

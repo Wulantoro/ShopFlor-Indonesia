@@ -18,6 +18,7 @@ import com.example.shopfloor.R;
 public class RejectActivity extends AppCompatActivity {
     SharedPreferences prf;
     private Button btnFrag;
+    private TextView tvdocentry0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,13 @@ public class RejectActivity extends AppCompatActivity {
         setTitle(null);
         Toolbar topToolBar = findViewById(R.id.toolbar);
         setSupportActionBar(topToolBar);
+
+        tvdocentry0 = findViewById(R.id.tvdocentry0);
+
+        TextView tvdocentry = findViewById(R.id.tvdocentry0);
+        prf = getSharedPreferences("Docentry", MODE_PRIVATE);
+        tvdocentry.setText(String.valueOf(prf.getString("tvdocentry", null)));
+        Log.e("docemtry", prf.getString("tvdocentry", null));
 
         /*****************qtyin**********************/
         TextView inqty = findViewById(R.id.tvInputQty1);
@@ -52,8 +60,8 @@ public class RejectActivity extends AppCompatActivity {
 
         /********************************nmprod*******************************/
         TextView tvnmprod = findViewById(R.id.tvnmprod1);
-        prf = getSharedPreferences("Nmprod", MODE_PRIVATE);
-        tvnmprod.setText(prf.getString("tvnmprod", null));
+        prf = getSharedPreferences("Namaprod", MODE_PRIVATE);
+        tvnmprod.setText(prf.getString("tvnamaprod", null));
 
         /****************************sequence************************************/
         TextView tvsequence = findViewById(R.id.tvsequence1);
@@ -68,13 +76,25 @@ public class RejectActivity extends AppCompatActivity {
         /*******************tglsel*************************************************/
         TextView tglsel = findViewById(R.id.tvtglsel1);
         prf = getSharedPreferences("Tglsel", MODE_PRIVATE);
-        tglsel.setText(prf.getString("tglsel", null));
+        tglsel.setText(prf.getString("tvtglsel", null));
 
         /******************************jamsel*********************************/
         TextView jamsel = findViewById(R.id.tvjamsel1);
         prf = getSharedPreferences("Jamsel", MODE_PRIVATE);
-        jamsel.setText(String.valueOf(prf.getString("jamsel", null)));
+        jamsel.setText(String.valueOf(prf.getString("tvjamsel", null)));
        Log.e("jam selesai = ", String.valueOf(prf.getString("jamsel", null)));
+
+       TextView tvdocsts = findViewById(R.id.tvdocsts2);
+       prf = getSharedPreferences("Docsts", MODE_PRIVATE);
+       tvdocsts.setText(prf.getString("tvdocsts", null));
+
+       TextView tvinqty = findViewById(R.id.tvInputQty1);
+       prf = getSharedPreferences("Inqty", MODE_PRIVATE);
+       tvinqty.setText(prf.getString("tvinqty", null));
+
+       TextView tvoutqty = findViewById(R.id.tvOutputQty1);
+       prf = getSharedPreferences("Outqty", MODE_PRIVATE);
+       tvoutqty.setText(prf.getString("tvoutqty", null));
 
        btnFrag = findViewById(R.id.btnFrag);
        btnFrag.setOnClickListener(new View.OnClickListener() {

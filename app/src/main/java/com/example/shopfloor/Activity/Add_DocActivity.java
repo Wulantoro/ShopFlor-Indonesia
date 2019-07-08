@@ -175,11 +175,11 @@ public class Add_DocActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Pilih Produksi Terlebih dahulu", Toast.LENGTH_LONG).show();
 
                 } else {
-//                    pref = getSharedPreferences("Docnum", MODE_PRIVATE);
-//                    String docnum = tvNo_prod1.getText().toString();
-//                    SharedPreferences.Editor editor = pref.edit();
-//                    editor.putString("docnum", docnum);
-//                    editor.commit();
+                    pref = getSharedPreferences("Docnum", MODE_PRIVATE);
+                    String docnum = tvNo_prod1.getText().toString();
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("docnum", docnum);
+                    editor.commit();
                     showDialog(Add_DocActivity.this);
 
                 }
@@ -196,6 +196,13 @@ public class Add_DocActivity extends AppCompatActivity {
 
     //showDialog
     public void showDialog(Activity activity) {
+
+
+//        TextView cobadocnum;
+//        cobadocnum = findViewById(R.id.cobadocnum);
+//        TextView tvdocnum = findViewById(R.id.cobadocnum);
+//        prf = getSharedPreferences("Docnum", MODE_PRIVATE);
+//        tvdocnum.setText(prf.getString("docnum", null));
 
         dialog = new Dialog(activity);
         dialog.setCancelable(true);
@@ -358,8 +365,10 @@ public class Add_DocActivity extends AppCompatActivity {
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
         Log.e("workcenter30",  "check workcenter " + prf.getString("workcenter", null));
 
-        prf = getSharedPreferences("Docnum", MODE_PRIVATE);
-        Log.e("docnum30 == ", "check docnum = " + prf.getString("docnum", null));
+//        TextView tvcobadocnum = findViewById(R.id.cobadocnum);
+//        prf = getSharedPreferences("Docnum", MODE_PRIVATE);
+//        tvcobadocnum.setText(prf.getString("docnum", null));
+//        Log.e("docnum30 == ", "check docnum = " + prf.getString("docnum", null));
 
 //       AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null)+"&&docnum="+prf.getString("docnum", null))
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null))

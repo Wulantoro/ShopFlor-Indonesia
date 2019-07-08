@@ -6,7 +6,7 @@
     tools:context=".Fragment.RejectListFragment">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/lineReject"
         android:layout_width="400dp"
         android:layout_height="350dp"
@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/tvReject2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="Choose Reject : "
@@ -24,14 +24,34 @@
         />
 
         <TextView
+            android:id="@+id/tvdocentry4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/tvReject2"
+            android:text="docentryyyyy"/>
+
+        <TextView
+            android:id="@+id/tvcodereject0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvReject2"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:text="code reject"/>
+
+        <TextView
             android:id="@+id/tvReject3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_below="@id/tvReject2"
+            android:layout_toRightOf="@id/tvcodereject0"
+            android:layout_marginLeft="10dp"
             android:text="Reject"
             android:layout_marginTop="10dp"
             android:textSize="20sp"
             />
+
 
         <Button
             android:id="@+id/btnReject"
@@ -39,6 +59,7 @@
             android:layout_height="wrap_content"
             android:text="Pilih Reject"
             android:gravity="center_horizontal"
+            android:layout_below="@id/tvReject3"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"/>
 
@@ -48,10 +69,11 @@
             android:layout_height="match_parent"
             android:text="SIMPAN"
             android:textSize="20sp"
+            android:layout_below="@id/btnReject"
             android:layout_marginTop="20dp"
             />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relinputRej"
