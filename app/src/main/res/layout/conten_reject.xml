@@ -90,7 +90,7 @@
             android:layout_marginTop="10dp"
             android:text="Doc.Status"/>
         <TextView
-            android:id="@+id/tvdocsts"
+            android:id="@+id/tvdocsts2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ini doc status"
@@ -149,12 +149,37 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvOutputQty"
             android:text="workcemter"/>
+
+
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/tvtampil"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@id/RootContent"
+        android:layout_toRightOf="@id/dashboard"
+        android:layout_marginLeft="20dp">
+
+        <TextView
+            android:id="@+id/tvdocentry0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="docentryyyyyyyy"/>
+
         <Button
             android:id="@+id/btnFrag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ButtonFragment"/>
+            android:layout_below="@id/tvdocentry0"
+            android:text="Tambah Reject"/>
 
-    </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvActualCrit"
+            android:layout_below="@id/btnFrag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+        </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
 
 </RelativeLayout>

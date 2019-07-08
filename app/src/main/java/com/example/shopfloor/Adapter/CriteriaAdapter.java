@@ -3,9 +3,12 @@ package com.example.shopfloor.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.shopfloor.Models.Criteria;
@@ -22,6 +25,10 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
     public CriteriaAdapter(List<Criteria> list, Context context) {
         this.context = context;
         list_item = list;
+    }
+
+    public List<Criteria> getData() {
+        return list_item;
     }
 
     public CriteriaAdapter(Context context) {
@@ -45,6 +52,22 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
         holder.tvcriteria1.setText(criteria.getUCriteria());
         holder.tvcritdesc1.setText(String.valueOf(criteria.getUCriteriaName()));
         holder.tvstandard1.setText(criteria.getUStandard());
+        holder.tvactual1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                criteria.setUValueType(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -95,17 +118,19 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
         return null;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvcriteria1;
         public TextView tvcritdesc1;
         public TextView tvvaluetype1;
         public TextView tvstandard1;
+        public EditText tvactual1;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvcriteria1 = itemView.findViewById(R.id.tvcriteria1);
             tvcritdesc1 = itemView.findViewById(R.id.tvcritdesc1);
             tvstandard1 = itemView.findViewById(R.id.tvstandard1);
+            tvactual1 = itemView.findViewById(R.id.tvactual1);
 
         }
     }

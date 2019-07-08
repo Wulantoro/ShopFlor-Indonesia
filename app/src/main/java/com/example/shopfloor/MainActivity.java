@@ -2,9 +2,11 @@ package com.example.shopfloor;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -75,6 +77,31 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+
+//        public void onBackPressed(){
+//            Intent a = new Intent(Intent.ACTION_MAIN);
+//            a.addCategory(Intent.CATEGORY_HOME);
+//            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(a);
+//        }
+
+
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Really Exit?")
+                .setMessage("Are you sure you want to exit?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Intent a = new Intent(Intent.ACTION_MAIN);
+            a.addCategory(Intent.CATEGORY_HOME);
+            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(a);
+                    }
+                }).create().show();
     }
 
     private void checkLogin(final String username, final String password) {
