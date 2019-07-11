@@ -55,6 +55,7 @@ public class RespRejectFragActivity extends AppCompatActivity {
         tvReject3 = findViewById(R.id.tvReject3);
         tvcodereject0 = findViewById(R.id.tvcodereject0);
         btnSimpan = findViewById(R.id.btnSimpan);
+        tvRejectQty = findViewById(R.id.tvRejectQty);
 
         tvdocentry4 = findViewById(R.id.tvdocentry4);
         TextView tvdocentry = findViewById(R.id.tvdocentry4);
@@ -65,8 +66,17 @@ public class RespRejectFragActivity extends AppCompatActivity {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                simpanReject();
-                startActivity(new Intent(getApplicationContext(), RejectActivity.class));
+
+                if (tvRejectQty.length() != 0 && tvcodereject0.length() != 0) {
+                    simpanReject();
+                    startActivity(new Intent(getApplicationContext(), RejectActivity.class));
+//                    Toast.makeText(getApplicationContext(), "Reject Qty atau Reject tidak boleh kosong", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(getApplicationContext(), "Reject Qty atau Reject tidak boleh kosong", Toast.LENGTH_SHORT).show();
+//                    simpanReject();
+//                    startActivity(new Intent(getApplicationContext(), RejectActivity.class));
+                }
             }
         });
 
@@ -176,7 +186,7 @@ public class RespRejectFragActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(ANError anError) {
-                        Toast.makeText(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_SHORT).show();
                     }
                 });
 

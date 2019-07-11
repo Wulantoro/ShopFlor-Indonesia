@@ -15,7 +15,7 @@
             android:id="@+id/tvcodereject1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
             android:text="Code reject"
             android:textStyle="bold"
             android:textColor="@color/blue_A700"/>
@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvqty0"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:text="quantitu"/>
 
         <TextView
@@ -41,6 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvcodereject1"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="nama reject"/>
     </RelativeLayout>

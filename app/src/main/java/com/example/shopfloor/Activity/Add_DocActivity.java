@@ -370,7 +370,7 @@ public class Add_DocActivity extends AppCompatActivity {
 //        tvcobadocnum.setText(prf.getString("docnum", null));
 //        Log.e("docnum30 == ", "check docnum = " + prf.getString("docnum", null));
 
-//       AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null)+"&&docnum="+prf.getString("docnum", null))
+//       AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null)+"&docnum="+prf.getString("docnum", null))
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null))
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?docnum="+prf.getString("docnum", null))
         AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null))

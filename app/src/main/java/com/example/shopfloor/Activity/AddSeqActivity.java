@@ -249,7 +249,7 @@ public class AddSeqActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(ANError anError) {
-                        Toast.makeText(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

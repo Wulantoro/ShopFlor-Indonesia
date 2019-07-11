@@ -176,6 +176,12 @@ public class Open_DocActivity extends AppCompatActivity {
         dateView.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
     }
 
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 
     }
 
