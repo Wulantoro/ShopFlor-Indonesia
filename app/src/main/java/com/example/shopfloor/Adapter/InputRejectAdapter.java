@@ -20,19 +20,21 @@ public class InputRejectAdapter extends RecyclerView.Adapter<InputRejectAdapter.
     private Context context;
     private List<InputReject> list_item;
 
+    public InputRejectAdapter(Context context) {
+        this.context = context;
+        list_item = new ArrayList<>();
+    }
+
+    public InputRejectAdapter(RejectFragment rejectFragment) {
+    }
+
     public InputRejectAdapter(List<InputReject> list, Context context) {
         this.context= context;
         list_item = list;
     }
 
-    public InputRejectAdapter(RejectFragment rejectFragment) {
 
-    }
 
-    public InputRejectAdapter(Context context) {
-        this.context = context;
-        list_item = new ArrayList<>();
-    }
 
     @NonNull
     @Override
@@ -62,8 +64,8 @@ public class InputRejectAdapter extends RecyclerView.Adapter<InputRejectAdapter.
     }
 
     public void addAll(List<InputReject> moveResults) {
-        for (InputReject result : moveResults) {
-            add(result);
+        for (InputReject results : moveResults) {
+            add(results);
         }
     }
 

@@ -44,6 +44,7 @@ public class RejectFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_reject, container, false);
 
         gson = new Gson();
+        list = new ArrayList<>();
         rv = rootView.findViewById(R.id.rvInputReject);
         adapter = new InputRejectAdapter(this);
         rv.setAdapter(adapter);
@@ -72,11 +73,14 @@ public class RejectFragment extends Fragment {
                                 result.clear();
 
                             String message = response.getString("message");
+
                             if (message.equals("Item reject were found")) {
                                 String records = response.getString("data");
 
                                 JSONArray dataArr = new JSONArray(records);
+
                                 if (dataArr.length() > 0) {
+
                                     for (int i = 0; i < dataArr.length(); i++) {
                                         InputReject inputReject = gson.fromJson(dataArr.getJSONObject(i).toString(), InputReject.class);
                                         result.add(inputReject);

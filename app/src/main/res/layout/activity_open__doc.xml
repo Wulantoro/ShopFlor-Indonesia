@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tvtanggal1"
-        android:text="2019-03-28"
+        android:text=""
         android:textStyle="bold"
         android:textSize="18sp"
         android:layout_below="@id/text1"
@@ -49,8 +49,7 @@
         android:id="@+id/btnPlhtgl"
         android:layout_below="@id/text1"
         android:text="PILIH TANGGAL"
-        android:layout_marginLeft="20dp"
-        android:onClick="setDate"/>
+        android:layout_marginLeft="20dp" />
 
     <Button
         android:layout_width="wrap_content"
