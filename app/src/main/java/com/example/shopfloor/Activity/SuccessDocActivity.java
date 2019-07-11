@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,18 +35,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class SuccessDocActivity extends AppCompatActivity {
 
-    private DatePicker datePickerSuc;
-    private Calendar calendarSuc;
-    private int year, month, day;
-    private TextView dateViewSuc;
-    private Button btnCoba;
+    private DatePickerDialog datePickerDialog;
+    private SimpleDateFormat dateFormatter;
     private TextView tvworkcenter4;
+    private Button btnPlhtglsuccess;
+    private TextView tvtanggal1success;
 
     private RecyclerView rv;
     private SuccDocAdapter adapter;
@@ -60,6 +64,8 @@ public class SuccessDocActivity extends AppCompatActivity {
         setContentView(R.layout.activity_success_doc);
 
         tvworkcenter4 = findViewById(R.id.tvworkcenter4);
+        btnPlhtglsuccess = findViewById(R.id.btnPlhtglsuccess);
+        tvtanggal1success = findViewById(R.id.tvtanggal1success);
 
         TextView tvworlcenter = findViewById(R.id.tvworkcenter4);
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
@@ -77,15 +83,69 @@ public class SuccessDocActivity extends AppCompatActivity {
         rv.setAdapter(adapter);
         loadData();
 
+        adapter = new SuccDocAdapter(list, this);
+        rv.setAdapter(adapter);
+        addTextListener();
+
 
         /*******************tanggal *****************/
-        dateViewSuc = (TextView) findViewById(R.id.tvtanggal1success);
-        calendarSuc = Calendar.getInstance();
-        year = calendarSuc.get(Calendar.YEAR);
+//        dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
-        month = calendarSuc.get(Calendar.MONTH);
-        day = calendarSuc.get(Calendar.DAY_OF_MONTH);
-        showDate(year, month + 1, day);
+        /*************************************/
+//        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+//        TextView docdate = findViewById(R.id.tvtanggal1success);
+//        docdate.setText(date);
+        /***********************************************/
+
+
+        btnPlhtglsuccess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
+        });
+
+//        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+//        TextView docdate = findViewById(R.id.tvtanggal1success);
+//        docdate.setText(date);
+//
+//        calendarSuc = Calendar.getInstance();
+//        year = calendarSuc.get(Calendar.YEAR);
+
+//        month = calendarSuc.get(Calendar.MONTH);
+//        day = calendarSuc.get(Calendar.DAY_OF_MONTH);
+//        showDate(year, month + 1, day);
+    }
+
+    private void showDialog() {
+        /**
+         * Calendar untuk mendapatkan tanggal sekarang
+         */
+        Calendar newCalendar = Calendar.getInstance();
+
+        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                /**
+                 * Method ini dipanggil saat kita selesai memilih tanggal di DatePicker
+                 */
+
+                /**
+                 * Set Calendar untuk menampung tanggal yang dipilih
+                 */
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(year, monthOfYear, dayOfMonth);
+
+
+                /**
+                 * Update TextView dengan tanggal yang kita pilih
+                 */
+                tvtanggal1success.setText(dateFormatter.format(newDate.getTime()));
+
+            }
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
     }
 
     private void loadData() {
@@ -145,30 +205,68 @@ public class SuccessDocActivity extends AppCompatActivity {
         }
     }
 
-    public void setDate(View view) {
-        showDialog(999);
-        Toast.makeText(getApplicationContext(), "Pilih tanggal", Toast.LENGTH_SHORT).show();
+    public void addTextListener() {
+        tvtanggal1success.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence query, int start, int before, int count) {
+                query = query.toString().toLowerCase();
+
+                final List<Header> filteredList = new ArrayList<>();
+
+                for (int i = 0; i < list.size(); i++) {
+                    final String text = list.get(i).getDocDate().toLowerCase();
+                    if (text.contains(query.toString())) {
+                        filteredList.add(list.get(i));
+                    }
+                }
+
+                rv.setLayoutManager(new LinearLayoutManager(SuccessDocActivity.this));
+                adapter = new SuccDocAdapter(filteredList, SuccessDocActivity.this);
+                rv.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+            }
+        });
     }
 
-    protected Dialog onCreateDialog(int id) {
-        if (id == 999) {
-            return new DatePickerDialog(this, myDateListener, year, month, day);
+//    public void setDate(View view) {
+//        showDialog(999);
+//        Toast.makeText(getApplicationContext(), "Pilih tanggal", Toast.LENGTH_SHORT).show();
+//
+//    }
+//
+//    protected Dialog onCreateDialog(int id) {
+//        if (id == 999) {
+//            return new DatePickerDialog(this, myDateListener, year, month, day);
+//
+//        }
+//        return null;
+//    }
+//
+//    private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
+//        @Override
+//        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//            showDate();
+//        }
+//    };
+//
+//    private void showDate(int year, int month, int day) {
+//        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+//        TextView docdate = findViewById(R.id.tvtanggal1success);
+//        docdate.setText(date);
+//        tvtanggal1success.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
 
-        }
-        return null;
-    }
-
-    private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            showDate(year, month + 1, dayOfMonth);
-        }
-    };
-
-    private void showDate(int year, int month, int day) {
-        dateViewSuc.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
-    }
+//    }
 
 }
 
