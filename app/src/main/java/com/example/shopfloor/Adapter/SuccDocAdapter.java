@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.shopfloor.Activity.DetailSuccDocActivity;
+import com.example.shopfloor.Activity.SuccessDocActivity;
 import com.example.shopfloor.Fragment.InfoFragment;
 import com.example.shopfloor.Fragment.RejectFragment;
 import com.example.shopfloor.Models.Header;
@@ -57,6 +58,7 @@ public class SuccDocAdapter extends RecyclerView.Adapter<SuccDocAdapter.ViewHold
                 Intent intent = new Intent(context, DetailSuccDocActivity.class);
                 intent.putExtra("key_succ", header);
                 context.startActivity(intent);
+                ((SuccessDocActivity)context).finish();
             }
         });
     }

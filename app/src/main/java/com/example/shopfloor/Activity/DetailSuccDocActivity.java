@@ -20,6 +20,7 @@ public class DetailSuccDocActivity extends AppCompatActivity {
     private Header header;
     private SuccDocAdapter adapter;
     private TextView tvNo_doc_Frag;
+    private ViewPager viewPager;
     private InfoFragment infoFragment;
 
 
@@ -29,11 +30,13 @@ public class DetailSuccDocActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_succ_doc);
 
         tvNo_doc_Frag = findViewById(R.id.tvNo_doc_Frag);
+        viewPager = findViewById(R.id.viewPager);
 
-        InfoFragment infoFragment = new InfoFragment();
+        CriteriaFragment criteriaFragment = new CriteriaFragment();
         adapter = new SuccDocAdapter(this);
         header = getIntent().getParcelableExtra("key_succ");
-        tvNo_doc_Frag.setText(String.valueOf(header.getDocNum()));
+
+
 
 
         initView();

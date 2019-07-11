@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.shopfloor.Fragment.RejectFragment;
 import com.example.shopfloor.Models.InputReject;
 import com.example.shopfloor.R;
 
@@ -22,6 +23,10 @@ public class InputRejectAdapter extends RecyclerView.Adapter<InputRejectAdapter.
     public InputRejectAdapter(List<InputReject> list, Context context) {
         this.context= context;
         list_item = list;
+    }
+
+    public InputRejectAdapter(RejectFragment rejectFragment) {
+
     }
 
     public InputRejectAdapter(Context context) {

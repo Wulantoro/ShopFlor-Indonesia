@@ -37,7 +37,7 @@
             android:layout_below="@id/tvReject2"
             android:layout_marginTop="10dp"
             android:textSize="20sp"
-            android:text="code reject"/>
+            android:hint="code reject"/>
 
         <TextView
             android:id="@+id/tvReject3"
@@ -86,7 +86,7 @@
             android:id="@+id/tvRejectQty"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Reject Qty"
+            android:hint="Reject Qty"
             android:textSize="20sp"
             android:gravity="center"/>
 
