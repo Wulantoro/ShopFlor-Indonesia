@@ -78,6 +78,7 @@ public class Add_DocActivity extends AppCompatActivity {
     private TextView tvTgl_mulai1;
     private TextView tvusername2;
     private TextView tvdocnum1;
+    private String docnum="";
 
 
 
@@ -155,10 +156,6 @@ public class Add_DocActivity extends AppCompatActivity {
         btn_Pilihprod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* String value = tvWC3.getText().toString();
-                Intent intent = new Intent(Add_DocActivity.this, ProductorderListActivity.class);
-                intent.putExtra(KEY_WC, value);
-                startActivity(intent);*/
 
                  showDialog2(Add_DocActivity.this);
 
@@ -197,13 +194,6 @@ public class Add_DocActivity extends AppCompatActivity {
     //showDialog
     public void showDialog(Activity activity) {
 
-
-//        TextView cobadocnum;
-//        cobadocnum = findViewById(R.id.cobadocnum);
-//        TextView tvdocnum = findViewById(R.id.cobadocnum);
-//        prf = getSharedPreferences("Docnum", MODE_PRIVATE);
-//        tvdocnum.setText(prf.getString("docnum", null));
-
         dialog = new Dialog(activity);
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.activity_sequence_list);
@@ -213,7 +203,7 @@ public class Add_DocActivity extends AppCompatActivity {
         adapter = new SequenceAdapter(this);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        loadData();
+        loadData(tvNo_Prod1.getText().toString());
 
         rv.setAdapter(adapter);
 
@@ -348,32 +338,16 @@ public class Add_DocActivity extends AppCompatActivity {
         });
     }
 
-    public void loadData() {
+    public void loadData(String docnum) {
         if (adapter != null)
             adapter.clearAll();
-
-//        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
-//        prf.getString("workcenter", null);
-//        Log.e("workcenterrrrrrrr",  prf.getString("workcenter", null));
-
-//        cobadocnum = findViewById(R.id.cobadocnum);
-//        TextView docnum = findViewById(R.id.cobadocnum);
-//        prf = getSharedPreferences("Docnum", MODE_PRIVATE);
-//        docnum.setText(prf.getString("docnum", null));
-//        Log.e("docnum ==== ", prf.getString("docnum", null));
 
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
         Log.e("workcenter30",  "check workcenter " + prf.getString("workcenter", null));
 
-//        TextView tvcobadocnum = findViewById(R.id.cobadocnum);
-//        prf = getSharedPreferences("Docnum", MODE_PRIVATE);
-//        tvcobadocnum.setText(prf.getString("docnum", null));
-//        Log.e("docnum30 == ", "check docnum = " + prf.getString("docnum", null));
+        Log.e("docnum3000 == ", "check docnum = " + tvNo_Prod1.getText().toString());
 
-//       AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null)+"&docnum="+prf.getString("docnum", null))
-//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null))
-//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?docnum="+prf.getString("docnum", null))
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null))
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null)+"&docnum="+docnum)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override

@@ -6,10 +6,12 @@ import android.os.Parcelable;
 public class Criteria implements Parcelable {
 
 
-    private int uSequence;
+//    private int uSequence;
+    private int U_sequence;
     private int uQuantity;
     private String itemCode;
     private int docNum;
+//    private String docnum
     private String status;
     private String itemName;
     private String uDesc;
@@ -42,7 +44,7 @@ public class Criteria implements Parcelable {
             ;
 
     protected Criteria(Parcel in) {
-        this.uSequence = ((int) in.readValue((int.class.getClassLoader())));
+        this.U_sequence = ((int) in.readValue((int.class.getClassLoader())));
         this.uQuantity = ((int) in.readValue((int.class.getClassLoader())));
         this.itemCode = ((String) in.readValue((String.class.getClassLoader())));
         this.docNum = ((int) in.readValue((int.class.getClassLoader())));
@@ -67,11 +69,11 @@ public class Criteria implements Parcelable {
     }
 
     public int getUSequence() {
-        return uSequence;
+        return U_sequence;
     }
 
     public void setUSequence(int uSequence) {
-        this.uSequence = uSequence;
+        this.U_sequence = uSequence;
     }
 
     public int getUQuantity() {
@@ -211,7 +213,7 @@ public class Criteria implements Parcelable {
     }
 
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(uSequence);
+        dest.writeValue(U_sequence);
         dest.writeValue(uQuantity);
         dest.writeValue(itemCode);
         dest.writeValue(docNum);

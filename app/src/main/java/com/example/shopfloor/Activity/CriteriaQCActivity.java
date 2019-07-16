@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.BuildConfig;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
@@ -44,7 +45,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
     TextView tvInputQty3;
     TextView tvdocentry3;
     private TextView tvdocnum5;
-    private TextView tvnoprod1;
+    private TextView tvnoprod0;
     private TextView tvprodcode;
     private TextView tvprodplanqty2;
     private TextView tvprodstatus1;
@@ -64,6 +65,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
     private TextView tvusername7;
     private TextView tvdocsts1;
     private TextView tvactual1;
+    private String docnum = "";
     private RecyclerView rv;
     private CriteriaAdapter adapter;
     private Gson gson;
@@ -85,7 +87,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvInputQty3 = findViewById(R.id.tvInputQty3);
         tvdocentry3 = findViewById(R.id.tvdocentry3);
         tvdocnum5 = findViewById(R.id.tvdocnum5);
-        tvnoprod1 = findViewById(R.id.tvnoprod1);
+        tvnoprod0 = findViewById(R.id.tvnoprod0);
         tvprodcode = findViewById(R.id.tvprodcode);
         tvprodplanqty2 = findViewById(R.id.tvprodplanqty2);
         tvprodstatus1 = findViewById(R.id.tvprodstatus1);
@@ -106,20 +108,8 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvcriteria1 = findViewById(R.id.tvcriteria1);
         tvdocsts1 = findViewById(R.id.tvdocsts1);
         tvactual1 = findViewById(R.id.tvactual1);
+
         /*************************************************************/
-
-        /*******************Ambil data criteria************************/
-        gson = new Gson();
-        list = new ArrayList<>();
-        rv = findViewById(R.id.rvActualCrit);
-        adapter = new CriteriaAdapter(this);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        rv.setLayoutManager(linearLayoutManager);
-        rv.setItemAnimator(new DefaultItemAnimator());
-        rv.setAdapter(adapter);
-        loadData();
-        /*******************************************************************/
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -131,9 +121,13 @@ public class CriteriaQCActivity extends AppCompatActivity {
         prf = getSharedPreferences("inQty", MODE_PRIVATE);
         tvinqty.setText(prf.getString("tvinqty", null));
 
-        TextView tvnoprod = findViewById(R.id.tvnoprod1);
+        TextView tvwc = findViewById(R.id.tvWorkcenter);
+        prf = getSharedPreferences("workCenter", MODE_PRIVATE);
+        tvwc.setText(String.valueOf(prf.getString("tvworkcenter", null)));
+
+        TextView tvnoprod = findViewById(R.id.tvnoprod0);
         prf = getSharedPreferences("Noprod", MODE_PRIVATE);
-        tvnoprod.setText(prf.getString("tvnoprod", null));
+        tvnoprod.setText(String.valueOf(prf.getString("tvnoprod", null)));
 
         TextView tvoutqty = findViewById(R.id.tvOutputQty1);
         prf = getSharedPreferences("outQty", MODE_PRIVATE);
@@ -151,9 +145,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
         prf = getSharedPreferences("SequenceQty", MODE_PRIVATE);
         tvseqqty.setText(prf.getString("tvseqqty", null));
 
-        TextView tvwc = findViewById(R.id.tvWorkcenter);
-        prf = getSharedPreferences("workCenter", MODE_PRIVATE);
-        tvwc.setText(prf.getString("tvworkcenter", null));
+
 
         TextView tvdocentry = findViewById(R.id.tvdocentry3);
         prf = getSharedPreferences("docEntry", MODE_PRIVATE);
@@ -218,37 +210,78 @@ public class CriteriaQCActivity extends AppCompatActivity {
         String jam = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
         TextView jamsel = findViewById(R.id.tvjamsel1);
         jamsel.setText(jam);
+
+        /*******************Ambil data criteria************************/
+        gson = new Gson();
+        list = new ArrayList<>();
+        rv = findViewById(R.id.rvActualCrit);
+        adapter = new CriteriaAdapter(this);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        rv.setLayoutManager(linearLayoutManager);
+        rv.setItemAnimator(new DefaultItemAnimator());
+        rv.setAdapter(adapter);
+        loadData(tvWorkcenter.getText().toString(), tvnoprod0.getText().toString());
+        /*******************************************************************/
 }
 
-    private void loadData() {
+    private void loadData(String wccode, String sequence) {
         if (adapter != null)
             adapter.clearAll();
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria")
+        prf = getSharedPreferences("workCenter", MODE_PRIVATE);
+        String.valueOf(prf.getString("tvworkcenter", null));
+        Log.e("wccode = ", prf.getString("tvworkcenter", null));
+
+        prf = getSharedPreferences("Noprod", MODE_PRIVATE);
+        String.valueOf(prf.getString("tvnoprod", null));
+        Log.e("docnum = ", prf.getString("tvnoprod", null));
+
+        Log.e("coba wccode", tvWorkcenter.getText().toString());
+        Log.e("Coba URL", GlobalVars.BASE_IP + "index.php/criteria?docNum="+prf.getString("tvnoprod", null)+"&wccode="+wccode+"&U_sequence="+sequence);
+        Log.e("Coba ", GlobalVars.BASE_IP +"index.php/criteria?wccode={wccode}"+"&docNum={docNum}");
+        Log.e("WHERE ", GlobalVars.BASE_IP + "index.php/criteria?wccode=ASS&docNum=10016649");
+        Log.e("URL ", GlobalVars.BASE_IP + "index.php/criteria?wccode="+prf.getString("tvworkcenter", null)+"&docNum="+prf.getString("tvnoprod", null)+"");
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?wccode="+prf.getString("tvworkcenter", null)+"&docNum="+docnum)
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?docNum="+prf.getString("tvnoprod", null)+"&wccode="+wccode)
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?wccode="+prf.getString("tvworkcenter", null))
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?docNum="+prf.getString("tvnoprod", null))
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?docNum="+prf.getString("tvnoprod", null)+"&wccode="+prf.getString("tvworkcenter", null)+"")
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?wccode="+prf.getString("tvworkcenter", null)+"&docNum="+prf.getString("tvnoprod", null)+"")
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?wccode="+prf.getString("tvworkcenter", null)+"&docNum="+prf.getString("tvnoprod", null)+"&U_sequence="+prf.getString("tvsequence", null)+"")
+//        AndroidNetworking.get(GlobalVars.BASE_IP +"index.php/criteria?wccode={wccode}"+"&docNum={docNum}")
+
+                .setTag(this)
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
                         List<Criteria> results = new ArrayList<>();
+                        Log.e("onResponse11111111 = " , ""+response);
                         try {
+//                            Log.e("onResponse = ", response.toString());
+
                             if (results != null)
                                 results.clear();
                             String message = response.getString("message");
-                            if (message.equals("Criteria were found")) {
+//                            if (message.equals("Criteria were found")) {
                                 String records = response.getString("data");
                                 JSONArray dataArr = new JSONArray(records);
+
 
                                 if (dataArr.length() > 0) {
                                     for (int i = 0; i < dataArr.length(); i++) {
                                         Criteria criteria = gson.fromJson(dataArr.getJSONObject(i).toString(), Criteria.class);
                                         results.add(criteria);
+                                        Log.e("onResponseeeeeeee ", dataArr.getJSONObject(i).toString());
                                     }
                                 }
-                            }
+//                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                         adapter.addAll(results);
                     }
 
