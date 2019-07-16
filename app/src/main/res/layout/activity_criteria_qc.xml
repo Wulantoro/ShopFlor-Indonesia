@@ -44,7 +44,7 @@
                 android:text="No. Produksi : "/>
 
             <TextView
-                android:id="@+id/tvnoprod1"
+                android:id="@+id/tvnoprod0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvnoprod"
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_below="@id/tvnoprod1"
+                android:layout_below="@id/tvnoprod0"
                 android:text="Nama Produk"/>
             <TextView
                 android:id="@+id/tvnmprod1"
