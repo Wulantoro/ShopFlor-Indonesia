@@ -8,9 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,18 +43,21 @@ public class RespRejectFragActivity extends AppCompatActivity {
     private Button btnReject;
     public static Dialog dialog;
     private RecyclerView rv;
-    private RejectAdapter adapter;
+
     public static TextView tvReject3;
     public static TextView tvcodereject0;
     private TextView tvdocentry4;
     private TextView btnSimpan;
     SharedPreferences pref, prf;
+
+    private RejectAdapter adapter1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resp_reject_frag);
 
         gson = new Gson();
+        adapter1 = new RejectAdapter(this);
         tvReject3 = findViewById(R.id.tvReject3);
         tvcodereject0 = findViewById(R.id.tvcodereject0);
         btnSimpan = findViewById(R.id.btnSimpan);
@@ -84,38 +90,97 @@ public class RespRejectFragActivity extends AppCompatActivity {
         btnReject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog(RespRejectFragActivity.this);
+                showDialog();
             }
         });
 
     }
 
-    public void showDialog(Activity activity) {
+    public void showDialog() {
 
-        dialog = new Dialog(activity);
+        dialog = new Dialog(RespRejectFragActivity.this);
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.activity_reject_list);
 
-        rv = findViewById(R.id.rvRejectFrag);
-        rv = dialog.findViewById(R.id.rvRejectFrag);
-        adapter = new RejectAdapter(this);
-        rv.setAdapter(adapter);
-        rv.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        loadData();
+        gson = new Gson();
 
-        rv.setAdapter(adapter);
-        rv.setOnClickListener(new View.OnClickListener() {
+        final RecyclerView rv1 = dialog.findViewById(R.id.rvRejectFrag);
+        final EditText searchRej = dialog.findViewById(R.id.searchRej);
+
+        final List<Reject> list = adapter1.getList_item();
+
+        loadData(adapter1);
+        rv1.setAdapter(adapter1);
+        rv1.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        rv1.setAdapter(adapter1);
+
+        searchRej.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence query, int start, int before, int count) {
+                query = query.toString().toLowerCase();
+
+                final List<Reject> filteredList = new ArrayList<>();
+
+                if (list != null & list.size() > 0) {
+
+                    for (int i = 0; i < list.size(); i++) {
+                        final String text = String.valueOf(list.get(i).getName()).toLowerCase();
+                        if (text.contains(query.toString())) {
+
+                            filteredList.add(list.get(i));
+                        }
+                    }
+
+                    rv1.setLayoutManager(new LinearLayoutManager(RespRejectFragActivity.this));
+                    adapter1 = new RejectAdapter(filteredList, RespRejectFragActivity.this);
+                    rv1.setAdapter(adapter1);
+                    adapter1.notifyDataSetChanged();
+                }
+
+            }
+
+        });
+
+        rv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
         });
         dialog.show();
+
+        /**********************************************/
+//        rv = findViewById(R.id.rvRejectFrag);
+//        rv = dialog.findViewById(R.id.rvRejectFrag);
+//        adapter1 = new RejectAdapter(this);
+//        rv.setAdapter(adapter1);
+//        rv.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+//        loadData();
+//
+//        rv.setAdapter(adapter1);
+//        rv.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+//        dialog.show();
     }
 
-    public void loadData() {
-        if (adapter != null)
-            adapter.clearAll();
+    public void loadData(final RejectAdapter adapter) {
+        if (adapter1 != null)
+            adapter1.clearAll();
 
         AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/reject")
                 .setPriority(Priority.MEDIUM)

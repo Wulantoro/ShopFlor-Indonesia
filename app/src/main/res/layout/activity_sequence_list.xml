@@ -7,9 +7,16 @@
     android:paddingTop="5dp"
     tools:context=".Activity.SequenceListActivity">
 
+    <EditText
+        android:id="@+id/searchSeq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:imeOptions="flagNoExtractUi"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvSequenceList"
         android:layout_width="match_parent"
+        android:layout_below="@id/searchSeq"
         android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>
