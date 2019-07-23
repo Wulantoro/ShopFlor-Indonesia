@@ -23,6 +23,11 @@ public class SequenceAdapter extends RecyclerView.Adapter<SequenceAdapter.ViewHo
     private Context context;
     private List<Sequence> list_item;
 
+    public SequenceAdapter(List<Sequence> list, Context context) {
+        this.context = context;
+        list_item = list;
+    }
+
     public SequenceAdapter( Context context) {
         this.context = context;
         list_item = new ArrayList<>();
@@ -41,18 +46,6 @@ public class SequenceAdapter extends RecyclerView.Adapter<SequenceAdapter.ViewHo
 
         holder.tvseq.setText(sequence.getUQuantity());
         holder.tvseqqty.setText(String.valueOf("("+sequence.getUSequence()+")"));
-
-       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, Add_DocActivity.class);
-                intent.putExtra("sequence", sequence.getUQuantity().substring(0,2));
-                intent.putExtra("sequenceqty", sequence.getUSequence());
-                context.startActivity(intent);
-                ((SequenceListActivity)context).finish();
-
-            }
-        });*/
 
     }
 
@@ -102,7 +95,10 @@ public class SequenceAdapter extends RecyclerView.Adapter<SequenceAdapter.ViewHo
             return list_item.get(position);
         }
         return null;
+    }
 
+    public List<Sequence> getList_item() {
+        return list_item;
     }
 
      class ViewHolder extends RecyclerView.ViewHolder {

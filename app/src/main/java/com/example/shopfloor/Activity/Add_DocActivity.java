@@ -68,7 +68,6 @@ public class Add_DocActivity extends AppCompatActivity {
     private TextView dateView;
     private Calendar calendar;
     private int year, month, day;
-    private SequenceAdapter adapter;
     private RecyclerView rv, rv2;
     public EditText searchPO;
     public SharedPreferences pref;
@@ -78,10 +77,12 @@ public class Add_DocActivity extends AppCompatActivity {
     private TextView tvusername2;
     private TextView tvdocnum1;
     private String docnum="";
+    private EditText searchSeq;
 
 
 
     private ProductorderAdapter adapter2;
+    private SequenceAdapter adapter1;
     private List<Productorder> list;
 
     @Override
@@ -99,6 +100,7 @@ public class Add_DocActivity extends AppCompatActivity {
 
         gson = new Gson();
         adapter2 = new ProductorderAdapter(this);
+        adapter1 = new SequenceAdapter(this);
         tvNm_prod1 = findViewById(R.id.tvNm_prod1);
         tvNo_Prod1 = findViewById(R.id.tvNo_prod1);
         tvRoute_Code1 = findViewById(R.id.tvRoute_Code1);
@@ -176,7 +178,7 @@ public class Add_DocActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = pref.edit();
                     editor.putString("docnum", docnum);
                     editor.commit();
-                    showDialog(Add_DocActivity.this);
+                    showDialog();
 
                 }
             }
@@ -197,22 +199,62 @@ public class Add_DocActivity extends AppCompatActivity {
     }
 
     //showDialog
-    public void showDialog(Activity activity) {
+    public void showDialog() {
 
-        dialog = new Dialog(activity);
+        dialog = new Dialog(Add_DocActivity.this);
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.activity_sequence_list);
 
-        rv = findViewById(R.id.rvSequenceList);
-        rv = dialog.findViewById(R.id.rvSequenceList);
-        adapter = new SequenceAdapter(this);
-        rv.setAdapter(adapter);
-        rv.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        loadData(tvNo_Prod1.getText().toString());
+        gson = new Gson();
 
-        rv.setAdapter(adapter);
+        final RecyclerView rv1 = dialog.findViewById(R.id.rvSequenceList);
+        final EditText seacrhSeq = dialog.findViewById(R.id.searchSeq);
 
-        rv.setOnClickListener(new View.OnClickListener() {
+        final List<Sequence> list = adapter1.getList_item();
+
+        loadData(tvNo_Prod1.getText().toString(), adapter1);
+        rv1.setAdapter(adapter1);
+        rv1.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        rv1.setAdapter(adapter1);
+
+        seacrhSeq.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence query, int start, int before, int count) {
+                query = query.toString().toLowerCase();
+
+                final List<Sequence> filteredList = new ArrayList<>();
+
+                if (list != null & list.size() > 0) {
+
+                    for (int i = 0; i < list.size(); i++) {
+                        final String text = String.valueOf(list.get(i).getUSequence()).toLowerCase();
+                        if (text.contains(query.toString())) {
+
+                            filteredList.add(list.get(i));
+                        }
+                    }
+
+                    rv1.setLayoutManager(new LinearLayoutManager(Add_DocActivity.this));
+                    adapter1 = new SequenceAdapter(filteredList, Add_DocActivity.this);
+                    rv1.setAdapter(adapter1);
+                    adapter1.notifyDataSetChanged();
+                }
+
+            }
+
+        });
+        rv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -227,14 +269,14 @@ public class Add_DocActivity extends AppCompatActivity {
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.activity_productorder_list);
 
-        gson = new Gson();
+    gson = new Gson();
 
-        final RecyclerView rv2 = dialog.findViewById(R.id.rvProductorderList);
-        final EditText searchPO = dialog.findViewById(R.id.searchPO);
+    final RecyclerView rv2 = dialog.findViewById(R.id.rvProductorderList);
+    final EditText searchPO = dialog.findViewById(R.id.searchPO);
 
-        final List<Productorder> list = adapter2.getList_item();
+    final List<Productorder> list = adapter2.getList_item();
 
-        loadData2(adapter2);
+    loadData2(adapter2);
 
         rv2.setAdapter(adapter2);
         rv2.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
@@ -243,46 +285,46 @@ public class Add_DocActivity extends AppCompatActivity {
 
         searchPO.addTextChangedListener(new TextWatcher() {
 
-            public void afterTextChanged(Editable s) {
+        public void afterTextChanged(Editable s) {
 
-            }
+        }
 
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
+        }
 
-            public void onTextChanged(CharSequence query, int start, int before, int count) {
+        public void onTextChanged(CharSequence query, int start, int before, int count) {
 
-                query = query.toString().toLowerCase();
+            query = query.toString().toLowerCase();
 
-                final List<Productorder> filteredList = new ArrayList<>();
+            final List<Productorder> filteredList = new ArrayList<>();
 
 
-                if (list != null & list.size() > 0) {
+            if (list != null & list.size() > 0) {
 
-                    for (int i = 0; i < list.size(); i++) {
-                        final String text = String.valueOf(list.get(i).getDocNum());
-                        if (text.contains(query.toString())) {
+                for (int i = 0; i < list.size(); i++) {
+                    final String text = String.valueOf(list.get(i).getDocNum()).toLowerCase();
+                    if (text.contains(query.toString())) {
 
-                            filteredList.add(list.get(i));
-                        }
+                        filteredList.add(list.get(i));
                     }
-
-                    rv2.setLayoutManager(new LinearLayoutManager(Add_DocActivity.this));
-                    adapter2 = new ProductorderAdapter(filteredList, Add_DocActivity.this);
-                    rv2.setAdapter(adapter2);
-                    adapter2.notifyDataSetChanged();
                 }
-            }
-        });
-        rv2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
+                rv2.setLayoutManager(new LinearLayoutManager(Add_DocActivity.this));
+                adapter2 = new ProductorderAdapter(filteredList, Add_DocActivity.this);
+                rv2.setAdapter(adapter2);
+                adapter2.notifyDataSetChanged();
             }
-        });
+        }
+    });
+        rv2.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    });
         dialog.show();
-    }
+}
 
     public void loadData2(final ProductorderAdapter adapter) {
         if (adapter2 != null)
@@ -333,9 +375,9 @@ public class Add_DocActivity extends AppCompatActivity {
     }
 
 
-    public void loadData(String docnum) {
-        if (adapter != null)
-            adapter.clearAll();
+    public void loadData(String docnum, final SequenceAdapter adapterr) {
+        if (adapter1 != null)
+            adapter1.clearAll();
 
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
         Log.e("workcenter30",  "check workcenter " + prf.getString("workcenter", null));
@@ -375,7 +417,7 @@ public class Add_DocActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        adapter.addAll(result);
+                        adapterr.addAll(result);
                     }
 
                     @Override

@@ -12,6 +12,7 @@ import com.example.shopfloor.Activity.RejectActivity;
 import com.example.shopfloor.Activity.RespRejectFragActivity;
 import com.example.shopfloor.Fragment.RejectListFragment;
 import com.example.shopfloor.Models.Reject;
+import com.example.shopfloor.Models.Sequence;
 import com.example.shopfloor.R;
 
 import java.util.ArrayList;
@@ -94,6 +95,10 @@ public class RejectAdapter extends RecyclerView.Adapter<RejectAdapter.ViewHolder
             return list_item.get(position);
         }
         return null;
+    }
+
+    public List<Reject> getList_item() {
+        return list_item;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

@@ -229,11 +229,11 @@ public class RejectActivity extends AppCompatActivity {
        adapter = new InputRejectAdapter(this);
        rv.setAdapter(adapter);
        rv.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-       loadData();
+       loadData(tvdocentry0.getText().toString());
        rv.setAdapter(adapter);
     }
 
-    public void loadData() {
+    public void loadData(String docentry) {
         final ProgressDialog progres = new ProgressDialog(this);
         progres.setMessage("Sedang Prosess");
         progres.setTitle("sedang proses");
@@ -243,12 +243,15 @@ public class RejectActivity extends AppCompatActivity {
         if (adapter != null)
             adapter.clearAll();
 
-        TextView tvdocentry = findViewById(R.id.tvdocentry0);
-        prf = getSharedPreferences("Docentry", MODE_PRIVATE);
-        tvdocentry.setText(String.valueOf(prf.getString("tvdocentry", null)));
-        Log.e("docentryyyy", prf.getString("tvdocentry", null));
+//        TextView tvdocentry = findViewById(R.id.tvdocentry0);
+//        prf = getSharedPreferences("Docentry", MODE_PRIVATE);
+//        tvdocentry.setText(String.valueOf(prf.getString("tvdocentry", null)));
+//        Log.e("docentryyyy", prf.getString("tvdocentry", null));
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/inputreject?docEntry="+ prf.getString("tvdocentry", null))
+        Log.e("docnum3000 == ", "check docnum = " + tvdocentry0.getText().toString());
+
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/inputreject?docEntry="+ prf.getString("tvdocentry", null))
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/inputreject?docEntry="+ docentry)
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
