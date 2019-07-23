@@ -26,6 +26,7 @@ public class InputRejectAdapter extends RecyclerView.Adapter<InputRejectAdapter.
     }
 
     public InputRejectAdapter(RejectFragment rejectFragment) {
+        list_item = new ArrayList<>();
     }
 
     public InputRejectAdapter(List<InputReject> list, Context context) {
@@ -100,6 +101,7 @@ public class InputRejectAdapter extends RecyclerView.Adapter<InputRejectAdapter.
         }
         return null;
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvcodereject1;

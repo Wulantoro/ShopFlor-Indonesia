@@ -23,6 +23,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Activity.HomeActivity;
 import com.example.shopfloor.Models.User;
 import com.example.shopfloor.Utils.GlobalVars;
+import com.example.shopfloor.Utils.SharedPrefManager;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -46,9 +47,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPrefManager sharedPrefManager;
+        sharedPrefManager = new SharedPrefManager(this);
+
         etusername0 = findViewById(R.id.etusername0);
         etpassword0 = findViewById(R.id.etpassword0);
 
+        if (sharedPrefManager.getSPSudahLogin()) {
+            startActivity(new Intent(MainActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+            finish();
+        }
         conMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         {
             if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable() && conMgr.getActiveNetworkInfo().isConnected()) {
@@ -80,31 +88,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//        public void onBackPressed(){
-//            Intent a = new Intent(Intent.ACTION_MAIN);
-//            a.addCategory(Intent.CATEGORY_HOME);
-//            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            startActivity(a);
-//        }
-
-
-    public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setTitle("Really Exit?")
-                .setMessage("Are you sure you want to exit?")
-                .setNegativeButton(android.R.string.no, null)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        Intent a = new Intent(Intent.ACTION_MAIN);
+        public void onBackPressed(){
+            Intent a = new Intent(Intent.ACTION_MAIN);
             a.addCategory(Intent.CATEGORY_HOME);
             a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(a);
-                    }
-                }).create().show();
-    }
+        }
+
+
+//    public void onBackPressed() {
+//        new AlertDialog.Builder(this)
+//                .setTitle("Really Exit?")
+//                .setMessage("Are you sure you want to exit?")
+//                .setNegativeButton(android.R.string.no, null)
+//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//
+//                    public void onClick(DialogInterface arg0, int arg1) {
+//                        Intent a = new Intent(Intent.ACTION_MAIN);
+//            a.addCategory(Intent.CATEGORY_HOME);
+//            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(a);
+//                    }
+//                }).create().show();
+//    }
 
     private void checkLogin(final String username, final String password) {
+
+        final SharedPrefManager sharedPrefManager;
+        sharedPrefManager = new SharedPrefManager(this);
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
         pDialog.setMessage("Logging in.....");
@@ -132,9 +143,13 @@ public class MainActivity extends AppCompatActivity {
                             String success = response.getString("success");
                             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
+
                             if ( success.equals("1")) {
 //                                String username = jObject.getString(TAG_USERNAME);
 //                                String password = jObject.getString(TAG_PASSWORD);
+
+                                sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
+
                                 pref = getSharedPreferences("username", MODE_PRIVATE);
                                 Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                                 String username = etusername0.getText().toString();

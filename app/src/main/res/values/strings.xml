@@ -16,4 +16,6 @@
     <string name="searc_producorder">Cari Productorder</string>
     <string name="jam_mulai">Jam Mulai</string>
     <string name="title_activity_add_seq">AddSeqActivity</string>
+    <string name="closedDrawr">apilkasi ditutup</string>
+    <string name="open_drawer">aplikasi di open</string>
 </resources>
