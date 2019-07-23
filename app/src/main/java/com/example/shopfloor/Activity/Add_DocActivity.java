@@ -69,7 +69,6 @@ public class Add_DocActivity extends AppCompatActivity {
     private Calendar calendar;
     private int year, month, day;
     private SequenceAdapter adapter;
-    private ProductorderAdapter adapter2;
     private RecyclerView rv, rv2;
     public EditText searchPO;
     public SharedPreferences pref;
@@ -82,7 +81,7 @@ public class Add_DocActivity extends AppCompatActivity {
 
 
 
-
+    private ProductorderAdapter adapter2;
     private List<Productorder> list;
 
     @Override
@@ -99,7 +98,7 @@ public class Add_DocActivity extends AppCompatActivity {
         /*******************************************************/
 
         gson = new Gson();
-
+        adapter2 = new ProductorderAdapter(this);
         tvNm_prod1 = findViewById(R.id.tvNm_prod1);
         tvNo_Prod1 = findViewById(R.id.tvNo_prod1);
         tvRoute_Code1 = findViewById(R.id.tvRoute_Code1);
@@ -157,7 +156,7 @@ public class Add_DocActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                 showDialog2(Add_DocActivity.this);
+                 showDialog2();
 
             }
         });
@@ -187,7 +186,13 @@ public class Add_DocActivity extends AppCompatActivity {
 
     //ketika klik back loncat ke home activity
     public void onBackPressed(){
+        pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        String wc = tvwc1.getText().toString();
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("tvworkcenter", wc);
+        editor.commit();
+
         startActivity(intent);
     }
 
@@ -217,36 +222,59 @@ public class Add_DocActivity extends AppCompatActivity {
     }
 
     //showDialog2
-    public void showDialog2(Activity activity) {
-        dialog = new Dialog(activity);
+    public void showDialog2() {
+        dialog = new Dialog(Add_DocActivity.this);
         dialog.setCancelable(true);
         dialog.setContentView(R.layout.activity_productorder_list);
 
         gson = new Gson();
-        list = new ArrayList<Productorder>();
-        rv2 = findViewById(R.id.rvProductorderList);
 
-        searchPO = findViewById(R.id.searchPO);
-        rv2 = findViewById(R.id.rvProductorderList);
-//        rv2.setHasFixedSize(true);
+        final RecyclerView rv2 = dialog.findViewById(R.id.rvProductorderList);
+        final EditText searchPO = dialog.findViewById(R.id.searchPO);
 
-        rv2 = findViewById(R.id.rvProductorderList);
-        rv2 = dialog.findViewById(R.id.rvProductorderList);
-        adapter2 = new ProductorderAdapter(this);
+        final List<Productorder> list = adapter2.getList_item();
+
+        loadData2(adapter2);
+
         rv2.setAdapter(adapter2);
-
         rv2.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-       loadData2();
 
         rv2.setAdapter(adapter2);
 
+        searchPO.addTextChangedListener(new TextWatcher() {
 
-        adapter2 = new ProductorderAdapter(this);
-        rv2.setAdapter(adapter2);
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            public void onTextChanged(CharSequence query, int start, int before, int count) {
+
+                query = query.toString().toLowerCase();
+
+                final List<Productorder> filteredList = new ArrayList<>();
 
 
-//        addTextListener();
+                if (list != null & list.size() > 0) {
 
+                    for (int i = 0; i < list.size(); i++) {
+                        final String text = String.valueOf(list.get(i).getDocNum());
+                        if (text.contains(query.toString())) {
+
+                            filteredList.add(list.get(i));
+                        }
+                    }
+
+                    rv2.setLayoutManager(new LinearLayoutManager(Add_DocActivity.this));
+                    adapter2 = new ProductorderAdapter(filteredList, Add_DocActivity.this);
+                    rv2.setAdapter(adapter2);
+                    adapter2.notifyDataSetChanged();
+                }
+            }
+        });
         rv2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -254,10 +282,9 @@ public class Add_DocActivity extends AppCompatActivity {
             }
         });
         dialog.show();
-
     }
 
-    public void loadData2() {
+    public void loadData2(final ProductorderAdapter adapter) {
         if (adapter2 != null)
             adapter2.clearAll();
 
@@ -295,7 +322,7 @@ public class Add_DocActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        adapter2.addAll(result);
+                        adapter.addAll(result);
                     }
 
                     @Override
@@ -305,38 +332,6 @@ public class Add_DocActivity extends AppCompatActivity {
                 });
     }
 
-    public void addTextListener() {
-        searchPO.addTextChangedListener(new TextWatcher() {
-
-            public void afterTextChanged(Editable s) {
-
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            public void onTextChanged(CharSequence query, int start, int before, int count) {
-
-                query = query.toString().toLowerCase();
-
-                final List<Productorder> filteredList = new ArrayList<>();
-
-                for (int i = 0; i < list.size(); i++) {
-                    final String text = String.valueOf(list.get(i).getDocNum());
-                    if (text.contains(query.toString())) {
-
-                        filteredList.add(list.get(i));
-                    }
-                }
-
-                rv2.setLayoutManager(new LinearLayoutManager(Add_DocActivity.this));
-                adapter2 = new ProductorderAdapter(filteredList, Add_DocActivity.this);
-                rv2.setAdapter(adapter2);
-                adapter2.notifyDataSetChanged();
-            }
-        });
-    }
 
     public void loadData(String docnum) {
         if (adapter != null)
@@ -415,11 +410,23 @@ public class Add_DocActivity extends AppCompatActivity {
             jam_mulai.setText(jam);
 
             /*********shift***********************/
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            String getCurentTime = sdf.format(c.getTime());
+            String getTestTime = "07:00";
+            String getTestTime1 = "15:00";
+            String getTestTime2 = "23:00";
 
-//            if (tvJam_mulai1.length() != 07.00) {
-//                TextView shift = findViewById(R.id.tvShift1);
-//                shift.setText("Shift 1");
-//            }
+            if (getCurentTime.compareTo(getTestTime) > 0 & getTestTime1.compareTo(getCurentTime) > 0) {
+                TextView shift = findViewById(R.id.tvShift1);
+                shift.setText("Shift 1");
+            }else if (getCurentTime.compareTo(getTestTime1) > 0 & getTestTime2.compareTo(getCurentTime) > 0) {
+                TextView shift = findViewById(R.id.tvShift1);
+                shift.setText("Shift 2");
+            }else if (getCurentTime.compareTo(getTestTime2) > 0) {
+                TextView shift = findViewById(R.id.tvShift1);
+                shift.setText("Shift 3");
+            }
         }
 
         if (id == R.id.action_seq && tvSquence_Qty1.length() != 0 && tvNo_Prod1.length() != 0) {
@@ -507,49 +514,6 @@ public class Add_DocActivity extends AppCompatActivity {
             editor13.putString("tvuserid", tvuserid);
             editor13.commit();
 
-            /*pref = getSharedPreferences("Nmprod", MODE_PRIVATE); //prodname
-            pref = getSharedPreferences("Sequence", MODE_PRIVATE);
-            pref = getSharedPreferences("SequenceQty", MODE_PRIVATE);
-            pref = getSharedPreferences("Itemcode", MODE_PRIVATE);
-            pref = getSharedPreferences("docNum", MODE_PRIVATE);
-            pref = getSharedPreferences("ProdPlanQty", MODE_PRIVATE);
-            pref = getSharedPreferences("StsProd", MODE_PRIVATE);
-            pref = getSharedPreferences("RouteCode", MODE_PRIVATE);
-            pref = getSharedPreferences("RouteName", MODE_PRIVATE);
-            pref = getSharedPreferences("TglMulai", MODE_PRIVATE);
-            pref = getSharedPreferences("jamMulai", MODE_PRIVATE);
-            pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
-
-            String tvnmprod = tvNm_prod1.getText().toString();
-            String tvnoprod = tvNo_Prod1.getText().toString();
-            String tvsequence = tvSquence1.getText().toString();
-            String tvsequenceqty = tvSquence_Qty1.getText().toString();
-            String tvitemcode = tvprod1.getText().toString();
-            String tvdocnum = tvNo_doc1.getText().toString();
-            String tvprodplanqty = tvQty_rencProd1.getText().toString();
-            String tvstsprod = tvSts_Prod1.getText().toString();
-            String tvroutecode = tvRoute_Code1.getText().toString();
-            String tvroutename = tvRoute_Code2.getText().toString();
-            String tvtglmulai = tvTgl_mulai1.getText().toString();
-            String tvjammulai = tvJam_mulai1.getText().toString();
-            String tvwc = tvwc1.getText().toString();
-
-
-            SharedPreferences.Editor editor = pref.edit();
-            editor.putString("tvnoprod", tvnoprod);
-            editor.putString("tvnmprod", tvnmprod);
-            editor.putString("tvsequence", tvsequence);
-            editor.putString("tvsequenceqty", tvsequenceqty);
-            editor.putString("tvitemcode", tvitemcode);
-            editor.putString("tvdocnum", tvdocnum);
-            editor.putString("tvprodplanqty", tvprodplanqty);
-            editor.putString("tvstsprod", tvstsprod);
-            editor.putString("tvroutecode", tvroutecode);
-            editor.putString("tvroutename", tvroutename);
-            editor.putString("tvtglmulai", tvtglmulai);
-            editor.putString("tvjammulai", tvjammulai);
-            editor.putString("workcenter", tvwc);
-            editor.commit();*/
             startActivity(new Intent(getApplicationContext(), AddSeqActivity.class));
 
         } else {

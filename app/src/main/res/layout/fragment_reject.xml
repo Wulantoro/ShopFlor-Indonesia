@@ -6,20 +6,27 @@
     tools:context=".Fragment.RejectFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <TextView
+        android:id="@+id/tvFrag"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="fragment reject" />
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Data Reject"
+        android:textStyle="bold"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvInputReject"
-        android:layout_below="@id/btnFrag"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/tvFrag"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
         tools:listitem="@layout/item_reject_row">
     </android.support.v7.widget.RecyclerView>
-
+    </RelativeLayout>
 
 
 </FrameLayout>

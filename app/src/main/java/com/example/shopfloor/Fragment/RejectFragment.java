@@ -18,6 +18,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.InputRejectAdapter;
 import com.example.shopfloor.Models.InputReject;
+import com.example.shopfloor.Models.Productorder;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
 import com.google.gson.Gson;
@@ -44,6 +45,7 @@ public class RejectFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_reject, container, false);
 
         gson = new Gson();
+
         list = new ArrayList<>();
         rv = rootView.findViewById(R.id.rvInputReject);
         adapter = new InputRejectAdapter(this);
@@ -56,7 +58,7 @@ public class RejectFragment extends Fragment {
     }
 
     public void loadData() {
-//        final ProgressDialog progress = new ProgressDialog(this);
+
         if (adapter != null)
             adapter.clearAll();
 

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class ProductorderAdapter extends RecyclerView.Adapter<ProductorderAdapte
     private Context context;
     private List<Productorder> list_item;
 
+
     public ProductorderAdapter(List<Productorder> list, Context context) {
         this.context = context;
         list_item = list;
@@ -35,6 +37,7 @@ public class ProductorderAdapter extends RecyclerView.Adapter<ProductorderAdapte
     @NonNull
     @Override
     public ProductorderAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.po_row_item, parent, false);
         final ProductorderAdapter.MyViewHolder holder = new ProductorderAdapter.MyViewHolder(v);
         return holder;
@@ -112,11 +115,16 @@ public class ProductorderAdapter extends RecyclerView.Adapter<ProductorderAdapte
         return null;
     }
 
+    public List<Productorder> getList_item() {
+        return list_item;
+    }
+
 
      class  MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_itemName;
         public TextView tv_itemCode;
         public TextView tv_docNum;
+        public EditText searchPO;
 
         private MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -124,6 +132,8 @@ public class ProductorderAdapter extends RecyclerView.Adapter<ProductorderAdapte
             tv_docNum = itemView.findViewById(R.id.tv_docNum);
             tv_itemCode = itemView.findViewById(R.id.tv_itemCode);
             tv_itemName = itemView.findViewById(R.id.tv_itemName);
+            searchPO = itemView.findViewById(R.id.searchPO);
+
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

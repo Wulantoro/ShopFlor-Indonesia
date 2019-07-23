@@ -221,7 +221,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
         rv.setLayoutManager(linearLayoutManager);
         rv.setItemAnimator(new DefaultItemAnimator());
         rv.setAdapter(adapter);
-        loadData(tvWorkcenter.getText().toString(), tvnoprod0.getText().toString());
+        loadData(tvWorkcenter.getText().toString(), tvsequence1.getText().toString());
         /*******************************************************************/
 }
 
@@ -243,14 +243,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
         Log.e("WHERE ", GlobalVars.BASE_IP + "index.php/criteria?wccode=ASS&docNum=10016649");
         Log.e("URL ", GlobalVars.BASE_IP + "index.php/criteria?wccode="+prf.getString("tvworkcenter", null)+"&docNum="+prf.getString("tvnoprod", null)+"");
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?wccode="+prf.getString("tvworkcenter", null)+"&docNum="+docnum)
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?docNum="+prf.getString("tvnoprod", null)+"&wccode="+wccode)
-//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?wccode="+prf.getString("tvworkcenter", null))
-//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?docNum="+prf.getString("tvnoprod", null))
-//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?docNum="+prf.getString("tvnoprod", null)+"&wccode="+prf.getString("tvworkcenter", null)+"")
-//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?wccode="+prf.getString("tvworkcenter", null)+"&docNum="+prf.getString("tvnoprod", null)+"")
-//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?wccode="+prf.getString("tvworkcenter", null)+"&docNum="+prf.getString("tvnoprod", null)+"&U_sequence="+prf.getString("tvsequence", null)+"")
-//        AndroidNetworking.get(GlobalVars.BASE_IP +"index.php/criteria?wccode={wccode}"+"&docNum={docNum}")
-
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?docNum="+prf.getString("tvnoprod", null)+"&wccode="+wccode+"&U_sequence="+sequence)
                 .setTag(this)
                 .setPriority(Priority.MEDIUM)
                 .build()
@@ -265,7 +258,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
                             if (results != null)
                                 results.clear();
                             String message = response.getString("message");
-//                            if (message.equals("Criteria were found")) {
+                            if (message.equals("Criteria were found")) {
                                 String records = response.getString("data");
                                 JSONArray dataArr = new JSONArray(records);
 
@@ -277,7 +270,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
                                         Log.e("onResponseeeeeeee ", dataArr.getJSONObject(i).toString());
                                     }
                                 }
-//                            }
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

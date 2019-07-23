@@ -2,12 +2,22 @@ package com.example.shopfloor.Activity;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,6 +33,7 @@ import com.example.shopfloor.Models.User;
 import com.example.shopfloor.Models.Workcenter;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
+import com.example.shopfloor.Utils.SharedPrefManager;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -57,7 +68,13 @@ public class HomeActivity extends AppCompatActivity {
     public static TextView tvSquence_Qty1;
     public static TextView tvNm_prod1;
 
+    private Button btnLogout;
+
     public SharedPreferences pref, prf;
+
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
+    private ActionBarDrawerToggle mToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +84,23 @@ public class HomeActivity extends AppCompatActivity {
         tvNm_prod1 = findViewById(R.id.tvNm_prod1);
         tvusername0 = findViewById(R.id.tvusername0);
         tvdivisi0 = findViewById(R.id.tvdivisi0);
+        btnLogout = findViewById(R.id.btnLogout);
+
+        final SharedPrefManager sharedPrefManager;
+        sharedPrefManager = new SharedPrefManager(this);
+
+
+        drawer = findViewById(R.id.drawer_layout);
+        mToggle = new ActionBarDrawerToggle(this, drawer, R.string.open_drawer, R.string.closedDrawr);
+
+        drawer.addDrawerListener(mToggle);
+        mToggle.syncState();
+
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        navigationView = findViewById(R.id.nav_view);
+        setupDrawerContent(navigationView);
+
 
         User user = new User();
 
@@ -76,6 +110,10 @@ public class HomeActivity extends AppCompatActivity {
         TextView tvusername = findViewById(R.id.tvusername0);
         prf = getSharedPreferences("username", MODE_PRIVATE);
         tvusername.setText(prf.getString("etusername", null));
+
+        TextView tvwc = findViewById(R.id.tvWCtampil1);
+        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
+        tvwc.setText(prf.getString("tvworkcenter", null));
 
         /************result workcenter terpilih***********************/
         if (getIntent().hasExtra("keywc")) {
@@ -124,7 +162,7 @@ public class HomeActivity extends AppCompatActivity {
                                   SharedPreferences.Editor editor1 = pref.edit();
                                   editor1.putString("tvuserid", tvuserid);
                                   editor1.commit();
-
+//
                                   startActivity(iStart);
                               } else {
                                   Toast.makeText(getApplicationContext(), "Workcenter tidak boleh kosong", Toast.LENGTH_SHORT).show();
@@ -176,55 +214,83 @@ public class HomeActivity extends AppCompatActivity {
                     }
 
                 });
+
+                btnLogout = findViewById(R.id.btnLogout);
+                btnLogout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
+                        startActivity(new Intent(HomeActivity.this, MainActivity.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        finish();
+                    }
+                });
             }
 
-            public void onBackPressed() {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-                finish();
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Really Exit?")
+                .setMessage("Are you sure you want to exit?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Intent a = new Intent(Intent.ACTION_MAIN);
+                        a.addCategory(Intent.CATEGORY_HOME);
+                        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(a);
+                    }
+                }).create().show();
+    }
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                selectDrawerItem(menuItem);
+
+                return true;
             }
+        });
+    }
 
+    //method untuk eksekusi action dari tiap menu item
+    public void selectDrawerItem(MenuItem menuItem) {
+        Fragment fragment = null;
+        Class fragmentClass;
 
-            //tampil tanggal home
-            public void showDate(int year, int month, int day) {
-                dateView1.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
-            }
-
-            private void userLogin() {
-                   AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/loginuser?U_STEM_Username="+prf.getString("etusername", null))
-                           .setPriority(Priority.MEDIUM)
-                           .build()
-                           .getAsJSONObject(new JSONObjectRequestListener() {
-                               @Override
-                               public void onResponse(JSONObject response) {
-                                   try {
-                                       Log.e("tampil user", response.toString(1));
-                                       String message = response.getString("message");
-
-                                       if (message.equals("User ketemu")) {
-                                           String records = response.getString("data");
-                                           JSONArray dataArr = new JSONArray(records);
-
-                                           Gson gson = new Gson();
-                                           User user = gson.fromJson(dataArr.getJSONObject(0).toString(), User.class);
-                                           tvdivisi0.setText(user.getDept());
-                                       }
-                                   }catch (JSONException e) {
-                                       e.printStackTrace();
-                                   }
-                               }
-
-                               @Override
-                               public void onError(ANError anError) {
-
-                               }
-                           });
-
-            }
-
-
+        switch (menuItem.getItemId()) {
+            case R.id.nav_gallery:
+                //action
+                break;
+            case R.id.nav_slideshow:
+                //action
+                break;
+            case R.id.nav_manage:
+                //action
+                break;
 
         }
+
+
+        menuItem.setChecked(true);
+        drawer.closeDrawers();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(mToggle.onOptionsItemSelected(item)){
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+            //tampil tanggal home
+            public void showDate(int year, int month, int day) {
+//                dateView1.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
+            }
+
+
+}
 
 
 
