@@ -159,23 +159,6 @@ public class RespRejectFragActivity extends AppCompatActivity {
             }
         });
         dialog.show();
-
-        /**********************************************/
-//        rv = findViewById(R.id.rvRejectFrag);
-//        rv = dialog.findViewById(R.id.rvRejectFrag);
-//        adapter1 = new RejectAdapter(this);
-//        rv.setAdapter(adapter1);
-//        rv.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-//        loadData();
-//
-//        rv.setAdapter(adapter1);
-//        rv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//        dialog.show();
     }
 
     public void loadData(final RejectAdapter adapter) {

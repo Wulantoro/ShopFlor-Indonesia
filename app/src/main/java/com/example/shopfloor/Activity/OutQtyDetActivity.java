@@ -43,6 +43,7 @@ public class OutQtyDetActivity extends AppCompatActivity {
     private TextView tvposted5;
     private TextView tvqcname2;
     private TextView tvusername6;
+    private TextView tvshift1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,7 @@ public class OutQtyDetActivity extends AppCompatActivity {
         tvposted5 = findViewById(R.id.tvposted5);
         tvqcname2 = findViewById(R.id.tvqcname2);
         tvusername6 = findViewById(R.id.tvusername6);
+        tvshift1 = findViewById(R.id.tvshift1);
 
         TextView tvdocnum6 = findViewById(R.id.tvdocnum6);
         prf = getSharedPreferences("docNum", MODE_PRIVATE);
@@ -152,6 +154,10 @@ public class OutQtyDetActivity extends AppCompatActivity {
         TextView tvusername = findViewById(R.id.tvusername6);
         prf = getSharedPreferences("Username", MODE_PRIVATE);
         tvusername.setText(prf.getString("tvusername", null));
+
+        TextView tvshift = findViewById(R.id.tvshift1);
+        prf = getSharedPreferences("Shift", MODE_PRIVATE);
+        tvshift.setText(prf.getString("tvshift", null));
 
     }
 
@@ -253,6 +259,12 @@ public class OutQtyDetActivity extends AppCompatActivity {
             SharedPreferences.Editor editor14 = pref.edit();
             editor14.putString("tvusername", tvusername);
             editor14.commit();
+
+            pref = getSharedPreferences("Shift", MODE_PRIVATE);
+            String tvshift = tvshift1.getText().toString();
+            SharedPreferences.Editor editor15 = pref.edit();
+            editor15.putString("tvshift", tvshift);
+            editor15.commit();
 
             startActivity(new Intent(getApplicationContext(), CriteriaQCActivity.class));
         } else {

@@ -248,6 +248,12 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         editor18.putString("tvusername", tvusername);
         editor18.commit();
 
+        pref = getSharedPreferences("Shift", MODE_PRIVATE);
+        String tvshift = tvShift1.getText().toString();
+        SharedPreferences.Editor editor19 = pref.edit();
+        editor19.putString("tvshift", tvshift);
+        editor19.commit();
+
         startActivity(new Intent(getApplicationContext(), OutQtyDetActivity.class));
         return true;
     }

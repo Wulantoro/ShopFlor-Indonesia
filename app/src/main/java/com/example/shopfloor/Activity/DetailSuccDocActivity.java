@@ -36,13 +36,6 @@ public class DetailSuccDocActivity extends AppCompatActivity {
         tvNo_doc_Frag = findViewById(R.id.tvNo_doc_Frag);
         viewPager = findViewById(R.id.viewPager);
 
-        CriteriaFragment criteriaFragment = new CriteriaFragment();
-        adapter = new SuccDocAdapter(this);
-        header = getIntent().getParcelableExtra("key_succ");
-
-        InfoFragment infoFragment = new InfoFragment();
-        adapter1 = new InputRejectAdapter(this);
-
 
         initView();
     }

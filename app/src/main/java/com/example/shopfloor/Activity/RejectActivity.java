@@ -61,6 +61,7 @@ public class RejectActivity extends AppCompatActivity {
     private TextView tvposted7;
     private TextView tvusername8;
     private TextView tvqcname4;
+    private TextView tvshift4;
     private Gson gson;
     private InputRejectAdapter adapter;
     private List<InputReject> list;
@@ -80,7 +81,7 @@ public class RejectActivity extends AppCompatActivity {
         setSupportActionBar(topToolBar);
 
         tvdocentry0 = findViewById(R.id.tvdocentry0);
-//        tvdocnum1 = findViewById(R.id.tvdocnum1);
+        tvdocnum1 = findViewById(R.id.tvdocnum1);
         tvprodcode0 = findViewById(R.id.tvprodcode0);
         tvnoprod1 = findViewById(R.id.tvnoprod1);
         tvnmprod1 = findViewById(R.id.tvnmprod1);
@@ -101,6 +102,11 @@ public class RejectActivity extends AppCompatActivity {
         tvposted7 = findViewById(R.id.tvposted7);
         tvusername8 = findViewById(R.id.tvusername8);
         tvqcname4 = findViewById(R.id.tvqcname4);
+        tvshift4 = findViewById(R.id.tvshift4);
+
+        TextView tvdocnum = findViewById(R.id.tvdocnum1);
+        prf = getSharedPreferences("Docnum", MODE_PRIVATE);
+        tvdocnum.setText(prf.getString("docnum", null));
 
         TextView tvqcname = findViewById(R.id.tvqcname4);
         prf = getSharedPreferences("Qcname", MODE_PRIVATE);
@@ -206,6 +212,10 @@ public class RejectActivity extends AppCompatActivity {
        prf = getSharedPreferences("Outqty", MODE_PRIVATE);
        tvoutqty.setText(prf.getString("tvoutqty", null));
 
+       TextView tvshift = findViewById(R.id.tvshift4);
+       prf = getSharedPreferences("Shift", MODE_PRIVATE);
+       tvshift.setText(prf.getString("tvshift", null));
+
         TextView tvstatus = findViewById(R.id.tvstatus0);
         tvstatus.setText("Completed");
 
@@ -297,7 +307,7 @@ public class RejectActivity extends AppCompatActivity {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("docEntry", tvdocentry0.getText().toString());
-//            jsonObject.put("docNum", tvdocnum5.getText().toString());
+            jsonObject.put("docNum", tvdocnum1.getText().toString());
             jsonObject.put("prodNo", tvnoprod1.getText().toString());
             jsonObject.put("prodCode", tvprodcode0.getText().toString());
             jsonObject.put("prodName", tvnmprod1.getText().toString());
@@ -307,9 +317,9 @@ public class RejectActivity extends AppCompatActivity {
             jsonObject.put("routeName", tvroutename2.getText().toString());
             jsonObject.put("sequence", tvsequence1.getText().toString());
             jsonObject.put("sequenceQty", tvseqqty1.getText().toString());
-//            jsonObject.put("shift", tvShift1.getText().toString());
-            jsonObject.put("docDate", tvdocdate0.getText().toString()); //masalah
-            jsonObject.put("tanggalMulai", tvdocdate0.getText().toString()); //masalah
+            jsonObject.put("shift", tvshift4.getText().toString());
+            jsonObject.put("docDate", tvdocdate0.getText().toString());
+            jsonObject.put("tanggalMulai", tvdocdate0.getText().toString());
             jsonObject.put("jamMulai", tvjammulai2.getText().toString());
             jsonObject.put("inQty", tvInputQty1.getText().toString());
             jsonObject.put("outQty", tvOutputQty1.getText().toString());
@@ -360,6 +370,7 @@ public class RejectActivity extends AppCompatActivity {
 
         if (id == R.id.update_header) {
             editHeader();
+            startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

@@ -65,6 +65,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
     private TextView tvusername7;
     private TextView tvdocsts1;
     private TextView tvactual1;
+    private TextView tvshift2;
     private String docnum = "";
     private RecyclerView rv;
     private CriteriaAdapter adapter;
@@ -108,6 +109,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvcriteria1 = findViewById(R.id.tvcriteria1);
         tvdocsts1 = findViewById(R.id.tvdocsts1);
         tvactual1 = findViewById(R.id.tvactual1);
+        tvshift2 = findViewById(R.id.tvshift2);
 
         /*************************************************************/
 
@@ -144,8 +146,6 @@ public class CriteriaQCActivity extends AppCompatActivity {
         TextView tvseqqty = findViewById(R.id.tvseqqty1);
         prf = getSharedPreferences("SequenceQty", MODE_PRIVATE);
         tvseqqty.setText(prf.getString("tvseqqty", null));
-
-
 
         TextView tvdocentry = findViewById(R.id.tvdocentry3);
         prf = getSharedPreferences("docEntry", MODE_PRIVATE);
@@ -190,6 +190,10 @@ public class CriteriaQCActivity extends AppCompatActivity {
         TextView tvusername = findViewById(R.id.tvusername7);
         prf = getSharedPreferences("Username", MODE_PRIVATE);
         tvusername.setText(prf.getString("tvusername", null));
+
+        TextView tvshift = findViewById(R.id.tvshift2);
+        prf = getSharedPreferences("Shift", MODE_PRIVATE);
+        tvshift.setText(prf.getString("tvshift", null));
 
         TextView tvstatus = findViewById(R.id.tvstatus2);
         tvstatus.setText("Completed");
@@ -454,6 +458,12 @@ public class CriteriaQCActivity extends AppCompatActivity {
             SharedPreferences.Editor editor18 = pref.edit();
             editor18.putString("tvqcname", tvqcname);
             editor18.commit();
+
+            pref = getSharedPreferences("Shift", MODE_PRIVATE);
+            String tvshift = tvshift2.getText().toString();
+            SharedPreferences.Editor editor19 = pref.edit();
+            editor19.putString("tvshift", tvshift);
+            editor19.commit();
 
 //            Intent intent = new Intent(getApplicationContext(), RejectActivity.class);
             startActivity(new Intent(getApplicationContext(), RejectActivity.class));

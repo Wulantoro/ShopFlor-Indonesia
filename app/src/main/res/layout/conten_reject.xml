@@ -9,12 +9,20 @@
 
 
     <LinearLayout
-        android:id="@+id/dashboard"
+        android:id="@+id/line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_marginLeft="10dp">
+
+        <RelativeLayout
+            android:id="@+id/dashboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="6"
+            >
 
         <TextView
             android:id="@+id/tvnoprod"
@@ -26,85 +34,100 @@
             android:id="@+id/tvnoprod1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvnoprod"
             android:text="ini no produksi"/>
 
         <TextView
             android:id="@+id/tvnmprod"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvnoprod1"
             android:layout_marginTop="10dp"
             android:text="Nama Produk"/>
         <TextView
             android:id="@+id/tvnmprod1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvnmprod"
             android:text="ini nama produk"/>
 
         <TextView
+            android:id="@+id/tvsequence8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvnmprod1"
             android:layout_marginTop="10dp"
             android:text="Sequence"/>
         <TextView
             android:id="@+id/tvsequence1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvsequence8"
             android:text="ini sequence"/>
 
         <TextView
+            android:id="@+id/tvseqqty3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvsequence1"
             android:layout_marginTop="10dp"
             android:text="Sequence Qty"/>
         <TextView
             android:id="@+id/tvseqqty1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvseqqty3"
             android:text="ini sequence qty"/>
 
         <TextView
+            android:id="@+id/tvtglsel0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvseqqty1"
             android:layout_marginTop="10dp"
             android:text="Tanggal Selesai :"/>
         <TextView
             android:id="@+id/tvtglsel1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvtglsel0"
             android:text="iin tanggal selesai"/>
 
         <TextView
+            android:id="@+id/tvjamsel2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvtglsel1"
             android:layout_marginTop="10dp"
             android:text="Jam Selesai"/>
         <TextView
             android:id="@+id/tvjamsel1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvjamsel2"
             android:text="ini jam selesai"/>
 
         <TextView
+            android:id="@+id/tvdocsts3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvjamsel1"
             android:layout_marginTop="10dp"
             android:text="Doc.Status"/>
         <TextView
             android:id="@+id/tvdocsts2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvdocsts3"
             android:text="ini doc status"
             />
-        </LinearLayout>
+        </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/RootContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:orientation="horizontal"
-        android:layout_toRightOf="@id/dashboard">
+
+        <RelativeLayout
+            android:id="@+id/dashboard2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
         <RelativeLayout
             android:id="@+id/content1"
@@ -122,12 +145,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvInputQty"
+                android:textColor="@color/blue_A700"
                 android:text="ini input quantity" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/content2"
             android:layout_width="150dp"
             android:layout_height="70dp"
+            android:layout_toRightOf="@id/content1"
             >
             <TextView
                 android:id="@+id/tvOutputQty"
@@ -139,26 +165,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvOutputQty"
+                android:textColor="@color/blue_A700"
                 android:text="ini output quantity"/>
-
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/content2"
+            >
         <TextView
             android:id="@+id/tvWorkcenter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tvOutputQty"
+            android:textColor="@color/blue_A700"
+            android:textSize="18sp"
             android:text="workcemter"/>
+        </RelativeLayout>
 
 
-    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/tvtampil"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_below="@id/RootContent"
-        android:layout_toRightOf="@id/dashboard"
-        android:layout_marginLeft="20dp">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/content1"
+        android:layout_marginTop="10dp"
+        >
 
         <TextView
             android:id="@+id/tvdocentry0"
@@ -261,11 +294,30 @@
             android:layout_marginLeft="5dp"
             android:text="qcname"/>
 
+        <TextView
+            android:id="@+id/tvdocnum5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvdocentry0"
+            android:layout_toRightOf="@id/tvqcname4"
+            android:layout_marginLeft="5dp"
+            />
+
+        <TextView
+            android:id="@+id/tvshift4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvdocentry0"
+            android:layout_toRightOf="@id/tvdocnum5"
+            android:layout_marginLeft="5dp"
+            android:text="shifffff"/>
+    </RelativeLayout>
+
         <Button
             android:id="@+id/btnFrag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvjammulai2"
+            android:layout_below="@id/tvtampil"
             android:text="Tambah Reject"/>
 
         <android.support.v7.widget.RecyclerView
@@ -277,5 +329,6 @@
             tools:listitem="@layout/item_reject_row">
         </android.support.v7.widget.RecyclerView>
     </RelativeLayout>
-
+    </LinearLayout>
 </RelativeLayout>
+
