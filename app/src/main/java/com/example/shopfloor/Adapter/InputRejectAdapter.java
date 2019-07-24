@@ -50,7 +50,7 @@ public class InputRejectAdapter extends RecyclerView.Adapter<InputRejectAdapter.
         final InputReject inputReject = list_item.get(holder.getAdapterPosition());
 
         holder.tvcodereject1.setText(inputReject.getRejectCode());
-        holder.tvqty1.setText(inputReject.getRejectQty());
+        holder.tvqty1.setText(inputReject.getRejectQty().replace(".000000",""));
         holder.tvnamareject.setText(inputReject.getRejectName());
     }
 

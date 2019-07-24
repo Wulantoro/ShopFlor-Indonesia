@@ -31,6 +31,10 @@ public class SuccDocAdapter extends RecyclerView.Adapter<SuccDocAdapter.ViewHold
     public SuccDocAdapter(InfoFragment infoFragment) {
     }
 
+    public SuccDocAdapter(RejectFragment rejectFragment) {
+
+    }
+
     public SuccDocAdapter(List<Header> list, Context context) {
         this.context = context;
         list_item = list;

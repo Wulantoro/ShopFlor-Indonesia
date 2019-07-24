@@ -44,7 +44,7 @@ public class SequenceAdapter extends RecyclerView.Adapter<SequenceAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Sequence sequence = list_item.get(holder.getAdapterPosition());
 
-        holder.tvseq.setText(sequence.getUQuantity());
+        holder.tvseq.setText(sequence.getUQuantity().replace(".000000",""));
         holder.tvseqqty.setText(String.valueOf("("+sequence.getUSequence()+")"));
 
     }
@@ -115,7 +115,7 @@ public class SequenceAdapter extends RecyclerView.Adapter<SequenceAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     Add_DocActivity.tvSquence1.setText(String.valueOf(list_item.get(getAdapterPosition()).getUSequence()));
-                    Add_DocActivity.tvSquence_Qty1.setText(list_item.get(getAdapterPosition()).getUQuantity());
+                    Add_DocActivity.tvSquence_Qty1.setText(list_item.get(getAdapterPosition()).getUQuantity().replace(".000000",""));
                     Add_DocActivity.dialog.dismiss();
                 }
             });

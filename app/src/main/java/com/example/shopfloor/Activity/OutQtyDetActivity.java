@@ -85,7 +85,7 @@ public class OutQtyDetActivity extends AppCompatActivity {
 
         TextView tvinqty = findViewById(R.id.tvinqty3);
         prf = getSharedPreferences("inQty", MODE_PRIVATE);
-        tvinqty.setText(prf.getString("tvinqty", null));
+        tvinqty.setText(prf.getString("tvinqty", null).replace(".000000",""));
 
         TextView tvnoprod = findViewById(R.id.tvnoprod3);
         prf = getSharedPreferences("prodNo", MODE_PRIVATE);

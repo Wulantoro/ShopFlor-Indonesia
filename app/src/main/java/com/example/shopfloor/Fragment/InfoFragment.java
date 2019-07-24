@@ -69,14 +69,14 @@ public class InfoFragment extends Fragment {
         tv_tglDoc_frag1.setText(header.getDocDate().substring(0,11));
         tv_prodFrag1.setText(header.getProdCode());
         tv_nmProd_frag1.setText(header.getProdName());
-        tv_qty_rencana1.setText(header.getProdPlanQty());
+        tv_qty_rencana1.setText(header.getProdPlanQty().replace(".000000",""));
         tv_sts_prod1.setText(header.getProdStatus());
         tv_route1.setText(header.getRouteCode());
         tvroutename3.setText(header.getRouteName());
         tv_inQty1.setText(header.getInQty());
         tv_outQty1.setText(header.getOutQty());
         tv_seq1.setText(header.getSequence());
-        tv_seq_qty1.setText(header.getSequenceQty());
+        tv_seq_qty1.setText(header.getSequenceQty().replace(".000000",""));
         tv_tglMulai1.setText(header.getTanggalMulai().substring(0,11));
         tv_tglSelesai1.setText(header.getTanggalSelesai().substring(0,11));
         tv_jamMulai1.setText(header.getJamMulai());
@@ -84,8 +84,4 @@ public class InfoFragment extends Fragment {
         tv_shift1.setText(header.getShift());
         return rootView;
     }
-
-    
-
-
 }
