@@ -11,11 +11,19 @@
         android:layout_height="wrap_content">
     <TextView
         android:id="@+id/tvFrag"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:text="Data Reject"
         android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvdocentry5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvFrag"
+            android:layout_marginLeft="5dp"
+            android:text="docentry"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvInputReject"

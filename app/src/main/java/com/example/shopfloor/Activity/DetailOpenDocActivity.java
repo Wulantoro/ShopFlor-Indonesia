@@ -81,10 +81,10 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvNm_prod1.setText(header.getProdName());
         tvRoute_Code1.setText(header.getRouteCode());
         tvRoute_Code2.setText(header.getRouteName());
-        tvQty_rencProd1.setText(header.getProdPlanQty());
+        tvQty_rencProd1.setText(header.getProdPlanQty().replace(".000000",""));
         tvSts_prod1.setText(header.getProdStatus());
         tvSquence1.setText(header.getSequence());
-        tvSquence_Qty1.setText(header.getSequenceQty());
+        tvSquence_Qty1.setText(header.getSequenceQty().replace(".000000",""));
         tvShift1.setText(header.getShift());
         tvTgl_mulai1.setText(header.getTanggalMulai().substring(0,10));
         tvJam_mulai1.setText(header.getJamMulai());

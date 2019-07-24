@@ -144,7 +144,7 @@ public class ProductorderAdapter extends RecyclerView.Adapter<ProductorderAdapte
                     Add_DocActivity.tvprod1.setText(list_item.get(getAdapterPosition()).getItemCode());
                     Add_DocActivity.tvRoute_Code1.setText(list_item.get(getAdapterPosition()).getCode());
                     Add_DocActivity.tvRoute_Code2.setText(list_item.get(getAdapterPosition()).getName());
-                    Add_DocActivity.tvQty_rencProd1.setText(list_item.get(getAdapterPosition()).getPlannedQty());
+                    Add_DocActivity.tvQty_rencProd1.setText(list_item.get(getAdapterPosition()).getPlannedQty().replace(".000000",""));
                     Add_DocActivity.tvSts_Prod1.setText(list_item.get(getAdapterPosition()).getStatus());
                     Add_DocActivity.dialog.dismiss();
                 }
