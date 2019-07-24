@@ -556,6 +556,12 @@ public class Add_DocActivity extends AppCompatActivity {
             editor13.putString("tvuserid", tvuserid);
             editor13.commit();
 
+            pref = getSharedPreferences("Shift", MODE_PRIVATE);
+            String tvshift = tvShift1.getText().toString();
+            SharedPreferences.Editor editor14 = pref.edit();
+            editor14.putString("tvshift", tvshift);
+            editor14.commit();
+
             startActivity(new Intent(getApplicationContext(), AddSeqActivity.class));
 
         } else {

@@ -35,6 +35,7 @@ public class InfoFragment extends Fragment {
     private TextView tv_tglSelesai1;
     private TextView tv_jamMulai1;
     private TextView tv_jamSelesai1;
+    private TextView tv_shift1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class InfoFragment extends Fragment {
         tv_tglSelesai1 = rootView.findViewById(R.id.tv_tglSelesai1);
         tv_jamMulai1 = rootView.findViewById(R.id.tv_jamMulai1);
         tv_jamSelesai1 = rootView.findViewById(R.id.tv_jamSelesai1);
+        tv_shift1 = rootView.findViewById(R.id.tv_shift1);
 
         adapter = new SuccDocAdapter(this);
 
@@ -79,10 +81,11 @@ public class InfoFragment extends Fragment {
         tv_tglSelesai1.setText(header.getTanggalSelesai().substring(0,11));
         tv_jamMulai1.setText(header.getJamMulai());
         tv_jamSelesai1.setText(header.getJamSelesai());
+        tv_shift1.setText(header.getShift());
         return rootView;
-
-
     }
+
+    
 
 
 }

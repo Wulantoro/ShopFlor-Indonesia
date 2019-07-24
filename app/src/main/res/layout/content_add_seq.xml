@@ -281,6 +281,15 @@
             android:layout_below="@id/tvprod7"
             android:text="username"/>
 
+        <TextView
+            android:id="@+id/tvshift0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/tvusername3"
+            android:layout_below="@id/tvprod7"
+            android:text="shifttt"/>
+
     </RelativeLayout>
 
 
