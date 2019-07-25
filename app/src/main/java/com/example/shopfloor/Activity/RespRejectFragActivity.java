@@ -21,7 +21,9 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.shopfloor.Adapter.InputRejectAdapter;
 import com.example.shopfloor.Adapter.RejectAdapter;
+import com.example.shopfloor.Models.InputReject;
 import com.example.shopfloor.Models.Reject;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
@@ -48,9 +50,11 @@ public class RespRejectFragActivity extends AppCompatActivity {
     public static TextView tvcodereject0;
     private TextView tvdocentry4;
     private TextView btnSimpan;
+    private TextView tvlinenumb0;
     SharedPreferences pref, prf;
 
     private RejectAdapter adapter1;
+    private InputRejectAdapter adapter2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,10 +62,13 @@ public class RespRejectFragActivity extends AppCompatActivity {
 
         gson = new Gson();
         adapter1 = new RejectAdapter(this);
+        adapter2 = new InputRejectAdapter(this);
         tvReject3 = findViewById(R.id.tvReject3);
         tvcodereject0 = findViewById(R.id.tvcodereject0);
         btnSimpan = findViewById(R.id.btnSimpan);
         tvRejectQty = findViewById(R.id.tvRejectQty);
+        tvlinenumb0 = findViewById(R.id.tvlinenumb0);
+
 
         tvdocentry4 = findViewById(R.id.tvdocentry4);
         TextView tvdocentry = findViewById(R.id.tvdocentry4);
@@ -93,6 +100,15 @@ public class RespRejectFragActivity extends AppCompatActivity {
                 showDialog();
             }
         });
+
+        Integer lastnumb = 1;
+        tvlinenumb0.setText(String.valueOf(lastnumb));
+        InputReject inputReject = new InputReject();
+//        tvlinenumb0.setText(String.valueOf(inputReject.getLineNumber())+1);
+//        Log.e("jumlahhhh", "onCreate: ", tvlinenumb0.setText(String.valueOf(inputReject.getLineNumber())));
+
+
+        loadDatalastReject(tvdocentry4.getText().toString());
 
     }
 
@@ -208,7 +224,7 @@ public class RespRejectFragActivity extends AppCompatActivity {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("docEntry", tvdocentry4.getText().toString());
-//            jsonObject.put("lineNumber", )
+            jsonObject.put("lineNumber", tvlinenumb0.getText().toString());
             jsonObject.put("rejectCode", tvcodereject0.getText().toString());
             jsonObject.put("rejectName", tvReject3.getText().toString());
             jsonObject.put("rejectQty", tvRejectQty.getText().toString());
@@ -238,6 +254,52 @@ public class RespRejectFragActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public void loadDatalastReject(String docentry) {
+        if (adapter2 != null)
+            adapter2.clearAll();
+
+        Log.e("docentry == ", "check docentry = " + tvdocentry4.getText().toString());
+
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastreject?docEntry="+docentry)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        List<InputReject> result = new ArrayList<>();
+                        try {
+                            Log.e("Item reject = ", response.toString(1));
+                            if (result != null)
+                                result.clear();
+
+                            String message = response.getString("message");
+                            if (message.equals("Item reject where found")) {
+                                String records = response.getString("data");
+
+                                JSONArray dataArr = new JSONArray(records);
+
+                                if (dataArr.length() > 0) {
+                                    for (int i = 0; i < dataArr.length(); i++) {
+                                        InputReject inputReject = gson.fromJson(dataArr.getJSONObject(i).toString(), InputReject.class);
+                                        result.add(inputReject);
+                                        tvlinenumb0.setText(String.valueOf(inputReject.getLineNumber()+1));
+
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        adapter2.addAll(result);
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
     }
 
     public void btn1Clicked(View v) {
