@@ -133,6 +133,8 @@ public class HomeActivity extends AppCompatActivity {
                 showDate(year, month + 1, day);
                 /**********end tampil tanggal**************************/
 
+        userLogin();
+
         btnWorkcenter = findViewById(R.id.btnWorkcenter);
         btnWorkcenter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,6 +228,51 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
             }
+
+
+            private void userLogin() {
+
+                prf = getSharedPreferences("username", MODE_PRIVATE);
+                prf.getString("etusername", null);
+                Log.e("username = ", prf.getString("etusername", null));
+
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/loginuser?U_STEM_Username="+prf.getString("etusername", null))
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Log.e("tampil user", response.toString(1));
+                            String message = response.getString("message");
+
+                            if (message.equals("User ketemu")) {
+                                String records = response.getString("data");
+                                JSONArray dataArr = new JSONArray(records);
+
+
+                                if (dataArr.length() > 0) {
+                                    for (int i = 0; i < dataArr.length(); i++) {
+
+                                        Gson gson = new Gson();
+                                        User user = gson.fromJson(dataArr.getJSONObject(0).toString(), User.class);
+                                        TextView tvdept = findViewById(R.id.tvdivisi0);
+                                        tvdept.setText(String.valueOf(user.getDept()));
+                                    }
+                                }
+                            }
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
+
+    }
 
     public void onBackPressed() {
         new AlertDialog.Builder(this)

@@ -219,7 +219,7 @@ public class AddSeqActivity extends AppCompatActivity {
             jsonObject.put("routeName", tvroutename7.getText().toString());
             jsonObject.put("sequence", tvsequence7.getText().toString());
             jsonObject.put("sequenceQty", tvsequenceqty7.getText().toString());
-            jsonObject.put("shift", tvshift0.getText().toString());
+            jsonObject.put("shiftName", tvshift0.getText().toString());
             jsonObject.put("docDate", tvtglmulai7.getText().toString());
             jsonObject.put("tanggalMulai", tvtglmulai7.getText().toString());
             jsonObject.put("jamMulai", tvjammulai7.getText().toString());

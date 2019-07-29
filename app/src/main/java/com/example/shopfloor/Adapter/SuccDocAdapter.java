@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.shopfloor.Activity.DetailSuccDocActivity;
 import com.example.shopfloor.Activity.SuccessDocActivity;
+import com.example.shopfloor.Fragment.CriteriaFragment;
 import com.example.shopfloor.Fragment.InfoFragment;
 import com.example.shopfloor.Fragment.RejectFragment;
 import com.example.shopfloor.Models.Header;
@@ -32,6 +33,10 @@ public class SuccDocAdapter extends RecyclerView.Adapter<SuccDocAdapter.ViewHold
     }
 
     public SuccDocAdapter(RejectFragment rejectFragment) {
+
+    }
+
+    public SuccDocAdapter(CriteriaFragment criteriaFragment) {
 
     }
 

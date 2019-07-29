@@ -312,7 +312,7 @@ public class RejectActivity extends AppCompatActivity {
             jsonObject.put("routeName", tvroutename2.getText().toString());
             jsonObject.put("sequence", tvsequence1.getText().toString());
             jsonObject.put("sequenceQty", tvseqqty1.getText().toString());
-            jsonObject.put("shift", tvshift4.getText().toString());
+            jsonObject.put("shiftName", tvshift4.getText().toString());
             jsonObject.put("docDate", tvdocdate0.getText().toString());
             jsonObject.put("tanggalMulai", tvdocdate0.getText().toString());
             jsonObject.put("jamMulai", tvjammulai2.getText().toString());

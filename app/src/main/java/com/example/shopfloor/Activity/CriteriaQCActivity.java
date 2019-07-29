@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,8 +22,10 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.CriteriaAdapter;
+import com.example.shopfloor.Adapter.InputCriteriaAdapter;
 import com.example.shopfloor.Models.Criteria;
 import com.example.shopfloor.Models.Reject;
+import com.example.shopfloor.Models.Upcriteria;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
 import com.google.gson.Gson;
@@ -64,14 +67,20 @@ public class CriteriaQCActivity extends AppCompatActivity {
     private TextView tvqcname3;
     private TextView tvusername7;
     private TextView tvdocsts1;
-    private TextView tvactual1;
+    private EditText etactual1;
     private TextView tvshift2;
     private String docnum = "";
     private RecyclerView rv;
     private CriteriaAdapter adapter;
+    private InputCriteriaAdapter adapter1;
     private Gson gson;
     private Criteria criteria;
     private List<Criteria> list;
+
+    private TextView tvcriteria2;
+    private TextView tvcriteriadesc0;
+    private TextView tvstandard0;
+    private EditText etactual;
 
     private static final String TAG = "MyActivity";
 
@@ -108,8 +117,13 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvusername7 = findViewById(R.id.tvusername7);
         tvcriteria1 = findViewById(R.id.tvcriteria1);
         tvdocsts1 = findViewById(R.id.tvdocsts1);
-        tvactual1 = findViewById(R.id.tvactual1);
+        etactual1 = findViewById(R.id.etactual1);
         tvshift2 = findViewById(R.id.tvshift2);
+
+//        tvcriteria2 = findViewById(R.id.tvcriteria2);
+//        tvcriteriadesc0 = findViewById(R.id.tvcriteriadesc0);
+//        tvstandard0 = findViewById(R.id.tvstandard0);
+//        etactual = findViewById(R.id.etactual);
 
         /*************************************************************/
 
@@ -152,7 +166,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvdocentry.setText(prf.getString("tvdocentry", null));
 
         TextView tvdocnum = findViewById(R.id.tvdocnum5);
-        prf = getSharedPreferences("docNum", MODE_PRIVATE);
+        prf = getSharedPreferences("Docnum", MODE_PRIVATE);
         tvdocnum.setText(prf.getString("tvdocnum", null));
 
         TextView tvprodcode = findViewById(R.id.tvprodcode);
@@ -220,6 +234,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
         list = new ArrayList<>();
         rv = findViewById(R.id.rvActualCrit);
         adapter = new CriteriaAdapter(this);
+        adapter1 = new InputCriteriaAdapter(this);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(linearLayoutManager);
@@ -227,7 +242,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
         rv.setAdapter(adapter);
         loadData(tvWorkcenter.getText().toString(), tvsequence1.getText().toString());
         /*******************************************************************/
-}
+    }
 
     private void loadData(String wccode, String sequence) {
         if (adapter != null)
@@ -242,12 +257,12 @@ public class CriteriaQCActivity extends AppCompatActivity {
         Log.e("docnum = ", prf.getString("tvnoprod", null));
 
         Log.e("coba wccode", tvWorkcenter.getText().toString());
-        Log.e("Coba URL", GlobalVars.BASE_IP + "index.php/criteria?docNum="+prf.getString("tvnoprod", null)+"&wccode="+wccode+"&U_sequence="+sequence);
-        Log.e("Coba ", GlobalVars.BASE_IP +"index.php/criteria?wccode={wccode}"+"&docNum={docNum}");
+        Log.e("Coba URL", GlobalVars.BASE_IP + "index.php/criteria?docNum=" + prf.getString("tvnoprod", null) + "&wccode=" + wccode + "&U_sequence=" + sequence);
+        Log.e("Coba ", GlobalVars.BASE_IP + "index.php/criteria?wccode={wccode}" + "&docNum={docNum}");
         Log.e("WHERE ", GlobalVars.BASE_IP + "index.php/criteria?wccode=ASS&docNum=10016649");
-        Log.e("URL ", GlobalVars.BASE_IP + "index.php/criteria?wccode="+prf.getString("tvworkcenter", null)+"&docNum="+prf.getString("tvnoprod", null)+"");
+        Log.e("URL ", GlobalVars.BASE_IP + "index.php/criteria?wccode=" + prf.getString("tvworkcenter", null) + "&docNum=" + prf.getString("tvnoprod", null) + "");
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?wccode="+prf.getString("tvworkcenter", null)+"&docNum="+docnum)
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?docNum="+prf.getString("tvnoprod", null)+"&wccode="+wccode+"&U_sequence="+sequence)
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?docNum=" + prf.getString("tvnoprod", null) + "&wccode=" + wccode + "&U_sequence=" + sequence)
                 .setTag(this)
                 .setPriority(Priority.MEDIUM)
                 .build()
@@ -255,7 +270,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         List<Criteria> results = new ArrayList<>();
-                        Log.e("onResponse11111111 = " , ""+response);
+                        Log.e("onResponse11111111 = ", "" + response);
                         try {
 //                            Log.e("onResponse = ", response.toString());
 
@@ -272,6 +287,9 @@ public class CriteriaQCActivity extends AppCompatActivity {
                                         Criteria criteria = gson.fromJson(dataArr.getJSONObject(i).toString(), Criteria.class);
                                         results.add(criteria);
                                         Log.e("onResponseeeeeeee ", dataArr.getJSONObject(i).toString());
+//                                        tvcriteria2.setText(criteria.getUCriteria());
+//                                        tvcriteriadesc0.setText(String.valueOf(criteria.getUCriteriaName()));
+//                                        tvstandard0.setText(criteria.getUStandard());
                                     }
                                 }
                             }
@@ -299,20 +317,23 @@ public class CriteriaQCActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.update_header) {
+            SimpanCriteria();
 
-            List<Criteria> data = adapter.getData();
+
+           /* List<Criteria> data = adapter.getData();
+//            List<Upcriteria> data = adapter.getData();
 
             if (data != null) {
                 for (Criteria x: data) {
                     Log.e(TAG,"respone: " + x.getUCriteria() + x.getUCriteriaName() + x.getUValueType() + x.getUStandard() ); // coba cek di logcat result ini bang ntar di ss
-                    if(x.getUValueType() != null) {
+//                    if(x.getUValueType() != null) {
                         JSONObject jsonObject = new JSONObject();
                         try {
                             jsonObject.put("docEntry", tvdocentry3.getText().toString());
-                            jsonObject.put("criteria",x.getUCriteria()); // error
-                            jsonObject.put("criteriaDesc", x.getUCriteriaName());
-                            jsonObject.put("valueType", x.getUValueType());
-                            jsonObject.put("standard", x.getUStandard());
+//                            jsonObject.put("criteria",x.getUCriteria()); // error
+//                            jsonObject.put("criteriaDesc", x.getUCriteriaName());
+//                            jsonObject.put("valueType", x.getUValueType());
+//                            jsonObject.put("standard", x.getUStandard());
 //                            jsonObject.put("actualResult", tvactual1.getText().toString());
 
                             AndroidNetworking.post(GlobalVars.BASE_IP +"index/upcriteria")
@@ -342,9 +363,9 @@ public class CriteriaQCActivity extends AppCompatActivity {
                             e.printStackTrace();
                             Log.e(TAG, "onOptionsItemSelected: " + e.getMessage());
                         }
-                    }
+//                    }
                 }
-            }
+            }*/
             pref = getSharedPreferences("Docentry", MODE_PRIVATE);
             String tvdocentry = tvdocentry3.getText().toString();
             SharedPreferences.Editor editor = pref.edit();
@@ -468,7 +489,58 @@ public class CriteriaQCActivity extends AppCompatActivity {
 //            Intent intent = new Intent(getApplicationContext(), RejectActivity.class);
             startActivity(new Intent(getApplicationContext(), RejectActivity.class));
         }
-    return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
-}
+    //actual result belum bisa
+    public void SimpanCriteria() {
+
+        List<Criteria> data = adapter.getData();
+
+//        if (adapter != null)
+//            adapter.clearAll();
+
+        if (data != null) {
+            for (Criteria x : data) {
+                Log.e(TAG, "respone: " + x.getUCriteria() + " " + x.getUCriteriaName() + " " + x.getUStandard() + " " + x.getUValueType());
+
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("docEntry", tvdocentry3.getText().toString());
+                        jsonObject.put("criteria", x.getUCriteria().toString());
+//                    jsonObject.put("criteriaDesc", x.getUCriteriaName().toString());
+                        jsonObject.put("standard", x.getUStandard().toString());
+//                        jsonObject.put("actualResult", etactual1.getText());
+                        jsonObject.put("valueType", x.getUValueType().toString());
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/upcriteria")
+                            .addJSONObjectBody(jsonObject)
+                            .setPriority(Priority.MEDIUM)
+                            .build()
+                            .getAsJSONObject(new JSONObjectRequestListener() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    try {
+                                        String message = response.getString("message");
+                                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                        Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onError(ANError anError) {
+                                    Toast.makeText(getApplicationContext(), "Gagal menambah Criteria", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+            }
+
+        }
+    }
+
