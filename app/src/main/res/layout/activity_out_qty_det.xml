@@ -45,6 +45,14 @@
             android:text="shiffff"/>
 
         <TextView
+            android:id="@+id/tvdocnum6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="docnum"
+            />
+
+        <TextView
             android:id="@+id/tvsequence3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -145,12 +153,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:text="ini docentry"/>
-        <TextView
-            android:id="@+id/tvdocnum6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="docnum"
-            android:textColor="@color/white"/>
+
         <TextView
             android:id="@+id/tvnoprod3"
             android:layout_width="wrap_content"

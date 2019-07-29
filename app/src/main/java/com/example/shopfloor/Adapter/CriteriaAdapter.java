@@ -1,6 +1,7 @@
 package com.example.shopfloor.Adapter;
 
 import android.content.Context;
+import android.print.PrinterId;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.shopfloor.Models.Criteria;
+import com.example.shopfloor.Models.Upcriteria;
 import com.example.shopfloor.R;
 
 import java.util.ArrayList;
@@ -22,14 +24,19 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
     private Context context;
     private List<Criteria> list_item;
 
+
+
     public CriteriaAdapter(List<Criteria> list, Context context) {
         this.context = context;
         list_item = list;
     }
 
+
+
     public List<Criteria> getData() {
         return list_item;
     }
+
 
     public CriteriaAdapter(Context context) {
         this.context = context;
@@ -48,26 +55,27 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Criteria criteria = list_item.get(holder.getAdapterPosition());
+//        final Upcriteria upcriteria = list_item2.get(holder.getAdapterPosition());
 
         holder.tvcriteria1.setText(criteria.getUCriteria());
         holder.tvcritdesc1.setText(String.valueOf(criteria.getUCriteriaName()));
         holder.tvstandard1.setText(criteria.getUStandard());
-        holder.tvactual1.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                criteria.setUValueType(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+//        holder.etactual1.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                criteria.setActualResult(s.toString());
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
     }
 
     @Override
@@ -123,14 +131,16 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
         public TextView tvcritdesc1;
         public TextView tvvaluetype1;
         public TextView tvstandard1;
-        public EditText tvactual1;
+        public EditText etactual1;
+
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvcriteria1 = itemView.findViewById(R.id.tvcriteria1);
             tvcritdesc1 = itemView.findViewById(R.id.tvcritdesc1);
             tvstandard1 = itemView.findViewById(R.id.tvstandard1);
-            tvactual1 = itemView.findViewById(R.id.tvactual1);
+            etactual1 = itemView.findViewById(R.id.etactual1);
 
         }
     }

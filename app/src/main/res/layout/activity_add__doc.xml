@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tool"
-        android:layout_weight="8">
+        android:layout_weight="9">
 
         <Button
             android:id="@+id/btn_PilihProd"
@@ -253,15 +253,24 @@
         android:layout_below="@+id/tvSquence_Qty"
         android:layout_marginTop="20dp"
         android:text="Shift" />
+        <TextView
+            android:id="@+id/shift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvSquence_Qty"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/tvShift"
+            android:text="nama shift"/>
     <TextView
         android:id="@+id/tvShift1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvSquence_Qty1"
-        android:layout_toRightOf="@+id/tvShift"
-        android:layout_marginLeft="90dp"
+        android:layout_toRightOf="@+id/shift"
+
         android:layout_marginTop="20dp"
-        android:text=""
+        android:text="shft"
         />
 
     <TextView

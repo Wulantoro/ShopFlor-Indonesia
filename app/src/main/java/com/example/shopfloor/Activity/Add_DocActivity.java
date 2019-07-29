@@ -28,6 +28,8 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.ProductorderAdapter;
 import com.example.shopfloor.Adapter.SequenceAdapter;
+import com.example.shopfloor.Adapter.SuccDocAdapter;
+import com.example.shopfloor.Models.Header;
 import com.example.shopfloor.Models.Productorder;
 import com.example.shopfloor.Models.Sequence;
 import com.example.shopfloor.R;
@@ -78,9 +80,10 @@ public class Add_DocActivity extends AppCompatActivity {
     private TextView tvdocnum1;
     private String docnum="";
     private EditText searchSeq;
+    private TextView shift;
 
 
-
+    private SuccDocAdapter adapter3;
     private ProductorderAdapter adapter2;
     private SequenceAdapter adapter1;
     private List<Productorder> list;
@@ -99,8 +102,10 @@ public class Add_DocActivity extends AppCompatActivity {
         /*******************************************************/
 
         gson = new Gson();
+        adapter3 = new SuccDocAdapter(this);
         adapter2 = new ProductorderAdapter(this);
         adapter1 = new SequenceAdapter(this);
+
         tvNm_prod1 = findViewById(R.id.tvNm_prod1);
         tvNo_Prod1 = findViewById(R.id.tvNo_prod1);
         tvRoute_Code1 = findViewById(R.id.tvRoute_Code1);
@@ -116,6 +121,7 @@ public class Add_DocActivity extends AppCompatActivity {
         tvJam_mulai1 = findViewById(R.id.tvJam_mulai1);
         tvwc1 = findViewById(R.id.tvwc1);
         tvusername2 = findViewById(R.id.tvusername2);
+        shift = findViewById(R.id.shift);
 
 
         tvSquence1 = findViewById(R.id.tvSquence1);
@@ -152,6 +158,8 @@ public class Add_DocActivity extends AppCompatActivity {
         String nodoc = new SimpleDateFormat("yyyyMM", Locale.getDefault()).format(new Date());
         TextView nodoc1 = findViewById(R.id.tvNo_doc1);
         nodoc1.setText(S+nodoc);
+
+        LastDocnum();
 
         btn_Pilihprod = findViewById(R.id.btn_PilihProd);
         btn_Pilihprod.setOnClickListener(new View.OnClickListener() {
@@ -427,6 +435,50 @@ public class Add_DocActivity extends AppCompatActivity {
                 });
     }
 
+    public void LastDocnum() {
+        if (adapter3 != null)
+            adapter3.clearAll();
+
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastdocnum")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        List<Header> results = new ArrayList<>();
+                        try {
+                            Log.e("tampil last = ", response.toString(1));
+
+                            if (results != null)
+                                results.clear();
+
+                            String message = response.getString("message");
+
+                            if (message.equals("data ketemu")) {
+                                String records = response.getString("data");
+
+                                JSONArray dataArr = new JSONArray(records);
+
+                                if (dataArr.length() > 0) {
+                                    for (int i = 0; i < dataArr.length(); i++) {
+                                        Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
+                                        results.add(header);
+                                        tvNo_doc1.setText(header.getDocNum()+1); }
+                                }
+                            }
+                        }catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        adapter3.addAll(results);
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
+    }
+
     //showDate
     public void showdate(int year, int month, int day) {
 //        dateView.setText(new StringBuilder().append(day).append("-").append(month).append("-").append(year));
@@ -453,22 +505,32 @@ public class Add_DocActivity extends AppCompatActivity {
 
             /*********shift***********************/
             Calendar c = Calendar.getInstance();
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("EEEE");
+            String getCurentDay = sdf1.format(c.getTime());
+
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
             String getCurentTime = sdf.format(c.getTime());
             String getTestTime = "07:00";
             String getTestTime1 = "15:00";
             String getTestTime2 = "23:00";
 
+            if (tvShift1.equals("Jumat - Shift 1")) {
+                TextView codeshitf = findViewById(R.id.shift);
+                codeshitf.setText("JmS1"+" "+"-");
+            }
+
             if (getCurentTime.compareTo(getTestTime) > 0 & getTestTime1.compareTo(getCurentTime) > 0) {
                 TextView shift = findViewById(R.id.tvShift1);
-                shift.setText("Shift 1");
+                shift.setText(getCurentDay+" "+"-"+" "+"Shift 1");
             }else if (getCurentTime.compareTo(getTestTime1) > 0 & getTestTime2.compareTo(getCurentTime) > 0) {
                 TextView shift = findViewById(R.id.tvShift1);
-                shift.setText("Shift 2");
+                shift.setText(getCurentDay+" "+"-"+" "+"Shift 2");
             }else if (getCurentTime.compareTo(getTestTime2) > 0) {
                 TextView shift = findViewById(R.id.tvShift1);
-                shift.setText("Shift 3");
+                shift.setText(getCurentDay+ "-"+" "+"Shift 3");
             }
+
         }
 
         if (id == R.id.action_seq && tvSquence_Qty1.length() != 0 && tvNo_Prod1.length() != 0) {

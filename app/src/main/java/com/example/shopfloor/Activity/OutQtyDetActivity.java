@@ -266,6 +266,12 @@ public class OutQtyDetActivity extends AppCompatActivity {
             editor15.putString("tvshift", tvshift);
             editor15.commit();
 
+            pref = getSharedPreferences("Docnum", MODE_PRIVATE);
+            String tvdocnum = tvdocnum6.getText().toString();
+            SharedPreferences.Editor editor16 = pref.edit();
+            editor16.putString("tvdocnum", tvdocnum);
+            editor16.commit();
+
             startActivity(new Intent(getApplicationContext(), CriteriaQCActivity.class));
         } else {
             Toast.makeText(getApplicationContext(), "Output Quantity tidak boleh kosong", Toast.LENGTH_SHORT).show();

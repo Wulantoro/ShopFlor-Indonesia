@@ -202,7 +202,6 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tvWorkcenter"
                 android:layout_marginLeft="10dp"
-                android:textColor="@color/white"
                 android:text="ini docentry"/>
             </RelativeLayout>
         <!--in qty, out qty, woekcenter-->
@@ -237,7 +236,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tvCrit"
                 android:text="docnum"
-                android:textColor="@color/white"
+
                 android:layout_marginLeft="5dp"/>
             <TextView
                 android:id="@+id/tvprodcode"
@@ -377,6 +376,26 @@
                         android:text="Actual"
                         android:textSize="18dp" />
                 </TableRow>
+
+               <!-- <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal" >
+                    <TextView
+                        android:id="@+id/tvcriteria2"
+                        android:text="Criteria"/>
+                    <TextView
+                        android:id="@+id/tvcriteriadesc0"
+                        android:text="Criteria Desc"/>
+                    <TextView
+                        android:id="@+id/tvstandard0"
+                        android:text="Standard"/>
+                    <EditText
+                        android:id="@+id/etactual"
+                        android:hint="Actual"/>
+                </TableRow>-->
+
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rvActualCrit"
                     android:layout_below="@id/tvqcname3"

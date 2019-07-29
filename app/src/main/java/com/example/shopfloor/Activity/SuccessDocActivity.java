@@ -224,7 +224,7 @@ public class SuccessDocActivity extends AppCompatActivity {
                 final List<Header> filteredList = new ArrayList<>();
 
                 for (int i = 0; i < list.size(); i++) {
-                    final String text = list.get(i).getDocDate().toLowerCase();
+                    final String text = list.get(i).getTanggalSelesai().toLowerCase();
                     if (text.contains(query.toString())) {
                         filteredList.add(list.get(i));
                     }
