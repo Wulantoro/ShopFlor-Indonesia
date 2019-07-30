@@ -39,6 +39,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
     private TextView tvposted4;
     private TextView tvqcname1;
     private TextView tvusername5;
+    private TextView tvcodeshift1;
     private OpenDocAdapter adapter;
     private Header header;
 
@@ -70,6 +71,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvposted4 = findViewById(R.id.tvposted4);
         tvqcname1 = findViewById(R.id.tvqcname1);
         tvusername5 = findViewById(R.id.tvusername5);
+        tvcodeshift1 = findViewById(R.id.tvcodeshift1);
 
         adapter = new OpenDocAdapter(this);
 
@@ -85,7 +87,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvSts_prod1.setText(header.getProdStatus());
         tvSquence1.setText(header.getSequence());
         tvSquence_Qty1.setText(header.getSequenceQty().replace(".000000",""));
-        tvShift1.setText(header.getShift());
+        tvShift1.setText(header.getShiftName());
         tvTgl_mulai1.setText(header.getTanggalMulai().substring(0,10));
         tvJam_mulai1.setText(header.getJamMulai());
         tvinqty4.setText(header.getInQty());
@@ -94,6 +96,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvstatus.setText(header.getStatus());
         tvposted4.setText(String.valueOf(header.getPosted()));
         tvusername5.setText(header.getUserId());
+        tvcodeshift1.setText(header.getShift());
 
 
         TextView tvqcname = findViewById(R.id.tvqcname1);
@@ -253,6 +256,12 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         SharedPreferences.Editor editor19 = pref.edit();
         editor19.putString("tvshift", tvshift);
         editor19.commit();
+
+        pref = getSharedPreferences("Codeshift", MODE_PRIVATE);
+        String tvcodesh = tvcodeshift1.getText().toString();
+        SharedPreferences.Editor editor20 = pref.edit();
+        editor20.putString("tvcodeshift", tvcodesh);
+        editor20.commit();
 
         startActivity(new Intent(getApplicationContext(), OutQtyDetActivity.class));
         return true;

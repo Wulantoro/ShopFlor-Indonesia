@@ -67,6 +67,7 @@ public class AddSeqActivity extends AppCompatActivity {
     private TextView tvposted3;
     private TextView tvusername3;
     private TextView tvshift0;
+    private TextView tvcodeshift0;
     private Button btnBack;
 
 
@@ -103,6 +104,7 @@ public class AddSeqActivity extends AppCompatActivity {
         tvposted3 = findViewById(R.id.tvposted3);
         tvusername3 = findViewById(R.id.tvusername3);
         tvshift0 = findViewById(R.id.tvshift0);
+        tvcodeshift0 = findViewById(R.id.tvcodeshift0);
 
         tvInputSeq = findViewById(R.id.tvInputSeq);
         pref = getSharedPreferences("inQty", MODE_PRIVATE);
@@ -172,6 +174,10 @@ public class AddSeqActivity extends AppCompatActivity {
         prf = getSharedPreferences("Shift", MODE_PRIVATE);
         tvshift.setText(prf.getString("tvshift", null));
 
+        TextView tvcodeshift1 = findViewById(R.id.tvcodeshift0);
+        prf = getSharedPreferences("Codeshift", MODE_PRIVATE);
+        tvcodeshift1.setText(prf.getString("tvcodeshift1", null));
+
         TextView tvstatus = findViewById(R.id.tvstatus);
         tvstatus.setText("0");
 
@@ -220,6 +226,7 @@ public class AddSeqActivity extends AppCompatActivity {
             jsonObject.put("sequence", tvsequence7.getText().toString());
             jsonObject.put("sequenceQty", tvsequenceqty7.getText().toString());
             jsonObject.put("shiftName", tvshift0.getText().toString());
+            jsonObject.put("shift", tvcodeshift0.getText().toString());
             jsonObject.put("docDate", tvtglmulai7.getText().toString());
             jsonObject.put("tanggalMulai", tvtglmulai7.getText().toString());
             jsonObject.put("jamMulai", tvjammulai7.getText().toString());

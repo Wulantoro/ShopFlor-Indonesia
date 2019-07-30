@@ -69,6 +69,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
     private TextView tvdocsts1;
     private EditText etactual1;
     private TextView tvshift2;
+    private TextView tvcodeshift3;
     private String docnum = "";
     private RecyclerView rv;
     private CriteriaAdapter adapter;
@@ -119,6 +120,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvdocsts1 = findViewById(R.id.tvdocsts1);
         etactual1 = findViewById(R.id.etactual1);
         tvshift2 = findViewById(R.id.tvshift2);
+        tvcodeshift3 = findViewById(R.id.tvcodeshift3);
 
 //        tvcriteria2 = findViewById(R.id.tvcriteria2);
 //        tvcriteriadesc0 = findViewById(R.id.tvcriteriadesc0);
@@ -208,6 +210,10 @@ public class CriteriaQCActivity extends AppCompatActivity {
         TextView tvshift = findViewById(R.id.tvshift2);
         prf = getSharedPreferences("Shift", MODE_PRIVATE);
         tvshift.setText(prf.getString("tvshift", null));
+
+        TextView tvcodesh = findViewById(R.id.tvcodeshift3);
+        prf = getSharedPreferences("Codeshift", MODE_PRIVATE);
+        tvcodesh.setText(prf.getString("tvcodeshift", null));
 
         TextView tvstatus = findViewById(R.id.tvstatus2);
         tvstatus.setText("Completed");
@@ -317,8 +323,54 @@ public class CriteriaQCActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.update_header) {
-            SimpanCriteria();
+//            SimpanCriteria();
 
+
+            List<Criteria> data = adapter.getData();
+
+//        if (adapter != null)
+//            adapter.clearAll();
+
+            if (data != null) {
+                for (Criteria x : data) {
+                    Log.e(TAG, "respone: " + x.getUCriteria() + " " + x.getUCriteriaName() + " " + x.getUStandard() + " " + x.getUValueType());
+
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("docEntry", tvdocentry3.getText().toString());
+//                        jsonObject.put("criteria", x.getUCriteria().toString());
+//                    jsonObject.put("criteriaDesc", x.getUCriteriaName().toString());
+//                        jsonObject.put("standard", x.getUStandard().toString());
+//                        jsonObject.put("actualResult", etactual1.getText());
+//                        jsonObject.put("valueType", x.getUValueType().toString());
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/upcriteria")
+                            .addJSONObjectBody(jsonObject)
+                            .setPriority(Priority.MEDIUM)
+                            .build()
+                            .getAsJSONObject(new JSONObjectRequestListener() {
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    try {
+                                        String message = response.getString("message");
+                                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                        Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onError(ANError anError) {
+                                    Toast.makeText(getApplicationContext(), "Gagal menambah Criteria", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+            }
 
            /* List<Criteria> data = adapter.getData();
 //            List<Upcriteria> data = adapter.getData();
@@ -486,11 +538,18 @@ public class CriteriaQCActivity extends AppCompatActivity {
             editor19.putString("tvshift", tvshift);
             editor19.commit();
 
+            pref = getSharedPreferences("Codeshift", MODE_PRIVATE);
+            String tvcodesh = tvcodeshift3.getText().toString();
+            SharedPreferences.Editor editor20 = pref.edit();
+            editor20.putString("tvcodeshift", tvcodesh);
+            editor20.commit();
+
 //            Intent intent = new Intent(getApplicationContext(), RejectActivity.class);
             startActivity(new Intent(getApplicationContext(), RejectActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     //actual result belum bisa
     public void SimpanCriteria() {

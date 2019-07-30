@@ -38,6 +38,14 @@
             android:text="In Qty"/>
 
         <TextView
+            android:id="@+id/tvcodeshift2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="code shift"/>
+
+
+        <TextView
             android:id="@+id/tvshift1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

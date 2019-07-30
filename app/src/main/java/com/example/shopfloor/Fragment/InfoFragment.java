@@ -73,8 +73,8 @@ public class InfoFragment extends Fragment {
         tv_sts_prod1.setText(header.getProdStatus());
         tv_route1.setText(header.getRouteCode());
         tvroutename3.setText(header.getRouteName());
-        tv_inQty1.setText(header.getInQty());
-        tv_outQty1.setText(header.getOutQty());
+        tv_inQty1.setText(header.getInQty().replace(".000000",""));
+        tv_outQty1.setText(header.getOutQty().replace(".000000",""));
         tv_seq1.setText(header.getSequence());
         tv_seq_qty1.setText(header.getSequenceQty().replace(".000000",""));
         tv_tglMulai1.setText(header.getTanggalMulai().substring(0,11));

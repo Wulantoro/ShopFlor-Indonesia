@@ -253,8 +253,9 @@
         android:layout_below="@+id/tvSquence_Qty"
         android:layout_marginTop="20dp"
         android:text="Shift" />
+
         <TextView
-            android:id="@+id/shift"
+            android:id="@+id/tvcodeshift"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvSquence_Qty"
@@ -262,15 +263,24 @@
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/tvShift"
             android:text="nama shift"/>
-    <TextView
+
+        <TextView
+            android:id="@+id/tvstrip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvcodeshift"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/tvSquence_Qty"
+            android:text=" - "/>
+        <TextView
         android:id="@+id/tvShift1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvSquence_Qty1"
-        android:layout_toRightOf="@+id/shift"
-
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/tvstrip"
         android:layout_marginTop="20dp"
-        android:text="shft"
+        android:text="code shft"
         />
 
     <TextView

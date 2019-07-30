@@ -333,6 +333,14 @@
                 android:layout_below="@id/tvCrit"
                 android:layout_toRightOf="@id/tvjammulai1"
                 android:text="siffff"/>
+            <TextView
+                android:id="@+id/tvcodeshift3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_below="@id/tvCrit"
+                android:layout_toRightOf="@id/tvshift2"
+                android:text="codeshift"/>
         </RelativeLayout>
 
             <TableLayout
