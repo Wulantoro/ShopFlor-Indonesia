@@ -80,7 +80,7 @@ public class Add_DocActivity extends AppCompatActivity {
     private TextView tvdocnum1;
     private String docnum="";
     private EditText searchSeq;
-    private TextView shift;
+    private TextView tvcodeshift;
 
 
     private SuccDocAdapter adapter3;
@@ -121,7 +121,7 @@ public class Add_DocActivity extends AppCompatActivity {
         tvJam_mulai1 = findViewById(R.id.tvJam_mulai1);
         tvwc1 = findViewById(R.id.tvwc1);
         tvusername2 = findViewById(R.id.tvusername2);
-        shift = findViewById(R.id.shift);
+        tvcodeshift = findViewById(R.id.tvcodeshift);
 
 
         tvSquence1 = findViewById(R.id.tvSquence1);
@@ -515,20 +515,60 @@ public class Add_DocActivity extends AppCompatActivity {
             String getTestTime1 = "15:00";
             String getTestTime2 = "23:00";
 
-            if (tvShift1.equals("Jumat - Shift 1")) {
-                TextView codeshitf = findViewById(R.id.shift);
-                codeshitf.setText("JmS1"+" "+"-");
-            }
-
-            if (getCurentTime.compareTo(getTestTime) > 0 & getTestTime1.compareTo(getCurentTime) > 0) {
-                TextView shift = findViewById(R.id.tvShift1);
-                shift.setText(getCurentDay+" "+"-"+" "+"Shift 1");
-            }else if (getCurentTime.compareTo(getTestTime1) > 0 & getTestTime2.compareTo(getCurentTime) > 0) {
-                TextView shift = findViewById(R.id.tvShift1);
+            //nama shift
+            TextView shift = findViewById(R.id.tvShift1);
+            if (getCurentTime.compareTo(getTestTime) > 0 && getTestTime1.compareTo(getCurentTime) > 0) {
+                shift.setText(getCurentDay + " " + "-" + " " + "Shift 1");
+            }else if (getCurentTime.compareTo(getTestTime1) > 0 && getTestTime2.compareTo(getCurentTime) > 0) {
                 shift.setText(getCurentDay+" "+"-"+" "+"Shift 2");
             }else if (getCurentTime.compareTo(getTestTime2) > 0) {
-                TextView shift = findViewById(R.id.tvShift1);
                 shift.setText(getCurentDay+ "-"+" "+"Shift 3");
+            }
+
+            //Code shift
+            TextView codeshitf = findViewById(R.id.tvcodeshift);
+            if (shift.getText().toString().equalsIgnoreCase("Senin - Shift 1")) {
+                codeshitf.setText("SS1");
+            }else if (shift.getText().toString().equalsIgnoreCase("Senin - Shift 2")) {
+                codeshitf.setText("SS2");
+            }else if (shift.getText().toString().equalsIgnoreCase("Senin - Shift 3")) {
+                codeshitf.setText("SS3");
+            }else if (shift.getText().toString().equalsIgnoreCase("Selasa - Shift 1")) {
+                codeshitf.setText("SlS1");
+            }else if (shift.getText().toString().equalsIgnoreCase("Selasa - Shift 2")) {
+                codeshitf.setText("SlS2");
+            }else if (shift.getText().toString().equalsIgnoreCase("Selasa - Shift 3")) {
+                codeshitf.setText("SlS3");
+            }else if (shift.getText().toString().equalsIgnoreCase("Rabu - Shift 1")) {
+                codeshitf.setText("RbS1");
+            }else if (shift.getText().toString().equalsIgnoreCase("Rabu - Shift 2")) {
+                codeshitf.setText("RbS2");
+            }else if (shift.getText().toString().equalsIgnoreCase("Rabu - Shift 3")) {
+                codeshitf.setText("RbS3");
+            }else if (shift.getText().toString().equalsIgnoreCase("Kamis - Shift 1")) {
+                codeshitf.setText("KmS1");
+            }else if (shift.getText().toString().equalsIgnoreCase("Kamis - Shift 2")) {
+                codeshitf.setText("KmS2");
+            }else if (shift.getText().toString().equalsIgnoreCase("Kamis - Shift 3")) {
+                codeshitf.setText("KmS3");
+            }else if (shift.getText().toString().equalsIgnoreCase("Jumat - Shift 1")) {
+                codeshitf.setText("JmS1");
+            }else if (shift.getText().toString().equalsIgnoreCase("Jumat - Shift 2")) {
+                codeshitf.setText("JmS1");
+            }else if (shift.getText().toString().equalsIgnoreCase("Jumat - Shift 3")) {
+                codeshitf.setText("JmS3");
+            }else if (shift.getText().toString().equalsIgnoreCase("Sabtu - Shift 1")) {
+                codeshitf.setText("SbS1");
+            }else if (shift.getText().toString().equalsIgnoreCase("Sabtu - Shift 2")) {
+                codeshitf.setText("SbS2");
+            }else if (shift.getText().toString().equalsIgnoreCase("Sabtu - Shift 3")) {
+                codeshitf.setText("SbS3");
+            }else if (shift.getText().toString().equalsIgnoreCase("Minggu - Shift 1")) {
+                codeshitf.setText("MgS1");
+            }else if (shift.getText().toString().equalsIgnoreCase("Minggu - Shift 2")) {
+                codeshitf.setText("MgS2");
+            }else if (shift.getText().toString().equalsIgnoreCase("Minggu - Shift 3")) {
+                codeshitf.setText("MgS3");
             }
 
         }
@@ -623,6 +663,13 @@ public class Add_DocActivity extends AppCompatActivity {
             SharedPreferences.Editor editor14 = pref.edit();
             editor14.putString("tvshift", tvshift);
             editor14.commit();
+
+            pref = getSharedPreferences("Codeshift", MODE_PRIVATE);
+            String tvcodeshift1 = tvcodeshift.getText().toString();
+            SharedPreferences.Editor editor15 = pref.edit();
+            editor15.putString("tvcodeshift1", tvcodeshift1);
+            editor15.commit();
+
 
             startActivity(new Intent(getApplicationContext(), AddSeqActivity.class));
 

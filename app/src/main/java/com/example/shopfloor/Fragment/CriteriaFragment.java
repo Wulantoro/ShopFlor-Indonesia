@@ -71,6 +71,8 @@ public class CriteriaFragment extends Fragment {
         if (adapter != null)
             adapter.clearAll();
 
+        Log.e("criteria haha = ", tvdocentry6.getText().toString());
+
         AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/upcriteria?docEntry="+docentry)
            .setPriority(Priority.MEDIUM)
            .build()

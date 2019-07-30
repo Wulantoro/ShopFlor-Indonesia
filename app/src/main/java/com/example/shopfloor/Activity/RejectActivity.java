@@ -62,6 +62,7 @@ public class RejectActivity extends AppCompatActivity {
     private TextView tvusername8;
     private TextView tvqcname4;
     private TextView tvshift4;
+    private TextView tvcodeshift4;
     private Gson gson;
     private InputRejectAdapter adapter;
     private List<InputReject> list;
@@ -103,6 +104,7 @@ public class RejectActivity extends AppCompatActivity {
         tvusername8 = findViewById(R.id.tvusername8);
         tvqcname4 = findViewById(R.id.tvqcname4);
         tvshift4 = findViewById(R.id.tvshift4);
+        tvcodeshift4 = findViewById(R.id.tvcodeshift4);
 
         TextView tvdocnum = findViewById(R.id.tvdocnum1);
         prf = getSharedPreferences("Docnum", MODE_PRIVATE);
@@ -127,7 +129,6 @@ public class RejectActivity extends AppCompatActivity {
         TextView tvdocdate = findViewById(R.id.tvdocdate0);
         prf = getSharedPreferences("Docdate", MODE_PRIVATE);
         tvdocdate.setText(prf.getString("tvdocdate", null));
-
 
         TextView tvroutename = findViewById(R.id.tvroutename2);
         prf = getSharedPreferences("Routename", MODE_PRIVATE);
@@ -215,6 +216,10 @@ public class RejectActivity extends AppCompatActivity {
        TextView tvshift = findViewById(R.id.tvshift4);
        prf = getSharedPreferences("Shift", MODE_PRIVATE);
        tvshift.setText(prf.getString("tvshift", null));
+
+       TextView tvcodesh = findViewById(R.id.tvcodeshift4);
+       prf = getSharedPreferences("Codeshift", MODE_PRIVATE);
+       tvcodesh.setText(prf.getString("tvcodeshift", null));
 
         TextView tvstatus = findViewById(R.id.tvstatus0);
         tvstatus.setText("Completed");
@@ -313,6 +318,7 @@ public class RejectActivity extends AppCompatActivity {
             jsonObject.put("sequence", tvsequence1.getText().toString());
             jsonObject.put("sequenceQty", tvseqqty1.getText().toString());
             jsonObject.put("shiftName", tvshift4.getText().toString());
+            jsonObject.put("shift", tvcodeshift4.getText().toString());
             jsonObject.put("docDate", tvdocdate0.getText().toString());
             jsonObject.put("tanggalMulai", tvdocdate0.getText().toString());
             jsonObject.put("jamMulai", tvjammulai2.getText().toString());

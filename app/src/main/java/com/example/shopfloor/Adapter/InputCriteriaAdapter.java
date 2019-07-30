@@ -57,22 +57,22 @@ public class InputCriteriaAdapter extends RecyclerView.Adapter<InputCriteriaAdap
         holder.tvcritdesc2.setText(String.valueOf(upcriteria.getCriteriaDesc()));
         holder.tvstandard2.setText(String.valueOf(upcriteria.getStandard()));
         holder.tvactual2.setText(String.valueOf(upcriteria.getActualResult()));
-        holder.etactual1.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                upcriteria.setActualResult(s.toString());
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+//        holder.etactual1.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                upcriteria.setActualResult(s.toString());
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
 
     }
 

@@ -311,6 +311,16 @@
             android:layout_toRightOf="@id/tvdocnum5"
             android:layout_marginLeft="5dp"
             android:text="shifffff"/>
+
+        <TextView
+            android:id="@+id/tvcodeshift4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvdocentry0"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/tvshift4"
+            android:text="code shift"
+            />
     </RelativeLayout>
 
         <Button
