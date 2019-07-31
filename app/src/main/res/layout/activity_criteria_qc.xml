@@ -202,6 +202,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tvWorkcenter"
                 android:layout_marginLeft="10dp"
+                android:textColor="@color/white"
                 android:text="ini docentry"/>
             </RelativeLayout>
         <!--in qty, out qty, woekcenter-->
@@ -236,7 +237,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/tvCrit"
                 android:text="docnum"
-
+                android:textColor="@color/white"
                 android:layout_marginLeft="5dp"/>
             <TextView
                 android:id="@+id/tvprodcode"
@@ -332,6 +333,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_below="@id/tvCrit"
                 android:layout_toRightOf="@id/tvjammulai1"
+                android:textColor="@color/white"
                 android:text="siffff"/>
             <TextView
                 android:id="@+id/tvcodeshift3"
@@ -340,6 +342,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_below="@id/tvCrit"
                 android:layout_toRightOf="@id/tvshift2"
+                android:textColor="@color/white"
                 android:text="codeshift"/>
         </RelativeLayout>
 

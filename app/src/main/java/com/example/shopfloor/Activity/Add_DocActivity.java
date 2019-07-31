@@ -1,11 +1,9 @@
 package com.example.shopfloor.Activity;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -40,6 +38,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -81,6 +83,11 @@ public class Add_DocActivity extends AppCompatActivity {
     private String docnum="";
     private EditText searchSeq;
     private TextView tvcodeshift;
+    ResultSet rs;
+    Statement st;
+    PreparedStatement pr;
+    String sql;
+    Connection con;
 
 
     private SuccDocAdapter adapter3;
@@ -138,13 +145,6 @@ public class Add_DocActivity extends AppCompatActivity {
         prf = getSharedPreferences("userId", MODE_PRIVATE);
         tvuserid.setText(prf.getString("tvuserid", null));
 
-        /*******************tanggal mulai***********************/
-        /*calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-        month = calendar.get(Calendar.MONTH);
-        day = calendar.get(Calendar.DAY_OF_MONTH);
-        showdate(year, month + 1, day);*/
-
 //        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         TextView tgl_mulai = findViewById(R.id.tvTgl_mulai1);
@@ -152,12 +152,6 @@ public class Add_DocActivity extends AppCompatActivity {
 
         /****************end**************************************/
 
-        /*************no dokumen************************/
-        int no;
-        String S = "S";
-        String nodoc = new SimpleDateFormat("yyyyMM", Locale.getDefault()).format(new Date());
-        TextView nodoc1 = findViewById(R.id.tvNo_doc1);
-        nodoc1.setText(S+nodoc);
 
         LastDocnum();
 
@@ -463,7 +457,26 @@ public class Add_DocActivity extends AppCompatActivity {
                                     for (int i = 0; i < dataArr.length(); i++) {
                                         Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
                                         results.add(header);
-                                        tvNo_doc1.setText(header.getDocNum()+1); }
+                                        String S = "S";
+                                        String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+                                        String docnum = header.getDocNum().substring(9);
+                                        String AN = "" + (Integer.parseInt(docnum)+1);
+                                        Log.e("aaannn", AN);
+                                        String Nol = "";
+//
+//                                        String docnum = header.getDocNum().substring(1);
+//                                        String AN = "" + (Integer.parseInt(docnum)+1);
+//                                        String Nol = "";
+                                        if(AN.length() == 1)
+                                        {Nol = "00";}
+                                        else if(AN.length()==2)
+                                        {Nol = "0";}
+                                        else if(AN.length()==3)
+                                        {Nol = "";}
+
+                                        tvNo_doc1.setText(S+nodoc+Nol+AN);
+
+                                    }
                                 }
                             }
                         }catch (JSONException e) {

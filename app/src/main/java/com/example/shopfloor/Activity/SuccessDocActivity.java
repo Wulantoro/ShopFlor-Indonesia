@@ -239,34 +239,10 @@ public class SuccessDocActivity extends AppCompatActivity {
         });
     }
 
-//    public void setDate(View view) {
-//        showDialog(999);
-//        Toast.makeText(getApplicationContext(), "Pilih tanggal", Toast.LENGTH_SHORT).show();
-//
-//    }
-//
-//    protected Dialog onCreateDialog(int id) {
-//        if (id == 999) {
-//            return new DatePickerDialog(this, myDateListener, year, month, day);
-//
-//        }
-//        return null;
-//    }
-//
-//    private DatePickerDialog.OnDateSetListener myDateListener = new DatePickerDialog.OnDateSetListener() {
-//        @Override
-//        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//            showDate();
-//        }
-//    };
-//
-//    private void showDate(int year, int month, int day) {
-//        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-//        TextView docdate = findViewById(R.id.tvtanggal1success);
-//        docdate.setText(date);
-//        tvtanggal1success.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
+    public void onBackPressed(){
 
-//    }
-
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        startActivity(intent);
+    }
 }
 
