@@ -236,7 +236,12 @@ public class Open_DocActivity extends AppCompatActivity {
 
 
     public void onBackPressed() {
+        pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        String wc = tvworkcenter0.getText().toString();
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("tvworkcenter", wc);
+        editor.commit();
         startActivity(intent);
         finish();
     }

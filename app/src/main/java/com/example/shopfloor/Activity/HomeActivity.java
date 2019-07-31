@@ -40,6 +40,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -67,6 +68,7 @@ public class HomeActivity extends AppCompatActivity {
     public static TextView tvSquence1;
     public static TextView tvSquence_Qty1;
     public static TextView tvNm_prod1;
+    private TextView tvTanggalHome;
 
     private Button btnLogout;
 
@@ -85,6 +87,7 @@ public class HomeActivity extends AppCompatActivity {
         tvusername0 = findViewById(R.id.tvusername0);
         tvdivisi0 = findViewById(R.id.tvdivisi0);
         btnLogout = findViewById(R.id.btnLogout);
+        tvTanggalHome = findViewById(R.id.tvTanggalHome);
 
         final SharedPrefManager sharedPrefManager;
         sharedPrefManager = new SharedPrefManager(this);
@@ -122,15 +125,11 @@ public class HomeActivity extends AppCompatActivity {
         }
         /*******************************************************************/
 
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String getCurentDate = sdf.format(c.getTime());
+        tvTanggalHome.setText(getCurentDate);
 
-                /**********************tampil tanggal****************/
-                dateView1 = findViewById(R.id.tvTanggalHome);
-                calendar = Calendar.getInstance();
-                year = calendar.get(Calendar.YEAR);
-
-                month = calendar.get(Calendar.MONTH);
-                day = calendar.get(Calendar.DAY_OF_MONTH);
-                showDate(year, month + 1, day);
                 /**********end tampil tanggal**************************/
 
         userLogin();
@@ -221,12 +220,33 @@ public class HomeActivity extends AppCompatActivity {
                 btnLogout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
-                        startActivity(new Intent(HomeActivity.this, MainActivity.class)
-                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-                        finish();
+//                        sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
+//                        startActivity(new Intent(HomeActivity.this, MainActivity.class)
+//                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+//                        finish();
+                        showDialog();
                     }
                 });
+            }
+
+            private void showDialog() {
+
+                final SharedPrefManager sharedPrefManager;
+                sharedPrefManager = new SharedPrefManager(this);
+
+                new AlertDialog.Builder(this)
+                        .setTitle("Really Logout?")
+                        .setMessage("Are you sure you want to Logout?")
+                        .setNegativeButton(android.R.string.no, null)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
+                                startActivity(new Intent(HomeActivity.this, MainActivity.class)
+                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                                finish();
+                            }
+                        }).create().show();
             }
 
 
@@ -331,11 +351,6 @@ public class HomeActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-            //tampil tanggal home
-            public void showDate(int year, int month, int day) {
-//                dateView1.setText(new StringBuilder().append(day).append("/").append(month).append("/").append(year));
-            }
-
 
 }
 

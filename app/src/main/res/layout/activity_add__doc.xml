@@ -262,7 +262,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/tvShift"
-            android:text="nama shift"/>
+           />
 
         <TextView
             android:id="@+id/tvstrip"
@@ -277,10 +277,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvSquence_Qty1"
-        android:layout_marginLeft="5dp"
         android:layout_toRightOf="@+id/tvstrip"
         android:layout_marginTop="20dp"
-        android:text="code shft"
         />
 
     <TextView

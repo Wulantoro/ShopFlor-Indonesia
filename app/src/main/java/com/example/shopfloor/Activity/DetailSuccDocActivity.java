@@ -1,5 +1,7 @@
 package com.example.shopfloor.Activity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -48,6 +50,12 @@ public class DetailSuccDocActivity extends AppCompatActivity {
         //setting tablayout
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    public void onBackPressed(){
+
+        Intent intent = new Intent(getApplicationContext(), SuccessDocActivity.class);
+        startActivity(intent);
     }
 
     private void setupViewPager(ViewPager viewPager) {

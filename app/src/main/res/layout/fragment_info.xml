@@ -276,11 +276,30 @@
         android:layout_height="wrap_content"
         android:text="ini shift"
         android:layout_toRightOf="@id/tv_shift"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="40dp"
         android:layout_below="@id/tv_seq_qty1"
         android:paddingTop="15dp"
         android:textStyle="bold"
         />
+        <TextView
+            android:id="@+id/tvstrip1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_seq_qty1"
+            android:paddingTop="15dp"
+            android:layout_toRightOf="@id/tv_shift1"
+            android:text=" - "
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tvnmshift"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvstrip1"
+            android:layout_below="@id/tv_seq_qty1"
+            android:paddingTop="15dp"
+            android:textStyle="bold"
+            android:text="nama shift"
+            />
 
     <TextView
         android:id="@+id/tv_tglMulai"

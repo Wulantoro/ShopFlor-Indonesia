@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="@color/white"
     tools:showIn="@layout/activity_reject">
 
 
@@ -197,6 +198,7 @@
             android:id="@+id/tvdocentry0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="docentryyyyyyyy"/>
         <TextView
             android:id="@+id/tvdocnum1"
@@ -204,6 +206,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvdocentry0"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
             android:text="docnum"/>
         <TextView
             android:id="@+id/tvprodcode0"
@@ -211,6 +214,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvdocnum1"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
             android:text="prodcode"/>
         <TextView
             android:id="@+id/tvprodplanqty0"
@@ -218,6 +222,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvprodcode0"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
             android:text="prodplanqty"/>
         <TextView
             android:id="@+id/tvprodstatus2"
@@ -225,6 +230,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvprodplanqty0"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
             android:text="prod status"/>
         <TextView
             android:id="@+id/tvroutecode2"
@@ -232,6 +238,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvprodstatus2"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
             android:text="route codecode"/>
         <TextView
             android:id="@+id/tvroutename2"
@@ -239,6 +246,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvroutecode2"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
             android:text="routenmae"/>
         <TextView
             android:id="@+id/tvdocdate0"
@@ -246,12 +254,14 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvroutename2"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
             android:text="docdate"/>
         <TextView
             android:id="@+id/tvjammulai2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvdocentry0"
+            android:textColor="@color/white"
             android:text="jam mulai"/>
         <TextView
             android:id="@+id/tvworkcenter6"
@@ -260,6 +270,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvjammulai2"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
             android:text="workcenter"/>
         <TextView
             android:id="@+id/tvstatus0"
@@ -268,6 +279,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvworkcenter6"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
             android:text="status"/>
         <TextView
             android:id="@+id/tvposted7"
@@ -276,6 +288,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvstatus0"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
             android:text="posted"/>
         <TextView
             android:id="@+id/tvusername8"
@@ -284,6 +297,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvposted7"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
             android:text="username"/>
         <TextView
             android:id="@+id/tvqcname4"
@@ -292,6 +306,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvusername8"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
             android:text="qcname"/>
 
         <TextView
@@ -301,6 +316,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvqcname4"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
             />
 
         <TextView
@@ -310,6 +326,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvdocnum5"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
             android:text="shifffff"/>
 
         <TextView
@@ -319,6 +336,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/tvshift4"
+            android:textColor="@color/white"
             android:text="code shift"
             />
     </RelativeLayout>
