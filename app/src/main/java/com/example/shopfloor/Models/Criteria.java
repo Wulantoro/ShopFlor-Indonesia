@@ -26,6 +26,8 @@ public class Criteria implements Parcelable {
     private String U_Standard;
     private Object U_CriteriaName;
     private String U_ValueType;
+    private String actualResult;
+    private int lineNumber;
     public final static Parcelable.Creator<Criteria> CREATOR = new Creator<Criteria>() {
 
 
@@ -63,6 +65,8 @@ public class Criteria implements Parcelable {
         this.U_Standard = ((String) in.readValue((String.class.getClassLoader())));
         this.U_CriteriaName = ((Object) in.readValue((Object.class.getClassLoader())));
         this.U_ValueType = ((String) in.readValue((String.class.getClassLoader())));
+        this.actualResult = ((String) in.readValue((Object.class.getClassLoader())));
+        this.lineNumber = ((int) in.readValue((Object.class.getClassLoader())));
     }
 
     public Criteria() {
@@ -212,6 +216,23 @@ public class Criteria implements Parcelable {
         this.U_ValueType = uValueType;
     }
 
+
+    public String getActualResult() {
+        return actualResult;
+    }
+
+    public void setActualResult(String actualResult) {
+        this.actualResult = actualResult;
+    }
+
+    public int getLineNumber() {
+        return lineNumber;
+    }
+
+    public void setLineNumber(int lineNumber) {
+        this.lineNumber = lineNumber;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(U_sequence);
         dest.writeValue(uQuantity);
@@ -231,6 +252,8 @@ public class Criteria implements Parcelable {
         dest.writeValue(U_Standard);
         dest.writeValue(U_CriteriaName);
         dest.writeValue(U_ValueType);
+        dest.writeValue(actualResult);
+        dest.writeValue(lineNumber);
     }
 
     public int describeContents() {
