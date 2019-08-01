@@ -83,13 +83,6 @@ public class Add_DocActivity extends AppCompatActivity {
     private String docnum="";
     private EditText searchSeq;
     private TextView tvcodeshift;
-    ResultSet rs;
-    Statement st;
-    PreparedStatement pr;
-    String sql;
-    Connection con;
-
-
     private SuccDocAdapter adapter3;
     private ProductorderAdapter adapter2;
     private SequenceAdapter adapter1;
@@ -463,10 +456,7 @@ public class Add_DocActivity extends AppCompatActivity {
                                         String AN = "" + (Integer.parseInt(docnum)+1);
                                         Log.e("aaannn", AN);
                                         String Nol = "";
-//
-//                                        String docnum = header.getDocNum().substring(1);
-//                                        String AN = "" + (Integer.parseInt(docnum)+1);
-//                                        String Nol = "";
+
                                         if(AN.length() == 1)
                                         {Nol = "00";}
                                         else if(AN.length()==2)
@@ -490,14 +480,6 @@ public class Add_DocActivity extends AppCompatActivity {
 
                     }
                 });
-    }
-
-    //showDate
-    public void showdate(int year, int month, int day) {
-//        dateView.setText(new StringBuilder().append(day).append("-").append(month).append("-").append(year));
-
-        //no dokumen
-        tvNo_doc1.setText(new StringBuilder().append("S").append(year).append(month));
     }
 
     /*********************************toolbar************************/

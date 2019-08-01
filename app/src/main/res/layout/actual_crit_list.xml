@@ -2,6 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:clickable="true">
 
@@ -11,6 +12,12 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvlinenumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="linenumber"/>
 
 
         <TextView
@@ -34,12 +41,18 @@
             android:layout_height="wrap_content"
             android:text="Standard "
             android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/tvvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            />
 
         <EditText
             android:id="@+id/etactual1"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:imeOptions="flagNoExtractUi"
+
            android:hint="Actual"/>
     </LinearLayout>
 

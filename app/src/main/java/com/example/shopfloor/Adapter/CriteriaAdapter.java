@@ -10,19 +10,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.shopfloor.Models.Criteria;
 import com.example.shopfloor.Models.Upcriteria;
 import com.example.shopfloor.R;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHolder> {
 
     private Context context;
     private List<Criteria> list_item;
+    int counter;
 
 
 
@@ -55,27 +59,30 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Criteria criteria = list_item.get(holder.getAdapterPosition());
-//        final Upcriteria upcriteria = list_item2.get(holder.getAdapterPosition());
+
+        counter++;
 
         holder.tvcriteria1.setText(criteria.getUCriteria());
         holder.tvcritdesc1.setText(String.valueOf(criteria.getUCriteriaName()));
         holder.tvstandard1.setText(criteria.getUStandard());
-//        holder.etactual1.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                criteria.setActualResult(s.toString());
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
+        holder.tvvalue.setText(criteria.getUValueType());
+        holder.tvlinenumber.setText(String.valueOf(counter));
+        holder.etactual1.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                criteria.setActualResult(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -132,6 +139,8 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
         public TextView tvvaluetype1;
         public TextView tvstandard1;
         public EditText etactual1;
+        public TextView tvvalue;
+        public TextView tvlinenumber;
 
 
 
@@ -141,6 +150,8 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
             tvcritdesc1 = itemView.findViewById(R.id.tvcritdesc1);
             tvstandard1 = itemView.findViewById(R.id.tvstandard1);
             etactual1 = itemView.findViewById(R.id.etactual1);
+            tvvalue = itemView.findViewById(R.id.tvvalue);
+            tvlinenumber = itemView.findViewById(R.id.tvlinenumber);
 
         }
     }
