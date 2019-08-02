@@ -58,7 +58,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
     private TextView tvtglmulai1;
     private TextView tvjammulai1;
     private TextView tvnmprod1;
-    private TextView tvsequence1;
+
     private TextView tvseqqty1;
     private TextView tvOutputQty1;
     private TextView tvWorkcenter;
@@ -79,6 +79,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
     private Criteria criteria;
     private List<Criteria> list;
     private static final String TAG = "MyActivity";
+    private TextView tvsequence1;
 
     /***************criteria********/
     public static TextView tvcriteria1;
@@ -102,7 +103,6 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvtglmulai1 = findViewById(R.id.tvtglmulai1);
         tvjammulai1 = findViewById(R.id.tvjammulai1);
         tvnmprod1 = findViewById(R.id.tvnmprod1);
-        tvsequence1 = findViewById(R.id.tvsequence1);
         tvseqqty1 = findViewById(R.id.tvseqqty1);
         tvOutputQty1 = findViewById(R.id.tvOutputQty1);
         tvWorkcenter = findViewById(R.id.tvWorkcenter);
@@ -115,6 +115,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvdocsts1 = findViewById(R.id.tvdocsts1);
         tvshift2 = findViewById(R.id.tvshift2);
         tvcodeshift3 = findViewById(R.id.tvcodeshift3);
+        tvsequence1 = findViewById(R.id.tvsequence1);
 
         /*************************************************************/
 
@@ -235,11 +236,11 @@ public class CriteriaQCActivity extends AppCompatActivity {
         rv.setLayoutManager(linearLayoutManager);
         rv.setItemAnimator(new DefaultItemAnimator());
         rv.setAdapter(adapter);
-        loadData(tvWorkcenter.getText().toString(), tvsequence1.getText().toString());
+        loadData(tvWorkcenter.getText().toString(), tvnoprod0.getText().toString(), tvsequence1.getText().toString());
         /*******************************************************************/
     }
 
-    private void loadData(String wccode, String sequence) {
+    private void loadData(String wccode, String docnum, String sequence) {
 
         if (adapter != null)
             adapter.clearAll();
@@ -252,13 +253,19 @@ public class CriteriaQCActivity extends AppCompatActivity {
         String.valueOf(prf.getString("tvnoprod", null));
         Log.e("docnum = ", prf.getString("tvnoprod", null));
 
-        Log.e("coba wccode", tvWorkcenter.getText().toString());
-        Log.e("Coba URL", GlobalVars.BASE_IP + "index.php/criteria?docNum=" + prf.getString("tvnoprod", null) + "&wccode=" + wccode + "&U_sequence=" + sequence);
-        Log.e("Coba ", GlobalVars.BASE_IP + "index.php/criteria?wccode={wccode}" + "&docNum={docNum}");
-        Log.e("WHERE ", GlobalVars.BASE_IP + "index.php/criteria?wccode=ASS&docNum=10016649");
-        Log.e("URL ", GlobalVars.BASE_IP + "index.php/criteria?wccode=" + prf.getString("tvworkcenter", null) + "&docNum=" + prf.getString("tvnoprod", null) + "");
+        Log.e("workcenter69 = ", tvWorkcenter.getText().toString());
+        Log.e("Docnum69 = ", tvnoprod0.getText().toString());
+        Log.e("Sequence69", tvsequence1.getText().toString());
+
+//        Log.e("coba wccode", tvWorkcenter.getText().toString());
+//        Log.e("Coba URL", GlobalVars.BASE_IP + "index.php/criteria?docNum=" + prf.getString("tvnoprod", null) + "&wccode=" + wccode + "&U_sequence=" + sequence);
+//        Log.e("Coba ", GlobalVars.BASE_IP + "index.php/criteria?wccode={wccode}" + "&docNum={docNum}");
+//        Log.e("WHERE ", GlobalVars.BASE_IP + "index.php/criteria?wccode=ASS&docNum=10016649");
+//        Log.e("URL ", GlobalVars.BASE_IP + "index.php/criteria?wccode=" + prf.getString("tvworkcenter", null) + "&docNum=" + prf.getString("tvnoprod", null) + "");
+        Log.e("Sequence = " , GlobalVars.BASE_IP + "index.php/criteria?wccode="+wccode + "&docNum="+docnum + "&U_sequence="+sequence+"");
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?wccode="+prf.getString("tvworkcenter", null)+"&docNum="+docnum)
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?docNum=" + prf.getString("tvnoprod", null) + "&wccode=" + wccode + "&U_sequence=" + sequence)
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?docNum=" + prf.getString("tvnoprod", null) + "&wccode=" + wccode + "&U_sequence=" + sequence)
+            AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?wccode="+wccode + "&docNum="+docnum + "&seq="+sequence)
                 .setTag(this)
                 .setPriority(Priority.MEDIUM)
                 .build()

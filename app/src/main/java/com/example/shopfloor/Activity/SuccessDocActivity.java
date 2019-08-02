@@ -48,6 +48,7 @@ public class SuccessDocActivity extends AppCompatActivity {
     private SimpleDateFormat dateFormatter;
     private TextView tvworkcenter4;
     private Button btnPlhtglsuccess;
+    private Button btnSmatglsuccess;
     private TextView tvtanggal1success;
 
     private RecyclerView rv;
@@ -58,6 +59,10 @@ public class SuccessDocActivity extends AppCompatActivity {
     private Context context;
     public SharedPreferences pref, prf;
 
+    public String str ="";
+    Character op = 'q';
+    float i,num,numtemp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +71,7 @@ public class SuccessDocActivity extends AppCompatActivity {
         tvworkcenter4 = findViewById(R.id.tvworkcenter4);
         btnPlhtglsuccess = findViewById(R.id.btnPlhtglsuccess);
         tvtanggal1success = findViewById(R.id.tvtanggal1success);
+        btnSmatglsuccess = findViewById(R.id.btnSmatglsuccess);
 
         TextView tvworlcenter = findViewById(R.id.tvworkcenter4);
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
@@ -243,6 +249,17 @@ public class SuccessDocActivity extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(intent);
+    }
+
+    public void btnclearClicked(View v) {
+        clear();
+    }
+
+    private void clear() {
+        str = "";
+        num = 0;
+        numtemp = 0;
+        tvtanggal1success.setText("");
     }
 }
 

@@ -7,6 +7,7 @@ public class Criteria implements Parcelable {
 
 
 //    private int uSequence;
+    private int seq;
     private int U_sequence;
     private int uQuantity;
     private String itemCode;
@@ -46,6 +47,7 @@ public class Criteria implements Parcelable {
             ;
 
     protected Criteria(Parcel in) {
+        this.seq = ((int) in.readValue((int.class.getClassLoader())));
         this.U_sequence = ((int) in.readValue((int.class.getClassLoader())));
         this.uQuantity = ((int) in.readValue((int.class.getClassLoader())));
         this.itemCode = ((String) in.readValue((String.class.getClassLoader())));
@@ -70,6 +72,14 @@ public class Criteria implements Parcelable {
     }
 
     public Criteria() {
+    }
+
+    public int getSeq() {
+        return seq;
+    }
+
+    public void setSeq(int seq) {
+        this.seq = seq;
     }
 
     public int getUSequence() {
@@ -234,6 +244,7 @@ public class Criteria implements Parcelable {
     }
 
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(seq);
         dest.writeValue(U_sequence);
         dest.writeValue(uQuantity);
         dest.writeValue(itemCode);

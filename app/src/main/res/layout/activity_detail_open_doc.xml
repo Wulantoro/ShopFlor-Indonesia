@@ -89,11 +89,16 @@
         android:layout_marginTop="20dp"
         android:text="ini Produk"
         />
+
+            <LinearLayout
+                android:id="@+id/linenamaprod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvprod">
     <TextView
         android:id="@+id/tvNm_prod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvprod"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:text="Nama Product" />
@@ -107,11 +112,12 @@
         android:layout_marginLeft="40dp"
         android:text="ini nama produksi"
         />
+    </LinearLayout>
     <TextView
         android:id="@+id/tvRoute_Code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvNm_prod"
+        android:layout_below="@+id/linenamaprod"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:text="Route Code" />
@@ -119,7 +125,7 @@
         android:id="@+id/tvRoute_Code1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvNm_prod1"
+        android:layout_below="@+id/linenamaprod"
         android:layout_toRightOf="@+id/tvRoute_Code"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="60dp"
@@ -129,7 +135,7 @@
                 android:id="@+id/tvRoute_Code2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvNm_prod1"
+                android:layout_below="@+id/linenamaprod"
                 android:layout_toRightOf="@+id/tvRoute_Code"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="100dp"

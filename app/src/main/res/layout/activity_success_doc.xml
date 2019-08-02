@@ -54,7 +54,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnSmatglsuccess"
         android:text="SEMUA TANGGAL"
-        android:layout_marginLeft="5dp"/>
+        android:layout_marginLeft="5dp"
+        android:onClick="btnclearClicked"/>
 
     <TextView
         android:id="@+id/tvworkcenter4"
