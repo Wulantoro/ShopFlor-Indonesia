@@ -53,6 +53,10 @@ public class Open_DocActivity extends AppCompatActivity {
     private TextView tvtanggal1;
     private Button btnPlhtgl;
 
+    public String str ="";
+    Character op = 'q';
+    float i,num,numtemp;
+
     private RecyclerView rv;
     private OpenDocAdapter adapter;
     private Gson gson;
@@ -233,8 +237,6 @@ public class Open_DocActivity extends AppCompatActivity {
         });
     }
 
-
-
     public void onBackPressed() {
         pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
@@ -246,6 +248,16 @@ public class Open_DocActivity extends AppCompatActivity {
         finish();
     }
 
+    public void btnclearClicked1(View v) {
+        clear();
+    }
+
+    private void clear() {
+        str = "";
+        num = 0;
+        numtemp = 0;
+        tvtanggal1.setText("");
+    }
 
     }
 
