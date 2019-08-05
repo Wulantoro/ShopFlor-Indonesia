@@ -30,6 +30,7 @@ import com.example.shopfloor.Models.Upcriteria;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -318,7 +319,38 @@ public class CriteriaQCActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.update_header) {
-            SimpanCriteria();
+           
+            String element = gson.toJson(
+
+            adapter.getData(),
+            new TypeToken<ArrayList<Upcriteria>>() {}.getType());
+
+            try {
+                JSONArray array = new JSONArray(element);
+                Log.e("arrraaayyyy = ", array.toString(1));
+
+                JSONArray newArr = new JSONArray();
+
+                for (int i = 0; i < array.length(); i++) {
+                    Criteria criteria = gson.fromJson(array.getJSONObject(i).toString(), Criteria.class);
+
+                    JSONObject object = new JSONObject();
+                    object.put("docEntry", tvdocentry3.getText().toString());
+                    object.put("criteria", criteria.getUCriteria());
+                    object.put("criteriaDesc", criteria.getUCriteriaName());
+                    object.put("standard", criteria.getUStandard());
+                    object.put("lineNumber", i+1);
+                    object.put("actualResult", criteria.getActualResult());
+                    object.put("valueType", criteria.getUValueType());
+
+                    newArr.put(object);
+
+                }
+                Log.e("coba input = ", newArr.toString(1));
+                SimpanCriteria(newArr);
+            }catch (JSONException e) {
+                e.printStackTrace();
+            }
 
             pref = getSharedPreferences("Docentry", MODE_PRIVATE);
             String tvdocentry = tvdocentry3.getText().toString();
@@ -455,7 +487,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
 
 
     //actual result belum bisa
-    public void SimpanCriteria() {
+    public void SimpanCriteria(JSONArray jsonArray) {
 
         List<Criteria> data = adapter.getData();
         EditText etactual1;
@@ -463,30 +495,27 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvlinenumber = findViewById(R.id.tvlinenumber);
         etactual1 = findViewById(R.id.etactual1);
 
-//        if (adapter != null)
-//            adapter.clearAll();
-
-        if (data != null) {
-            for (Criteria x : data) {
-                Log.e(TAG, "respone: " + x.getUCriteria() + " " + x.getUCriteriaName() + " " + x.getUStandard() + " " + x.getUValueType() + " " + x.getActualResult());
-                if (x.getActualResult() != null) {
-                    JSONObject jsonObject = new JSONObject();
-                    try {
-                        jsonObject.put("docEntry", tvdocentry3.getText().toString());
-                        jsonObject.put("criteria", x.getUCriteria());
-                        jsonObject.put("criteriaDesc", x.getUCriteriaName().toString());
-                        jsonObject.put("standard", x.getUStandard());
-                        jsonObject.put("lineNumber", tvlinenumber.getText());
-                        jsonObject.put("actualResult", etactual1.getText());
-                        jsonObject.put("valueType", x.getUValueType());
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+//        if (data != null) {
+//            for (Criteria x : data) {
+//                Log.e(TAG, "respone: " + x.getUCriteria() + " " + x.getUCriteriaName() + " " + x.getUStandard() + " " + x.getUValueType() + " " + x.getActualResult());
+//                if (x.getActualResult() != null) {
+//                    JSONObject jsonObject = new JSONObject();
+//                    try {
+//                        jsonObject.put("docEntry", tvdocentry3.getText().toString());
+//                        jsonObject.put("criteria", x.getUCriteria());
+//                        jsonObject.put("criteriaDesc", x.getUCriteriaName().toString());
+//                        jsonObject.put("standard", x.getUStandard());
+//                        jsonObject.put("lineNumber", tvlinenumber.getText());
+//                        jsonObject.put("actualResult", etactual1.getText());
+//                        jsonObject.put("valueType", x.getUValueType());
+//
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
 
 
                     AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/upcriteria")
-                            .addJSONObjectBody(jsonObject)
+                            .addJSONArrayBody(jsonArray)
                             .setPriority(Priority.MEDIUM)
                             .build()
                             .getAsJSONObject(new JSONObjectRequestListener() {
@@ -510,8 +539,5 @@ public class CriteriaQCActivity extends AppCompatActivity {
                 }
             }
 
-        }
-    }
-}
 
 
