@@ -61,12 +61,13 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
         final Criteria criteria = list_item.get(holder.getAdapterPosition());
 
         counter++;
+        criteria.setLineNumber(counter);
 
         holder.tvcriteria1.setText(criteria.getUCriteria());
         holder.tvcritdesc1.setText(String.valueOf(criteria.getUCriteriaName()));
         holder.tvstandard1.setText(criteria.getUStandard());
         holder.tvvalue.setText(criteria.getUValueType());
-        holder.tvlinenumber.setText(String.valueOf(counter));
+        holder.tvlinenumber.setText(position+1+"");
         holder.etactual1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
