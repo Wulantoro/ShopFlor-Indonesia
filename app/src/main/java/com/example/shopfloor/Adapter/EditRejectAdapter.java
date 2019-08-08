@@ -8,35 +8,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.shopfloor.Activity.RejectActivity;
-import com.example.shopfloor.Activity.RespRejectFragActivity;
-//import com.example.shopfloor.Fragment.RejectListFragment;
+import com.example.shopfloor.Activity.EditRejectActivity;
 import com.example.shopfloor.Models.Reject;
-import com.example.shopfloor.Models.Sequence;
 import com.example.shopfloor.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RejectAdapter extends RecyclerView.Adapter<RejectAdapter.ViewHolder> {
+public class EditRejectAdapter extends RecyclerView.Adapter<EditRejectAdapter.ViewHolder> {
 
     private Context context;
     private List<Reject> list_item;
 
-    public RejectAdapter(List<Reject> list, Context context) {
+    public EditRejectAdapter(List<Reject> list, Context context) {
         this.context = context;
         list_item = list;
     }
 
-    public RejectAdapter(Context context) {
+    public EditRejectAdapter(Context context) {
         this.context = context;
         list_item = new ArrayList<>();
     }
+
     @NonNull
     @Override
-    public RejectAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public EditRejectAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.reject_row_item, parent, false);
-        final RejectAdapter.ViewHolder holder = new RejectAdapter.ViewHolder(v);
+        final EditRejectAdapter.ViewHolder holder = new EditRejectAdapter.ViewHolder(v);
         return holder;
     }
 
@@ -92,7 +90,7 @@ public class RejectAdapter extends RecyclerView.Adapter<RejectAdapter.ViewHolder
 
     private Reject getItem(int position) {
         if (list_item != null) {
-            return list_item.get(position);
+            return  list_item.get(position);
         }
         return null;
     }
@@ -101,25 +99,26 @@ public class RejectAdapter extends RecyclerView.Adapter<RejectAdapter.ViewHolder
         return list_item;
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
         public TextView tvCodeR;
         public TextView tvNameR;
-        public TextView tvcodereject0;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvCodeR = itemView.findViewById(R.id.tvCodeR);
             tvNameR = itemView.findViewById(R.id.tvNameR);
-            tvcodereject0 = itemView.findViewById(R.id.tvcodereject0);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    RespRejectFragActivity.tvReject3.setText(list_item.get(getAdapterPosition()).getName());
-                    RespRejectFragActivity.tvcodereject0.setText(list_item.get(getAdapterPosition()).getCode());
-                    RespRejectFragActivity.dialog.dismiss();
+                    EditRejectActivity.tvReject3.setText(list_item.get(getAdapterPosition()).getName());
+                    EditRejectActivity.tvcodereject0.setText(list_item.get(getAdapterPosition()).getCode());
+                    EditRejectActivity.dialog.dismiss();
+
                 }
             });
         }
     }
+
 }

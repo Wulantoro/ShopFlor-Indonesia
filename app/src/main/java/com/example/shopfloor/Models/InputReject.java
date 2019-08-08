@@ -14,6 +14,7 @@ public class InputReject implements Parcelable
     private String rejectCode;
     private String rejectName;
     private String rejectQty;
+    
     public final static Parcelable.Creator<InputReject> CREATOR = new Creator<InputReject>() {
 
 

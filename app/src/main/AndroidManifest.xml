@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.DetailSuccDocActivity"></activity>
+        <activity android:name=".Activity.EditRejectActivity"></activity>
+        <activity android:name=".Activity.DetailSuccDocActivity" />
         <activity android:name=".Activity.CriteriaQCActivity" />
         <activity android:name=".Activity.OutQtyDetActivity" />
         <activity android:name=".Activity.RejectListActivity" />
@@ -48,8 +49,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".Activity.Add_DocActivity"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".Activity.StartDocActivity"
             android:screenOrientation="landscape" />

@@ -344,7 +344,6 @@ public class CriteriaQCActivity extends AppCompatActivity {
                     object.put("valueType", criteria.getUValueType());
 
                     newArr.put(object);
-
                 }
                 Log.e("coba input = ", newArr.toString(1));
                 SimpanCriteria(newArr);
@@ -485,8 +484,6 @@ public class CriteriaQCActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-    //actual result belum bisa
     public void SimpanCriteria(JSONArray jsonArray) {
 
         List<Criteria> data = adapter.getData();
