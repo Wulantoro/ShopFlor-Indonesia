@@ -96,22 +96,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-//    public void onBackPressed() {
-//        new AlertDialog.Builder(this)
-//                .setTitle("Really Exit?")
-//                .setMessage("Are you sure you want to exit?")
-//                .setNegativeButton(android.R.string.no, null)
-//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//
-//                    public void onClick(DialogInterface arg0, int arg1) {
-//                        Intent a = new Intent(Intent.ACTION_MAIN);
-//            a.addCategory(Intent.CATEGORY_HOME);
-//            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            startActivity(a);
-//                    }
-//                }).create().show();
-//    }
-
     private void checkLogin(final String username, final String password) {
 
         final SharedPrefManager sharedPrefManager;
@@ -174,45 +158,6 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    /*private void userLogin() {
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/loginuser")
-//                U_STEM_Username="+prf.getString("etusername", null))
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            Log.e("tampil user", response.toString(1));
-                            String message = response.getString("message");
-
-                            if (message.equals("User ketemu")) {
-                                String records = response.getString("data");
-                                JSONArray dataArr = new JSONArray(records);
-
-
-                                if (dataArr.length() > 0) {
-                                    for (int i = 0; i < dataArr.length(); i++) {
-
-                                        Gson gson = new Gson();
-                                        User user = gson.fromJson(dataArr.getJSONObject(0).toString(), User.class);
-                                        TextView tvdept = findViewById(R.id.tvdivisi0);
-                                        tvdept.setText(user.getDept());
-                                    }
-                                }
-                            }
-                        }catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-
-                    }
-                });
-
-    }*/
     private void showDialog() {
         if (!pDialog.isShowing())
             pDialog.isShowing();

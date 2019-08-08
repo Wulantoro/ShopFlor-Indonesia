@@ -44,6 +44,14 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="nama reject"/>
+
+        <TextView
+            android:id="@+id/tvid0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvcodereject1"
+            android:layout_toRightOf="@id/tvnamareject"
+            android:layout_marginLeft="20dp"/>
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

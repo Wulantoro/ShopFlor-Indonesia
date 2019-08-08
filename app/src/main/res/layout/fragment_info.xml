@@ -78,7 +78,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/line5"
         android:layout_marginLeft="5dp"
-        android:layout_weight="8">
+        android:layout_weight="10">
 
         <TextView
             android:id="@+id/tv_prodFrag"
@@ -96,11 +96,15 @@
             android:text="ini produk"
             android:textStyle="bold" />
 
+        <RelativeLayout
+            android:id="@+id/relnamaprod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_prodFrag">
         <TextView
             android:id="@+id/tv_nmProd_frag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_prodFrag"
             android:paddingTop="15dp"
             android:text="Nama Produk" />
 
@@ -108,17 +112,18 @@
             android:id="@+id/tv_nmProd_frag1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_prodFrag1"
             android:paddingLeft="130dp"
             android:paddingTop="15dp"
             android:text="nama produk"
             android:textStyle="bold" />
 
+        </RelativeLayout>
+
         <TextView
             android:id="@+id/tv_qty_rencana"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_nmProd_frag"
+            android:layout_below="@id/relnamaprod"
             android:paddingTop="15dp"
             android:text="Qty Rencana Prod" />
 
@@ -126,7 +131,7 @@
             android:id="@+id/tv_qty_rencana1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_nmProd_frag1"
+            android:layout_below="@id/relnamaprod"
             android:paddingLeft="130dp"
             android:paddingTop="15dp"
             android:text="ini qty renc prod"

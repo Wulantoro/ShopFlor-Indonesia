@@ -450,21 +450,29 @@ public class Add_DocActivity extends AppCompatActivity {
                                     for (int i = 0; i < dataArr.length(); i++) {
                                         Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
                                         results.add(header);
-                                        String S = "S";
-                                        String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-                                        String docnum = header.getDocNum().substring(9);
-                                        String AN = "" + (Integer.parseInt(docnum)+1);
-                                        Log.e("aaannn", AN);
-                                        String Nol = "";
+                                        if (header.getDocNum().equals("")) {
+                                            String S = "S";
+                                            String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+                                            String Nol = "001";
+                                            tvNo_doc1.setText(S+nodoc+Nol);
+                                        } else {
+                                            String S = "S";
+                                            String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+                                            String docnum = header.getDocNum().substring(9);
+                                            String AN = "" + (Integer.parseInt(docnum) + 1);
+                                            Log.e("aaannn", AN);
+                                            String Nol = "";
 
-                                        if(AN.length() == 1)
-                                        {Nol = "00";}
-                                        else if(AN.length()==2)
-                                        {Nol = "0";}
-                                        else if(AN.length()==3)
-                                        {Nol = "";}
+                                            if (AN.length() == 1) {
+                                                Nol = "00";
+                                            } else if (AN.length() == 2) {
+                                                Nol = "0";
+                                            } else if (AN.length() == 3) {
+                                                Nol = "";
+                                            }
 
-                                        tvNo_doc1.setText(S+nodoc+Nol+AN);
+                                            tvNo_doc1.setText(S + nodoc + Nol + AN);
+                                        }
 
                                     }
                                 }
