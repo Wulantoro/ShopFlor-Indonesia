@@ -7,13 +7,28 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.OpenDocAdapter;
+import com.example.shopfloor.Adapter.WorkcenterAdapter;
 import com.example.shopfloor.Models.Header;
+import com.example.shopfloor.Models.Workcenter;
 import com.example.shopfloor.R;
+import com.example.shopfloor.Utils.GlobalVars;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DetailOpenDocActivity extends AppCompatActivity {
     private TabLayout tabLayout;
@@ -42,6 +57,9 @@ public class DetailOpenDocActivity extends AppCompatActivity {
     private TextView tvcodeshift1;
     private OpenDocAdapter adapter;
     private Header header;
+    private Gson gson;
+    private WorkcenterAdapter workcenterAdapter;
+    private TextView tvnamawc3;
 
     public SharedPreferences pref;
     SharedPreferences prf;
@@ -72,8 +90,11 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvqcname1 = findViewById(R.id.tvqcname1);
         tvusername5 = findViewById(R.id.tvusername5);
         tvcodeshift1 = findViewById(R.id.tvcodeshift1);
+        tvnamawc3 = findViewById(R.id.tvnamawc3);
 
         adapter = new OpenDocAdapter(this);
+        gson = new Gson();
+        workcenterAdapter = new WorkcenterAdapter(this);
 
         //key dari opendocadapter
         header = getIntent().getParcelableExtra("key_opendoc");
@@ -108,6 +129,8 @@ public class DetailOpenDocActivity extends AppCompatActivity {
 //        setTitle(null);
         Toolbar topToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(topToolbar);
+
+        loadData(tvworkcenter3.getText().toString());
 
 
       /* tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -263,8 +286,55 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         editor20.putString("tvcodeshift", tvcodesh);
         editor20.commit();
 
+        pref = getSharedPreferences("Namawc", MODE_PRIVATE);
+        String tvnamawc = tvnamawc3.getText().toString();
+        SharedPreferences.Editor editor21 = pref.edit();
+        editor21.putString("tvnamawc", tvnamawc);
+        editor21.commit();
+
         startActivity(new Intent(getApplicationContext(), OutQtyDetActivity.class));
         return true;
+    }
+
+    private void loadData(String codewc) {
+
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/Namawc?code="+codewc)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        List<Workcenter> result = new ArrayList<>();
+
+                        try {
+                            Log.e(" namaworkcenter = ",  response.toString(1));
+
+                            String message = response.getString("message");
+
+                            if (message.equals("namawc ketemu")) {
+                                String records = response.getString("data");
+
+                                JSONArray dataArr = new JSONArray(records);
+
+                                if (dataArr.length() > 0) {
+                                    for (int i = 0; i < dataArr.length(); i++) {
+                                       Workcenter workcenter =  gson.fromJson(dataArr.getJSONObject(i).toString(), Workcenter.class);
+                                       result.add(workcenter);
+
+                                        tvnamawc3.setText(workcenter.getName());
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
+
     }
 
 

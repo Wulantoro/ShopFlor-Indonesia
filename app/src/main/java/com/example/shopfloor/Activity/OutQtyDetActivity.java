@@ -45,6 +45,7 @@ public class OutQtyDetActivity extends AppCompatActivity {
     private TextView tvusername6;
     private TextView tvshift1;
     private TextView tvcodeshift2;
+    private TextView tvnamawc4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,7 @@ public class OutQtyDetActivity extends AppCompatActivity {
         tvusername6 = findViewById(R.id.tvusername6);
         tvshift1 = findViewById(R.id.tvshift1);
         tvcodeshift2 = findViewById(R.id.tvcodeshift2);
+        tvnamawc4 = findViewById(R.id.tvnamawc4);
 
         TextView tvdocnum6 = findViewById(R.id.tvdocnum6);
         prf = getSharedPreferences("docNum", MODE_PRIVATE);
@@ -164,6 +166,10 @@ public class OutQtyDetActivity extends AppCompatActivity {
         TextView tvcodesh = findViewById(R.id.tvcodeshift2);
         prf = getSharedPreferences("Codeshift", MODE_PRIVATE);
         tvcodesh.setText(prf.getString("tvcodeshift", null));
+
+        TextView tvnamawc = findViewById(R.id.tvnamawc4);
+        prf = getSharedPreferences("Namawc", MODE_PRIVATE);
+        tvnamawc.setText(prf.getString("tvnamawc", null));
 
     }
 
@@ -283,6 +289,12 @@ public class OutQtyDetActivity extends AppCompatActivity {
             SharedPreferences.Editor editor17 = pref.edit();
             editor17.putString("tvcodeshift", tvcodesh);
             editor17.commit();
+
+            pref = getSharedPreferences("Namawc", MODE_PRIVATE);
+            String tvnamawc = tvnamawc4.getText().toString();
+            SharedPreferences.Editor editor18 = pref.edit();
+            editor18.putString("tvnamawc", tvnamawc);
+            editor18.commit();
 
 
 

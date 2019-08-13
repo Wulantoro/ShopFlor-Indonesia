@@ -52,6 +52,7 @@ public class Open_DocActivity extends AppCompatActivity {
     private TextView tvqcname0;
     private TextView tvtanggal1;
     private Button btnPlhtgl;
+    private TextView tvnamawc0;
 
     public String str ="";
     Character op = 'q';
@@ -75,15 +76,22 @@ public class Open_DocActivity extends AppCompatActivity {
         tvqcname0 = findViewById(R.id.tvqcname0);
         btnPlhtgl = findViewById(R.id.btnPlhtgl);
         tvtanggal1 = findViewById(R.id.tvtanggal1);
+        tvnamawc0 = findViewById(R.id.tvnamawc0);
 
         TextView tvqcname = findViewById(R.id.tvqcname0);
         prf = getSharedPreferences("Qcname", MODE_PRIVATE);
         tvqcname.setText(prf.getString("tvqcname", null));
 
+        TextView tvnamawc = findViewById(R.id.tvnamawc0);
+        prf = getSharedPreferences("keynamawc", MODE_PRIVATE);
+        tvnamawc.setText(prf.getString("keynamawc1", null));
+
+
+
+        /************workcenter harus selalu berada di bawah biar tetap di baca*****************************/
         TextView tvworkcenter = findViewById(R.id.tvworkcenter0);
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
         tvworkcenter.setText(prf.getString("workcenter", null));
-
         /******************************************************/
         dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
@@ -238,12 +246,21 @@ public class Open_DocActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+
         String wc = tvworkcenter0.getText().toString();
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("tvworkcenter", wc);
         editor.commit();
+
+        pref = getSharedPreferences("Namewc", MODE_PRIVATE);
+        String tvnamewc = tvnamawc0.getText().toString();
+        SharedPreferences.Editor editor1 = pref.edit();
+        editor1.putString("tvnamewc", tvnamewc);
+        editor1.commit();
+
         startActivity(intent);
         finish();
     }

@@ -23,8 +23,10 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.InputRejectAdapter;
 
+import com.example.shopfloor.Adapter.OpenDocAdapter;
 import com.example.shopfloor.Models.InputReject;
 import com.example.shopfloor.Models.Productorder;
+import com.example.shopfloor.Models.SincHeader;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
 import com.google.gson.Gson;
@@ -63,10 +65,16 @@ public class RejectActivity extends AppCompatActivity {
     private TextView tvqcname4;
     private TextView tvshift4;
     private TextView tvcodeshift4;
+    private TextView tvtglmulai2;
+
+    private TextView tvdocentry7;
+    private TextView tvdocnum2;
     private Gson gson;
     private InputRejectAdapter adapter;
+    private OpenDocAdapter openDocAdapter;
     private List<InputReject> list;
     private RecyclerView rv;
+    private TextView tvnamawc6;
 
 
 
@@ -105,6 +113,12 @@ public class RejectActivity extends AppCompatActivity {
         tvqcname4 = findViewById(R.id.tvqcname4);
         tvshift4 = findViewById(R.id.tvshift4);
         tvcodeshift4 = findViewById(R.id.tvcodeshift4);
+//        tvtglmulai2 = findViewById(R.id.tvtglmulai2);
+        tvdocnum2 = findViewById(R.id.tvdocnum2);
+        tvdocentry7 = findViewById(R.id.tvdocentry7);
+        tvnamawc6 = findViewById(R.id.tvnamawc6);
+
+        openDocAdapter = new OpenDocAdapter(this);
 
         TextView tvdocnum = findViewById(R.id.tvdocnum1);
         prf = getSharedPreferences("Docnum", MODE_PRIVATE);
@@ -221,6 +235,10 @@ public class RejectActivity extends AppCompatActivity {
        prf = getSharedPreferences("Codeshift", MODE_PRIVATE);
        tvcodesh.setText(prf.getString("tvcodeshift", null));
 
+       TextView tvnamawc = findViewById(R.id.tvnamawc6);
+       prf = getSharedPreferences("Namawc", MODE_PRIVATE);
+       tvnamawc.setText(prf.getString("tvnamawc", null));
+
         TextView tvstatus = findViewById(R.id.tvstatus0);
         tvstatus.setText("Completed");
 
@@ -229,6 +247,8 @@ public class RejectActivity extends AppCompatActivity {
 
         TextView tvposted1 = findViewById(R.id.tvposted7);
         tvposted1.setText("1");
+
+        loadPRDSPECH();
 
        btnFrag = findViewById(R.id.btnFrag);
        btnFrag.setOnClickListener(new View.OnClickListener() {
@@ -370,7 +390,8 @@ public class RejectActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.update_header) {
-            editHeader();
+//            editHeader();
+            sincHeader();
             startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
         }
         return super.onOptionsItemSelected(item);
@@ -380,5 +401,106 @@ public class RejectActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), Open_DocActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void loadPRDSPECH() {
+
+        AndroidNetworking.get(GlobalVars.BASE_IP +"index.php/sincheader")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        List<SincHeader> result = new ArrayList<>();
+                        try {
+                            String message = response.getString("message");
+                            if (message.equals("SincHeader where found")) {
+                                String records = response.getString("data");
+
+                                JSONArray dataArr = new JSONArray(records);
+
+                                if (dataArr.length() > 0) {
+                                    for (int i = 0; i < dataArr.length(); i++) {
+                                        SincHeader sincHeader = gson.fromJson(dataArr.getJSONObject(i).toString(), SincHeader.class);
+                                        result.add(sincHeader);
+                                        tvdocentry7.setText(String.valueOf(sincHeader.getDocEntry()+1));
+                                        tvdocnum2.setText(String.valueOf(sincHeader.getDocNum()+1));
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
+    }
+
+    public void sincHeader() {
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            JSONArray newArr = new JSONArray();
+            jsonObject.put("DocNum", tvdocnum2.getText().toString());
+            jsonObject.put("DocEntry", tvdocentry7.getText().toString());
+            jsonObject.put("CreateDate", tvdocdate0.getText().toString());
+            jsonObject.put("U_DocDate", tvdocdate0.getText().toString());
+            jsonObject.put("U_PD_No", tvnoprod1.getText().toString());
+            jsonObject.put("U_Sequence", tvsequence1.getText().toString());
+            jsonObject.put("U_Product", tvprodcode0.getText().toString());
+            jsonObject.put("U_ProductDesc", tvnmprod1.getText().toString());
+            jsonObject.put("U_PlannedQty", tvprodplanqty0.getText().toString());
+            jsonObject.put("U_SequenceQty", tvseqqty1.getText().toString());
+            jsonObject.put("U_WCCode", tvworkcenter6.getText().toString());
+            jsonObject.put("U_InputQty", tvInputQty1.getText().toString());
+            jsonObject.put("U_OutputQty", tvOutputQty1.getText().toString());
+            jsonObject.put("U_Shift", tvcodeshift4.getText().toString());
+            jsonObject.put("U_WCDesc", tvnamawc6.getText().toString());
+            jsonObject.put("U_PD_Status", tvprodstatus2.getText().toString());
+            jsonObject.put("U_RouteCode", tvroutecode2.getText().toString());
+            jsonObject.put("U_RouteDesc", tvroutename2.getText().toString());
+            jsonObject.put("U_ShiftDesc", tvshift4.getText().toString());
+            jsonObject.put("U_TglMulai", tvdocdate0.getText().toString());
+            jsonObject.put("U_TglSelesai", tvtglsel1.getText().toString());
+//            jsonObject.put("U_JamMulai", tvjammulai2.getText().toString());
+//            jsonObject.put("U_JamSelesai", tvjamsel1.getText().toString());
+            jsonObject.put("U_Operator", tvusername8.getText().toString());
+
+            newArr.put(jsonObject);
+            Log.e("coba input put put = ", newArr.toString(1));
+
+//            jsonObject.put("U_PD_Status", )
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/sincheader")
+                .addJSONObjectBody(jsonObject)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+                            String message = response.getString("message");
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "JSONExceptions"+ e, Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Toast.makeText(getApplicationContext(), "Gagal synchron data", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
     }
 }

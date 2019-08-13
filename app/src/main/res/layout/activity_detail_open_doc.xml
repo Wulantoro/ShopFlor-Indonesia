@@ -350,6 +350,13 @@
                 android:layout_below="@id/tvJam_mulai1"
                 android:textColor="@color/white"
                 android:text="ini workcenter"/>
+            <TextView
+                android:id="@+id/tvnamawc3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvJam_mulai1"
+                android:layout_toRightOf="@id/tvworkcenter3"
+                android:text="namawc"/>
 
 
     <!--<android.support.design.widget.AppBarLayout

@@ -51,6 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvcodereject1"
             android:layout_toRightOf="@id/tvnamareject"
+            android:textColor="@color/white"
             android:layout_marginLeft="20dp"/>
     </RelativeLayout>
 

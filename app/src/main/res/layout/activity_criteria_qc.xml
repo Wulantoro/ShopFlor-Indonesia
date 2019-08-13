@@ -344,6 +344,14 @@
                 android:layout_toRightOf="@id/tvshift2"
                 android:textColor="@color/white"
                 android:text="codeshift"/>
+            <TextView
+                android:id="@+id/tvnamawc5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_below="@id/tvCrit"
+                android:layout_toRightOf="@id/tvcodeshift3"
+                android:text="namawc"/>
         </RelativeLayout>
 
             <TableLayout

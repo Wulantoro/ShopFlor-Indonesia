@@ -20,6 +20,7 @@ public class StartDocActivity extends AppCompatActivity {
     private Button btnAdd_doc, btscan;
     private TextView tvwc2;
     private TextView tvusername1;
+    private TextView tvnamawc1;
     public SharedPreferences pref, prf;
 
     private Camera mCamera;
@@ -38,7 +39,11 @@ public class StartDocActivity extends AppCompatActivity {
         tvwc2 = findViewById(R.id.tvwc2);
         tvusername1 = findViewById(R.id.tvusername1);
         btscan = findViewById(R.id.btscan);
+        tvnamawc1 = findViewById(R.id.tvnamawc1);
 
+        TextView tvwcname = findViewById(R.id.tvnamawc1);
+        prf = getSharedPreferences("Namewc", MODE_PRIVATE);
+        tvwcname.setText(prf.getString("tvnamewc", null));
 
        TextView tvwc = findViewById(R.id.tvwc2);
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
@@ -72,6 +77,12 @@ public class StartDocActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor1 = pref.edit();
                 editor1.putString("tvuserid", tvuserid);
                 editor1.commit();
+
+                pref = getSharedPreferences("Namewc", MODE_PRIVATE);
+                String tvwcname = tvnamawc1.getText().toString();
+                SharedPreferences.Editor editor2 = pref.edit();
+                editor2.putString("tvnamewc", tvwcname);
+                editor2.commit();
                 startActivity(iAdd_doc);
             }
         });

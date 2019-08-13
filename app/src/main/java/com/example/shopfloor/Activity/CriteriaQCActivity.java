@@ -81,6 +81,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
     private List<Criteria> list;
     private static final String TAG = "MyActivity";
     private TextView tvsequence1;
+    private TextView tvnamawc5;
 
     /***************criteria********/
     public static TextView tvcriteria1;
@@ -117,6 +118,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvshift2 = findViewById(R.id.tvshift2);
         tvcodeshift3 = findViewById(R.id.tvcodeshift3);
         tvsequence1 = findViewById(R.id.tvsequence1);
+        tvnamawc5 = findViewById(R.id.tvnamawc5);
 
         /*************************************************************/
 
@@ -205,6 +207,10 @@ public class CriteriaQCActivity extends AppCompatActivity {
         TextView tvcodesh = findViewById(R.id.tvcodeshift3);
         prf = getSharedPreferences("Codeshift", MODE_PRIVATE);
         tvcodesh.setText(prf.getString("tvcodeshift", null));
+
+        TextView tvnamawc = findViewById(R.id.tvnamawc5);
+        prf = getSharedPreferences("Namawc", MODE_PRIVATE);
+        tvnamawc.setText(prf.getString("tvnamawc", null));
 
         TextView tvstatus = findViewById(R.id.tvstatus2);
         tvstatus.setText("Completed");
@@ -346,7 +352,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
                     newArr.put(object);
                 }
                 Log.e("coba input = ", newArr.toString(1));
-                SimpanCriteria(newArr);
+//                SimpanCriteria(newArr);
             }catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -476,6 +482,12 @@ public class CriteriaQCActivity extends AppCompatActivity {
             SharedPreferences.Editor editor20 = pref.edit();
             editor20.putString("tvcodeshift", tvcodesh);
             editor20.commit();
+
+            pref = getSharedPreferences("Namawc", MODE_PRIVATE);
+            String tvnamawc = tvnamawc5.getText().toString();
+            SharedPreferences.Editor editor21 = pref.edit();
+            editor21.putString("tvnamawc", tvnamawc);
+            editor21.commit();
 
 //            Intent intent = new Intent(getApplicationContext(), RejectActivity.class);
             startActivity(new Intent(getApplicationContext(), RejectActivity.class));
