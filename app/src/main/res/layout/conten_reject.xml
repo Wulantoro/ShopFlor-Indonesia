@@ -339,6 +339,35 @@
             android:textColor="@color/white"
             android:text="code shift"
             />
+
+        <TextView
+            android:id="@+id/tvdocentry7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvdocentry0"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/tvcodeshift4"
+            android:text="docentry++"/>
+
+        <TextView
+            android:id="@+id/tvdocnum2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_below="@id/tvdocentry0"
+            android:layout_toRightOf="@id/tvdocentry7"
+            android:textColor="@color/white"
+            android:text="docnum++"/>
+
+        <TextView
+            android:id="@+id/tvnamawc6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_below="@id/tvdocentry0"
+            android:layout_toRightOf="@id/tvdocnum2"
+            android:text="namawc"/>
     </RelativeLayout>
 
         <Button

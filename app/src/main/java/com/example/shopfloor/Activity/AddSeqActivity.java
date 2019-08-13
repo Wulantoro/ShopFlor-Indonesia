@@ -24,6 +24,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -215,6 +216,7 @@ public class AddSeqActivity extends AppCompatActivity {
         JSONObject jsonObject = new JSONObject();
 
         try {
+            JSONArray newArr = new JSONArray();
             jsonObject.put("docNum", tvdocnum7.getText().toString());
             jsonObject.put("prodNo", tvprod7.getText().toString());
             jsonObject.put("prodCode", tvprodcode7.getText().toString());
@@ -237,6 +239,8 @@ public class AddSeqActivity extends AppCompatActivity {
             jsonObject.put("userId", tvusername3.getText().toString());
 
             Log.e("Username 1===========" ,tvusername3.getText().toString());
+            newArr.put(jsonObject);
+            Log.e("coba input = ", newArr.toString(1));
 
         } catch (JSONException e) {
             e.printStackTrace();

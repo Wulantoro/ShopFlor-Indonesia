@@ -54,6 +54,7 @@
         android:layout_marginLeft="3dp"
         android:layout_toRightOf="@id/tvusername0"
         android:layout_marginTop="10dp"
+        android:textColor="@color/white"
         android:text="ini divisi"/>
 
     <TextView
@@ -71,6 +72,14 @@
         android:layout_below="@id/tvUser"
         android:text=""
         android:layout_marginLeft="110dp"/>
+
+        <TextView
+            android:id="@+id/tvnamawc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvUser"
+            android:layout_toRightOf="@id/tvWC"
+            android:layout_marginLeft="115dp"/>
 
     <TextView
         android:id="@+id/tvTanggalHome"

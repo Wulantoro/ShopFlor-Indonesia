@@ -87,6 +87,7 @@ public class Add_DocActivity extends AppCompatActivity {
     private ProductorderAdapter adapter2;
     private SequenceAdapter adapter1;
     private List<Productorder> list;
+    private TextView tvnamawc2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +123,7 @@ public class Add_DocActivity extends AppCompatActivity {
         tvwc1 = findViewById(R.id.tvwc1);
         tvusername2 = findViewById(R.id.tvusername2);
         tvcodeshift = findViewById(R.id.tvcodeshift);
+        tvnamawc2 = findViewById(R.id.tvnamawc2);
 
 
         tvSquence1 = findViewById(R.id.tvSquence1);
@@ -137,6 +139,10 @@ public class Add_DocActivity extends AppCompatActivity {
         TextView tvuserid = findViewById(R.id.tvusername2);
         prf = getSharedPreferences("userId", MODE_PRIVATE);
         tvuserid.setText(prf.getString("tvuserid", null));
+
+        TextView tvnamawc = findViewById(R.id.tvnamawc2);
+        prf = getSharedPreferences("Namewc", MODE_PRIVATE);
+        tvnamawc.setText(prf.getString("tvnamewc", null));
 
 //        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
@@ -450,12 +456,7 @@ public class Add_DocActivity extends AppCompatActivity {
                                     for (int i = 0; i < dataArr.length(); i++) {
                                         Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
                                         results.add(header);
-                                        if (header.getDocNum().equals("")) {
-                                            String S = "S";
-                                            String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-                                            String Nol = "001";
-                                            tvNo_doc1.setText(S+nodoc+Nol);
-                                        } else {
+
                                             String S = "S";
                                             String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
                                             String docnum = header.getDocNum().substring(9);
@@ -472,7 +473,7 @@ public class Add_DocActivity extends AppCompatActivity {
                                             }
 
                                             tvNo_doc1.setText(S + nodoc + Nol + AN);
-                                        }
+
 
                                     }
                                 }

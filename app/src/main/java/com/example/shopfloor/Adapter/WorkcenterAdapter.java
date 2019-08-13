@@ -61,6 +61,7 @@ public class WorkcenterAdapter extends RecyclerView.Adapter<WorkcenterAdapter.Vi
 
         Intent intent = new Intent(context, HomeActivity.class);
         intent.putExtra("keywc",workcenter.getCode());//Put Message to pass over intent
+        intent.putExtra("keynamawc", workcenter.getName());
         context.startActivity(intent);
         ((WorkcenterListActivity)context).finish(); //Set result OK
       }

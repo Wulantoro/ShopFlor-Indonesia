@@ -52,6 +52,10 @@ public class InputRejectAdapter extends RecyclerView.Adapter<InputRejectAdapter.
         list_item = list;
     }
 
+    public List<InputReject> getData() {
+        return list_item;
+    }
+
 
     @NonNull
     @Override

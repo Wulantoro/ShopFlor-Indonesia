@@ -50,6 +50,7 @@ public class SuccessDocActivity extends AppCompatActivity {
     private Button btnPlhtglsuccess;
     private Button btnSmatglsuccess;
     private TextView tvtanggal1success;
+    private TextView tvnamawc0;
 
     private RecyclerView rv;
     private SuccDocAdapter adapter;
@@ -72,6 +73,7 @@ public class SuccessDocActivity extends AppCompatActivity {
         btnPlhtglsuccess = findViewById(R.id.btnPlhtglsuccess);
         tvtanggal1success = findViewById(R.id.tvtanggal1success);
         btnSmatglsuccess = findViewById(R.id.btnSmatglsuccess);
+        tvnamawc0 = findViewById(R.id.tvnamawc0);
 
         TextView tvworlcenter = findViewById(R.id.tvworkcenter4);
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);

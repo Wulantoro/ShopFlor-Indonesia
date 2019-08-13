@@ -183,6 +183,12 @@
             android:textColor="@color/white"
             android:layout_toRightOf="@id/tvwc1"
             android:text="usernameeeeeeee"/>
+        <TextView
+            android:id="@+id/tvnamawc2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvusername2"
+            android:text="wcname"/>
 
 
     </RelativeLayout>

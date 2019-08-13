@@ -39,6 +39,13 @@
             android:text="In Qty"/>
 
         <TextView
+            android:id="@+id/tvnamawc4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="namawc"/>
+
+        <TextView
             android:id="@+id/tvcodeshift2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

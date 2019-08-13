@@ -28,6 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvReject2"
+            android:textColor="@color/white"
             android:text="docentryyyyy"/>
 
         <TextView
@@ -36,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvdocentry4"
             android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
             android:text="line numb"/>
 
         <TextView

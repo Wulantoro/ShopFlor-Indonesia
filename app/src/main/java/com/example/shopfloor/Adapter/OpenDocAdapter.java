@@ -29,6 +29,10 @@ public class OpenDocAdapter extends RecyclerView.Adapter<OpenDocAdapter.ViewHold
         this.context = context;
         list_item = list;
     }
+
+    public List<Header> getData() {
+        return list_item;
+    }
     @NonNull
     @Override
     public OpenDocAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
