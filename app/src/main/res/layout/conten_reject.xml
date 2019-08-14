@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_weight="6"
+            android:layout_weight="8"
             >
 
         <TextView
@@ -133,7 +133,7 @@
         <RelativeLayout
             android:id="@+id/content1"
             android:layout_width="150dp"
-            android:layout_height="70dp">
+            android:layout_height="50dp">
 
             <TextView
                 android:id="@+id/tvInputQty"
@@ -153,7 +153,7 @@
         <RelativeLayout
             android:id="@+id/content2"
             android:layout_width="150dp"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_toRightOf="@id/content1"
             >
             <TextView
@@ -183,7 +183,6 @@
             android:textSize="18sp"
             android:text="workcemter"/>
         </RelativeLayout>
-
 
 
     <RelativeLayout
@@ -248,14 +247,7 @@
             android:layout_marginLeft="5dp"
             android:textColor="@color/white"
             android:text="routenmae"/>
-        <TextView
-            android:id="@+id/tvdocdate0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tvroutename2"
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
-            android:text="docdate"/>
+
         <TextView
             android:id="@+id/tvjammulai2"
             android:layout_width="wrap_content"
@@ -355,8 +347,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
-            android:layout_below="@id/tvdocentry0"
-            android:layout_toRightOf="@id/tvdocentry7"
+            android:layout_below="@id/tvjammulai2"
             android:textColor="@color/white"
             android:text="docnum++"/>
 
@@ -365,9 +356,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
-            android:layout_below="@id/tvdocentry0"
+            android:layout_below="@id/tvjammulai2"
             android:layout_toRightOf="@id/tvdocnum2"
             android:text="namawc"/>
+
+        <TextView
+            android:id="@+id/tvdocdate0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvdocnum2"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@id/tvjammulai2"
+            android:textColor="@color/white"
+            android:text="docdate"/>
     </RelativeLayout>
 
         <Button
@@ -376,6 +377,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvtampil"
             android:text="Tambah Reject"/>
+
+            <TextView
+                android:id="@+id/tvPRDSPECD2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/btnFrag"
+                android:layout_below="@id/tvtampil"
+                android:text="docentry"
+                />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvInputReject"
