@@ -27,9 +27,11 @@ import com.example.shopfloor.Adapter.OpenDocAdapter;
 import com.example.shopfloor.Models.InputReject;
 import com.example.shopfloor.Models.Productorder;
 import com.example.shopfloor.Models.SincHeader;
+import com.example.shopfloor.Models.SincReject;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,6 +77,7 @@ public class RejectActivity extends AppCompatActivity {
     private List<InputReject> list;
     private RecyclerView rv;
     private TextView tvnamawc6;
+    private TextView tvPRDSPECD2;
 
 
 
@@ -117,6 +120,7 @@ public class RejectActivity extends AppCompatActivity {
         tvdocnum2 = findViewById(R.id.tvdocnum2);
         tvdocentry7 = findViewById(R.id.tvdocentry7);
         tvnamawc6 = findViewById(R.id.tvnamawc6);
+        tvPRDSPECD2 = findViewById(R.id.tvPRDSPECD2);
 
         openDocAdapter = new OpenDocAdapter(this);
 
@@ -249,6 +253,7 @@ public class RejectActivity extends AppCompatActivity {
         tvposted1.setText("1");
 
         loadPRDSPECH();
+        loadPRDSPECD2();
 
        btnFrag = findViewById(R.id.btnFrag);
        btnFrag.setOnClickListener(new View.OnClickListener() {
@@ -390,8 +395,40 @@ public class RejectActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.update_header) {
-//            editHeader();
+            editHeader();
             sincHeader();
+
+            String element = gson.toJson(
+
+            adapter.getData(),
+                    new TypeToken<ArrayList<SincReject>>() {}.getType());
+
+            try {
+                JSONArray array = new JSONArray(element);
+                Log.e("arrraaayyyy = ", array.toString(1));
+
+                JSONArray newArr = new JSONArray();
+
+                for (int i = 0; i < array.length(); i++) {
+                    InputReject inputReject = gson.fromJson(array.getJSONObject(i).toString(), InputReject.class);
+
+                    JSONObject object = new JSONObject();
+                    object.put("DocEntry", tvPRDSPECD2.getText().toString());
+                    object.put("lineId", inputReject.getLineNumber());
+//                    object.put("visOrder");
+//                    object.put("object");
+//                    object.put("logInst");
+                    object.put("U_LineNum", inputReject.getLineNumber()).toString();
+                    object.put("U_Type", inputReject.getRejectName());
+                    object.put("U_Qty", inputReject.getRejectQty());
+
+                    newArr.put(object);
+                }
+                Log.e("coba input = ", newArr.toString(1));
+                simpanSincreject(newArr);
+            }catch (JSONException e) {
+                e.printStackTrace();
+            }
             startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
         }
         return super.onOptionsItemSelected(item);
@@ -499,6 +536,69 @@ public class RejectActivity extends AppCompatActivity {
                     @Override
                     public void onError(ANError anError) {
                         Toast.makeText(getApplicationContext(), "Gagal synchron data", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+    }
+
+    public void loadPRDSPECD2() {
+
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/SincReject")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        List<SincReject> result = new ArrayList<>();
+                        try {
+                            String message = response.getString("message");
+                            if (message.equals("SincReject ketemu")) {
+                               String records = response.getString("data");
+
+                               JSONArray dataArr = new JSONArray(records);
+
+                               if (dataArr.length() > 0) {
+                                   for (int i = 0; i < dataArr.length(); i++) {
+                                       SincReject sincReject = gson.fromJson(dataArr.getJSONObject(i).toString(), SincReject.class);
+                                       result.add(sincReject);
+                                       tvPRDSPECD2.setText(String.valueOf(sincReject.getDocEntry()+1));
+                                   }
+                               }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
+
+    }
+
+    public void simpanSincreject(JSONArray jsonArray) {
+
+        AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/SincReject")
+                .addJSONArrayBody(jsonArray)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            String message = response.getString("message");
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Toast.makeText(getApplicationContext(), "Gagal menambah Criteria", Toast.LENGTH_SHORT).show();
 
                     }
                 });
