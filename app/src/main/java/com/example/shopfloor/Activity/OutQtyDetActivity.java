@@ -53,10 +53,10 @@ public class OutQtyDetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_out_qty_det);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
         setTitle(null);
         Toolbar topToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(topToolbar);
+//        setSupportActionBar(topToolbar);
 
         tvOutputSeq1 = findViewById(R.id.tvOutputSeq1);
 

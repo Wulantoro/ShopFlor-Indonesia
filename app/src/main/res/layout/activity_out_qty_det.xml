@@ -7,14 +7,6 @@
     android:background="@color/white"
     tools:context=".Activity.OutQtyDetActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:minHeight="?attr/actionBarSize"
-        android:layout_width="match_parent"
-        android:background="@color/blue_A700"
-        android:layout_height="64dp">
-    </android.support.v7.widget.Toolbar>
-
     <LinearLayout
         android:id="@+id/tvlinetext"
         android:layout_width="wrap_content"

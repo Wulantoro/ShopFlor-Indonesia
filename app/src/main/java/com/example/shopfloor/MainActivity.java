@@ -21,6 +21,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Activity.HomeActivity;
+import com.example.shopfloor.Activity.KonfigurasiActivity;
 import com.example.shopfloor.Models.User;
 import com.example.shopfloor.Utils.GlobalVars;
 import com.example.shopfloor.Utils.SharedPrefManager;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private ConnectivityManager conMgr;
     private ProgressDialog pDialog;
     public SharedPreferences pref, prf;
+    private TextView btnKonf;
     public final static String TAG_USERNAME = "U_STEM_Username";
     public final static String TAG_PASSWORD = "U_STEM_Password";
 
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         etusername0 = findViewById(R.id.etusername0);
         etpassword0 = findViewById(R.id.etpassword0);
+        btnKonf = findViewById(R.id.btnKonf);
 
         if (sharedPrefManager.getSPSudahLogin()) {
             startActivity(new Intent(MainActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
@@ -79,10 +82,20 @@ public class MainActivity extends AppCompatActivity {
                         checkLogin(username, password);
 
                     }else {
-                        Toast.makeText(getApplicationContext(), "Kolom tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "No Internet Connecting", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Kolom tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        btnKonf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), KonfigurasiActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -144,6 +157,8 @@ public class MainActivity extends AppCompatActivity {
 //                                intent.putExtra(TAG_PASSWORD, password);
 //                                finish();
                                 startActivity(intent);
+                            }else {
+                                Toast.makeText(MainActivity.this, "Password atau Username salah", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

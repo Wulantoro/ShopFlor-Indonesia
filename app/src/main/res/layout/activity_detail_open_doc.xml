@@ -7,33 +7,17 @@
     android:background="@color/white"
     tools:context=".Activity.DetailOpenDocActivity">
 
-    <RelativeLayout
-        android:id="@+id/tool"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:minHeight="?attr/actionBarSize"
-            android:layout_width="match_parent"
-            android:background="@color/blue_A700"
-            android:layout_height="64dp">
-        </android.support.v7.widget.Toolbar>
-
-    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tool"
         android:orientation="horizontal">
 
         <RelativeLayout
             android:id="@+id/rel2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/tool"
             android:layout_weight="8">
     <TextView
         android:id="@+id/tvNo_doc"
