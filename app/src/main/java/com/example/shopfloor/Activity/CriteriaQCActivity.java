@@ -123,10 +123,10 @@ public class CriteriaQCActivity extends AppCompatActivity {
         /*************************************************************/
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
         setTitle(null);
         Toolbar topToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(topToolbar);
+//        setSupportActionBar(topToolbar);
 
         TextView tvinqty = findViewById(R.id.tvInputQty3);
         prf = getSharedPreferences("inQty", MODE_PRIVATE);
@@ -324,8 +324,9 @@ public class CriteriaQCActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+
         if (id == R.id.update_header) {
-           
+
             String element = gson.toJson(
 
             adapter.getData(),
@@ -352,7 +353,8 @@ public class CriteriaQCActivity extends AppCompatActivity {
                     newArr.put(object);
                 }
                 Log.e("coba input = ", newArr.toString(1));
-//                SimpanCriteria(newArr);
+
+                SimpanCriteria(newArr);
             }catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -491,6 +493,8 @@ public class CriteriaQCActivity extends AppCompatActivity {
 
 //            Intent intent = new Intent(getApplicationContext(), RejectActivity.class);
             startActivity(new Intent(getApplicationContext(), RejectActivity.class));
+        } else {
+            Toast.makeText(getApplicationContext(), "Ada Yang kosong", Toast.LENGTH_SHORT).show();
         }
 
         return super.onOptionsItemSelected(item);

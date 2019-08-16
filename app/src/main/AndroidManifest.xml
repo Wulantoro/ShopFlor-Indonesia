@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -12,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.EditRejectActivity"></activity>
+        <activity android:name=".Activity.ScanActivity"></activity>
+        <activity android:name=".Activity.KonfigurasiActivity" />
+        <activity android:name=".Activity.EditRejectActivity" />
         <activity android:name=".Activity.DetailSuccDocActivity" />
         <activity android:name=".Activity.CriteriaQCActivity" />
         <activity android:name=".Activity.OutQtyDetActivity" />
@@ -49,7 +53,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".Activity.Add_DocActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Activity.StartDocActivity"
             android:screenOrientation="landscape" />

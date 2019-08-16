@@ -96,10 +96,10 @@ public class Add_DocActivity extends AppCompatActivity {
 
         /**************Toolbar**********************************/
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
         setTitle(null);
         Toolbar topToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(topToolbar);
+//        setSupportActionBar(topToolbar);
         /*******************************************************/
 
         gson = new Gson();

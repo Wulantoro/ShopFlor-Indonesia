@@ -38,7 +38,7 @@ public class StartDocActivity extends AppCompatActivity {
 
         tvwc2 = findViewById(R.id.tvwc2);
         tvusername1 = findViewById(R.id.tvusername1);
-        btscan = findViewById(R.id.btscan);
+        btscan = findViewById(R.id.btnscan);
         tvnamawc1 = findViewById(R.id.tvnamawc1);
 
         TextView tvwcname = findViewById(R.id.tvnamawc1);
@@ -56,6 +56,8 @@ public class StartDocActivity extends AppCompatActivity {
         btscan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ScanActivity.class);
+                startActivity(intent);
 
             }
         });

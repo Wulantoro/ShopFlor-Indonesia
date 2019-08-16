@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -70,19 +71,23 @@ public class HomeActivity extends AppCompatActivity {
     public static TextView tvNm_prod1;
     public static TextView tvnamawc;
     private TextView tvTanggalHome;
+    private TextView tvidmobile0;
 
     private Button btnLogout;
 
     public SharedPreferences pref, prf;
 
-    private DrawerLayout drawer;
+    private DrawerLayout mDrawerLayout;
     private NavigationView navigationView;
     private ActionBarDrawerToggle mToggle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        getSupportActionBar();
         tvWCtampil1 = findViewById(R.id.tvWCtampil1);
         tvNm_prod1 = findViewById(R.id.tvNm_prod1);
         tvusername0 = findViewById(R.id.tvusername0);
@@ -90,28 +95,33 @@ public class HomeActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.btnLogout);
         tvTanggalHome = findViewById(R.id.tvTanggalHome);
         tvnamawc = findViewById(R.id.tvnamawc);
+        tvidmobile0 = findViewById(R.id.tvidmobile0);
 
         final SharedPrefManager sharedPrefManager;
         sharedPrefManager = new SharedPrefManager(this);
 
+//**********************************************************************/
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_drawer, R.string.closedDrawr);
 
-        drawer = findViewById(R.id.drawer_layout);
-        mToggle = new ActionBarDrawerToggle(this, drawer, R.string.open_drawer, R.string.closedDrawr);
-
-        drawer.addDrawerListener(mToggle);
+        mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
 
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        navigationView = findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         setupDrawerContent(navigationView);
+        /*********************************************************/
 
+
+
+//        tvidmobile0.setText(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
 
         User user = new User();
 
          TextView tvdivisi = findViewById(R.id.tvdivisi0);
         tvdivisi.setText(String.valueOf(user.getDept()));
-
+//
         TextView tvusername = findViewById(R.id.tvusername0);
         prf = getSharedPreferences("username", MODE_PRIVATE);
         tvusername.setText(prf.getString("etusername", null));
@@ -160,7 +170,7 @@ public class HomeActivity extends AppCompatActivity {
                           @Override
                           public void onClick(View v) {
                               if (tvWCtampil1.length() != 0) {
-
+//
                                   pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
                                   Intent iStart = new Intent(HomeActivity.this, StartDocActivity.class);
 
@@ -240,15 +250,15 @@ public class HomeActivity extends AppCompatActivity {
                     }
 
                 });
-
+//
                 btnLogout = findViewById(R.id.btnLogout);
                 btnLogout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
-//                        startActivity(new Intent(HomeActivity.this, MainActivity.class)
-//                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-//                        finish();
+                        sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
+                        startActivity(new Intent(HomeActivity.this, MainActivity.class)
+                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        finish();
                         showDialog();
                     }
                 });
@@ -301,8 +311,8 @@ public class HomeActivity extends AppCompatActivity {
 
                                         Gson gson = new Gson();
                                         User user = gson.fromJson(dataArr.getJSONObject(0).toString(), User.class);
-                                        TextView tvdept = findViewById(R.id.tvdivisi0);
-                                        tvdept.setText(String.valueOf(user.getDept()));
+//                                        TextView tvdept = findViewById(R.id.tvdivisi0);
+//                                        tvdept.setText(String.valueOf(user.getDept()));
                                     }
                                 }
                             }
@@ -350,23 +360,46 @@ public class HomeActivity extends AppCompatActivity {
     public void selectDrawerItem(MenuItem menuItem) {
         Fragment fragment = null;
         Class fragmentClass;
+//        final SharedPrefManager sharedPrefManager;
+//        sharedPrefManager = new SharedPrefManager(this);
 
         switch (menuItem.getItemId()) {
-            case R.id.nav_gallery:
+
+
+            case R.id.nav_logout:
                 //action
+//                sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
+//                startActivity(new Intent(HomeActivity.this, MainActivity.class)
+//                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+//                finish();
+//                showDialog();
+
+//                new AlertDialog.Builder(this)
+//                        .setTitle("Really Logout?")
+//                        .setMessage("Are you sure you want to Logout?")
+//                        .setNegativeButton(android.R.string.no, null)
+//                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//
+//                            public void onClick(DialogInterface arg0, int arg1) {
+//                                sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
+//                                startActivity(new Intent(HomeActivity.this, MainActivity.class)
+//                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+//                                finish();
+//                            }
+//                        }).create().show();
                 break;
-            case R.id.nav_slideshow:
+//            case R.id.nav_slideshow:
                 //action
-                break;
-            case R.id.nav_manage:
+//                break;
+//            case R.id.nav_manage:
                 //action
-                break;
+//                break;
 
         }
 
 
         menuItem.setChecked(true);
-        drawer.closeDrawers();
+        mDrawerLayout.closeDrawers();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item){

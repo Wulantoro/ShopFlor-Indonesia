@@ -8,5 +8,5 @@
         android:id="@+id/action_upHeader"
         android:orderInCategory="300"
          android:icon="@drawable/ic_upload"
-        android:title="UpHeader"/>
+        android:title="Simpan"/>
 </menu>

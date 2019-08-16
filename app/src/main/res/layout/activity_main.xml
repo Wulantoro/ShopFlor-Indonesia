@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/line9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -49,19 +50,39 @@
                 android:inputType="numberPassword" />
         </android.support.design.widget.TextInputLayout>
 
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line9"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
         <Button
             android:id="@+id/btnLogin"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
             android:layout_margin="22dp"
             android:background="@color/blue_700"
-            android:text="Sign in"
+            android:text="MASUK"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:textSize="18sp" />
 
+        <Button
+            android:id="@+id/btnKonf"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@id/btnLogin"
+            android:layout_margin="22dp"
+            android:textSize="18sp"
+            android:textAllCaps="false"
+            android:background="@color/red_A700"
+            android:textColor="#FFF"
+            android:text="KONFIGURASI"
+            />
+    </RelativeLayout>
 
-
-    </LinearLayout>
 
 </RelativeLayout>

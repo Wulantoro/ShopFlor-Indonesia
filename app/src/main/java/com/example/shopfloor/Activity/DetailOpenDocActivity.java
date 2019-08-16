@@ -125,10 +125,10 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvqcname.setText(prf.getString("tvqcname", null));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 //        setTitle(null);
         Toolbar topToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(topToolbar);
+//        setSupportActionBar(topToolbar);
 
         loadData(tvworkcenter3.getText().toString());
 

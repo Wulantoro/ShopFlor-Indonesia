@@ -87,10 +87,10 @@ public class RejectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reject);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
         setTitle(null);
         Toolbar topToolBar = findViewById(R.id.toolbar);
-        setSupportActionBar(topToolBar);
+//        setSupportActionBar(topToolBar);
 
         tvdocentry0 = findViewById(R.id.tvdocentry0);
         tvdocnum1 = findViewById(R.id.tvdocnum1);
@@ -396,9 +396,9 @@ public class RejectActivity extends AppCompatActivity {
 
         if (id == R.id.update_header) {
             editHeader();
-            sincHeader();
+//            sincHeader();
 
-            String element = gson.toJson(
+            /*String element = gson.toJson(
 
             adapter.getData(),
                     new TypeToken<ArrayList<SincReject>>() {}.getType());
@@ -425,10 +425,10 @@ public class RejectActivity extends AppCompatActivity {
                     newArr.put(object);
                 }
                 Log.e("coba input = ", newArr.toString(1));
-                simpanSincreject(newArr);
+//                simpanSincreject(newArr);
             }catch (JSONException e) {
                 e.printStackTrace();
-            }
+            }*/
             startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
         }
         return super.onOptionsItemSelected(item);
@@ -477,6 +477,7 @@ public class RejectActivity extends AppCompatActivity {
                 });
     }
 
+//    tidak di pake
     public void sincHeader() {
         JSONObject jsonObject = new JSONObject();
 
