@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
@@ -88,6 +89,10 @@ public class Add_DocActivity extends AppCompatActivity {
     private SequenceAdapter adapter1;
     private List<Productorder> list;
     private TextView tvnamawc2;
+    private Productorder productorder;
+
+    //barcode
+    private static final String TAG = Add_DocActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,10 +129,20 @@ public class Add_DocActivity extends AppCompatActivity {
         tvusername2 = findViewById(R.id.tvusername2);
         tvcodeshift = findViewById(R.id.tvcodeshift);
         tvnamawc2 = findViewById(R.id.tvnamawc2);
-
-
         tvSquence1 = findViewById(R.id.tvSquence1);
         tvSquence_Qty1 = findViewById(R.id.tvSquence_Qty1);
+
+        //barcode
+        String barcode = getIntent().getStringExtra("wccode");
+        tvNo_Prod1.setText(barcode.substring(0,8));
+        tvSquence1.setText(barcode.substring(9));
+
+
+        Log.e("docnum1001 == ", "check docnum1001 = " + tvNo_Prod1.getText().toString());
+
+        // search the barcode
+        searchBarcode(tvNo_Prod1.getText().toString(), tvSquence1.getText().toString());
+
 
         dateView = findViewById(R.id.tvTgl_mulai1);
 
@@ -381,9 +396,9 @@ public class Add_DocActivity extends AppCompatActivity {
             adapter1.clearAll();
 
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
-        Log.e("workcenter30",  "check workcenter " + prf.getString("workcenter", null));
+        Log.e("workcenter100",  "check workcenter " + prf.getString("workcenter", null));
 
-        Log.e("docnum3000 == ", "check docnum = " + tvNo_Prod1.getText().toString());
+        Log.e("docnum1000 == ", "check docnum = " + tvNo_Prod1.getText().toString());
 
         AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null)+"&docnum="+docnum)
                 .build()
@@ -681,6 +696,63 @@ public class Add_DocActivity extends AppCompatActivity {
             Toast.makeText(Add_DocActivity.this, "Pilih Productorder dan Sequence dahulu", Toast.LENGTH_SHORT).show();
         }
         return true;
+    }
+
+//    barcode
+    private void searchBarcode(final String docnum1, final String seq1) {
+
+        if (adapter2 != null)
+            adapter2.clearAll();
+
+
+        Log.e("docnumbaru", tvNo_Prod1.getText().toString());
+        Log.e("seq11", tvSquence1.getText().toString());
+        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
+        prf.getString("workcenter", null);
+        Log.e("workcenter1111 = ", prf.getString("workcenter", null));
+
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/poscan?wccode="+prf.getString("workcenter", null)+"&DocNum="+docnum1)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        List<Productorder> result = new ArrayList<>();
+                        try {
+                            Log.e("scanbarcode", response.toString(1));
+
+                            if (result != null)
+                                result.clear();
+
+                            String message = response.getString("message");
+
+                            if (message.equals("Production Order were found")){
+                                String records = response.getString("data");
+
+                                JSONArray dataArr = new JSONArray(records);
+
+                                if (dataArr.length() > 0) {
+                                    for (int i = 0; i < dataArr.length(); i++) {
+                                        Productorder productorder = gson.fromJson(dataArr.getJSONObject(i).toString(), Productorder.class);
+                                        result.add(productorder);
+//                                        tvNo_prod1.setText(String.valueOf(productorder.getDocNum()));
+//                                        tvprod1.setText(productorder.getItemCode());
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        adapter2.addAll(result);
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
+
+
     }
 
 }
