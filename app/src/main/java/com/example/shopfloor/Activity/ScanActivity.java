@@ -22,7 +22,6 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 public class ScanActivity extends AppCompatActivity implements BarcodeReader.BarcodeReaderListener {
 
     BarcodeReader barcodeReader;
-    private Productorder productorder;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +34,7 @@ public class ScanActivity extends AppCompatActivity implements BarcodeReader.Bar
     @Override
     public void onScanned(Barcode barcode) {
 
-        Intent intent = new Intent(ScanActivity.this, Add_DocActivity.class);
+        Intent intent = new Intent(ScanActivity.this, ResultScanActivity.class);
         intent.putExtra("wccode", barcode.displayValue);
         startActivity(intent);
 

@@ -6,9 +6,9 @@ import android.os.Parcelable.Creator;
 
 public class Poscan implements Parcelable
 {
-
-    private int uSequence;
-    private String uQuantity;
+    private int seq;
+    private int U_Sequence;
+    private String U_Quantity;
     private String itemCode;
     private int DocNum;
     private String status;
@@ -38,8 +38,9 @@ public class Poscan implements Parcelable
             ;
 
     protected Poscan(Parcel in) {
-        this.uSequence = ((int) in.readValue((int.class.getClassLoader())));
-        this.uQuantity = ((String) in.readValue((String.class.getClassLoader())));
+        this.seq = ((int) in.readValue((int.class.getClassLoader())));
+        this.U_Sequence = ((int) in.readValue((int.class.getClassLoader())));
+        this.U_Quantity = ((String) in.readValue((String.class.getClassLoader())));
         this.itemCode = ((String) in.readValue((String.class.getClassLoader())));
         this.DocNum = ((int) in.readValue((int.class.getClassLoader())));
         this.status = ((String) in.readValue((String.class.getClassLoader())));
@@ -56,20 +57,29 @@ public class Poscan implements Parcelable
     public Poscan() {
     }
 
+    public int getSeq() {
+        return seq;
+    }
+
+    public void setSeq(int seq) {
+        this.seq = seq;
+    }
+
+
     public int getUSequence() {
-        return uSequence;
+        return U_Sequence;
     }
 
     public void setUSequence(int uSequence) {
-        this.uSequence = uSequence;
+        this.U_Sequence = uSequence;
     }
 
     public String getUQuantity() {
-        return uQuantity;
+        return U_Quantity;
     }
 
     public void setUQuantity(String uQuantity) {
-        this.uQuantity = uQuantity;
+        this.U_Quantity = uQuantity;
     }
 
     public String getItemCode() {
@@ -161,8 +171,9 @@ public class Poscan implements Parcelable
     }
 
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(uSequence);
-        dest.writeValue(uQuantity);
+        dest.writeValue(seq);
+        dest.writeValue(U_Sequence);
+        dest.writeValue(U_Quantity);
         dest.writeValue(itemCode);
         dest.writeValue(DocNum);
         dest.writeValue(status);

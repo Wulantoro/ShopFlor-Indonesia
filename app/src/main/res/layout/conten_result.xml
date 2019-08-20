@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_result_scan"
+    tools:context=".Activity.ResultScanActivity"
+    >
+
+    <LinearLayout
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rel2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="9">
+
+            <Button
+                android:id="@+id/btn_PilihProd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:text="Pilih Produksi"/>
+
+            <TextView
+                android:id="@+id/tvNo_doc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/acPilihProd"
+                android:layout_marginTop="70dp"
+                android:layout_marginLeft="20dp"
+                android:text="No. Document" />
+            <TextView
+                android:id="@+id/tvNo_doc1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvNo_doc"
+                android:layout_below="@+id/acPilihProd"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="70dp"
+                android:text=""
+                />
+            <TextView
+                android:id="@+id/tvNo_prod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNo_doc"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="No. Produksi" />
+
+            <TextView
+                android:id="@+id/tvNo_prod1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNo_doc1"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@id/tvNo_doc"
+                android:text=""
+                />
+            <TextView
+                android:id="@+id/tvprod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNo_prod"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Product" />
+            <TextView
+                android:id="@+id/tvprod1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNo_prod1"
+                android:layout_toRightOf="@+id/tvprod"
+                android:layout_marginLeft="90dp"
+                android:layout_marginTop="20dp"
+                android:text=""
+                />
+            <LinearLayout
+                android:id="@+id/linenamaprod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvprod"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tvNm_prod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="Nama Product" />
+                <TextView
+                    android:id="@+id/tvNm_prod1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="50dp"
+                    android:text=""
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvRoute_Code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linenamaprod"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="Route Code" />
+            <TextView
+                android:id="@+id/tvRoute_Code1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linenamaprod"
+                android:layout_toRightOf="@+id/tvRoute_Code"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="70dp"
+                android:text=""
+                />
+
+            <TextView
+                android:id="@+id/tvRoute_Code2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linenamaprod"
+                android:layout_toRightOf="@+id/tvRoute_Code1"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="5dp"
+                android:text=""
+                />
+
+            <TextView
+                android:id="@+id/tvQty_rencProd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvRoute_Code"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Qty Renc Produksi" />
+            <TextView
+                android:id="@+id/tvQty_rencProd1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvRoute_Code1"
+                android:layout_marginLeft="170dp"
+                android:layout_marginTop="20dp"
+                android:text=""/>
+
+            <TextView
+                android:id="@+id/tvwc1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvQty_rencProd"
+                android:textColor="@color/white"
+                android:text="ini mworkcenter"/>
+            <TextView
+                android:id="@+id/tvusername2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvQty_rencProd"
+                android:textColor="@color/white"
+                android:layout_toRightOf="@id/tvwc1"
+                android:text="usernameeeeeeee"/>
+            <TextView
+                android:id="@+id/tvnamawc2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvusername2"
+                android:text="wcname"/>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="20">
+
+            <Button
+                android:id="@+id/btn_PilihSeq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Pilih Sequence"/>
+
+            <TextView
+                android:id="@+id/tvSts_prod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/acPilihSeq"
+                android:layout_marginTop="70dp"
+                android:text="Status Produksi" />
+            <TextView
+                android:id="@+id/tvSts_prod1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tvSts_prod"
+                android:layout_below="@+id/acPilihSeq"
+                android:layout_marginTop="70dp"
+                android:layout_marginLeft="20dp"
+                android:text=""
+                />
+            <TextView
+                android:id="@+id/tvSquence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSts_prod"
+                android:layout_marginTop="20dp"
+                android:text="Squence" />
+            <TextView
+                android:id="@+id/tvSquence1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSts_prod"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/tvSquence"
+                android:layout_marginLeft="68dp"
+                android:text=""
+                />
+            <TextView
+                android:id="@+id/tvSquence_Qty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSquence"
+                android:layout_marginTop="20dp"
+                android:text="Squence Qty" />
+            <TextView
+                android:id="@+id/tvSquence_Qty1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSquence1"
+                android:layout_marginLeft="40dp"
+                android:layout_toRightOf="@+id/tvSquence_Qty"
+                android:layout_marginTop="20dp"
+                android:text=""
+                />
+            <TextView
+                android:id="@+id/tvShift"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSquence_Qty"
+                android:layout_marginTop="20dp"
+                android:text="Shift" />
+
+            <TextView
+                android:id="@+id/tvcodeshift"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvSquence_Qty"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/tvShift"
+                />
+
+            <TextView
+                android:id="@+id/tvstrip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvcodeshift"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/tvSquence_Qty"
+                android:text=" - "/>
+            <TextView
+                android:id="@+id/tvShift1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSquence_Qty1"
+                android:layout_toRightOf="@+id/tvstrip"
+                android:layout_marginTop="20dp"
+                />
+
+            <TextView
+                android:id="@+id/tvTgl_mulai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvShift"
+                android:layout_marginTop="20dp"
+                android:text="Tgl. Mulai" />
+
+            <TextView
+                android:id="@+id/tvTgl_mulai1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvShift1"
+                android:layout_toRightOf="@+id/tvTgl_mulai"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
+                android:text=""
+                />
+
+            <TextView
+                android:id="@+id/tvJam_mulai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTgl_mulai"
+                android:layout_marginTop="20dp"
+                android:text="@string/jam_mulai" />
+
+            <TextView
+                android:id="@+id/tvJam_mulai1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTgl_mulai1"
+                android:layout_toRightOf="@+id/tvJam_mulai"
+                android:layout_marginLeft="53dp"
+                android:layout_marginTop="20dp"
+                android:text="" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
