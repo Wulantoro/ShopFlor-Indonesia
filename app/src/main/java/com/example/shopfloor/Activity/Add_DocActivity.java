@@ -132,16 +132,16 @@ public class Add_DocActivity extends AppCompatActivity {
         tvSquence1 = findViewById(R.id.tvSquence1);
         tvSquence_Qty1 = findViewById(R.id.tvSquence_Qty1);
 
-        //barcode
-        String barcode = getIntent().getStringExtra("wccode");
-        tvNo_Prod1.setText(barcode.substring(0,8));
-        tvSquence1.setText(barcode.substring(9));
-
-
-        Log.e("docnum1001 == ", "check docnum1001 = " + tvNo_Prod1.getText().toString());
-
-        // search the barcode
-        searchBarcode(tvNo_Prod1.getText().toString(), tvSquence1.getText().toString());
+//        barcode
+//        String barcode = getIntent().getStringExtra("wccode");
+//        tvNo_Prod1.setText(barcode.substring(0,8));
+//        tvSquence1.setText(barcode.substring(9));
+//
+//
+//        Log.e("docnum1001 == ", "check docnum1001 = " + tvNo_Prod1.getText().toString());
+//
+//         search the barcode
+//        searchBarcode(tvNo_Prod1.getText().toString(), tvSquence1.getText().toString());
 
 
         dateView = findViewById(R.id.tvTgl_mulai1);
@@ -711,7 +711,7 @@ public class Add_DocActivity extends AppCompatActivity {
         prf.getString("workcenter", null);
         Log.e("workcenter1111 = ", prf.getString("workcenter", null));
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/poscan?wccode="+prf.getString("workcenter", null)+"&DocNum="+docnum1)
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/poscan?wccode="+prf.getString("workcenter", null)+"&DocNum="+docnum1+"&seq="+seq1)
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -726,7 +726,7 @@ public class Add_DocActivity extends AppCompatActivity {
 
                             String message = response.getString("message");
 
-                            if (message.equals("Production Order were found")){
+                            if (message.equals("Scan were found")){
                                 String records = response.getString("data");
 
                                 JSONArray dataArr = new JSONArray(records);
@@ -737,6 +737,10 @@ public class Add_DocActivity extends AppCompatActivity {
                                         result.add(productorder);
 //                                        tvNo_prod1.setText(String.valueOf(productorder.getDocNum()));
 //                                        tvprod1.setText(productorder.getItemCode());
+//                                         tvNm_prod1.setText(productorder.getItemName());
+//                                         tvRoute_Code1.setText(productorder.getCode());
+//                                         tvRoute_Code2.setText(productorder.getName());
+//                                         tvQty_rencProd1.setText(productorder.getPlannedQty());
                                     }
                                 }
                             }

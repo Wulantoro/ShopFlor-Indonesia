@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.ScanActivity"></activity>
+        <activity android:name=".Activity.ResultScanActivity"></activity>
+        <activity android:name=".Activity.ScanActivity" />
         <activity android:name=".Activity.KonfigurasiActivity" />
         <activity android:name=".Activity.EditRejectActivity" />
         <activity android:name=".Activity.DetailSuccDocActivity" />
@@ -63,9 +64,7 @@
         <activity
             android:name=".Activity.HomeActivity"
             android:screenOrientation="landscape" />
-        <activity
-            android:name=".MainActivity"
-            >
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
