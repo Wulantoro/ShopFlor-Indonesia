@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,6 +79,7 @@ public class RejectActivity extends AppCompatActivity {
     private RecyclerView rv;
     private TextView tvnamawc6;
     private TextView tvPRDSPECD2;
+    private ImageButton ibscan;
 
 
 
@@ -120,7 +122,7 @@ public class RejectActivity extends AppCompatActivity {
         tvdocnum2 = findViewById(R.id.tvdocnum2);
         tvdocentry7 = findViewById(R.id.tvdocentry7);
         tvnamawc6 = findViewById(R.id.tvnamawc6);
-        tvPRDSPECD2 = findViewById(R.id.tvPRDSPECD2);
+        ibscan = findViewById(R.id.ibscan);
 
         openDocAdapter = new OpenDocAdapter(this);
 
@@ -252,8 +254,6 @@ public class RejectActivity extends AppCompatActivity {
         TextView tvposted1 = findViewById(R.id.tvposted7);
         tvposted1.setText("1");
 
-        loadPRDSPECH();
-        loadPRDSPECD2();
 
        btnFrag = findViewById(R.id.btnFrag);
        btnFrag.setOnClickListener(new View.OnClickListener() {
@@ -263,6 +263,14 @@ public class RejectActivity extends AppCompatActivity {
                startActivity(intent);
            }
        });
+
+        ibscan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ScanRejectActivity.class);
+                startActivity(intent);
+            }
+        });
 
        gson = new Gson();
        rv = findViewById(R.id.rvInputReject);

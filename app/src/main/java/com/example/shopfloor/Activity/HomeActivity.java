@@ -114,12 +114,11 @@ public class HomeActivity extends AppCompatActivity {
         /*********************************************************/
 
 
-
 //        tvidmobile0.setText(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
 
         User user = new User();
 
-         TextView tvdivisi = findViewById(R.id.tvdivisi0);
+        TextView tvdivisi = findViewById(R.id.tvdivisi0);
         tvdivisi.setText(String.valueOf(user.getDept()));
 //
         TextView tvusername = findViewById(R.id.tvusername0);
@@ -151,7 +150,7 @@ public class HomeActivity extends AppCompatActivity {
         String getCurentDate = sdf.format(c.getTime());
         tvTanggalHome.setText(getCurentDate);
 
-                /**********end tampil tanggal**************************/
+        /**********end tampil tanggal**************************/
 
         userLogin();
 
@@ -165,117 +164,104 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
-                      btnstartdoc = findViewById(R.id.btnstartdoc);
-                      btnstartdoc.setOnClickListener(new View.OnClickListener() {
-                          @Override
-                          public void onClick(View v) {
-                              if (tvWCtampil1.length() != 0) {
+        btnstartdoc = findViewById(R.id.btnstartdoc);
+        btnstartdoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvWCtampil1.length() != 0) {
 //
-                                  pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
-                                  Intent iStart = new Intent(HomeActivity.this, StartDocActivity.class);
+                    pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+                    Intent iStart = new Intent(HomeActivity.this, StartDocActivity.class);
 
-                                  String wc = tvWCtampil1.getText().toString();
-                                  SharedPreferences.Editor editor = pref.edit();
-                                  editor.putString("workcenter", wc);
-                                  editor.commit();
+                    String wc = tvWCtampil1.getText().toString();
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("workcenter", wc);
+                    editor.commit();
 
-                                  pref = getSharedPreferences("userId", MODE_PRIVATE);
-                                  String tvuserid = tvusername0.getText().toString();
-                                  SharedPreferences.Editor editor1 = pref.edit();
-                                  editor1.putString("tvuserid", tvuserid);
-                                  editor1.commit();
+                    pref = getSharedPreferences("userId", MODE_PRIVATE);
+                    String tvuserid = tvusername0.getText().toString();
+                    SharedPreferences.Editor editor1 = pref.edit();
+                    editor1.putString("tvuserid", tvuserid);
+                    editor1.commit();
 
-                                  pref = getSharedPreferences("Namewc", MODE_PRIVATE);
-                                  String tvnamewc = tvnamawc.getText().toString();
-                                  SharedPreferences.Editor editor2 = pref.edit();
-                                  editor2.putString("tvnamewc", tvnamewc);
-                                  editor2.commit();
+                    pref = getSharedPreferences("Namewc", MODE_PRIVATE);
+                    String tvnamewc = tvnamawc.getText().toString();
+                    SharedPreferences.Editor editor2 = pref.edit();
+                    editor2.putString("tvnamewc", tvnamewc);
+                    editor2.commit();
 //
-                                  startActivity(iStart);
-                              } else {
-                                  Toast.makeText(getApplicationContext(), "Workcenter tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                              }
-                          }
-                      });
+                    startActivity(iStart);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Workcenter tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
 
-                btnOpendoc = findViewById(R.id.btnOpendoc);
-                btnOpendoc.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (tvWCtampil1.length() != 0) {
-                            pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
-                            Intent iOpen = new Intent(HomeActivity.this, Open_DocActivity.class);
-                            String wc1 = tvWCtampil1.getText().toString();
-                            SharedPreferences.Editor editor = pref.edit();
-                            editor.putString("workcenter", wc1);
-                            editor.commit();
+        btnOpendoc = findViewById(R.id.btnOpendoc);
+        btnOpendoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvWCtampil1.length() != 0) {
+                    pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+                    Intent iOpen = new Intent(HomeActivity.this, Open_DocActivity.class);
+                    String wc1 = tvWCtampil1.getText().toString();
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("workcenter", wc1);
+                    editor.commit();
 
-                            pref = getSharedPreferences("Qcname", MODE_PRIVATE);
-                            String tvqcname = tvusername0.getText().toString();
-                            SharedPreferences.Editor editor1 = pref.edit();
-                            editor1.putString("tvqcname", tvqcname);
-                            editor1.commit();
+                    pref = getSharedPreferences("Qcname", MODE_PRIVATE);
+                    String tvqcname = tvusername0.getText().toString();
+                    SharedPreferences.Editor editor1 = pref.edit();
+                    editor1.putString("tvqcname", tvqcname);
+                    editor1.commit();
 
-                            pref = getSharedPreferences("keynamawc", MODE_PRIVATE);
-                            String tvnamewc = tvnamawc.getText().toString();
-                            SharedPreferences.Editor editor2 = pref.edit();
-                            editor2.putString("keynamawc1", tvnamewc);
-                            editor2.commit();
-                            startActivity(iOpen);
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Pilih Workcenter dahulu", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                    pref = getSharedPreferences("keynamawc", MODE_PRIVATE);
+                    String tvnamewc = tvnamawc.getText().toString();
+                    SharedPreferences.Editor editor2 = pref.edit();
+                    editor2.putString("keynamawc1", tvnamewc);
+                    editor2.commit();
+                    startActivity(iOpen);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Pilih Workcenter dahulu", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
-                btnSucDoc = findViewById(R.id.btnSucDoc);
-                btnSucDoc.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+        btnSucDoc = findViewById(R.id.btnSucDoc);
+        btnSucDoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                        if (tvWCtampil1.length() != 0) {
-                            pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
-                            Intent iSuc = new Intent(getApplicationContext(), SuccessDocActivity.class);
-                            String wc2 = tvWCtampil1.getText().toString();
-                            SharedPreferences.Editor editor1 = pref.edit();
-                            editor1.putString("workcenter", wc2);
-                            editor1.commit();
+                if (tvWCtampil1.length() != 0) {
+                    pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+                    Intent iSuc = new Intent(getApplicationContext(), SuccessDocActivity.class);
+                    String wc2 = tvWCtampil1.getText().toString();
+                    SharedPreferences.Editor editor1 = pref.edit();
+                    editor1.putString("workcenter", wc2);
+                    editor1.commit();
 
 
-                            startActivity(iSuc);
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Pilih Workcenter dahulu", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                });
-//
-                btnLogout = findViewById(R.id.btnLogout);
-                btnLogout.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
-                        startActivity(new Intent(HomeActivity.this, MainActivity.class)
-                                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-                        finish();
-                        showDialog();
-                    }
-                });
+                    startActivity(iSuc);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Pilih Workcenter dahulu", Toast.LENGTH_SHORT).show();
+                }
             }
 
-            private void showDialog() {
+        });
 
-                final SharedPrefManager sharedPrefManager;
-                sharedPrefManager = new SharedPrefManager(this);
-
-                new AlertDialog.Builder(this)
-                        .setTitle("Really Logout?")
+        btnLogout = findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            //                    @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+                builder.setTitle("Really Logout?")
                         .setMessage("Are you sure you want to Logout?")
-                        .setNegativeButton(android.R.string.no, null)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                            public void onClick(DialogInterface arg0, int arg1) {
+                        .setCancelable(false)
+                        .setNegativeButton("No", null)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
                                 sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
                                 startActivity(new Intent(HomeActivity.this, MainActivity.class)
                                         .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
@@ -283,7 +269,29 @@ public class HomeActivity extends AppCompatActivity {
                             }
                         }).create().show();
             }
+        });
+    }
 
+    private void userLogout() {
+        final SharedPrefManager sharedPrefManager;
+        sharedPrefManager = new SharedPrefManager(this);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+        builder.setTitle("Really Logout?")
+                .setMessage("Are you sure you want to Logout?")
+                .setCancelable(false)
+                .setNegativeButton("No", null)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        finish();
+
+                    }
+                }).create().show();
+    }
 
             private void userLogin() {
 
@@ -360,54 +368,73 @@ public class HomeActivity extends AppCompatActivity {
     public void selectDrawerItem(MenuItem menuItem) {
         Fragment fragment = null;
         Class fragmentClass;
-//        final SharedPrefManager sharedPrefManager;
-//        sharedPrefManager = new SharedPrefManager(this);
+        final SharedPrefManager sharedPrefManager;
+        sharedPrefManager = new SharedPrefManager(this);
 
-        switch (menuItem.getItemId()) {
+        int id = menuItem.getItemId();
 
+        switch (id){
+            case R.id.home:
+                Toast.makeText(getApplicationContext(),"Home",Toast.LENGTH_SHORT).show();
 
-            case R.id.nav_logout:
-                //action
-//                sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
-//                startActivity(new Intent(HomeActivity.this, MainActivity.class)
-//                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-//                finish();
-//                showDialog();
-
-//                new AlertDialog.Builder(this)
-//                        .setTitle("Really Logout?")
-//                        .setMessage("Are you sure you want to Logout?")
-//                        .setNegativeButton(android.R.string.no, null)
-//                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//
-//                            public void onClick(DialogInterface arg0, int arg1) {
-//                                sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
-//                                startActivity(new Intent(HomeActivity.this, MainActivity.class)
-//                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-//                                finish();
-//                            }
-//                        }).create().show();
                 break;
-//            case R.id.nav_slideshow:
-                //action
-//                break;
-//            case R.id.nav_manage:
-                //action
-//                break;
+            case R.id.nav_manage:
+                Toast.makeText(getApplicationContext(),"Settings",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_slideshow:
+                Toast.makeText(getApplicationContext(),"Trash",Toast.LENGTH_SHORT).show();
+
+                break;
+            case R.id.nav_logout:
+                finish();
 
         }
+
+//        sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
+//        startActivity(new Intent(getApplicationContext(), MainActivity.class)
+//                .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+//        finish();
+        /******************************************************************************/
+
+//        int id = R.id.nav_logout;
+//        if (menuItem.getItemId() == R.id.nav_logout) {
+//            userLogout();
+//        }
+/**************************************************/
+//        switch (menuItem.getItemId()) {
+//            case R.id.nav_logout:
+//                //action
+//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                startActivity(intent);
+//
+//                break;
+//            case R.id.nav_slideshow:
+//                //action
+//                break;
+//            case R.id.nav_manage:
+//                //action
+//                break;
+//
+//        }
 
 
         menuItem.setChecked(true);
         mDrawerLayout.closeDrawers();
     }
+
+    public void SelectItem(int possition) {
+
+    }
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if(mToggle.onOptionsItemSelected(item)){
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        if(mToggle.onOptionsItemSelected(menuItem)){
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        menuItem.setChecked(true);
+        mDrawerLayout.closeDrawers();
+
+        return super.onOptionsItemSelected(menuItem);
     }
 
 }

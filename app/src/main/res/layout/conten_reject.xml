@@ -197,7 +197,7 @@
             android:id="@+id/tvdocentry0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+
             android:text="docentryyyyyyyy"/>
         <TextView
             android:id="@+id/tvdocnum1"
@@ -378,14 +378,6 @@
             android:layout_below="@id/tvtampil"
             android:text="Tambah Reject"/>
 
-            <TextView
-                android:id="@+id/tvPRDSPECD2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/btnFrag"
-                android:layout_below="@id/tvtampil"
-                android:text="docentry"
-                />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvInputReject"
@@ -395,6 +387,16 @@
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_reject_row">
         </android.support.v7.widget.RecyclerView>
+
+            <ImageButton
+                android:id="@+id/ibscan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/rvInputReject"
+                android:layout_below="@id/btnFrag"
+                android:layout_marginLeft="50dp"
+                android:src="@drawable/ic_camera"
+                />
     </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>
