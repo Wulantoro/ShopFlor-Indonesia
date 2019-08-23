@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.ResultScanActivity"></activity>
+        <activity android:name=".Activity.ResultScanRejectActivity"></activity>
+        <activity android:name=".Activity.ScanRejectActivity" />
+        <activity android:name=".Activity.ResultScanActivity" />
         <activity android:name=".Activity.ScanActivity" />
         <activity android:name=".Activity.KonfigurasiActivity" />
         <activity android:name=".Activity.EditRejectActivity" />

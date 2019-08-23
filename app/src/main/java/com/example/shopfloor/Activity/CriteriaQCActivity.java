@@ -354,7 +354,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
                 }
                 Log.e("coba input = ", newArr.toString(1));
 
-                SimpanCriteria(newArr);
+//                SimpanCriteria(newArr);
             }catch (JSONException e) {
                 e.printStackTrace();
             }
