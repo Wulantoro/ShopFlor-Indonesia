@@ -100,17 +100,17 @@ public class HomeActivity extends AppCompatActivity {
         final SharedPrefManager sharedPrefManager;
         sharedPrefManager = new SharedPrefManager(this);
 
-//**********************************************************************/
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_drawer, R.string.closedDrawr);
-
-        mDrawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        setupDrawerContent(navigationView);
+//***********************************drawerrrr layout***********************************/
+//        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open_drawer, R.string.closedDrawr);
+//
+//        mDrawerLayout.addDrawerListener(mToggle);
+//        mToggle.syncState();
+//
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//
+//        navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        setupDrawerContent(navigationView);
         /*********************************************************/
 
 
@@ -153,6 +153,12 @@ public class HomeActivity extends AppCompatActivity {
         /**********end tampil tanggal**************************/
 
         userLogin();
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        setTitle(null);
+        Toolbar topToolBar = findViewById(R.id.toolbar);
+        setSupportActionBar(topToolBar);
 
         btnWorkcenter = findViewById(R.id.btnWorkcenter);
         btnWorkcenter.setOnClickListener(new View.OnClickListener() {
@@ -249,27 +255,6 @@ public class HomeActivity extends AppCompatActivity {
             }
 
         });
-
-        btnLogout = findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            //                    @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
-                builder.setTitle("Really Logout?")
-                        .setMessage("Are you sure you want to Logout?")
-                        .setCancelable(false)
-                        .setNegativeButton("No", null)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
-                                startActivity(new Intent(HomeActivity.this, MainActivity.class)
-                                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
-                                finish();
-                            }
-                        }).create().show();
-            }
-        });
     }
 
     private void userLogout() {
@@ -353,42 +338,55 @@ public class HomeActivity extends AppCompatActivity {
                 }).create().show();
     }
 
-    private void setupDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                selectDrawerItem(menuItem);
 
-                return true;
-            }
-        });
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_logout, menu);
+        return  true;
     }
 
-    //method untuk eksekusi action dari tiap menu item
-    public void selectDrawerItem(MenuItem menuItem) {
-        Fragment fragment = null;
-        Class fragmentClass;
-        final SharedPrefManager sharedPrefManager;
-        sharedPrefManager = new SharedPrefManager(this);
-
-        int id = menuItem.getItemId();
-
-        switch (id){
-            case R.id.home:
-                Toast.makeText(getApplicationContext(),"Home",Toast.LENGTH_SHORT).show();
-
-                break;
-            case R.id.nav_manage:
-                Toast.makeText(getApplicationContext(),"Settings",Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_slideshow:
-                Toast.makeText(getApplicationContext(),"Trash",Toast.LENGTH_SHORT).show();
-
-                break;
-            case R.id.nav_logout:
-                finish();
-
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_logout) {
+            userLogout();
         }
+        return super.onOptionsItemSelected(item);
+    }
+//    private void setupDrawerContent(NavigationView navigationView) {
+//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+//                selectDrawerItem(menuItem);
+//
+//                return true;
+//            }
+//        });
+//    }
+
+//    //method untuk eksekusi action dari tiap menu item
+//    public void selectDrawerItem(MenuItem menuItem) {
+//        Fragment fragment = null;
+//        Class fragmentClass;
+//        final SharedPrefManager sharedPrefManager;
+//        sharedPrefManager = new SharedPrefManager(this);
+//
+//        int id = menuItem.getItemId();
+//
+//        switch (id){
+//            case R.id.home:
+//                Toast.makeText(getApplicationContext(),"Home",Toast.LENGTH_SHORT).show();
+//
+//                break;
+//            case R.id.nav_manage:
+//                Toast.makeText(getApplicationContext(),"Settings",Toast.LENGTH_SHORT).show();
+//                break;
+//            case R.id.nav_slideshow:
+//                Toast.makeText(getApplicationContext(),"Trash",Toast.LENGTH_SHORT).show();
+//
+//                break;
+//            case R.id.nav_logout:
+//                finish();
+//
+//        }
 
 //        sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
 //        startActivity(new Intent(getApplicationContext(), MainActivity.class)
@@ -416,26 +414,26 @@ public class HomeActivity extends AppCompatActivity {
 //                break;
 //
 //        }
-
-
-        menuItem.setChecked(true);
-        mDrawerLayout.closeDrawers();
-    }
-
-    public void SelectItem(int possition) {
-
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem){
-        if(mToggle.onOptionsItemSelected(menuItem)){
-            return true;
-        }
-
-        menuItem.setChecked(true);
-        mDrawerLayout.closeDrawers();
-
-        return super.onOptionsItemSelected(menuItem);
-    }
+//
+//
+//        menuItem.setChecked(true);
+//        mDrawerLayout.closeDrawers();
+//    }
+//
+//    public void SelectItem(int possition) {
+//
+//    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem menuItem){
+//        if(mToggle.onOptionsItemSelected(menuItem)){
+//            return true;
+//        }
+//
+//        menuItem.setChecked(true);
+//        mDrawerLayout.closeDrawers();
+//
+//        return super.onOptionsItemSelected(menuItem);
+//    }
 
 }
 

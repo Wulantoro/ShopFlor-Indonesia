@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activity.HomeActivity"
+    tools:showIn="@layout/activity_home">
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/tvUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selamat datang, "
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tvusername0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_toRightOf="@id/tvUser"
+        android:layout_marginTop="10dp"
+        android:text="ini user"/>
+
+    <TextView
+        android:id="@+id/tvdivisi0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_toRightOf="@id/tvusername0"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:text="ini divisi"/>
+
+    <TextView
+        android:id="@+id/tvWC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvUser"
+        android:text="Workcenter : "
+        android:layout_marginLeft="20dp"/>
+
+    <TextView
+        android:id="@+id/tvWCtampil1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvUser"
+        android:text=""
+        android:layout_marginLeft="110dp"/>
+
+    <TextView
+        android:id="@+id/tvnamawc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvUser"
+        android:layout_toRightOf="@id/tvWC"
+        android:textColor="@color/white"
+        android:layout_marginLeft="115dp"/>
+
+    <TextView
+        android:id="@+id/tvidmobile0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tvnamawc"
+        android:layout_below="@id/tvUser"
+        android:textColor="@color/white"
+        android:layout_marginLeft="120dp"/>
+
+    <TextView
+        android:id="@+id/tvTanggalHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_toRightOf="@+id/tvUser"
+        android:layout_marginLeft="450dp"
+        android:paddingTop="10dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="250dp"
+            android:id="@+id/btnWorkcenter"
+            android:text="Work Center"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="50dp"/>
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="250dp"
+            android:id="@+id/btnstartdoc"
+            android:text="Start Document"
+            android:layout_marginTop="50dp"/>
+        <!---->
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="250dp"
+            android:id="@+id/btnOpendoc"
+            android:text="Open Document"
+            android:layout_marginTop="50dp"
+            />
+        <!---->
+        <Button
+            android:id="@+id/btnSucDoc"
+            android:layout_width="150dp"
+            android:layout_height="250dp"
+            android:text="Success Doc"
+            android:layout_marginTop="50dp"/>
+        <!---->
+    </LinearLayout>
+</RelativeLayout>
+    <!--    -->
+
+</RelativeLayout>

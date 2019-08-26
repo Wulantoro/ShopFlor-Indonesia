@@ -101,10 +101,10 @@ public class Add_DocActivity extends AppCompatActivity {
 
         /**************Toolbar**********************************/
         Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         setTitle(null);
         Toolbar topToolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(topToolbar);
+        setSupportActionBar(topToolbar);
         /*******************************************************/
 
         gson = new Gson();
@@ -132,6 +132,7 @@ public class Add_DocActivity extends AppCompatActivity {
         tvSquence1 = findViewById(R.id.tvSquence1);
         tvSquence_Qty1 = findViewById(R.id.tvSquence_Qty1);
 
+        /************************ga kepake*************************/
 //        barcode
 //        String barcode = getIntent().getStringExtra("wccode");
 //        tvNo_Prod1.setText(barcode.substring(0,8));
@@ -229,6 +230,7 @@ public class Add_DocActivity extends AppCompatActivity {
         final List<Sequence> list = adapter1.getList_item();
 
         loadData(tvNo_Prod1.getText().toString(), adapter1);
+
         rv1.setAdapter(adapter1);
         rv1.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         rv1.setAdapter(adapter1);

@@ -1,150 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start"
-    tools:context=".Activity.HomeActivity">
-
-
-    <!-- Layout untuk konten dimana drawer akan muncul disini -->
-   <FrameLayout
-        android:id="@+id/content_frame"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-     Container untuk konten drawer
-  <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:menu="@menu/drawer_view"
-        app:headerLayout="@layout/nav_header"
-        />
+        tools:openDrawer="start"
+        tools:context=".Activity.HomeActivity">
 
-
-    <RelativeLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-    <TextView
-        android:id="@+id/tvUser"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Selamat datang, "
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"/>
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-    <TextView
-        android:id="@+id/tvusername0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-        android:layout_toRightOf="@id/tvUser"
-        android:layout_marginTop="10dp"
-        android:text="ini user"/>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <TextView
-        android:id="@+id/tvdivisi0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="3dp"
-        android:layout_toRightOf="@id/tvusername0"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/white"
-        android:text="ini divisi"/>
+    </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/tvWC"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvUser"
-        android:text="Workcenter : "
-        android:layout_marginLeft="20dp"/>
+    <include layout="@layout/content_home"/>
 
-    <TextView
-        android:id="@+id/tvWCtampil1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvUser"
-        android:text=""
-        android:layout_marginLeft="110dp"/>
+</android.support.design.widget.CoordinatorLayout>
 
-        <TextView
-            android:id="@+id/tvnamawc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvUser"
-            android:layout_toRightOf="@id/tvWC"
-            android:layout_marginLeft="115dp"/>
+    <!--<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:id="@+id/drawer_layout"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:fitsSystemWindows="true"-->
+<!--    tools:openDrawer="start"-->
+<!--    tools:context=".Activity.HomeActivity">-->
 
-        <TextView
-            android:id="@+id/tvidmobile0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tvnamawc"
-            android:layout_below="@id/tvUser"
-            android:textColor="@color/white"
-            android:layout_marginLeft="120dp"/>
 
-    <TextView
-        android:id="@+id/tvTanggalHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_toRightOf="@+id/tvUser"
-        android:layout_marginLeft="450dp"
-        android:paddingTop="10dp"/>
+<!--    &lt;!&ndash; Layout untuk konten dimana drawer akan muncul disini &ndash;&gt;-->
+<!--   <FrameLayout-->
+<!--        android:id="@+id/content_frame"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
 
-        <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tvTanggalHome"
-            android:text="Log out"/>
+<!--     Container untuk konten drawer-->
+<!--  <android.support.design.widget.NavigationView-->
+<!--        android:id="@+id/nav_view"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_gravity="start"-->
+<!--        android:fitsSystemWindows="true"-->
+<!--        app:menu="@menu/drawer_view"-->
+<!--        app:headerLayout="@layout/nav_header"-->
+<!--        />-->
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="250dp"
-            android:id="@+id/btnWorkcenter"
-            android:text="Work Center"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="50dp"/>
 
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="250dp"
-            android:id="@+id/btnstartdoc"
-            android:text="Start Document"
-            android:layout_marginTop="50dp"/>
 
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="250dp"
-            android:id="@+id/btnOpendoc"
-            android:text="Open Document"
-            android:layout_marginTop="50dp"
-            />
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        >-->
 
-        <Button
-            android:id="@+id/btnSucDoc"
-            android:layout_width="150dp"
-            android:layout_height="250dp"
-            android:text="Success Doc"
-            android:layout_marginTop="50dp"/>
+<!--    <TextView-->
+<!--        android:id="@+id/tvUser"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Selamat datang, "-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginTop="10dp"/>-->
 
-    </LinearLayout>
-   </RelativeLayout>
+<!--    <TextView-->
+<!--        android:id="@+id/tvusername0"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="3dp"-->
+<!--        android:layout_toRightOf="@id/tvUser"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:text="ini user"/>-->
 
-</android.support.v4.widget.DrawerLayout>
+<!--    <TextView-->
+<!--        android:id="@+id/tvdivisi0"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="3dp"-->
+<!--        android:layout_toRightOf="@id/tvusername0"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:text="ini divisi"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tvWC"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/tvUser"-->
+<!--        android:text="Workcenter : "-->
+<!--        android:layout_marginLeft="20dp"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tvWCtampil1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/tvUser"-->
+<!--        android:text=""-->
+<!--        android:layout_marginLeft="110dp"/>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvnamawc"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/tvUser"-->
+<!--            android:layout_toRightOf="@id/tvWC"-->
+<!--            android:layout_marginLeft="115dp"/>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvidmobile0"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_toRightOf="@id/tvnamawc"-->
+<!--            android:layout_below="@id/tvUser"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:layout_marginLeft="120dp"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/tvTanggalHome"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text=""-->
+<!--        android:layout_toRightOf="@+id/tvUser"-->
+<!--        android:layout_marginLeft="450dp"-->
+<!--        android:paddingTop="10dp"/>-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btnLogout"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_toRightOf="@id/tvTanggalHome"-->
+<!--            android:text="Log out"/>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:orientation="horizontal">-->
+<!--        <Button-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="250dp"-->
+<!--            android:id="@+id/btnWorkcenter"-->
+<!--            android:text="Work Center"-->
+<!--            android:layout_marginLeft="60dp"-->
+<!--            android:layout_marginTop="50dp"/>-->
+
+<!--        <Button-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="250dp"-->
+<!--            android:id="@+id/btnstartdoc"-->
+<!--            android:text="Start Document"-->
+<!--            android:layout_marginTop="50dp"/>-->
+
+<!--        <Button-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="250dp"-->
+<!--            android:id="@+id/btnOpendoc"-->
+<!--            android:text="Open Document"-->
+<!--            android:layout_marginTop="50dp"-->
+<!--            />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/btnSucDoc"-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="250dp"-->
+<!--            android:text="Success Doc"-->
+<!--            android:layout_marginTop="50dp"/>-->
+
+<!--    </LinearLayout>-->
+<!--   </RelativeLayout>-->
+
+<!--</android.support.v4.widget.DrawerLayout>-->
