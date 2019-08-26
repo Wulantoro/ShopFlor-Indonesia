@@ -247,10 +247,24 @@ public class SuccessDocActivity extends AppCompatActivity {
         });
     }
 
-    public void onBackPressed(){
+    public void onBackPressed() {
 
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+        pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+
+        String wc = tvworkcenter4.getText().toString();
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("tvworkcenter", wc);
+        editor.commit();
+
+//        pref = getSharedPreferences("Namewc", MODE_PRIVATE);
+//        String tvnamewc = tvnamawc0.getText().toString();
+//        SharedPreferences.Editor editor1 = pref.edit();
+//        editor1.putString("tvnamewc", tvnamewc);
+//        editor1.commit();
+
         startActivity(intent);
+        finish();
     }
 
     public void btnclearClicked(View v) {

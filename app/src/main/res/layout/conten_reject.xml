@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:background="@color/white"
@@ -186,7 +186,7 @@
 
 
     <RelativeLayout
-        android:id="@+id/tvtampil"
+        android:id="@+id/reltampil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/content1"
@@ -357,6 +357,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_below="@id/tvjammulai2"
+            android:textColor="@color/white"
             android:layout_toRightOf="@id/tvdocnum2"
             android:text="namawc"/>
 
@@ -371,11 +372,16 @@
             android:text="docdate"/>
     </RelativeLayout>
 
+            <RelativeLayout
+               android:id="@+id/relList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/reltampil"
+                >
         <Button
             android:id="@+id/btnFrag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvtampil"
             android:text="Tambah Reject"/>
 
 
@@ -388,15 +394,18 @@
             tools:listitem="@layout/item_reject_row">
         </android.support.v7.widget.RecyclerView>
 
-            <ImageButton
-                android:id="@+id/ibscan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/rvInputReject"
-                android:layout_below="@id/btnFrag"
-                android:layout_marginLeft="50dp"
-                android:src="@drawable/ic_camera"
-                />
+                <ImageButton
+                    android:id="@+id/ibscan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/btnFrag"
+                    android:layout_marginLeft="195dp"
+                    android:background="@color/white"
+                    android:src="@drawable/ic_camera"
+                    />
+            </RelativeLayout>
+
+
     </RelativeLayout>
     </LinearLayout>
 </RelativeLayout>

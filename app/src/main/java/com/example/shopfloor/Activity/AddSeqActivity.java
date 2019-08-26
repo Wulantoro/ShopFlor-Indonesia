@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
@@ -21,14 +23,22 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.shopfloor.Adapter.SuccDocAdapter;
+import com.example.shopfloor.Models.Header;
+import com.example.shopfloor.Models.LastId;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 public class AddSeqActivity extends AppCompatActivity {
     private TextView tvInputSeq;
@@ -70,7 +80,12 @@ public class AddSeqActivity extends AppCompatActivity {
     private TextView tvshift0;
     private TextView tvcodeshift0;
     private Button btnBack;
-
+    private TextView tvlastdocnum;
+    private SuccDocAdapter succDocAdapter;
+    private Gson gson;
+    private Handler mHandler;
+    private TextView tvmobileid;
+    private TextView tvid;
 
 
     @Override
@@ -106,6 +121,15 @@ public class AddSeqActivity extends AppCompatActivity {
         tvusername3 = findViewById(R.id.tvusername3);
         tvshift0 = findViewById(R.id.tvshift0);
         tvcodeshift0 = findViewById(R.id.tvcodeshift0);
+        tvlastdocnum = findViewById(R.id.tvlastdocnum);
+        tvmobileid = findViewById(R.id.tvmobileid);
+        tvid = findViewById(R.id.tvid);
+        succDocAdapter = new SuccDocAdapter(this);
+
+        gson = new Gson();
+
+        tvmobileid.setText(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
+        lastId(tvmobileid.getText().toString());
 
         tvInputSeq = findViewById(R.id.tvInputSeq);
         pref = getSharedPreferences("inQty", MODE_PRIVATE);
@@ -193,8 +217,21 @@ public class AddSeqActivity extends AppCompatActivity {
 
         Log.e("Date 2 " ,tvtglmulai7.getText().toString());
 
+/***************reload otomatis****************/
+        this.mHandler = new Handler();
+        m_Runnable.run();
+
     }
 
+    private final Runnable m_Runnable = new Runnable() {
+        @Override
+        public void run() {
+//            Toast.makeText(getApplicationContext(),"in runnable",Toast.LENGTH_SHORT).show();
+            lastDocnum();
+            AddSeqActivity.this.mHandler.postDelayed(m_Runnable, 2000);
+        }
+    };
+/*****************************************************************************************/
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_seq, menu);
         return true;
@@ -211,13 +248,115 @@ public class AddSeqActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void lastId(String mobile) {
+
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastid?mobileId=" + mobile)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        List<LastId> result = new ArrayList<>();
+                        try {
+                            String message = response.getString("message");
+
+                            if (message.equals("id ketemu")) {
+                                String records = response.getString("data");
+
+                                JSONArray dataArr = new JSONArray(records);
+
+                                if (dataArr.length() > 0) {
+                                    for (int i = 0; i < dataArr.length(); i++) {
+
+                                        LastId lastId = gson.fromJson(dataArr.getJSONObject(i).toString(), LastId.class);
+                                        result.add(lastId);
+
+                                        tvid.setText(String.valueOf(lastId.getId()+1));
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
+
+    }
+
+    public void lastDocnum() {
+
+        if (succDocAdapter != null)
+            succDocAdapter.clearAll();
+
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastdocnum")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        List<Header> results = new ArrayList<>();
+                        try {
+                            Log.e("tampil last = ", response.toString(1));
+
+                            if (results != null)
+                                results.clear();
+
+                            String message = response.getString("message");
+
+                            if (message.equals("data ketemu")) {
+                                String records = response.getString("data");
+
+                                JSONArray dataArr = new JSONArray(records);
+
+                                if (dataArr.length() > 0) {
+                                    for (int i = 0; i < dataArr.length(); i++) {
+                                        Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
+                                        results.add(header);
+
+                                        String S = "S";
+                                        String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+                                        String docnum = header.getDocNum().substring(9);
+                                        String AN = "" + (Integer.parseInt(docnum) + 1);
+                                        String Nol = "";
+
+                                        if (AN.length() == 1) {
+                                            Nol = "00";
+                                        } else if (AN.length() == 2) {
+                                            Nol = "0";
+                                        } else if (AN.length() == 3) {
+                                            Nol = "";
+                                        }
+
+                                        tvlastdocnum.setText(S+ nodoc + Nol + AN);
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        succDocAdapter.addAll(results);
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
+    }
+
 
     private void upHeader() {
         JSONObject jsonObject = new JSONObject();
 
         try {
             JSONArray newArr = new JSONArray();
-            jsonObject.put("docNum", tvdocnum7.getText().toString());
+            jsonObject.put("id", tvid.getText().toString());
+            jsonObject.put("mobileId", tvmobileid.getText().toString());
+            jsonObject.put("docNum", tvlastdocnum.getText().toString());
             jsonObject.put("prodNo", tvprod7.getText().toString());
             jsonObject.put("prodCode", tvprodcode7.getText().toString());
             jsonObject.put("prodName", tvnmprod7.getText().toString());

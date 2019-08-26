@@ -1,11 +1,10 @@
 package com.example.shopfloor.Models;
 
-
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Parcelable.Creator;
 
-public class Header implements Parcelable
+public class LastId implements Parcelable
 {
 
     private int docEntry;
@@ -31,31 +30,30 @@ public class Header implements Parcelable
     private String outQty;
     private Object remarks;
     private String userId;
-    private String QcName;
+    private String mobileId;
     private int posted;
     private int targetEntry;
     private String uploadTime;
     private String workCenter;
     private String status;
-    private String mobileId;
-    public final static Parcelable.Creator<Header> CREATOR = new Creator<Header>() {
+    public final static Parcelable.Creator<LastId> CREATOR = new Creator<LastId>() {
 
 
         @SuppressWarnings({
                 "unchecked"
         })
-        public Header createFromParcel(Parcel in) {
-            return new Header(in);
+        public LastId createFromParcel(Parcel in) {
+            return new LastId(in);
         }
 
-        public Header[] newArray(int size) {
-            return (new Header[size]);
+        public LastId[] newArray(int size) {
+            return (new LastId[size]);
         }
 
     }
             ;
 
-    protected Header(Parcel in) {
+    protected LastId(Parcel in) {
         this.docEntry = ((int) in.readValue((int.class.getClassLoader())));
         this.id = ((int) in.readValue((int.class.getClassLoader())));
         this.docNum = ((String) in.readValue((String.class.getClassLoader())));
@@ -79,16 +77,15 @@ public class Header implements Parcelable
         this.outQty = ((String) in.readValue((String.class.getClassLoader())));
         this.remarks = ((Object) in.readValue((Object.class.getClassLoader())));
         this.userId = ((String) in.readValue((String.class.getClassLoader())));
-        this.QcName = ((String) in.readValue((String.class.getClassLoader())));
+        this.mobileId = ((String) in.readValue((String.class.getClassLoader())));
         this.posted = ((int) in.readValue((int.class.getClassLoader())));
         this.targetEntry = ((int) in.readValue((int.class.getClassLoader())));
         this.uploadTime = ((String) in.readValue((String.class.getClassLoader())));
         this.workCenter = ((String) in.readValue((String.class.getClassLoader())));
         this.status = ((String) in.readValue((String.class.getClassLoader())));
-        this.mobileId = ((String) in.readValue((String.class.getClassLoader())));
     }
 
-    public Header() {
+    public LastId() {
     }
 
     public int getDocEntry() {
@@ -275,12 +272,12 @@ public class Header implements Parcelable
         this.userId = userId;
     }
 
-    public String getQcName() {
-        return QcName;
+    public String getMobileId() {
+        return mobileId;
     }
 
-    public void setQcName(String mobileId) {
-        this.QcName = QcName;
+    public void setMobileId(String mobileId) {
+        this.mobileId = mobileId;
     }
 
     public int getPosted() {
@@ -323,14 +320,6 @@ public class Header implements Parcelable
         this.status = status;
     }
 
-    public String getMobileId() {
-        return mobileId;
-    }
-
-    public void setMobileId(String mobileId) {
-        this.mobileId = mobileId;
-    }
-
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(docEntry);
         dest.writeValue(id);
@@ -355,16 +344,16 @@ public class Header implements Parcelable
         dest.writeValue(outQty);
         dest.writeValue(remarks);
         dest.writeValue(userId);
-        dest.writeValue(QcName);
+        dest.writeValue(mobileId);
         dest.writeValue(posted);
         dest.writeValue(targetEntry);
         dest.writeValue(uploadTime);
         dest.writeValue(workCenter);
         dest.writeValue(status);
-        dest.writeValue(mobileId);
     }
 
     public int describeContents() {
         return 0;
     }
+
 }
