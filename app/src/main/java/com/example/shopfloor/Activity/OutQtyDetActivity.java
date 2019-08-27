@@ -46,6 +46,7 @@ public class OutQtyDetActivity extends AppCompatActivity {
     private TextView tvshift1;
     private TextView tvcodeshift2;
     private TextView tvnamawc4;
+    private TextView tvid3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +54,10 @@ public class OutQtyDetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_out_qty_det);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         setTitle(null);
         Toolbar topToolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(topToolbar);
+        setSupportActionBar(topToolbar);
 
         tvOutputSeq1 = findViewById(R.id.tvOutputSeq1);
 
@@ -82,6 +83,7 @@ public class OutQtyDetActivity extends AppCompatActivity {
         tvshift1 = findViewById(R.id.tvshift1);
         tvcodeshift2 = findViewById(R.id.tvcodeshift2);
         tvnamawc4 = findViewById(R.id.tvnamawc4);
+        tvid3 = findViewById(R.id.tvid3);
 
         TextView tvdocnum6 = findViewById(R.id.tvdocnum6);
         prf = getSharedPreferences("docNum", MODE_PRIVATE);
@@ -171,6 +173,10 @@ public class OutQtyDetActivity extends AppCompatActivity {
         prf = getSharedPreferences("Namawc", MODE_PRIVATE);
         tvnamawc.setText(prf.getString("tvnamawc", null));
 
+        TextView tvid = findViewById(R.id.tvid3);
+        prf = getSharedPreferences("Id", MODE_PRIVATE);
+        tvid.setText(String.valueOf(prf.getString("tvid", null)));
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -180,6 +186,7 @@ public class OutQtyDetActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
 
         if (id == R.id.action_seq && tvOutputSeq1.length() != 0) {
             pref = getSharedPreferences("inQty", MODE_PRIVATE);
@@ -296,12 +303,22 @@ public class OutQtyDetActivity extends AppCompatActivity {
             editor18.putString("tvnamawc", tvnamawc);
             editor18.commit();
 
-
+            pref = getSharedPreferences("Id", MODE_PRIVATE);
+            String tvid = tvid3.getText().toString();
+            SharedPreferences.Editor editor19 = pref.edit();
+            editor19.putString("tvid", tvid);
+            editor19.commit();
 
             startActivity(new Intent(getApplicationContext(), CriteriaQCActivity.class));
-        } else {
+        }else {
             Toast.makeText(getApplicationContext(), "Output Quantity tidak boleh kosong", Toast.LENGTH_SHORT).show();
         }
+
+//        if (id == R.id.action_seq && tvOutputSeq1.length() == 0) {
+//            Toast.makeText(getApplicationContext(), "Output Quantity tidak boleh kosong", Toast.LENGTH_SHORT).show();
+//        } else  {
+//            Toast.makeText(getApplicationContext(), "Output Quantity tidak boleh besar dari Input Quantity", Toast.LENGTH_SHORT).show();
+//        }
         return true;
     }
 

@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvnoprod1"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="Nama Produk"/>
         <TextView
             android:id="@+id/tvnmprod1"
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvnmprod1"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="Sequence"/>
         <TextView
             android:id="@+id/tvsequence1"
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvsequence1"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="Sequence Qty"/>
         <TextView
             android:id="@+id/tvseqqty1"
@@ -85,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvseqqty1"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="Tanggal Selesai :"/>
         <TextView
             android:id="@+id/tvtglsel1"
@@ -99,7 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvtglsel1"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="Jam Selesai"/>
         <TextView
             android:id="@+id/tvjamsel1"
@@ -113,7 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvjamsel1"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="Doc.Status"/>
         <TextView
             android:id="@+id/tvdocsts2"
@@ -133,7 +133,7 @@
         <RelativeLayout
             android:id="@+id/content1"
             android:layout_width="150dp"
-            android:layout_height="50dp">
+            android:layout_height="70dp">
 
             <TextView
                 android:id="@+id/tvInputQty"
@@ -148,6 +148,12 @@
                 android:layout_below="@id/tvInputQty"
                 android:textColor="@color/blue_A700"
                 android:text="ini input quantity" />
+            <TextView
+                android:id="@+id/tvmobileid0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvInputQty1"
+                android:text="mobileid"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -182,6 +188,14 @@
             android:textColor="@color/blue_A700"
             android:textSize="18sp"
             android:text="workcemter"/>
+
+            <TextView
+                android:id="@+id/tvid5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvWorkcenter"
+                android:layout_marginLeft="5dp"
+                android:text="id"/>
         </RelativeLayout>
 
 
@@ -289,7 +303,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvposted7"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="username"/>
         <TextView
             android:id="@+id/tvqcname4"

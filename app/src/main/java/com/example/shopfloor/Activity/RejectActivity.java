@@ -3,6 +3,7 @@ package com.example.shopfloor.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.Settings;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -69,6 +70,8 @@ public class RejectActivity extends AppCompatActivity {
     private TextView tvshift4;
     private TextView tvcodeshift4;
     private TextView tvtglmulai2;
+    private TextView tvid5;
+    private TextView tvmobileid0;
 
     private TextView tvdocentry7;
     private TextView tvdocnum2;
@@ -89,10 +92,10 @@ public class RejectActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reject);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         setTitle(null);
         Toolbar topToolBar = findViewById(R.id.toolbar);
-//        setSupportActionBar(topToolBar);
+        setSupportActionBar(topToolBar);
 
         tvdocentry0 = findViewById(R.id.tvdocentry0);
         tvdocnum1 = findViewById(R.id.tvdocnum1);
@@ -123,8 +126,12 @@ public class RejectActivity extends AppCompatActivity {
         tvdocentry7 = findViewById(R.id.tvdocentry7);
         tvnamawc6 = findViewById(R.id.tvnamawc6);
         ibscan = findViewById(R.id.ibscan);
+        tvid5 = findViewById(R.id.tvid5);
+        tvmobileid0 = findViewById(R.id.tvmobileid0);
 
         openDocAdapter = new OpenDocAdapter(this);
+
+        tvmobileid0.setText(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
 
         TextView tvdocnum = findViewById(R.id.tvdocnum1);
         prf = getSharedPreferences("Docnum", MODE_PRIVATE);
@@ -245,6 +252,10 @@ public class RejectActivity extends AppCompatActivity {
        prf = getSharedPreferences("Namawc", MODE_PRIVATE);
        tvnamawc.setText(prf.getString("tvnamawc", null));
 
+       TextView tvid = findViewById(R.id.tvid5);
+       prf = getSharedPreferences("Id", MODE_PRIVATE);
+       tvid.setText(String.valueOf(prf.getString("tvid", null)));
+
         TextView tvstatus = findViewById(R.id.tvstatus0);
         tvstatus.setText("Completed");
 
@@ -255,14 +266,22 @@ public class RejectActivity extends AppCompatActivity {
         tvposted1.setText("1");
 
 
-       btnFrag = findViewById(R.id.btnFrag);
-       btnFrag.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Intent intent = new Intent(RejectActivity.this, RespRejectFragActivity.class);
-               startActivity(intent);
-           }
-       });
+/*****************************belum sempputna***************************/
+            btnFrag = findViewById(R.id.btnFrag);
+            btnFrag.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TextView in = findViewById(R.id.tvInputQty1);
+                    if (tvInputQty1.length() == tvOutputQty1.length()) {
+                        Toast.makeText(getApplicationContext(), "Tidak perlu", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Intent intent = new Intent(RejectActivity.this, RespRejectFragActivity.class);
+                        startActivity(intent);
+                    }
+
+                }
+            });
+
 
         ibscan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -365,6 +384,7 @@ public class RejectActivity extends AppCompatActivity {
             jsonObject.put("UploadTime", tvjamsel1.getText().toString());
             jsonObject.put("QcName", tvqcname4.getText().toString());
             jsonObject.put("userId", tvusername8.getText().toString());
+            jsonObject.put("id", tvid5.getText().toString());
 
         }
         catch (JSONException e) {
