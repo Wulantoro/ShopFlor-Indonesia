@@ -60,6 +60,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
     private Gson gson;
     private WorkcenterAdapter workcenterAdapter;
     private TextView tvnamawc3;
+    private TextView tvid1;
 
     public SharedPreferences pref;
     SharedPreferences prf;
@@ -91,6 +92,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvusername5 = findViewById(R.id.tvusername5);
         tvcodeshift1 = findViewById(R.id.tvcodeshift1);
         tvnamawc3 = findViewById(R.id.tvnamawc3);
+        tvid1 = findViewById(R.id.tvid1);
 
         adapter = new OpenDocAdapter(this);
         gson = new Gson();
@@ -118,6 +120,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvposted4.setText(String.valueOf(header.getPosted()));
         tvusername5.setText(header.getUserId());
         tvcodeshift1.setText(header.getShift());
+        tvid1.setText(String.valueOf(header.getId()));
 
 
         TextView tvqcname = findViewById(R.id.tvqcname1);
@@ -125,10 +128,10 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvqcname.setText(prf.getString("tvqcname", null));
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        setTitle(null);
+        setSupportActionBar(toolbar);
+        setTitle(null);
         Toolbar topToolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(topToolbar);
+        setSupportActionBar(topToolbar);
 
         loadData(tvworkcenter3.getText().toString());
 
@@ -291,6 +294,12 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         SharedPreferences.Editor editor21 = pref.edit();
         editor21.putString("tvnamawc", tvnamawc);
         editor21.commit();
+
+        pref = getSharedPreferences("Id", MODE_PRIVATE);
+        String tvid = tvid1.getText().toString();
+        SharedPreferences.Editor editor22 = pref.edit();
+        editor22.putString("tvid", tvid);
+        editor22.commit();
 
         startActivity(new Intent(getApplicationContext(), OutQtyDetActivity.class));
         return true;

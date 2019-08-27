@@ -82,6 +82,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
     private static final String TAG = "MyActivity";
     private TextView tvsequence1;
     private TextView tvnamawc5;
+    private TextView tvid4;
 
     /***************criteria********/
     public static TextView tvcriteria1;
@@ -119,14 +120,15 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvcodeshift3 = findViewById(R.id.tvcodeshift3);
         tvsequence1 = findViewById(R.id.tvsequence1);
         tvnamawc5 = findViewById(R.id.tvnamawc5);
+        tvid4 = findViewById(R.id.tvid4);
 
         /*************************************************************/
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         setTitle(null);
         Toolbar topToolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(topToolbar);
+        setSupportActionBar(topToolbar);
 
         TextView tvinqty = findViewById(R.id.tvInputQty3);
         prf = getSharedPreferences("inQty", MODE_PRIVATE);
@@ -211,6 +213,10 @@ public class CriteriaQCActivity extends AppCompatActivity {
         TextView tvnamawc = findViewById(R.id.tvnamawc5);
         prf = getSharedPreferences("Namawc", MODE_PRIVATE);
         tvnamawc.setText(prf.getString("tvnamawc", null));
+
+        TextView tvid = findViewById(R.id.tvid4);
+        prf = getSharedPreferences("Id", MODE_PRIVATE);
+        tvid.setText(String.valueOf(prf.getString("tvid", null)));
 
         TextView tvstatus = findViewById(R.id.tvstatus2);
         tvstatus.setText("Completed");
@@ -490,6 +496,12 @@ public class CriteriaQCActivity extends AppCompatActivity {
             SharedPreferences.Editor editor21 = pref.edit();
             editor21.putString("tvnamawc", tvnamawc);
             editor21.commit();
+
+            pref = getSharedPreferences("Id", MODE_PRIVATE);
+            String tvid = tvid4.getText().toString();
+            SharedPreferences.Editor editor22 = pref.edit();
+            editor22.putString("tvid", tvid);
+            editor22.commit();
 
 //            Intent intent = new Intent(getApplicationContext(), RejectActivity.class);
             startActivity(new Intent(getApplicationContext(), RejectActivity.class));

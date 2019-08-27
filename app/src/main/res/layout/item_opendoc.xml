@@ -150,6 +150,14 @@
             android:layout_marginTop="5dp"
             android:textColor="@color/white"
             android:text="ini docentry"/>
+
+        <TextView
+            android:id="@+id/tvid2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvposted1"
+            android:layout_marginLeft="5dp"
+            android:text="id"/>
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

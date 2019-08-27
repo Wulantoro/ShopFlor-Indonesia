@@ -56,6 +56,7 @@ public class OpenDocAdapter extends RecyclerView.Adapter<OpenDocAdapter.ViewHold
         holder.tvdocentry.setText(String.valueOf(header.getDocEntry()));
         holder.tvposted1.setText(header.getStatus());
         holder.tvusername4.setText(header.getUserId());
+        holder.tvid2.setText(String.valueOf(header.getId()));
 
 
 
@@ -130,6 +131,7 @@ public class OpenDocAdapter extends RecyclerView.Adapter<OpenDocAdapter.ViewHold
         public TextView tvdocentry;
         public TextView tvusername4;
         public TextView tvcodeshift1;
+        public TextView tvid2;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -145,6 +147,7 @@ public class OpenDocAdapter extends RecyclerView.Adapter<OpenDocAdapter.ViewHold
             tvdocentry = itemView.findViewById(R.id.tvdocentry);
             tvusername4 = itemView.findViewById(R.id.tvusername4);
             tvcodeshift1 = itemView.findViewById(R.id.tvcodeshift1);
+            tvid2 = itemView.findViewById(R.id.tvid2);
         }
     }
 }

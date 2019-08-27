@@ -216,10 +216,10 @@ public class HomeActivity extends AppCompatActivity {
                     editor.putString("workcenter", wc1);
                     editor.commit();
 
-                    pref = getSharedPreferences("Qcname", MODE_PRIVATE);
+                    pref = getSharedPreferences("Username", MODE_PRIVATE);
                     String tvqcname = tvusername0.getText().toString();
                     SharedPreferences.Editor editor1 = pref.edit();
-                    editor1.putString("tvqcname", tvqcname);
+                    editor1.putString("tvusername", tvqcname);
                     editor1.commit();
 
                     pref = getSharedPreferences("keynamawc", MODE_PRIVATE);
