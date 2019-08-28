@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +25,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.InputRejectAdapter;
 import com.example.shopfloor.Adapter.RejectAdapter;
 import com.example.shopfloor.Models.InputReject;
+import com.example.shopfloor.Models.LastId;
 import com.example.shopfloor.Models.Reject;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
@@ -51,6 +53,8 @@ public class RespRejectFragActivity extends AppCompatActivity {
     private TextView tvdocentry4;
     private TextView btnSimpan;
     private TextView tvlinenumb0;
+    private TextView tvmobileid1;
+    private TextView tvid6;
     SharedPreferences pref, prf;
 
     private RejectAdapter adapter1;
@@ -68,6 +72,12 @@ public class RespRejectFragActivity extends AppCompatActivity {
         btnSimpan = findViewById(R.id.btnSimpan);
         tvRejectQty = findViewById(R.id.tvRejectQty);
         tvlinenumb0 = findViewById(R.id.tvlinenumb0);
+        tvmobileid1 = findViewById(R.id.tvmobileid1);
+        tvid6 = findViewById(R.id.tvid6);
+
+
+        tvmobileid1.setText(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
+        lastId(tvmobileid1.getText().toString());
 
 
         tvdocentry4 = findViewById(R.id.tvdocentry4);
@@ -109,6 +119,46 @@ public class RespRejectFragActivity extends AppCompatActivity {
 
 
         loadDatalastReject(tvdocentry4.getText().toString());
+
+    }
+
+    public void lastId(String mobile) {
+
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastid?mobileId=" + mobile)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        List<LastId> result = new ArrayList<>();
+                        try {
+                            Log.e("tampil last = ", response.toString(1));
+                            String message = response.getString("message");
+
+                            if (message.equals("id ketemu")) {
+                                String records = response.getString("data");
+
+                                JSONArray dataArr = new JSONArray(records);
+                                Log.e("iddd", result.toString());
+
+                                if (dataArr.length() > 0) {
+                                    for (int i = 0; i < dataArr.length(); i++) {
+                                        LastId lastId = gson.fromJson(dataArr.getJSONObject(i).toString(), LastId.class);
+                                        result.add(lastId);
+                                        tvid6.setText(String.valueOf(lastId.getId()));
+
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();;
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+
+                    }
+                });
 
     }
 
@@ -223,7 +273,8 @@ public class RespRejectFragActivity extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("docEntry", tvdocentry4.getText().toString());
+            jsonObject.put("hostHeadEntry", tvdocentry4.getText().toString());
+            jsonObject.put("id", tvid6.getText().toString());
             jsonObject.put("lineNumber", tvlinenumb0.getText().toString());
             jsonObject.put("rejectCode", tvcodereject0.getText().toString());
             jsonObject.put("rejectName", tvReject3.getText().toString());
@@ -262,7 +313,7 @@ public class RespRejectFragActivity extends AppCompatActivity {
 
         Log.e("docentry == ", "check docentry = " + tvdocentry4.getText().toString());
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastreject?docEntry="+docentry)
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastreject?hostHeadEntry="+docentry)
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {

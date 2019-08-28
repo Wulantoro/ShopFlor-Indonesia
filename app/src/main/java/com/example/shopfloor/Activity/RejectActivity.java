@@ -271,8 +271,8 @@ public class RejectActivity extends AppCompatActivity {
             btnFrag.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    TextView in = findViewById(R.id.tvInputQty1);
-                    if (tvInputQty1.length() == tvOutputQty1.length()) {
+
+                    if (Integer.parseInt(String.valueOf(tvInputQty1.getText())) == Integer.parseInt(String.valueOf(tvOutputQty1.getText()))) {
                         Toast.makeText(getApplicationContext(), "Tidak perlu", Toast.LENGTH_SHORT).show();
                     }else {
                         Intent intent = new Intent(RejectActivity.this, RespRejectFragActivity.class);
@@ -313,7 +313,7 @@ public class RejectActivity extends AppCompatActivity {
         Log.e("docnum3000 == ", "check docnum = " + tvdocentry0.getText().toString());
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/inputreject?docEntry="+ prf.getString("tvdocentry", null))
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/inputreject?docEntry="+ docentry)
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/inputreject?hostHeadEntry="+ docentry)
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
