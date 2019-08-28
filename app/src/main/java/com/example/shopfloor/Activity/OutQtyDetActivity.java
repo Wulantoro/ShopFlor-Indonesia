@@ -188,7 +188,137 @@ public class OutQtyDetActivity extends AppCompatActivity {
         int id = item.getItemId();
 
 
-        if (id == R.id.action_seq && tvOutputSeq1.length() != 0) {
+//        if (id == R.id.action_seq && tvOutputSeq1.length() != 0) {
+//            pref = getSharedPreferences("inQty", MODE_PRIVATE);
+//            String tvinqty = tvinqty3.getText().toString();
+//            SharedPreferences.Editor editor = pref.edit();
+//            editor.putString("tvinqty", tvinqty);
+//            editor.commit();
+//
+//            pref = getSharedPreferences("Noprod", MODE_PRIVATE);
+//            String tvnoprod = tvnoprod3.getText().toString();
+//            SharedPreferences.Editor editor1 = pref.edit();
+//            editor1.putString("tvnoprod", tvnoprod);
+//            editor1.commit();
+//
+//            pref = getSharedPreferences("outQty", MODE_PRIVATE);
+//            String tvoutqty = tvOutputSeq1.getText().toString();
+//            SharedPreferences.Editor editor2 = pref.edit();
+//            editor2.putString("tvoutqty", tvoutqty);
+//            editor2.commit();
+//
+//            pref = getSharedPreferences("prodName", MODE_PRIVATE);
+//            String tvprodname = tvnmprod2.getText().toString();
+//            SharedPreferences.Editor editor3 = pref.edit();
+//            editor3.putString("tvprodname", tvprodname);
+//            editor3.commit();
+//
+//            pref = getSharedPreferences("Sequence", MODE_PRIVATE);
+//            String tvsequence = tvsequence3.getText().toString();
+//            SharedPreferences.Editor editor4 = pref.edit();
+//            editor4.putString("tvsequence", tvsequence);
+//            editor4.commit();
+//
+//            pref = getSharedPreferences("SequenceQty", MODE_PRIVATE);
+//            String tvseqqty = tvseqqty2.getText().toString();
+//            SharedPreferences.Editor editor5 = pref.edit();
+//            editor5.putString("tvseqqty", tvseqqty);
+//            editor5.commit();
+//
+//            pref = getSharedPreferences("workCenter", MODE_PRIVATE);
+//            String tvworkcenter = tvworkcenter1.getText().toString();
+//            SharedPreferences.Editor editor6 = pref.edit();
+//            editor6.putString("tvworkcenter", tvworkcenter);
+//            editor6.commit();
+//
+//            pref = getSharedPreferences("prodPlanQty", MODE_PRIVATE);
+//            String tvprodplanqty = tvprodplanqty1.getText().toString();
+//            SharedPreferences.Editor editor7 = pref.edit();
+//            editor7.putString("tvprodplanqty", tvprodplanqty);
+//            editor7.commit();
+//
+//            pref = getSharedPreferences("routeCode", MODE_PRIVATE);
+//            String tvroutecode = tvroutecode0.getText().toString();
+//            SharedPreferences.Editor editor8 = pref.edit();
+//            editor8.putString("tvroutecode", tvroutecode);
+//            editor8.commit();
+//
+//            pref = getSharedPreferences("routeName", MODE_PRIVATE);
+//            String tvroutename = tvroutename0.getText().toString();
+//            SharedPreferences.Editor editor9 = pref.edit();
+//            editor9.putString("tvroutename", tvroutename);
+//            editor9.commit();
+//
+//            pref = getSharedPreferences("tanggalMulai", MODE_PRIVATE);
+//            String tvtglmulai = tvtglmulai0.getText().toString();
+//            SharedPreferences.Editor editor10 = pref.edit();
+//            editor10.putString("tvtglmulai", tvtglmulai);
+//            editor10.commit();
+//
+//            pref = getSharedPreferences("jamMulai", MODE_PRIVATE);
+//            String tvjammulai = tvjammulai0.getText().toString();
+//            SharedPreferences.Editor editor11 = pref.edit();
+//            editor11.putString("tvjammulai", tvjammulai);
+//            editor11.commit();
+//
+//            pref = getSharedPreferences("posted", MODE_PRIVATE);
+//            String tvposted = tvposted5.getText().toString();
+//            SharedPreferences.Editor editor12 = pref.edit();
+//            editor12.putString("tvposted", tvposted);
+//            editor12.commit();
+//
+//            pref = getSharedPreferences("Qcname", MODE_PRIVATE);
+//            String tvqcname = tvqcname2.getText().toString();
+//            SharedPreferences.Editor editor13 = pref.edit();
+//            editor13.putString("tvqcname", tvqcname);
+//            editor13.commit();
+//
+//            pref = getSharedPreferences("Username", MODE_PRIVATE);
+//            String tvusername = tvusername6.getText().toString();
+//            SharedPreferences.Editor editor14 = pref.edit();
+//            editor14.putString("tvusername", tvusername);
+//            editor14.commit();
+//
+//            pref = getSharedPreferences("Shift", MODE_PRIVATE);
+//            String tvshift = tvshift1.getText().toString();
+//            SharedPreferences.Editor editor15 = pref.edit();
+//            editor15.putString("tvshift", tvshift);
+//            editor15.commit();
+//
+//            pref = getSharedPreferences("Docnum", MODE_PRIVATE);
+//            String tvdocnum = tvdocnum6.getText().toString();
+//            SharedPreferences.Editor editor16 = pref.edit();
+//            editor16.putString("tvdocnum", tvdocnum);
+//            editor16.commit();
+//
+//            pref = getSharedPreferences("Codeshift", MODE_PRIVATE);
+//            String tvcodesh = tvcodeshift2.getText().toString();
+//            SharedPreferences.Editor editor17 = pref.edit();
+//            editor17.putString("tvcodeshift", tvcodesh);
+//            editor17.commit();
+//
+//            pref = getSharedPreferences("Namawc", MODE_PRIVATE);
+//            String tvnamawc = tvnamawc4.getText().toString();
+//            SharedPreferences.Editor editor18 = pref.edit();
+//            editor18.putString("tvnamawc", tvnamawc);
+//            editor18.commit();
+//
+//            pref = getSharedPreferences("Id", MODE_PRIVATE);
+//            String tvid = tvid3.getText().toString();
+//            SharedPreferences.Editor editor19 = pref.edit();
+//            editor19.putString("tvid", tvid);
+//            editor19.commit();
+//
+//            startActivity(new Intent(getApplicationContext(), CriteriaQCActivity.class));
+//        }else {
+//            Toast.makeText(getApplicationContext(), "Output Quantity tidak boleh kosong", Toast.LENGTH_SHORT).show();
+//        }
+
+        if (id == R.id.action_seq && tvOutputSeq1.length() == 0) {
+            Toast.makeText(getApplicationContext(), "Output Quantity tidak boleh kosong", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_seq && Integer.parseInt(String.valueOf(tvOutputSeq1.getText())) > Integer.parseInt(String.valueOf(tvinqty3.getText()))) {
+            Toast.makeText(getApplicationContext(), "Output Quantity tidak boleh besar dari Input Quantity", Toast.LENGTH_SHORT).show();
+        } else {
             pref = getSharedPreferences("inQty", MODE_PRIVATE);
             String tvinqty = tvinqty3.getText().toString();
             SharedPreferences.Editor editor = pref.edit();
@@ -310,15 +440,7 @@ public class OutQtyDetActivity extends AppCompatActivity {
             editor19.commit();
 
             startActivity(new Intent(getApplicationContext(), CriteriaQCActivity.class));
-        }else {
-            Toast.makeText(getApplicationContext(), "Output Quantity tidak boleh kosong", Toast.LENGTH_SHORT).show();
         }
-
-//        if (id == R.id.action_seq && tvOutputSeq1.length() == 0) {
-//            Toast.makeText(getApplicationContext(), "Output Quantity tidak boleh kosong", Toast.LENGTH_SHORT).show();
-//        } else  {
-//            Toast.makeText(getApplicationContext(), "Output Quantity tidak boleh besar dari Input Quantity", Toast.LENGTH_SHORT).show();
-//        }
         return true;
     }
 

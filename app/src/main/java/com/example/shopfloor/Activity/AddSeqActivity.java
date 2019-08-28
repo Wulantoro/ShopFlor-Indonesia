@@ -257,12 +257,15 @@ public class AddSeqActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         List<LastId> result = new ArrayList<>();
                         try {
+
+                            Log.e("tampil last = ", response.toString(1));
                             String message = response.getString("message");
 
                             if (message.equals("id ketemu")) {
                                 String records = response.getString("data");
 
                                 JSONArray dataArr = new JSONArray(records);
+                                Log.e("idddddd", result.toString());
 
                                 if (dataArr.length() > 0) {
                                     for (int i = 0; i < dataArr.length(); i++) {
