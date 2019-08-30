@@ -348,7 +348,8 @@ public class CriteriaQCActivity extends AppCompatActivity {
                     Criteria criteria = gson.fromJson(array.getJSONObject(i).toString(), Criteria.class);
 
                     JSONObject object = new JSONObject();
-                    object.put("docEntry", tvdocentry3.getText().toString());
+                    object.put("hostHeadEntry", tvdocentry3.getText().toString());
+                    object.put("id", tvid4.getText().toString());
                     object.put("criteria", criteria.getUCriteria());
                     object.put("criteriaDesc", criteria.getUCriteriaName());
                     object.put("standard", criteria.getUStandard());

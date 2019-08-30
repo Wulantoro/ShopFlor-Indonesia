@@ -29,6 +29,8 @@ public class Criteria implements Parcelable {
     private String U_ValueType;
     private String actualResult;
     private int lineNumber;
+    private int hostHeadEntry;
+    private int id;
     public final static Parcelable.Creator<Criteria> CREATOR = new Creator<Criteria>() {
 
 
@@ -69,6 +71,8 @@ public class Criteria implements Parcelable {
         this.U_ValueType = ((String) in.readValue((String.class.getClassLoader())));
         this.actualResult = ((String) in.readValue((Object.class.getClassLoader())));
         this.lineNumber = ((int) in.readValue((Object.class.getClassLoader())));
+        this.hostHeadEntry = ((int) in.readValue((int.class.getClassLoader())));
+        this.id = ((int) in.readValue((int.class.getClassLoader())));
     }
 
     public Criteria() {
@@ -243,6 +247,22 @@ public class Criteria implements Parcelable {
         this.lineNumber = lineNumber;
     }
 
+    public int getHostHeadEntry() {
+        return hostHeadEntry;
+    }
+
+    public void setHostHeadEntry(int hostHeadEntry) {
+        this.hostHeadEntry = hostHeadEntry;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(seq);
         dest.writeValue(U_sequence);
@@ -265,6 +285,8 @@ public class Criteria implements Parcelable {
         dest.writeValue(U_ValueType);
         dest.writeValue(actualResult);
         dest.writeValue(lineNumber);
+        dest.writeValue(hostHeadEntry);
+        dest.writeValue(id);
     }
 
     public int describeContents() {
