@@ -90,6 +90,7 @@ public class Add_DocActivity extends AppCompatActivity {
     private List<Productorder> list;
     private TextView tvnamawc2;
     private Productorder productorder;
+    private TextView tvip4;
 
     //barcode
     private static final String TAG = Add_DocActivity.class.getSimpleName();
@@ -131,6 +132,7 @@ public class Add_DocActivity extends AppCompatActivity {
         tvnamawc2 = findViewById(R.id.tvnamawc2);
         tvSquence1 = findViewById(R.id.tvSquence1);
         tvSquence_Qty1 = findViewById(R.id.tvSquence_Qty1);
+        tvip4 = findViewById(R.id.tvip4);
 
         /************************ga kepake*************************/
 //        barcode
@@ -159,6 +161,10 @@ public class Add_DocActivity extends AppCompatActivity {
         TextView tvnamawc = findViewById(R.id.tvnamawc2);
         prf = getSharedPreferences("Namewc", MODE_PRIVATE);
         tvnamawc.setText(prf.getString("tvnamewc", null));
+
+        TextView tvipadd = findViewById(R.id.tvip4);
+        prf = getSharedPreferences("Ip", MODE_PRIVATE);
+        tvipadd.setText(prf.getString("tvip", null));
 
 //        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
@@ -229,7 +235,7 @@ public class Add_DocActivity extends AppCompatActivity {
 
         final List<Sequence> list = adapter1.getList_item();
 
-        loadData(tvNo_Prod1.getText().toString(), adapter1);
+        loadData(tvNo_Prod1.getText().toString(), adapter1, tvwc1.getText().toString());
 
         rv1.setAdapter(adapter1);
         rv1.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
@@ -294,7 +300,7 @@ public class Add_DocActivity extends AppCompatActivity {
 
     final List<Productorder> list = adapter2.getList_item();
 
-    loadData2(adapter2);
+    loadData2(adapter2, tvwc1.getText().toString());
 
         rv2.setAdapter(adapter2);
         rv2.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
@@ -344,15 +350,18 @@ public class Add_DocActivity extends AppCompatActivity {
         dialog.show();
 }
 
-    public void loadData2(final ProductorderAdapter adapter) {
+    public void loadData2(final ProductorderAdapter adapter, String wccode) {
         if (adapter2 != null)
             adapter2.clearAll();
 
-        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
-        prf.getString("workcenter", null);
-        Log.e("workcenter = ", prf.getString("workcenter", null));
+        prf = getSharedPreferences("Ip", MODE_PRIVATE);
+        prf.getString("tvip", null);
+        Log.e("ip server",  prf.getString("tvip", null));
+        Log.e("workcenter = ", tvwc1.getText().toString());
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/productorder?wccode="+prf.getString("workcenter", null))
+
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/productorder?wccode="+prf.getString("workcenter", null))
+        AndroidNetworking.get(prf.getString("tvip", null) + "index.php/productorder?wccode="+wccode)
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -393,16 +402,21 @@ public class Add_DocActivity extends AppCompatActivity {
     }
 
 
-    public void loadData(String docnum, final SequenceAdapter adapterr) {
+    public void loadData(String docnum, final SequenceAdapter adapterr, String wccode) {
         if (adapter1 != null)
             adapter1.clearAll();
 
-        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
-        Log.e("workcenter100",  "check workcenter " + prf.getString("workcenter", null));
+        prf = getSharedPreferences("Ip", MODE_PRIVATE);
+        Log.e("ip server",  "check ip server " + prf.getString("tvip", null));
 
         Log.e("docnum1000 == ", "check docnum = " + tvNo_Prod1.getText().toString());
+        Log.e("Workcenter = ", tvwc1.getText().toString());
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null)+"&docnum="+docnum)
+//        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
+//        Log.e("workcenterr", prf.getString("workcenter", null));
+
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null)+"&docnum="+docnum)
+        AndroidNetworking.get(prf.getString("tvip", null) + "index.php/sequence?wccode="+wccode+"&docnum="+docnum)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
@@ -690,6 +704,12 @@ public class Add_DocActivity extends AppCompatActivity {
             SharedPreferences.Editor editor15 = pref.edit();
             editor15.putString("tvcodeshift1", tvcodeshift1);
             editor15.commit();
+
+            pref = getSharedPreferences("Ip", MODE_PRIVATE);
+            String tvipadd = tvip4.getText().toString();
+            SharedPreferences.Editor editor16 = pref.edit();
+            editor16.putString("tvip", tvipadd);
+            editor16.commit();
 
 
             startActivity(new Intent(getApplicationContext(), AddSeqActivity.class));

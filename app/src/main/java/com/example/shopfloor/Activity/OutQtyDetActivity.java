@@ -11,7 +11,16 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.R;
+import com.example.shopfloor.Utils.RealmHelper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 public class OutQtyDetActivity extends AppCompatActivity {
 
@@ -47,6 +56,11 @@ public class OutQtyDetActivity extends AppCompatActivity {
     private TextView tvcodeshift2;
     private TextView tvnamawc4;
     private TextView tvid3;
+    private TextView tvip8;
+
+    Realm realm;
+    RealmHelper realmHelper;
+    List<ServerModel> serverModels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +98,7 @@ public class OutQtyDetActivity extends AppCompatActivity {
         tvcodeshift2 = findViewById(R.id.tvcodeshift2);
         tvnamawc4 = findViewById(R.id.tvnamawc4);
         tvid3 = findViewById(R.id.tvid3);
+        tvip8 = findViewById(R.id.tvip8);
 
         TextView tvdocnum6 = findViewById(R.id.tvdocnum6);
         prf = getSharedPreferences("docNum", MODE_PRIVATE);
@@ -176,6 +191,23 @@ public class OutQtyDetActivity extends AppCompatActivity {
         TextView tvid = findViewById(R.id.tvid3);
         prf = getSharedPreferences("Id", MODE_PRIVATE);
         tvid.setText(String.valueOf(prf.getString("tvid", null)));
+
+        //        Setup Realm
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+
+        realmHelper = new RealmHelper(realm);
+        serverModels = new ArrayList<>();
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
+        }
+        tvip8.setText(text);
+
 
     }
 

@@ -6,16 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".Activity.WorkcenterListActivity">
 
+    <TextView
+        android:id="@+id/tvip2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ip address"/>
+
     <EditText
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:layout_below="@id/tvip2"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:textSize="16sp"
         android:hint="Search here"
-        android:layout_marginTop="20dp"
         android:imeOptions="flagNoExtractUi"
        />
 

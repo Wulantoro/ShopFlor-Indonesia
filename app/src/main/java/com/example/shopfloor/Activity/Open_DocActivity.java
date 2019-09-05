@@ -65,6 +65,7 @@ public class Open_DocActivity extends AppCompatActivity {
     private Header header;
     private Context context;
     private SharedPreferences prf, pref;
+    private TextView tvip6;
 
 
     @Override
@@ -77,6 +78,7 @@ public class Open_DocActivity extends AppCompatActivity {
         btnPlhtgl = findViewById(R.id.btnPlhtgl);
         tvtanggal1 = findViewById(R.id.tvtanggal1);
         tvnamawc0 = findViewById(R.id.tvnamawc0);
+        tvip6 = findViewById(R.id.tvip6);
 
         TextView tvqcname = findViewById(R.id.tvqcname0);
         prf = getSharedPreferences("Qcname", MODE_PRIVATE);
@@ -85,6 +87,10 @@ public class Open_DocActivity extends AppCompatActivity {
         TextView tvnamawc = findViewById(R.id.tvnamawc0);
         prf = getSharedPreferences("keynamawc", MODE_PRIVATE);
         tvnamawc.setText(prf.getString("keynamawc1", null));
+
+        TextView tvipadd = findViewById(R.id.tvip6);
+        prf = getSharedPreferences("Ip", MODE_PRIVATE);
+        tvipadd.setText(prf.getString("tvip", null));
 
 
 
@@ -117,7 +123,7 @@ public class Open_DocActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("tvqcname", tvqcname1);
         editor.commit();
-        loadData();
+        loadData(tvworkcenter0.getText().toString());
 
         adapter = new OpenDocAdapter(list, this);
         rv.setAdapter(adapter);
@@ -155,7 +161,7 @@ public class Open_DocActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void loadData() {
+    private void loadData(String wccode) {
 
         final ProgressDialog progress = new ProgressDialog(this);
         progress.setMessage("Sedang proses");
@@ -165,7 +171,14 @@ public class Open_DocActivity extends AppCompatActivity {
         if (adapter != null) {
             adapter.clearAll();
 
-            AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/simpanheader?workCenter="+prf.getString("workcenter", null))
+//            prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
+//            Log.e("ip = ", prf.getString("workcenter", null));
+
+            prf = getSharedPreferences("Ip", MODE_PRIVATE);
+            Log.e("ip = ", prf.getString("tvip", null));
+
+//            AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/simpanheader?workCenter="+prf.getString("workcenter", null))
+            AndroidNetworking.get(prf.getString("tvip", null) + "index.php/simpanheader?workCenter="+wccode)
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {

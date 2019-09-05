@@ -86,6 +86,7 @@ public class AddSeqActivity extends AppCompatActivity {
     private Handler mHandler;
     private TextView tvmobileid;
     private TextView tvid;
+    private TextView tvip5;
 
 
     @Override
@@ -124,6 +125,7 @@ public class AddSeqActivity extends AppCompatActivity {
         tvlastdocnum = findViewById(R.id.tvlastdocnum);
         tvmobileid = findViewById(R.id.tvmobileid);
         tvid = findViewById(R.id.tvid);
+        tvip5 = findViewById(R.id.tvip5);
         succDocAdapter = new SuccDocAdapter(this);
 
         gson = new Gson();
@@ -202,6 +204,10 @@ public class AddSeqActivity extends AppCompatActivity {
         TextView tvcodeshift1 = findViewById(R.id.tvcodeshift0);
         prf = getSharedPreferences("Codeshift", MODE_PRIVATE);
         tvcodeshift1.setText(prf.getString("tvcodeshift1", null));
+
+        TextView tvipadd = findViewById(R.id.tvip5);
+        prf = getSharedPreferences("Ip", MODE_PRIVATE);
+        tvipadd.setText(prf.getString("tvip", null));
 
         TextView tvstatus = findViewById(R.id.tvstatus);
         tvstatus.setText("0");
@@ -376,7 +382,7 @@ public class AddSeqActivity extends AppCompatActivity {
             jsonObject.put("jamMulai", tvjammulai7.getText().toString());
             jsonObject.put("inQty", tvInputSeq.getText().toString());
             jsonObject.put("workCenter", tvwc3.getText().toString());
-            jsonObject.put("status", tvstatus.getText().toString());
+//            jsonObject.put("status", tvstatus.getText().toString());
             jsonObject.put("posted", tvposted3.getText().toString());
             jsonObject.put("userId", tvusername3.getText().toString());
 
@@ -388,7 +394,11 @@ public class AddSeqActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        AndroidNetworking.post(GlobalVars.BASE_IP +"index.php/simpanheader")
+        prf = getSharedPreferences("Ip", MODE_PRIVATE);
+        Log.e("ip = ", prf.getString("tvip", null));
+
+//        AndroidNetworking.post(GlobalVars.BASE_IP +"index.php/simpanheader")
+        AndroidNetworking.post(prf.getString("tvip", null) +"index.php/simpanheader")
                 .addJSONObjectBody(jsonObject)
                 .setPriority(Priority.MEDIUM)
                 .build()

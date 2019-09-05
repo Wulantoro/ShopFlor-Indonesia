@@ -26,4 +26,36 @@
         android:textSize="24sp"
         android:text="id"/>
 
+    <EditText
+        android:id="@+id/tvip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvandroidid1"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/btnsimpanip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvip"
+        android:text="Simpan"/>
+
+    <Button
+        android:id="@+id/btnhapus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvip"
+        android:layout_toRightOf="@id/btnsimpanip"
+        android:layout_marginLeft="40dp"
+        android:text="Hapus"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/btnsimpanip"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
 </RelativeLayout>

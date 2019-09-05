@@ -3,6 +3,7 @@ package com.example.shopfloor.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -41,6 +42,8 @@ public class WorkcenterListActivity extends AppCompatActivity {
     private Workcenter workcenter;
     private EditText search;
     private TextView tvCodeWC;
+    private SharedPreferences pref, prf;
+    private TextView tvip2;
 
     private Context context;
 
@@ -53,6 +56,11 @@ public class WorkcenterListActivity extends AppCompatActivity {
         gson = new Gson();
         list = new ArrayList<Workcenter>();
         rv = findViewById(R.id.rvWorkcenterList);
+        tvip2 = findViewById(R.id.tvip2);
+
+        TextView tvipadd = findViewById(R.id.tvip2);
+        prf = getSharedPreferences("Ip", MODE_PRIVATE);
+        tvipadd.setText(prf.getString("tvip", null));
 
         /*****tambahan*******/
         search = (EditText) findViewById(R.id.search);
@@ -82,7 +90,8 @@ public class WorkcenterListActivity extends AppCompatActivity {
         if (adapter != null)
             adapter.clearAll();
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/workcenter")
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/workcenter")
+        AndroidNetworking.get(prf.getString("tvip", null) + "index.php/workcenter")
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {

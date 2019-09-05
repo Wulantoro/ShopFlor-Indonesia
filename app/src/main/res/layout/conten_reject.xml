@@ -400,6 +400,14 @@
             android:layout_height="wrap_content"
             android:text="Tambah Reject"/>
 
+                <TextView
+                    android:id="@+id/tvip10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/btnFrag"
+                    android:layout_marginLeft="5dp"
+                    android:text="docnum"/>
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvInputReject"
@@ -436,7 +444,6 @@
             android:id="@+id/tvdocentry0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:text="docentryyyyyyyy"/>
         <TextView
             android:id="@+id/tvdocnum1"

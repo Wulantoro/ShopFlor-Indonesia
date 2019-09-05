@@ -72,11 +72,30 @@
         android:textColor="@color/blue_A700"
         android:text="ini workcenter"/>
 
+
+</LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line2"/>
+
+    <TextView
+        android:id="@+id/tvip6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line2"
+        android:text="ip server"/>
+
     <TextView
         android:id="@+id/tvqcname0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
+        android:layout_toRightOf="@id/tvip6"
+        android:layout_below="@id/line2"
+        android:layout_marginLeft="5dp"
         android:text="qcname"/>
 
     <TextView
@@ -84,16 +103,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
+        android:layout_toRightOf="@id/tvqcname0"
+        android:layout_below="@id/line2"
+        android:layout_marginLeft="5dp"
         android:text="namawc"/>
 
 
 
-</LinearLayout>
-
     <RelativeLayout
+        android:id="@+id/rel3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/line2">
+        android:layout_below="@id/tvip6">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvOpenDocList"
@@ -104,4 +125,6 @@
 
     </RelativeLayout>
 
-</RelativeLayout>
+    </RelativeLayout>
+
+

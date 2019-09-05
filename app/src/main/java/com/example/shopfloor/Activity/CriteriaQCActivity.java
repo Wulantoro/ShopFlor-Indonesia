@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
@@ -26,9 +28,11 @@ import com.example.shopfloor.Adapter.CriteriaAdapter;
 import com.example.shopfloor.Adapter.InputCriteriaAdapter;
 import com.example.shopfloor.Models.Criteria;
 import com.example.shopfloor.Models.Reject;
+import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.Models.Upcriteria;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
+import com.example.shopfloor.Utils.RealmHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -41,6 +45,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 public class CriteriaQCActivity extends AppCompatActivity {
 
@@ -83,6 +91,12 @@ public class CriteriaQCActivity extends AppCompatActivity {
     private TextView tvsequence1;
     private TextView tvnamawc5;
     private TextView tvid4;
+    private Button tvCrit;
+    private TextView tvip9;
+
+    Realm realm;
+    RealmHelper realmHelper;
+    List<ServerModel> serverModels;
 
     /***************criteria********/
     public static TextView tvcriteria1;
@@ -121,6 +135,9 @@ public class CriteriaQCActivity extends AppCompatActivity {
         tvsequence1 = findViewById(R.id.tvsequence1);
         tvnamawc5 = findViewById(R.id.tvnamawc5);
         tvid4 = findViewById(R.id.tvid4);
+        tvCrit = findViewById(R.id.tvCrit);
+        tvip9 = findViewById(R.id.tvip9);
+
 
         /*************************************************************/
 
@@ -238,6 +255,63 @@ public class CriteriaQCActivity extends AppCompatActivity {
         TextView jamsel = findViewById(R.id.tvjamsel1);
         jamsel.setText(jam);
 
+        //        Setup Realm
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+
+        realmHelper = new RealmHelper(realm);
+        serverModels = new ArrayList<>();
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c : results1) {
+            text = text + c.getAddress();
+        }
+        tvip9.setText(text);
+
+
+        tvCrit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String element = gson.toJson(
+
+                        adapter.getData(),
+                        new TypeToken<ArrayList<Upcriteria>>() {
+                        }.getType());
+
+                try {
+                    JSONArray array = new JSONArray(element);
+                    Log.e("arrraaayyyy = ", array.toString(1));
+
+                    JSONArray newArr = new JSONArray();
+
+                    for (int i = 0; i < array.length(); i++) {
+                        Criteria criteria = gson.fromJson(array.getJSONObject(i).toString(), Criteria.class);
+
+                        JSONObject object = new JSONObject();
+                        object.put("hostHeadEntry", tvdocentry3.getText().toString());
+                        object.put("id", tvid4.getText().toString());
+                        object.put("criteria", criteria.getUCriteria());
+                        object.put("criteriaDesc", criteria.getUCriteriaName());
+                        object.put("standard", criteria.getUStandard());
+                        object.put("lineNumber", i + 1);
+                        object.put("actualResult", criteria.getActualResult());
+                        object.put("valueType", criteria.getUValueType());
+
+                        newArr.put(object);
+                    }
+                    Log.e("coba input = ", newArr.toString(1));
+
+                    SimpanCriteria(newArr);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
         /*******************Ambil data criteria************************/
         gson = new Gson();
         list = new ArrayList<>();
@@ -275,50 +349,60 @@ public class CriteriaQCActivity extends AppCompatActivity {
 //        Log.e("Coba ", GlobalVars.BASE_IP + "index.php/criteria?wccode={wccode}" + "&docNum={docNum}");
 //        Log.e("WHERE ", GlobalVars.BASE_IP + "index.php/criteria?wccode=ASS&docNum=10016649");
 //        Log.e("URL ", GlobalVars.BASE_IP + "index.php/criteria?wccode=" + prf.getString("tvworkcenter", null) + "&docNum=" + prf.getString("tvnoprod", null) + "");
-        Log.e("Sequence = " , GlobalVars.BASE_IP + "index.php/criteria?wccode="+wccode + "&docNum="+docnum + "&U_sequence="+sequence+"");
+        Log.e("Sequence = ", GlobalVars.BASE_IP + "index.php/criteria?wccode=" + wccode + "&docNum=" + docnum + "&U_sequence=" + sequence + "");
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?wccode="+prf.getString("tvworkcenter", null)+"&docNum="+docnum)
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?docNum=" + prf.getString("tvnoprod", null) + "&wccode=" + wccode + "&U_sequence=" + sequence)
-            AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?wccode="+wccode + "&docNum="+docnum + "&seq="+sequence)
-                .setTag(this)
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<Criteria> results = new ArrayList<>();
-                        Log.e("onResponse11111111 = ", "" + response);
-                        try {
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c : results1) {
+            text = text + c.getAddress();
+
+
+//            AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?wccode="+wccode + "&docNum="+docnum + "&seq="+sequence)
+            AndroidNetworking.get(c.getAddress() + "index.php/criteria?wccode=" + wccode + "&docNum=" + docnum + "&seq=" + sequence)
+                    .setTag(this)
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            List<Criteria> results = new ArrayList<>();
+                            Log.e("onResponse11111111 = ", "" + response);
+                            try {
 //                            Log.e("onResponse = ", response.toString());
 
-                            if (results != null)
-                                results.clear();
-                            String message = response.getString("message");
-                            if (message.equals("Criteria were found")) {
-                                String records = response.getString("data");
-                                JSONArray dataArr = new JSONArray(records);
+                                if (results != null)
+                                    results.clear();
+                                String message = response.getString("message");
+                                if (message.equals("Criteria were found")) {
+                                    String records = response.getString("data");
+                                    JSONArray dataArr = new JSONArray(records);
 
 
-                                if (dataArr.length() > 0) {
-                                    for (int i = 0; i < dataArr.length(); i++) {
-                                        Criteria criteria = gson.fromJson(dataArr.getJSONObject(i).toString(), Criteria.class);
-                                        results.add(criteria);
-                                        Log.e("onResponseeeeeeee ", dataArr.getJSONObject(i).toString());
+                                    if (dataArr.length() > 0) {
+                                        for (int i = 0; i < dataArr.length(); i++) {
+                                            Criteria criteria = gson.fromJson(dataArr.getJSONObject(i).toString(), Criteria.class);
+                                            results.add(criteria);
+                                            Log.e("onResponseeeeeeee ", dataArr.getJSONObject(i).toString());
 //                                      tvlinenumber.setText(String.valueOf(criteria.getLineNumber())+1);
+                                        }
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
+                            adapter.addAll(results);
                         }
 
-                        adapter.addAll(results);
-                    }
+                        @Override
+                        public void onError(ANError anError) {
 
-                    @Override
-                    public void onError(ANError anError) {
-
-                    }
-                });
+                        }
+                    });
+        }
     }
 
 
@@ -335,8 +419,9 @@ public class CriteriaQCActivity extends AppCompatActivity {
 
             String element = gson.toJson(
 
-            adapter.getData(),
-            new TypeToken<ArrayList<Upcriteria>>() {}.getType());
+                    adapter.getData(),
+                    new TypeToken<ArrayList<Upcriteria>>() {
+                    }.getType());
 
             try {
                 JSONArray array = new JSONArray(element);
@@ -353,7 +438,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
                     object.put("criteria", criteria.getUCriteria());
                     object.put("criteriaDesc", criteria.getUCriteriaName());
                     object.put("standard", criteria.getUStandard());
-                    object.put("lineNumber", i+1);
+                    object.put("lineNumber", i + 1);
                     object.put("actualResult", criteria.getActualResult());
                     object.put("valueType", criteria.getUValueType());
 
@@ -362,7 +447,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
                 Log.e("coba input = ", newArr.toString(1));
 
 //                SimpanCriteria(newArr);
-            }catch (JSONException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
@@ -540,30 +625,39 @@ public class CriteriaQCActivity extends AppCompatActivity {
 //                    }
 
 
-                    AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/upcriteria")
-                            .addJSONArrayBody(jsonArray)
-                            .setPriority(Priority.MEDIUM)
-                            .build()
-                            .getAsJSONObject(new JSONObjectRequestListener() {
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    try {
-                                        String message = response.getString("message");
-                                        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                        Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_SHORT).show();
-                                    }
-                                }
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c : results1) {
+            text = text + c.getAddress();
 
 
-                                @Override
-                                public void onError(ANError anError) {
-                                    Toast.makeText(getApplicationContext(), "Gagal menambah Criteria", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                }
-            }
+//                    AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/upcriteria")
+            AndroidNetworking.post(c.getAddress() + "index.php/upcriteria")
+                    .addJSONArrayBody(jsonArray)
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                String message = response.getString("message");
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+
+                        @Override
+                        public void onError(ANError anError) {
+                            Toast.makeText(getApplicationContext(), "Gagal menambah Criteria", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+}
 
 
 

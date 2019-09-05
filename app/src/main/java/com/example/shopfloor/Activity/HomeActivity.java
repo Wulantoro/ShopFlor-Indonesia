@@ -72,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
     public static TextView tvnamawc;
     private TextView tvTanggalHome;
     private TextView tvidmobile0;
+    private TextView tvip1;
 
     private Button btnLogout;
 
@@ -96,6 +97,7 @@ public class HomeActivity extends AppCompatActivity {
         tvTanggalHome = findViewById(R.id.tvTanggalHome);
         tvnamawc = findViewById(R.id.tvnamawc);
         tvidmobile0 = findViewById(R.id.tvidmobile0);
+        tvip1 = findViewById(R.id.tvip1);
 
         final SharedPrefManager sharedPrefManager;
         sharedPrefManager = new SharedPrefManager(this);
@@ -133,6 +135,10 @@ public class HomeActivity extends AppCompatActivity {
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
         tvwc.setText(prf.getString("tvworkcenter", null));
 
+        TextView tvipadd = findViewById(R.id.tvip1);
+        prf = getSharedPreferences("Ip", MODE_PRIVATE);
+        tvipadd.setText(prf.getString("tvip", null));
+
         /************result workcenter terpilih***********************/
         if (getIntent().hasExtra("keywc")) {
             String keywc = getIntent().getStringExtra("keywc");
@@ -164,7 +170,12 @@ public class HomeActivity extends AppCompatActivity {
         btnWorkcenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pref = getSharedPreferences("Ip", MODE_PRIVATE);
                 Intent iWork = new Intent(getApplicationContext(), WorkcenterListActivity.class);
+                String tvipadd = tvip1.getText().toString();
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("tvip", tvipadd);
+                editor.commit();
                 startActivity(iWork);
             }
         });
@@ -195,6 +206,12 @@ public class HomeActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor2 = pref.edit();
                     editor2.putString("tvnamewc", tvnamewc);
                     editor2.commit();
+
+                    pref = getSharedPreferences("Ip", MODE_PRIVATE);
+                    String tvipadd = tvip1.getText().toString();
+                    SharedPreferences.Editor editor3 = pref.edit();
+                    editor3.putString("tvip", tvipadd);
+                    editor3.commit();
 //
                     startActivity(iStart);
                 } else {
@@ -227,6 +244,13 @@ public class HomeActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor2 = pref.edit();
                     editor2.putString("keynamawc1", tvnamewc);
                     editor2.commit();
+
+                    pref = getSharedPreferences("Ip", MODE_PRIVATE);
+                    String tvipadd = tvip1.getText().toString();
+                    SharedPreferences.Editor editor3 = pref.edit();
+                    editor3.putString("tvip", tvipadd);
+                    editor3.commit();
+
                     startActivity(iOpen);
                 } else {
                     Toast.makeText(getApplicationContext(), "Pilih Workcenter dahulu", Toast.LENGTH_SHORT).show();

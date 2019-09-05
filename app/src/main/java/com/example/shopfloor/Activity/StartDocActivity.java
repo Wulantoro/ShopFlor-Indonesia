@@ -22,6 +22,7 @@ public class StartDocActivity extends AppCompatActivity {
     private TextView tvusername1;
     private TextView tvnamawc1;
     public SharedPreferences pref, prf;
+    private TextView tvip3;
 
     private Camera mCamera;
 
@@ -40,6 +41,7 @@ public class StartDocActivity extends AppCompatActivity {
         tvusername1 = findViewById(R.id.tvusername1);
         btscan = findViewById(R.id.btnscan);
         tvnamawc1 = findViewById(R.id.tvnamawc1);
+        tvip3 = findViewById(R.id.tvip3);
 
         TextView tvwcname = findViewById(R.id.tvnamawc1);
         prf = getSharedPreferences("Namewc", MODE_PRIVATE);
@@ -52,6 +54,10 @@ public class StartDocActivity extends AppCompatActivity {
         TextView tvusername = findViewById(R.id.tvusername1);
         prf = getSharedPreferences("userId", MODE_PRIVATE);
         tvusername.setText(prf.getString("tvuserid", null));
+
+        TextView tvipadd = findViewById(R.id.tvip3);
+        prf = getSharedPreferences("Ip", MODE_PRIVATE);
+        tvipadd.setText(prf.getString("tvip", null));
 
         btscan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +91,12 @@ public class StartDocActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor2 = pref.edit();
                 editor2.putString("tvnamewc", tvwcname);
                 editor2.commit();
+
+                pref = getSharedPreferences("Ip", MODE_PRIVATE);
+                String tvipadd = tvip3.getText().toString();
+                SharedPreferences.Editor editor3 = pref.edit();
+                editor3.putString("tvip", tvipadd);
+                editor3.commit();
                 startActivity(iAdd_doc);
             }
         });
