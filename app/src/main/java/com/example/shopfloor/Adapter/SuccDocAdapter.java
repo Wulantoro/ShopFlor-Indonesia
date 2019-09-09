@@ -63,8 +63,8 @@ public class SuccDocAdapter extends RecyclerView.Adapter<SuccDocAdapter.ViewHold
         holder.tvworkcenter5.setText(header.getWorkCenter());
         holder.tvprodno2.setText(header.getProdNo());
         holder.tvsequence4.setText(header.getSequence());
-        holder.tvinputqty4.setText(header.getInQty());
-        holder.tvoutputqty2.setText(header.getOutQty());
+        holder.tvinputqty4.setText(String.valueOf(header.getInQty()).replace(".000000", ""));
+        holder.tvoutputqty2.setText(header.getOutQty().replace(".000000", ""));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

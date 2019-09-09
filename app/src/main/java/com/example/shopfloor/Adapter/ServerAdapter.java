@@ -10,15 +10,26 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.shopfloor.Activity.KonfigurasiActivity;
+import com.example.shopfloor.Fragment.CriteriaFragment;
 import com.example.shopfloor.Models.InputReject;
 import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ServerAdapter extends RecyclerView.Adapter<ServerAdapter.ViewHolder> {
     private List<ServerModel> serverModels;
     Context context;
+
+    public ServerAdapter(Context context) {
+        this.context = context;
+        serverModels = new ArrayList<>();
+    }
+
+    public ServerAdapter(CriteriaFragment criteriaFragment) {
+        serverModels = new ArrayList<>();
+    }
 
     public ServerAdapter(Context context, List<ServerModel> serverModels) {
         this.context = context;

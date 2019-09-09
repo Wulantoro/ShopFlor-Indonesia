@@ -91,6 +91,9 @@ public class Add_DocActivity extends AppCompatActivity {
     private TextView tvnamawc2;
     private Productorder productorder;
     private TextView tvip4;
+    private TextView tvblnkmrn;
+    private TextView tvblnkmrn0;
+    private TextView tvblnskrg;
 
     //barcode
     private static final String TAG = Add_DocActivity.class.getSimpleName();
@@ -133,6 +136,9 @@ public class Add_DocActivity extends AppCompatActivity {
         tvSquence1 = findViewById(R.id.tvSquence1);
         tvSquence_Qty1 = findViewById(R.id.tvSquence_Qty1);
         tvip4 = findViewById(R.id.tvip4);
+        tvblnkmrn = findViewById(R.id.tvblnkmrn);
+        tvblnkmrn0 = findViewById(R.id.tvblnkmrn0);
+        tvblnskrg = findViewById(R.id.tvblnskrg);
 
         /************************ga kepake*************************/
 //        barcode
@@ -158,9 +164,9 @@ public class Add_DocActivity extends AppCompatActivity {
         prf = getSharedPreferences("userId", MODE_PRIVATE);
         tvuserid.setText(prf.getString("tvuserid", null));
 
-        TextView tvnamawc = findViewById(R.id.tvnamawc2);
-        prf = getSharedPreferences("Namewc", MODE_PRIVATE);
-        tvnamawc.setText(prf.getString("tvnamewc", null));
+//        TextView tvnamawc = findViewById(R.id.tvnamawc2);
+//        prf = getSharedPreferences("Namewc", MODE_PRIVATE);
+//        tvnamawc.setText(prf.getString("tvnamewc", null));
 
         TextView tvipadd = findViewById(R.id.tvip4);
         prf = getSharedPreferences("Ip", MODE_PRIVATE);
@@ -488,24 +494,73 @@ public class Add_DocActivity extends AppCompatActivity {
                                         Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
                                         results.add(header);
 
+//                                            String S = "S";
+//                                            String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+//                                            String docnum = header.getDocNum().substring(9);
+//                                            String AN = "" + (Integer.parseInt(docnum) + 1);
+//                                            Log.e("aaannn", AN);
+//                                            String Nol = "";
+//
+//                                            if (AN.length() == 1) {
+//                                                Nol = "00";
+//                                            } else if (AN.length() == 2) {
+//                                                Nol = "0";
+//                                            } else if (AN.length() == 3) {
+//                                                Nol = "";
+//                                            }
+//
+//                                            tvNo_doc1.setText(S + nodoc + Nol + AN);
                                             String S = "S";
-                                            String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+                                            String bulan = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
+                                            String tahun = new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date());
+                                            String hari = new SimpleDateFormat("dd", Locale.getDefault()).format(new Date());
                                             String docnum = header.getDocNum().substring(9);
+                                            String bulankmrn1 = header.getDocNum().substring(5);
+                                            String bulankmrn2 = bulankmrn1.substring(0, 2);
                                             String AN = "" + (Integer.parseInt(docnum) + 1);
                                             Log.e("aaannn", AN);
                                             String Nol = "";
 
-                                            if (AN.length() == 1) {
-                                                Nol = "00";
-                                            } else if (AN.length() == 2) {
-                                                Nol = "0";
-                                            } else if (AN.length() == 3) {
-                                                Nol = "";
+//                                        if (AN.length() == 1) {
+//                                                Nol = "00";
+//                                            } else if (AN.length() == 2) {
+//                                                Nol = "0";
+//                                            } else if (AN.length() == 3) {
+//                                                Nol = "";
+//                                            }
+
+
+//                                        if (AN.length() == 1 ) {
+//                                            Nol = "00";
+//
+//                                        } else if (AN.length() == 2) {
+//                                            Nol = "0";
+//                                        } else if (AN.length() == 3) {
+//                                            Nol = "";
+//                                        }
+
+                                        //masih salah
+
+                                            if (bulan.equals( bulankmrn2)) {
+                                                if (AN.length() == 1 ) {
+                                                    Nol = "00";
+
+                                                } else if (AN.length() == 2) {
+                                                    Nol = "0";
+                                                } else if (AN.length() == 3) {
+                                                    Nol = "";
+                                                }
+
+                                                tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN);
+                                            } else if (bulan != bulankmrn2) {
+                                                String AN1 = "001";
+                                                tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN1);
                                             }
 
-                                            tvNo_doc1.setText(S + nodoc + Nol + AN);
-
-
+//                                        tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN);
+                                            tvblnkmrn.setText("BULAN KMRN1" +bulankmrn1);
+                                            tvblnkmrn0.setText("BULAN KMRN2 " +bulankmrn2);
+                                            tvblnskrg.setText("BULAN SKRG " +bulan);
                                     }
                                 }
                             }

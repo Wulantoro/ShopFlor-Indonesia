@@ -26,9 +26,11 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.SuccDocAdapter;
 import com.example.shopfloor.Models.Header;
+import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.Models.User;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
+import com.example.shopfloor.Utils.RealmHelper;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -41,6 +43,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 public class SuccessDocActivity extends AppCompatActivity {
 
@@ -59,10 +65,15 @@ public class SuccessDocActivity extends AppCompatActivity {
     private Header header;
     private Context context;
     public SharedPreferences pref, prf;
+    private TextView tvip11;
 
     public String str ="";
     Character op = 'q';
     float i,num,numtemp;
+
+    Realm realm;
+    RealmHelper realmHelper;
+    List<ServerModel> serverModels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +85,23 @@ public class SuccessDocActivity extends AppCompatActivity {
         tvtanggal1success = findViewById(R.id.tvtanggal1success);
         btnSmatglsuccess = findViewById(R.id.btnSmatglsuccess);
         tvnamawc0 = findViewById(R.id.tvnamawc0);
+        tvip11 = findViewById(R.id.tvip11);
+
+        //        Setup Realm
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+
+        realmHelper = new RealmHelper(realm);
+        serverModels = new ArrayList<>();
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
+        }
+        tvip11.setText(text);
 
         TextView tvworlcenter = findViewById(R.id.tvworkcenter4);
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
@@ -165,51 +193,60 @@ public class SuccessDocActivity extends AppCompatActivity {
         if (adapter != null) {
             adapter.clearAll();
 
-            prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
-            prf.getString("workcenter", null);
-            Log.e("work vwjbgyg ", prf.getString("workcenter", null));
+            Realm realm = Realm.getDefaultInstance();
+            RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+            String text = "";
+            for (ServerModel c : results1) {
+                text = text + c.getAddress();
 
 
-            AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/completeheader?workCenter="+prf.getString("workcenter", null))
-                   .setPriority(Priority.MEDIUM)
-                   .build()
-                   .getAsJSONObject(new JSONObjectRequestListener() {
-                       @Override
-                       public void onResponse(JSONObject response) {
-                           List<Header> results = new ArrayList<>();
-                           try {
-                               Log.e("tampil = ", response.toString(1));
+                prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
+                prf.getString("workcenter", null);
+                Log.e("work vwjbgyg ", prf.getString("workcenter", null));
 
-                               if (results != null)
-                                   results.clear();
 
-                               String message = response.getString("message");
+//            AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/completeheader?workCenter="+prf.getString("workcenter", null))
+                AndroidNetworking.get(c.getAddress() + "index.php/completeheader?workCenter=" + prf.getString("workcenter", null))
+                        .setPriority(Priority.MEDIUM)
+                        .build()
+                        .getAsJSONObject(new JSONObjectRequestListener() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                List<Header> results = new ArrayList<>();
+                                try {
+                                    Log.e("tampil = ", response.toString(1));
 
-                               if (message.equals("Header complete where found")) {
-                                   String records = response.getString("data");
+                                    if (results != null)
+                                        results.clear();
 
-                                   JSONArray dataArr = new JSONArray(records);
+                                    String message = response.getString("message");
 
-                                   if (dataArr.length() > 0) {
+                                    if (message.equals("Header complete where found")) {
+                                        String records = response.getString("data");
 
-                                       for (int i = 0; i < dataArr.length(); i++) {
-                                           Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
-                                           results.add(header);
-                                       }
-                                   }
-                               }
-                               progress.dismiss();
-                           } catch (JSONException e) {
-                               e.printStackTrace();
-                           }
-                           adapter.addAll(results);
-                       }
+                                        JSONArray dataArr = new JSONArray(records);
 
-                       @Override
-                       public void onError(ANError anError) {
-                            progress.dismiss();
-                       }
-                   });
+                                        if (dataArr.length() > 0) {
+
+                                            for (int i = 0; i < dataArr.length(); i++) {
+                                                Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
+                                                results.add(header);
+                                            }
+                                        }
+                                    }
+                                    progress.dismiss();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                adapter.addAll(results);
+                            }
+
+                            @Override
+                            public void onError(ANError anError) {
+                                progress.dismiss();
+                            }
+                        });
+            }
         }
     }
 

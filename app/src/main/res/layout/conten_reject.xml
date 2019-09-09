@@ -124,7 +124,7 @@
             />
         </RelativeLayout>
 
-
+        <!--in qty, out qty, woekcenter-->
         <RelativeLayout
             android:id="@+id/dashboard2"
             android:layout_width="wrap_content"
@@ -148,12 +148,7 @@
                 android:layout_below="@id/tvInputQty"
                 android:textColor="@color/blue_A700"
                 android:text="ini input quantity" />
-            <TextView
-                android:id="@+id/tvmobileid0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvInputQty1"
-                android:text="mobileid"/>
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -189,13 +184,6 @@
             android:textSize="18sp"
             android:text="workcemter"/>
 
-            <TextView
-                android:id="@+id/tvid5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/tvWorkcenter"
-                android:layout_marginLeft="5dp"
-                android:text="id"/>
         </RelativeLayout>
 
 <!--            <RelativeLayout-->
@@ -398,15 +386,8 @@
             android:id="@+id/btnFrag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button"
             android:text="Tambah Reject"/>
-
-                <TextView
-                    android:id="@+id/tvip10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/btnFrag"
-                    android:layout_marginLeft="5dp"
-                    android:text="docnum"/>
 
 
         <android.support.v7.widget.RecyclerView
@@ -444,6 +425,7 @@
             android:id="@+id/tvdocentry0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text="docentryyyyyyyy"/>
         <TextView
             android:id="@+id/tvdocnum1"
@@ -535,7 +517,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvposted7"
             android:layout_marginLeft="5dp"
-
+            android:textColor="@color/white"
             android:text="username"/>
         <TextView
             android:id="@+id/tvqcname4"
@@ -616,6 +598,32 @@
             android:layout_below="@id/tvjammulai2"
             android:textColor="@color/white"
             android:text="docdate"/>
+
+        <TextView
+            android:id="@+id/tvmobileid0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvdocdate0"
+            android:textColor="@color/white"
+            android:text="mobileid"/>
+
+        <TextView
+            android:id="@+id/tvip10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvmobileid0"
+            android:textColor="@color/white"
+            android:layout_marginLeft="5dp"
+            android:text="ip sever"/>
+
+        <TextView
+            android:id="@+id/tvid5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvip10"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:text="id"/>
     </RelativeLayout>
 </RelativeLayout>
 

@@ -19,6 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Selamat datang, "
+        android:textColor="@color/blue_A100"
+        android:textSize="24sp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"/>
 
@@ -28,7 +30,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="3dp"
         android:layout_toRightOf="@id/tvUser"
+        android:textColor="@color/blue_A100"
         android:layout_marginTop="10dp"
+        android:textSize="24sp"
         android:text="ini user"/>
 
     <TextView
@@ -46,6 +50,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvUser"
+        android:textStyle="bold"
+        android:textSize="24sp"
         android:text="Workcenter : "
         android:layout_marginLeft="20dp"/>
 
@@ -54,17 +60,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvUser"
+        android:textColor="@color/red_A700"
+        android:layout_toRightOf="@id/tvWC"
+        android:textSize="24sp"
+        android:textStyle="bold"
         android:text=""
-        android:layout_marginLeft="110dp"/>
+        android:layout_marginLeft="5dp"/>
 
     <TextView
         android:id="@+id/tvnamawc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvUser"
-        android:layout_toRightOf="@id/tvWC"
+        android:layout_toRightOf="@id/tvWCtampil1"
         android:textColor="@color/white"
-        android:layout_marginLeft="115dp"/>
+        android:layout_marginLeft="5dp"/>
 
     <TextView
         android:id="@+id/tvidmobile0"
@@ -85,18 +95,20 @@
         android:layout_marginLeft="450dp"
         android:paddingTop="10dp"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/line10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:orientation="horizontal">
+        android:layout_marginLeft="40dp"
+       >
         <Button
             android:layout_width="150dp"
             android:layout_height="250dp"
             android:id="@+id/btnWorkcenter"
             android:text="Work Center"
-            android:layout_marginLeft="60dp"
+            android:background="@drawable/button"
+            android:textColor="@color/white"
             android:layout_marginTop="50dp"/>
 
         <Button
@@ -104,13 +116,30 @@
             android:layout_height="250dp"
             android:id="@+id/btnstartdoc"
             android:text="Start Document"
+            android:layout_toRightOf="@id/btnWorkcenter"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/button"
+            android:textColor="@color/white"
             android:layout_marginTop="50dp"/>
+
+<!--        <ImageButton-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="250dp"-->
+<!--            android:id="@+id/btnstartdoc"-->
+<!--            android:text="Start Document"-->
+<!--            android:src="@drawable/ic_start"-->
+<!--            android:background="@color/blue_400"-->
+<!--            android:layout_marginTop="50dp"/>-->
         <!---->
         <Button
             android:layout_width="150dp"
             android:layout_height="250dp"
             android:id="@+id/btnOpendoc"
             android:text="Open Document"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/btnstartdoc"
+            android:background="@drawable/button"
+            android:textColor="@color/white"
             android:layout_marginTop="50dp"
             />
         <!---->
@@ -119,9 +148,13 @@
             android:layout_width="150dp"
             android:layout_height="250dp"
             android:text="Success Doc"
+            android:background="@drawable/button"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/white"
+            android:layout_toRightOf="@id/btnOpendoc"
             android:layout_marginTop="50dp"/>
         <!---->
-    </LinearLayout>
+    </RelativeLayout>
 
         <TextView
             android:id="@+id/tvip1"
@@ -129,6 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/line10"
             android:layout_marginLeft="10dp"
+            android:textColor="@color/white"
             android:text="ip address"/>
 </RelativeLayout>
     <!--    -->

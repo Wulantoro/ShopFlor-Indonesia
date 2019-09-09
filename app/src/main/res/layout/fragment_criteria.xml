@@ -9,7 +9,18 @@
         android:id="@+id/tvdocentry6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/white"
         android:text="docentry"/>
+
+    <TextView
+        android:id="@+id/tvip12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:textColor="@color/white"
+        android:text="ip server"/>
+
+
 
     <TableLayout
         android:id="@+id/tabCrit1"

@@ -16,6 +16,8 @@ public class Upcriteria implements Parcelable
     private Object standard;
     private Object actualResult;
     private Object actualRemarks;
+    private int hostHeadEntry;
+    private int id;
     public final static Parcelable.Creator<Upcriteria> CREATOR = new Creator<Upcriteria>() {
 
 
@@ -42,6 +44,8 @@ public class Upcriteria implements Parcelable
         this.standard = ((Object) in.readValue((Object.class.getClassLoader())));
         this.actualResult = ((Object) in.readValue((Object.class.getClassLoader())));
         this.actualRemarks = ((Object) in.readValue((Object.class.getClassLoader())));
+        this.hostHeadEntry = ((int) in.readValue((int.class.getClassLoader())));
+        this.id = ((int) in.readValue((int.class.getClassLoader())));
     }
 
     public Upcriteria() {
@@ -111,6 +115,22 @@ public class Upcriteria implements Parcelable
         this.actualRemarks = actualRemarks;
     }
 
+    public int getHostHeadEntry() {
+        return hostHeadEntry;
+    }
+
+    public void setHostHeadEntry(int hostHeadEntry) {
+        this.hostHeadEntry = hostHeadEntry;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(docEntry);
         dest.writeValue(lineNumber);
@@ -120,6 +140,8 @@ public class Upcriteria implements Parcelable
         dest.writeValue(standard);
         dest.writeValue(actualResult);
         dest.writeValue(actualRemarks);
+        dest.writeValue(hostHeadEntry);
+        dest.writeValue(id);
     }
 
     public int describeContents() {

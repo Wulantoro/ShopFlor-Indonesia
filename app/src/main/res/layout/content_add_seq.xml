@@ -40,24 +40,28 @@
             android:id="@+id/tvip5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:layout_marginLeft="5dp"/>
 
         <TextView
             android:id="@+id/tvlastdocnum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:layout_marginLeft="5dp"/>
 
         <TextView
             android:id="@+id/tvmobileid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:layout_marginLeft="5dp"/>
 
         <TextView
             android:id="@+id/tvid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:layout_marginLeft="5dp"/>
 
         <TextView
@@ -226,6 +230,7 @@
         android:layout_height="90dp"
         android:text="1"
         android:onClick="btn1Clicked"
+        android:background="@drawable/button"
         android:textSize="60sp"/>
         <Button
             android:id="@+id/btn2"
@@ -234,6 +239,7 @@
             android:layout_toRightOf="@id/btn1"
             android:text="2"
             android:onClick="btn2Clicked"
+            android:background="@drawable/button"
             android:textSize="60sp"/>
         <Button
             android:id="@+id/btn3"
@@ -242,6 +248,7 @@
             android:layout_toRightOf="@id/btn2"
             android:text="3"
             android:onClick="btn3Clicked"
+            android:background="@drawable/button"
             android:textSize="60sp"/>
         <Button
             android:id="@+id/btn4"
@@ -250,6 +257,7 @@
             android:layout_below="@id/btn1"
             android:text="4"
             android:onClick="btn4Clicked"
+            android:background="@drawable/button"
             android:textSize="60sp"/>
         <Button
             android:id="@+id/btn5"
@@ -257,6 +265,7 @@
             android:layout_height="90dp"
             android:layout_below="@id/btn2"
             android:layout_toRightOf="@id/btn4"
+            android:background="@drawable/button"
             android:text="5"
             android:onClick="btn5Clicked"
             android:textSize="60sp"/>
@@ -266,6 +275,7 @@
             android:layout_height="90dp"
             android:layout_below="@id/btn3"
             android:layout_toRightOf="@id/btn5"
+            android:background="@drawable/button"
             android:text="6"
             android:onClick="btn6Clicked"
             android:textSize="60sp"/>
@@ -274,6 +284,7 @@
             android:layout_width="100dp"
             android:layout_height="90dp"
             android:layout_below="@id/btn4"
+            android:background="@drawable/button"
             android:text="7"
             android:onClick="btn7Clicked"
             android:textSize="60sp"/>
@@ -283,6 +294,7 @@
             android:layout_height="90dp"
             android:layout_below="@id/btn5"
             android:layout_toRightOf="@id/btn7"
+            android:background="@drawable/button"
             android:text="8"
             android:onClick="btn8Clicked"
             android:textSize="60sp"/>
@@ -292,6 +304,7 @@
             android:layout_height="90dp"
             android:layout_below="@id/btn6"
             android:layout_toRightOf="@id/btn8"
+            android:background="@drawable/button"
             android:text="9"
             android:onClick="btn9Clicked"
             android:textSize="60sp"/>
@@ -302,6 +315,7 @@
             android:layout_below="@id/btn7"
             android:text="Clear"
             android:onClick="btnclearClicked"
+            android:background="@drawable/button"
             android:textSize="20sp"/>
         <Button
             android:id="@+id/btn0"
@@ -309,6 +323,7 @@
             android:layout_height="90dp"
             android:layout_below="@id/btn8"
             android:layout_toRightOf="@id/btnClear"
+            android:background="@drawable/button"
             android:text="0"
             android:onClick="btn0Clicked"
             android:textSize="60sp"/>
@@ -318,6 +333,7 @@
             android:layout_height="90dp"
             android:layout_below="@id/btn9"
             android:layout_toRightOf="@id/btn0"
+            android:background="@drawable/button"
             android:text="Back"
             android:textSize="20sp"/>
     </RelativeLayout>

@@ -27,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="20dp"
+                android:background="@drawable/button"
                 android:text="Pilih Produksi"/>
 
             <TextView
@@ -169,21 +170,48 @@
                 android:textColor="@color/white"
                 android:layout_toRightOf="@id/tvwc1"
                 android:text="usernameeeeeeee"/>
-            <TextView
-                android:id="@+id/tvnamawc2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvusername2"
-                android:text="wcname"/>
+<!--            <TextView-->
+<!--                android:id="@+id/tvnamawc2"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/tvusername2"-->
+<!--                android:text="wcname"/>-->
 
             <TextView
                 android:id="@+id/tvip4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/tvnamawc2"
                 android:layout_marginLeft="5dp"
                 android:layout_below="@id/tvusername2"
+                android:textColor="@color/white"
                 android:text="ip server"/>
+
+            <TextView
+                android:id="@+id/tvblnkmrn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvusername2"
+                android:layout_toRightOf="@id/tvip4"
+                android:textColor="@color/white"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/tvblnkmrn0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_below="@id/tvblnkmrn"
+                />
+
+            <TextView
+                android:id="@+id/tvblnskrg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/tvblnkmrn0"
+                android:layout_below="@id/tvblnkmrn"
+                android:textColor="@color/white"
+                android:text="bulan sekarang"/>
 
 
         </RelativeLayout>
@@ -199,6 +227,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:background="@drawable/button"
                 android:text="Pilih Sequence"/>
 
             <TextView
