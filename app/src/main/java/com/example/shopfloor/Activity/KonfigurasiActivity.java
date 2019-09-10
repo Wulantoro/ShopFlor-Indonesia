@@ -78,17 +78,9 @@ public class KonfigurasiActivity extends AppCompatActivity {
         prf = getSharedPreferences("Ip", MODE_PRIVATE);
         tvipadd.setText(prf.getString("tvip", null));
 
-//        tvip.setText(GlobalVars.BASE_IP);
-
         btnsimpanip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                pref = getSharedPreferences("Ip", MODE_PRIVATE);
-//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                String tvipadd = tvip.getText().toString();
-//                SharedPreferences.Editor editor = pref.edit();
-//                editor.putString("tvip", tvipadd);
-//                editor.commit();
 
                     saddress = tvip.getText().toString();
                     serverModel = new ServerModel();
@@ -96,19 +88,6 @@ public class KonfigurasiActivity extends AppCompatActivity {
                     realmHelper = new RealmHelper(realm);
                     realmHelper.save(serverModel);
                     Toast.makeText(getApplicationContext(), "Berhasil Disimpan!", Toast.LENGTH_SHORT).show();
-
-
-//                TextView tvipadd = findViewById(R.id.tvip);
-//                prf = getSharedPreferences("Ip", MODE_PRIVATE);
-//                tvipadd.setText(prf.getString("tvip", null));
-//
-//                realmHelper.update(String.valueOf(prf.getString("tvip", null)), (tvip.getText().toString()));
-//                Toast.makeText(getApplicationContext(), "Update Success", Toast.LENGTH_SHORT).show();
-////                etNim.setText("");
-////                etNama.setText("");
-//                finish();
-
-//                Toast.makeText(getApplicationContext(), "Berhasil Disimpan!", Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
@@ -126,14 +105,17 @@ public class KonfigurasiActivity extends AppCompatActivity {
 
     @Override
     protected void onRestart() {
+        List<ServerModel> moveResults = new ArrayList<>();
         super.onRestart();
         serverAdapter.notifyDataSetChanged();
+
         show();
     }
 
     public void show(){
         serverAdapter = new ServerAdapter(this, serverModels);
         recyclerView.setAdapter(serverAdapter);
+
 
 
     }

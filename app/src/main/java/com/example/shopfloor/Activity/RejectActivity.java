@@ -90,6 +90,7 @@ public class RejectActivity extends AppCompatActivity {
     private TextView tvPRDSPECD2;
     private ImageButton ibscan;
     private TextView tvip10;
+    private TextView tvdocentry01;
 
     Realm realm;
     RealmHelper realmHelper;
@@ -140,6 +141,7 @@ public class RejectActivity extends AppCompatActivity {
         tvid5 = findViewById(R.id.tvid5);
         tvmobileid0 = findViewById(R.id.tvmobileid0);
         tvip10 = findViewById(R.id.tvip10);
+//        tvdocentry01 = findViewById(R.id.tvdocentry01);
 
         openDocAdapter = new OpenDocAdapter(this);
 
@@ -193,6 +195,12 @@ public class RejectActivity extends AppCompatActivity {
         prf = getSharedPreferences("Docentry", MODE_PRIVATE);
         tvdocentry.setText(String.valueOf(prf.getString("tvdocentry", null)));
         Log.e("docemtry", prf.getString("tvdocentry", null));
+
+
+
+//        TextView tvdocentry1 = findViewById(R.id.tvdocentry01);
+//        prf = getSharedPreferences("Docentry", MODE_PRIVATE);
+//        tvdocentry1.setText(String.valueOf(prf.getString("tvdocentry", null)));
 
         /*****************qtyin**********************/
         TextView inqty = findViewById(R.id.tvInputQty1);
@@ -347,6 +355,7 @@ public class RejectActivity extends AppCompatActivity {
         for (ServerModel c : results1) {
             text = text + c.getAddress();
 
+            Log.e("ip server = ", c.getAddress());
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/inputreject?hostHeadEntry="+ docentry)
             AndroidNetworking.get(c.getAddress() + "index.php/inputreject?hostHeadEntry=" + docentry)
                     .setPriority(Priority.MEDIUM)
@@ -514,6 +523,7 @@ public class RejectActivity extends AppCompatActivity {
         finish();
     }
 
+    //tidak dipake
     public void loadPRDSPECH() {
 
         AndroidNetworking.get(GlobalVars.BASE_IP +"index.php/sincheader")

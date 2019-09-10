@@ -380,6 +380,7 @@
                android:id="@+id/relList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_below="@id/content1"
                 >
         <Button
@@ -388,7 +389,6 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button"
             android:text="Tambah Reject"/>
-
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvInputReject"
@@ -401,10 +401,10 @@
 
                 <ImageButton
                     android:id="@+id/ibscan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
                     android:layout_toRightOf="@id/btnFrag"
-                    android:layout_marginLeft="195dp"
+                    android:layout_marginLeft="175dp"
                     android:background="@color/white"
                     android:src="@drawable/ic_camera"
                     />

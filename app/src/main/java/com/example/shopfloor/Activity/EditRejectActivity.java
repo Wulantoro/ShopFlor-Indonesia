@@ -24,8 +24,10 @@ import com.example.shopfloor.Adapter.InputRejectAdapter;
 import com.example.shopfloor.Adapter.RejectAdapter;
 import com.example.shopfloor.Models.InputReject;
 import com.example.shopfloor.Models.Reject;
+import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
+import com.example.shopfloor.Utils.RealmHelper;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -35,6 +37,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
+
 public class EditRejectActivity extends AppCompatActivity {
 
     public static TextView tvReject2;
@@ -43,6 +49,8 @@ public class EditRejectActivity extends AppCompatActivity {
     public static TextView tvcodereject0;
     public static TextView tvReject3;
     public static TextView tvid;
+    public  static TextView tvhosthed;
+    private TextView tvip15;
     Button btnReject;
     Button btnSimpan;
     public  static TextView tvRejectQty;
@@ -52,6 +60,10 @@ public class EditRejectActivity extends AppCompatActivity {
     private InputRejectAdapter inputRejectAdapter;
     private InputReject inputReject;
     private EditRejectAdapter editRejectAdapter;
+
+    Realm realm;
+    RealmHelper realmHelper;
+    List<ServerModel> serverModels;
 
     public static Dialog dialog;
 
@@ -78,6 +90,8 @@ public class EditRejectActivity extends AppCompatActivity {
         btnSimpan = findViewById(R.id.btnSimpan);
         tvRejectQty = findViewById(R.id.tvRejectQty);
         tvid = findViewById(R.id.tvid);
+        tvhosthed = findViewById(R.id.tvhosthed);
+        tvip15 = findViewById(R.id.tvip15);
 
         inputReject = getIntent().getParcelableExtra("edit");
         tvRejectQty.setText(inputReject.getRejectQty().replace(".000000", ""));
@@ -86,6 +100,22 @@ public class EditRejectActivity extends AppCompatActivity {
         tvcodereject0.setText(inputReject.getRejectCode());
         tvReject3.setText(inputReject.getRejectName());
         tvid.setText(String.valueOf(inputReject.getId()));
+        tvhosthed.setText(String.valueOf(inputReject.getHostHeadEntry()));
+
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+
+        realmHelper = new RealmHelper(realm);
+        serverModels = new ArrayList<>();
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c : results) {
+            text = text + c.getAddress();
+        }
+        tvip15.setText(text);
 
 
         btnReject.setOnClickListener(new View.OnClickListener() {
@@ -169,48 +199,58 @@ public class EditRejectActivity extends AppCompatActivity {
         if (rejectAdapter != null)
             rejectAdapter.clearAll();
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/reject")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<Reject> result = new ArrayList<>();
-                        try {
-                            Log.e("Reject", response.toString(1));
-                            if (result != null)
-                                result.clear();
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c : results) {
+            text = text + c.getAddress();
 
-                            String mesage = response.getString("message");
 
-                            if (mesage.equals("Reject were found")) {
-                                String records = response.getString("data");
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/reject")
+            AndroidNetworking.get(c.getAddress() + "index.php/reject")
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            List<Reject> result = new ArrayList<>();
+                            try {
+                                Log.e("Reject", response.toString(1));
+                                if (result != null)
+                                    result.clear();
 
-                                JSONArray dataarr = new JSONArray(records);
-                                if (dataarr.length() > 0) {
-                                    for (int i = 0; i < dataarr.length(); i++) {
-                                        Reject reject = gson.fromJson(dataarr.getJSONObject(i).toString(), Reject.class);
-                                        result.add(reject);
+                                String mesage = response.getString("message");
+
+                                if (mesage.equals("Reject were found")) {
+                                    String records = response.getString("data");
+
+                                    JSONArray dataarr = new JSONArray(records);
+                                    if (dataarr.length() > 0) {
+                                        for (int i = 0; i < dataarr.length(); i++) {
+                                            Reject reject = gson.fromJson(dataarr.getJSONObject(i).toString(), Reject.class);
+                                            result.add(reject);
+                                        }
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            adapter.addAll(result);
                         }
-                        adapter.addAll(result);
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
+                        @Override
+                        public void onError(ANError anError) {
 
-                    }
-                });
+                        }
+                    });
+        }
     }
 
     public void editReject() {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("id", tvid.getText().toString());
+            jsonObject.put("hostHeadEntry", tvhosthed.getText().toString());
             jsonObject.put("docEntry", tvdocentry4.getText().toString());
             jsonObject.put("lineNumber", tvlinenumb0.getText().toString());
             jsonObject.put("rejectCode", tvcodereject0.getText().toString());
@@ -220,27 +260,35 @@ public class EditRejectActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        AndroidNetworking.put(GlobalVars.BASE_IP + "index.php/inputreject?id")
-                .addJSONObjectBody(jsonObject)
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String message = response.getString("message");
-                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        }catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "JSONExceptions" + e, Toast.LENGTH_SHORT).show();
-                        }
-                    }
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c : results) {
+            text = text + c.getAddress();
 
-                    @Override
-                    public void onError(ANError anError) {
-                        Toast.makeText(getApplicationContext(), "Data gagal diedit", Toast.LENGTH_SHORT).show();
-                    }
-                });
+//            AndroidNetworking.put(GlobalVars.BASE_IP + "index.php/inputreject?docEntry")
+            AndroidNetworking.put(c.getAddress()+ "index.php/inputreject?docEntry")
+                    .addJSONObjectBody(jsonObject)
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                String message = response.getString("message");
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "JSONExceptions" + e, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onError(ANError anError) {
+                            Toast.makeText(getApplicationContext(), "Data gagal diedit", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
 
     public void btn1Clicked(View v) {

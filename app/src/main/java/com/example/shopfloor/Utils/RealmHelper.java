@@ -2,8 +2,10 @@ package com.example.shopfloor.Utils;
 
 import android.util.Log;
 
+import com.example.shopfloor.Adapter.ServerAdapter;
 import com.example.shopfloor.Models.ServerModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
@@ -11,6 +13,9 @@ import io.realm.RealmResults;
 
 public class RealmHelper {
     Realm realm;
+    ServerAdapter serverAdapter;
+    List<ServerModel> serverModels;
+    ServerModel serverModel;
 
     public RealmHelper(Realm realm) {
         this.realm = realm;
@@ -68,12 +73,18 @@ public class RealmHelper {
     }
 
     public void delete() {
+
         final RealmResults<ServerModel> model = realm.where(ServerModel.class).findAll();
+        final List<ServerModel> moveResults = new ArrayList<>();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 model.deleteFromRealm(0);
+                moveResults.remove(model);
             }
+
         });
+
     }
+
 }

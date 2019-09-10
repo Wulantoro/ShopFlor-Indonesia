@@ -24,6 +24,7 @@ import com.example.shopfloor.Activity.EditRejectActivity;
 import com.example.shopfloor.Activity.RejectActivity;
 import com.example.shopfloor.Fragment.RejectFragment;
 import com.example.shopfloor.Models.InputReject;
+import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
 
@@ -32,6 +33,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class InputRejectAdapter extends RecyclerView.Adapter<InputRejectAdapter.ViewHolder> {
 
@@ -93,28 +97,36 @@ public class InputRejectAdapter extends RecyclerView.Adapter<InputRejectAdapter.
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface arg0, int arg1) {
-                                                AndroidNetworking.delete(GlobalVars.BASE_IP+"index.php/inputreject?id="+inputReject.getId())
-                                                        .setPriority(Priority.MEDIUM)
-                                                        .build()
-                                                        .getAsJSONObject(new JSONObjectRequestListener() {
-                                                            @Override
-                                                            public void onResponse(JSONObject response) {
-                                                                try {
-                                                                    String message = response.getString("message");
-                                                                    Toast.makeText(v.getContext(), message, Toast.LENGTH_SHORT).show();
-                                                                }catch (JSONException e) {
-                                                                    e.printStackTrace();
-                                                                    Toast.makeText(v.getContext(), "JSONExceptions" + e, Toast.LENGTH_SHORT).show();
+                                                Realm realm = Realm.getDefaultInstance();
+                                                RealmResults<ServerModel> results = realm.where(ServerModel.class).findAll();
+                                                String text = "";
+                                                for (ServerModel c : results) {
+                                                    text = text + c.getAddress();
+
+//                                                    AndroidNetworking.delete(GlobalVars.BASE_IP + "index.php/inputreject?id=" + inputReject.getId())
+                                                    AndroidNetworking.delete(c.getAddress() + "index.php/inputreject?docEntry=" + inputReject.getDocEntry())
+                                                            .setPriority(Priority.MEDIUM)
+                                                            .build()
+                                                            .getAsJSONObject(new JSONObjectRequestListener() {
+                                                                @Override
+                                                                public void onResponse(JSONObject response) {
+                                                                    try {
+                                                                        String message = response.getString("message");
+                                                                        Toast.makeText(v.getContext(), message, Toast.LENGTH_SHORT).show();
+                                                                    } catch (JSONException e) {
+                                                                        e.printStackTrace();
+                                                                        Toast.makeText(v.getContext(), "JSONExceptions" + e, Toast.LENGTH_SHORT).show();
+                                                                    }
+
                                                                 }
 
-                                                            }
+                                                                @Override
+                                                                public void onError(ANError anError) {
+                                                                    Toast.makeText(v.getContext(), "Gagal menghapus reject", Toast.LENGTH_SHORT).show();
 
-                                                            @Override
-                                                            public void onError(ANError anError) {
-                                                                Toast.makeText(v.getContext(), "Gagal menghapus reject", Toast.LENGTH_SHORT).show();
-
-                                                            }
-                                                        });
+                                                                }
+                                                            });
+                                                }
                                                 remove(inputReject);
                                             }
                                         }).create().show();
@@ -134,6 +146,7 @@ public class InputRejectAdapter extends RecyclerView.Adapter<InputRejectAdapter.
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
