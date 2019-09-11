@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,8 +32,10 @@ import com.example.shopfloor.Adapter.SuccDocAdapter;
 import com.example.shopfloor.Models.Header;
 import com.example.shopfloor.Models.Productorder;
 import com.example.shopfloor.Models.Sequence;
+import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
+import com.example.shopfloor.Utils.RealmHelper;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -49,6 +52,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 public class Add_DocActivity extends AppCompatActivity {
 
@@ -94,6 +101,11 @@ public class Add_DocActivity extends AppCompatActivity {
     private TextView tvblnkmrn;
     private TextView tvblnkmrn0;
     private TextView tvblnskrg;
+    private Handler mHandler;
+
+    Realm realm;
+    RealmHelper realmHelper;
+    List<ServerModel> serverModels;
 
     //barcode
     private static final String TAG = Add_DocActivity.class.getSimpleName();
@@ -168,9 +180,25 @@ public class Add_DocActivity extends AppCompatActivity {
 //        prf = getSharedPreferences("Namewc", MODE_PRIVATE);
 //        tvnamawc.setText(prf.getString("tvnamewc", null));
 
-        TextView tvipadd = findViewById(R.id.tvip4);
-        prf = getSharedPreferences("Ip", MODE_PRIVATE);
-        tvipadd.setText(prf.getString("tvip", null));
+//        TextView tvipadd = findViewById(R.id.tvip4);
+//        prf = getSharedPreferences("Ip", MODE_PRIVATE);
+//        tvipadd.setText(prf.getString("tvip", null));
+
+        //        Setup Realm
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+
+        realmHelper = new RealmHelper(realm);
+        serverModels = new ArrayList<>();
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
+        }
+        tvip4.setText(text);
 
 //        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
@@ -180,7 +208,8 @@ public class Add_DocActivity extends AppCompatActivity {
         /****************end**************************************/
 
 
-        LastDocnum();
+//        LastDocnum();
+
 
         btn_Pilihprod = findViewById(R.id.btn_PilihProd);
         btn_Pilihprod.setOnClickListener(new View.OnClickListener() {
@@ -212,7 +241,20 @@ public class Add_DocActivity extends AppCompatActivity {
                 }
             }
         });
+
+        /***************reload otomatis****************/
+        this.mHandler = new Handler();
+        m_Runnable.run();
     }
+
+    private final Runnable m_Runnable = new Runnable() {
+        @Override
+        public void run() {
+//            Toast.makeText(getApplicationContext(),"in runnable",Toast.LENGTH_SHORT).show();
+            LastDocnum();
+            Add_DocActivity.this.mHandler.postDelayed(m_Runnable, 2000);
+        }
+    };
 
 
     //ketika klik back loncat ke home activity
@@ -366,45 +408,53 @@ public class Add_DocActivity extends AppCompatActivity {
         Log.e("workcenter = ", tvwc1.getText().toString());
 
 
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
+
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/productorder?wccode="+prf.getString("workcenter", null))
-        AndroidNetworking.get(prf.getString("tvip", null) + "index.php/productorder?wccode="+wccode)
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<Productorder> result = new ArrayList<>();
-                        try {
-                            Log.e("resp2", response.toString(1));
+//        AndroidNetworking.get(prf.getString("tvip", null) + "index.php/productorder?wccode="+wccode)
+            AndroidNetworking.get(c.getAddress() + "index.php/productorder?wccode=" + wccode)
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            List<Productorder> result = new ArrayList<>();
+                            try {
+                                Log.e("resp2", response.toString(1));
 
-                            if (result != null)
-                                result.clear();
+                                if (result != null)
+                                    result.clear();
 
-                            String message = response.getString("message");
+                                String message = response.getString("message");
 
-                            if (message.equals("Production Order were found")){
-                                String records = response.getString("data");
+                                if (message.equals("Production Order were found")) {
+                                    String records = response.getString("data");
 
-                                JSONArray dataArr = new JSONArray(records);
+                                    JSONArray dataArr = new JSONArray(records);
 
-                                if (dataArr.length() > 0) {
-                                    for (int i = 0; i < dataArr.length(); i++) {
-                                        Productorder productorder = gson.fromJson(dataArr.getJSONObject(i).toString(), Productorder.class);
-                                        result.add(productorder);
+                                    if (dataArr.length() > 0) {
+                                        for (int i = 0; i < dataArr.length(); i++) {
+                                            Productorder productorder = gson.fromJson(dataArr.getJSONObject(i).toString(), Productorder.class);
+                                            result.add(productorder);
+                                        }
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            adapter.addAll(result);
                         }
-                        adapter.addAll(result);
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
+                        @Override
+                        public void onError(ANError anError) {
 
-                    }
-                });
+                        }
+                    });
+        }
     }
 
 
@@ -421,78 +471,93 @@ public class Add_DocActivity extends AppCompatActivity {
 //        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
 //        Log.e("workcenterr", prf.getString("workcenter", null));
 
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
+
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null)+"&docnum="+docnum)
-        AndroidNetworking.get(prf.getString("tvip", null) + "index.php/sequence?wccode="+wccode+"&docnum="+docnum)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<Sequence> result = new ArrayList<>();
-                        try {
-                            Log.e("sequenceeeeeeeeeeee", response.toString(1));
+//        AndroidNetworking.get(prf.getString("tvip", null) + "index.php/sequence?wccode="+wccode+"&docnum="+docnum)
+            AndroidNetworking.get(c.getAddress() + "index.php/sequence?wccode=" + wccode + "&docnum=" + docnum)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            List<Sequence> result = new ArrayList<>();
+                            try {
+                                Log.e("sequenceeeeeeeeeeee", response.toString(1));
 
-                            if (result != null)
-                                result.clear();
+                                if (result != null)
+                                    result.clear();
 
-                            String message = response.getString("message");
+                                String message = response.getString("message");
 
-                            if (message.equals("Sequence were found")) {
-                                String records = response.getString("data");
+                                if (message.equals("Sequence were found")) {
+                                    String records = response.getString("data");
 
-                                JSONArray dataArr = new JSONArray(records);
+                                    JSONArray dataArr = new JSONArray(records);
 
-                                if (dataArr.length() > 0) {
-                                    for (int i = 0; i < dataArr.length(); i++) {
+                                    if (dataArr.length() > 0) {
+                                        for (int i = 0; i < dataArr.length(); i++) {
 
-                                        System.out.println("res "+dataArr.getJSONObject(i).toString());
+                                            System.out.println("res " + dataArr.getJSONObject(i).toString());
 
-                                        Sequence sequence = gson.fromJson(dataArr.getJSONObject(i).toString(), Sequence.class);
-                                        result.add(sequence);
+                                            Sequence sequence = gson.fromJson(dataArr.getJSONObject(i).toString(), Sequence.class);
+                                            result.add(sequence);
+                                        }
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
+                            adapterr.addAll(result);
                         }
 
-                        adapterr.addAll(result);
-                    }
+                        @Override
+                        public void onError(ANError anError) {
 
-                    @Override
-                    public void onError(ANError anError) {
-
-                    }
-                });
+                        }
+                    });
+        }
     }
 
     public void LastDocnum() {
         if (adapter3 != null)
             adapter3.clearAll();
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastdocnum")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<Header> results = new ArrayList<>();
-                        try {
-                            Log.e("tampil last = ", response.toString(1));
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
 
-                            if (results != null)
-                                results.clear();
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastdocnum")
+            AndroidNetworking.get(c.getAddress() + "index.php/lastdocnum")
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            List<Header> results = new ArrayList<>();
+                            try {
+                                Log.e("tampil last = ", response.toString(1));
 
-                            String message = response.getString("message");
+                                if (results != null)
+                                    results.clear();
 
-                            if (message.equals("data ketemu")) {
-                                String records = response.getString("data");
+                                String message = response.getString("message");
 
-                                JSONArray dataArr = new JSONArray(records);
+                                if (message.equals("data ketemu")) {
+                                    String records = response.getString("data");
 
-                                if (dataArr.length() > 0) {
-                                    for (int i = 0; i < dataArr.length(); i++) {
-                                        Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
-                                        results.add(header);
+                                    JSONArray dataArr = new JSONArray(records);
+
+                                    if (dataArr.length() > 0) {
+                                        for (int i = 0; i < dataArr.length(); i++) {
+                                            Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
+                                            results.add(header);
 
 //                                            String S = "S";
 //                                            String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
@@ -539,10 +604,10 @@ public class Add_DocActivity extends AppCompatActivity {
 //                                            Nol = "";
 //                                        }
 
-                                        //masih salah
+                                            //masih salah
 
-                                            if (bulan.equals( bulankmrn2)) {
-                                                if (AN.length() == 1 ) {
+                                            if (bulan.equals(bulankmrn2)) {
+                                                if (AN.length() == 1) {
                                                     Nol = "00";
 
                                                 } else if (AN.length() == 2) {
@@ -558,23 +623,24 @@ public class Add_DocActivity extends AppCompatActivity {
                                             }
 
 //                                        tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN);
-                                            tvblnkmrn.setText("BULAN KMRN1" +bulankmrn1);
-                                            tvblnkmrn0.setText("BULAN KMRN2 " +bulankmrn2);
-                                            tvblnskrg.setText("BULAN SKRG " +bulan);
+                                            tvblnkmrn.setText("BULAN KMRN1" + bulankmrn1);
+                                            tvblnkmrn0.setText("BULAN KMRN2 " + bulankmrn2);
+                                            tvblnskrg.setText("BULAN SKRG " + bulan);
+                                        }
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        }catch (JSONException e) {
-                            e.printStackTrace();
+                            adapter3.addAll(results);
                         }
-                        adapter3.addAll(results);
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
+                        @Override
+                        public void onError(ANError anError) {
 
-                    }
-                });
+                        }
+                    });
+        }
     }
 
     /*********************************toolbar************************/
@@ -760,11 +826,11 @@ public class Add_DocActivity extends AppCompatActivity {
             editor15.putString("tvcodeshift1", tvcodeshift1);
             editor15.commit();
 
-            pref = getSharedPreferences("Ip", MODE_PRIVATE);
-            String tvipadd = tvip4.getText().toString();
-            SharedPreferences.Editor editor16 = pref.edit();
-            editor16.putString("tvip", tvipadd);
-            editor16.commit();
+//            pref = getSharedPreferences("Ip", MODE_PRIVATE);
+//            String tvipadd = tvip4.getText().toString();
+//            SharedPreferences.Editor editor16 = pref.edit();
+//            editor16.putString("tvip", tvipadd);
+//            editor16.commit();
 
 
             startActivity(new Intent(getApplicationContext(), AddSeqActivity.class));

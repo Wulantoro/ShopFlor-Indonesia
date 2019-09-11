@@ -13,7 +13,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.R;
+import com.example.shopfloor.Utils.RealmHelper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 public class StartDocActivity extends AppCompatActivity {
 
@@ -25,6 +34,10 @@ public class StartDocActivity extends AppCompatActivity {
     private TextView tvip3;
 
     private Camera mCamera;
+
+    Realm realm;
+    RealmHelper realmHelper;
+    List<ServerModel> serverModels;
 
 
     private boolean barcodeScanned = false;
@@ -55,9 +68,25 @@ public class StartDocActivity extends AppCompatActivity {
         prf = getSharedPreferences("userId", MODE_PRIVATE);
         tvusername.setText(prf.getString("tvuserid", null));
 
-        TextView tvipadd = findViewById(R.id.tvip3);
-        prf = getSharedPreferences("Ip", MODE_PRIVATE);
-        tvipadd.setText(prf.getString("tvip", null));
+//        TextView tvipadd = findViewById(R.id.tvip3);
+//        prf = getSharedPreferences("Ip", MODE_PRIVATE);
+//        tvipadd.setText(prf.getString("tvip", null));
+
+        //        Setup Realm
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+
+        realmHelper = new RealmHelper(realm);
+        serverModels = new ArrayList<>();
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
+        }
+        tvip3.setText(text);
 
         btscan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,11 +121,11 @@ public class StartDocActivity extends AppCompatActivity {
                 editor2.putString("tvnamewc", tvwcname);
                 editor2.commit();
 
-                pref = getSharedPreferences("Ip", MODE_PRIVATE);
-                String tvipadd = tvip3.getText().toString();
-                SharedPreferences.Editor editor3 = pref.edit();
-                editor3.putString("tvip", tvipadd);
-                editor3.commit();
+//                pref = getSharedPreferences("Ip", MODE_PRIVATE);
+//                String tvipadd = tvip3.getText().toString();
+//                SharedPreferences.Editor editor3 = pref.edit();
+//                editor3.putString("tvip", tvipadd);
+//                editor3.commit();
                 startActivity(iAdd_doc);
             }
         });

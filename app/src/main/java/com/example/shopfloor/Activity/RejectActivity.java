@@ -302,7 +302,6 @@ public class RejectActivity extends AppCompatActivity {
         tvip10.setText(text);
 
 
-/*****************************belum sempputna***************************/
             btnFrag = findViewById(R.id.btnFrag);
             btnFrag.setOnClickListener(new View.OnClickListener() {
                 @Override

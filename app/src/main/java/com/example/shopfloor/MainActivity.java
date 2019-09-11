@@ -116,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+//                startActivity(intent);
 
                 String username = etusername0.getText().toString();
                 String password = etpassword0.getText().toString();
@@ -187,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.e("ip address = " ,  c.getAddress());
             Log.e("ip = ", String.valueOf(AndroidNetworking.post(c.getAddress() + "index.php/loginuser")));
+//            AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/loginuser")
             AndroidNetworking.post(c.getAddress() + "index.php/loginuser")
                     .addJSONObjectBody(jObject)
                     .setPriority(Priority.MEDIUM)
@@ -215,11 +218,11 @@ public class MainActivity extends AppCompatActivity {
                                     editor.putString("etusername", username);
                                     editor.commit();
 
-                                    pref = getSharedPreferences("Ip", MODE_PRIVATE);
-                                    String tvipadd = tvip0.getText().toString();
-                                    SharedPreferences.Editor editor1 = pref.edit();
-                                    editor1.putString("tvip", tvipadd);
-                                    editor1.commit();
+//                                    pref = getSharedPreferences("Ip", MODE_PRIVATE);
+//                                    String tvipadd = tvip0.getText().toString();
+//                                    SharedPreferences.Editor editor1 = pref.edit();
+//                                    editor1.putString("tvip", tvipadd);
+//                                    editor1.commit();
 //                                intent.putExtra(TAG_USERNAME, username);
 //                                intent.putExtra(TAG_PASSWORD, password);
 //                                finish();

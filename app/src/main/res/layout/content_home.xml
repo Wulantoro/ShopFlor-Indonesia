@@ -92,7 +92,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:layout_toRightOf="@+id/tvUser"
-        android:layout_marginLeft="450dp"
+        android:layout_marginLeft="400dp"
         android:paddingTop="10dp"/>
 
     <RelativeLayout
@@ -109,7 +109,7 @@
             android:text="Work Center"
             android:background="@drawable/button"
             android:textColor="@color/white"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="60dp"/>
 
         <Button
             android:layout_width="150dp"
@@ -120,7 +120,7 @@
             android:layout_marginLeft="20dp"
             android:background="@drawable/button"
             android:textColor="@color/white"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="60dp"/>
 
 <!--        <ImageButton-->
 <!--            android:layout_width="150dp"-->
@@ -140,7 +140,7 @@
             android:layout_toRightOf="@id/btnstartdoc"
             android:background="@drawable/button"
             android:textColor="@color/white"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="60dp"
             />
         <!---->
         <Button
@@ -152,7 +152,7 @@
             android:layout_marginLeft="20dp"
             android:textColor="@color/white"
             android:layout_toRightOf="@id/btnOpendoc"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="60dp"/>
         <!---->
     </RelativeLayout>
 
@@ -162,7 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/line10"
             android:layout_marginLeft="10dp"
-            android:textColor="@color/white"
+
             android:text="ip address"/>
 </RelativeLayout>
     <!--    -->

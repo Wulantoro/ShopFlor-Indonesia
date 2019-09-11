@@ -20,9 +20,11 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.WorkcenterAdapter;
+import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.Models.Workcenter;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
+import com.example.shopfloor.Utils.RealmHelper;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -31,6 +33,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 
 public class WorkcenterListActivity extends AppCompatActivity {
@@ -47,6 +53,10 @@ public class WorkcenterListActivity extends AppCompatActivity {
 
     private Context context;
 
+    Realm realm;
+    RealmHelper realmHelper;
+    List<ServerModel> serverModels;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +68,25 @@ public class WorkcenterListActivity extends AppCompatActivity {
         rv = findViewById(R.id.rvWorkcenterList);
         tvip2 = findViewById(R.id.tvip2);
 
-        TextView tvipadd = findViewById(R.id.tvip2);
-        prf = getSharedPreferences("Ip", MODE_PRIVATE);
-        tvipadd.setText(prf.getString("tvip", null));
+//        TextView tvipadd = findViewById(R.id.tvip2);
+//        prf = getSharedPreferences("Ip", MODE_PRIVATE);
+//        tvipadd.setText(prf.getString("tvip", null));
+
+        //        Setup Realm
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+
+        realmHelper = new RealmHelper(realm);
+        serverModels = new ArrayList<>();
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
+        }
+        tvip2.setText(text);
 
         /*****tambahan*******/
         search = (EditText) findViewById(R.id.search);
@@ -90,53 +116,62 @@ public class WorkcenterListActivity extends AppCompatActivity {
         if (adapter != null)
             adapter.clearAll();
 
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
+
+
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/workcenter")
-        AndroidNetworking.get(prf.getString("tvip", null) + "index.php/workcenter")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    public void onResponse(JSONObject response) {
-                        List<Workcenter> results = new ArrayList<>();
-                        try {
-                            Log.e("resp", response.toString(1));
+//        AndroidNetworking.get(prf.getString("tvip", null) + "index.php/workcenter")
+            AndroidNetworking.get(c.getAddress() + "index.php/workcenter")
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        public void onResponse(JSONObject response) {
+                            List<Workcenter> results = new ArrayList<>();
+                            try {
+                                Log.e("resp", response.toString(1));
 
-                            if (results != null)
-                                results.clear();
+                                if (results != null)
+                                    results.clear();
 
-                            String message = response.getString("message");
+                                String message = response.getString("message");
 
-                            if (message.equals("Workcenter were found")) {
-                                String records = response.getString("data");
+                                if (message.equals("Workcenter were found")) {
+                                    String records = response.getString("data");
 
-                                JSONArray dataArr = new JSONArray(records);
+                                    JSONArray dataArr = new JSONArray(records);
 
-                                if (dataArr.length() > 0) {
+                                    if (dataArr.length() > 0) {
 
-                                    for (int i = 0; i < dataArr.length(); i++) {
+                                        for (int i = 0; i < dataArr.length(); i++) {
 //                                        System.out.println("res "+dataArr.getJSONObject(i).toString());\
 
-                                        Workcenter workcenter = gson.fromJson(dataArr.getJSONObject(i).toString(), Workcenter.class);
-                                        results.add(workcenter);
+                                            Workcenter workcenter = gson.fromJson(dataArr.getJSONObject(i).toString(), Workcenter.class);
+                                            results.add(workcenter);
+                                        }
                                     }
                                 }
+
+                                progress.dismiss();
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+                                progress.dismiss();
+
                             }
 
-                            progress.dismiss();
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-
-                            progress.dismiss();
-
+                            adapter.addAll(results);
                         }
 
-                        adapter.addAll(results);
-                    }
-
-                    public void onError(ANError anError) {
-                        progress.dismiss();
-                    }
-                });
+                        public void onError(ANError anError) {
+                            progress.dismiss();
+                        }
+                    });
+        }
     }
 
     public void addTextListener() {

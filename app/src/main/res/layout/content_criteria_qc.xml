@@ -537,7 +537,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:layout_toRightOf="@id/tvnamawc5"
-            android:text="workcemter"/>
+            android:text="ip server"/>
 </RelativeLayout>
 
 </RelativeLayout>

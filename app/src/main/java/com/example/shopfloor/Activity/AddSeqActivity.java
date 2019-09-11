@@ -26,8 +26,10 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.SuccDocAdapter;
 import com.example.shopfloor.Models.Header;
 import com.example.shopfloor.Models.LastId;
+import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
+import com.example.shopfloor.Utils.RealmHelper;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -39,6 +41,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 public class AddSeqActivity extends AppCompatActivity {
     private TextView tvInputSeq;
@@ -87,6 +93,10 @@ public class AddSeqActivity extends AppCompatActivity {
     private TextView tvmobileid;
     private TextView tvid;
     private TextView tvip5;
+
+    Realm realm;
+    RealmHelper realmHelper;
+    List<ServerModel> serverModels;
 
 
     @Override
@@ -205,9 +215,25 @@ public class AddSeqActivity extends AppCompatActivity {
         prf = getSharedPreferences("Codeshift", MODE_PRIVATE);
         tvcodeshift1.setText(prf.getString("tvcodeshift1", null));
 
-        TextView tvipadd = findViewById(R.id.tvip5);
-        prf = getSharedPreferences("Ip", MODE_PRIVATE);
-        tvipadd.setText(prf.getString("tvip", null));
+//        TextView tvipadd = findViewById(R.id.tvip5);
+//        prf = getSharedPreferences("Ip", MODE_PRIVATE);
+//        tvipadd.setText(prf.getString("tvip", null));
+
+        //        Setup Realm
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+
+        realmHelper = new RealmHelper(realm);
+        serverModels = new ArrayList<>();
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
+        }
+        tvip5.setText(text);
 
         TextView tvstatus = findViewById(R.id.tvstatus);
         tvstatus.setText("0");
@@ -256,44 +282,51 @@ public class AddSeqActivity extends AppCompatActivity {
 
     public void lastId(String mobile) {
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastid?mobileId=" + mobile)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<LastId> result = new ArrayList<>();
-                        try {
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
 
-                            Log.e("tampil last = ", response.toString(1));
-                            String message = response.getString("message");
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastid?mobileId=" + mobile)
+            AndroidNetworking.get(c.getAddress() + "index.php/lastid?mobileId=" + mobile)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            List<LastId> result = new ArrayList<>();
+                            try {
 
-                            if (message.equals("id ketemu")) {
-                                String records = response.getString("data");
+                                Log.e("tampil last = ", response.toString(1));
+                                String message = response.getString("message");
 
-                                JSONArray dataArr = new JSONArray(records);
-                                Log.e("idddddd", result.toString());
+                                if (message.equals("id ketemu")) {
+                                    String records = response.getString("data");
 
-                                if (dataArr.length() > 0) {
-                                    for (int i = 0; i < dataArr.length(); i++) {
+                                    JSONArray dataArr = new JSONArray(records);
+                                    Log.e("idddddd", result.toString());
 
-                                        LastId lastId = gson.fromJson(dataArr.getJSONObject(i).toString(), LastId.class);
-                                        result.add(lastId);
+                                    if (dataArr.length() > 0) {
+                                        for (int i = 0; i < dataArr.length(); i++) {
 
-                                        tvid.setText(String.valueOf(lastId.getId()+1));
+                                            LastId lastId = gson.fromJson(dataArr.getJSONObject(i).toString(), LastId.class);
+                                            result.add(lastId);
+
+                                            tvid.setText(String.valueOf(lastId.getId() + 1));
+                                        }
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
+                        @Override
+                        public void onError(ANError anError) {
 
-                    }
-                });
-
+                        }
+                    });
+        }
     }
 
     public void lastDocnum() {
@@ -301,30 +334,37 @@ public class AddSeqActivity extends AppCompatActivity {
         if (succDocAdapter != null)
             succDocAdapter.clearAll();
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastdocnum")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<Header> results = new ArrayList<>();
-                        try {
-                            Log.e("tampil last = ", response.toString(1));
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
 
-                            if (results != null)
-                                results.clear();
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastdocnum")
+            AndroidNetworking.get(c.getAddress() + "index.php/lastdocnum")
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            List<Header> results = new ArrayList<>();
+                            try {
+                                Log.e("tampil last = ", response.toString(1));
 
-                            String message = response.getString("message");
+                                if (results != null)
+                                    results.clear();
 
-                            if (message.equals("data ketemu")) {
-                                String records = response.getString("data");
+                                String message = response.getString("message");
 
-                                JSONArray dataArr = new JSONArray(records);
+                                if (message.equals("data ketemu")) {
+                                    String records = response.getString("data");
 
-                                if (dataArr.length() > 0) {
-                                    for (int i = 0; i < dataArr.length(); i++) {
-                                        Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
-                                        results.add(header);
+                                    JSONArray dataArr = new JSONArray(records);
+
+                                    if (dataArr.length() > 0) {
+                                        for (int i = 0; i < dataArr.length(); i++) {
+                                            Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
+                                            results.add(header);
 
 //                                        String S = "S";
 //                                        String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
@@ -342,51 +382,52 @@ public class AddSeqActivity extends AppCompatActivity {
 //
 //                                        tvlastdocnum.setText(S+ nodoc + Nol + AN);
 
-                                        String S = "S";
-                                        String bulan = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
-                                        String tahun = new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date());
-                                        String hari = new SimpleDateFormat("dd", Locale.getDefault()).format(new Date());
-                                        String docnum = header.getDocNum().substring(9);
-                                        String bulankmrn1 = header.getDocNum().substring(5);
-                                        String bulankmrn2 = bulankmrn1.substring(0, 2);
-                                        String AN = "" + (Integer.parseInt(docnum) + 1);
-                                        Log.e("aaannn", AN);
-                                        String Nol = "";
+                                            String S = "S";
+                                            String bulan = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
+                                            String tahun = new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date());
+                                            String hari = new SimpleDateFormat("dd", Locale.getDefault()).format(new Date());
+                                            String docnum = header.getDocNum().substring(9);
+                                            String bulankmrn1 = header.getDocNum().substring(5);
+                                            String bulankmrn2 = bulankmrn1.substring(0, 2);
+                                            String AN = "" + (Integer.parseInt(docnum) + 1);
+                                            Log.e("aaannn", AN);
+                                            String Nol = "";
 
-                                        if (bulan.equals(bulankmrn2)) {
-                                            if (AN.length() == 1 ) {
-                                                Nol = "00";
+                                            if (bulan.equals(bulankmrn2)) {
+                                                if (AN.length() == 1) {
+                                                    Nol = "00";
 
-                                            } else if (AN.length() == 2) {
-                                                Nol = "0";
-                                            } else if (AN.length() == 3) {
-                                                Nol = "";
+                                                } else if (AN.length() == 2) {
+                                                    Nol = "0";
+                                                } else if (AN.length() == 3) {
+                                                    Nol = "";
+                                                }
+
+                                                tvlastdocnum.setText(S + tahun + bulan + hari + Nol + AN);
+                                            } else if (bulan != bulankmrn2) {
+                                                String AN1 = "001";
+                                                tvlastdocnum.setText(S + tahun + bulan + hari + Nol + AN1);
                                             }
-
-                                            tvlastdocnum.setText(S + tahun + bulan + hari + Nol + AN);
-                                        } else if (bulan != bulankmrn2) {
-                                            String AN1 = "001";
-                                            tvlastdocnum.setText(S + tahun + bulan + hari + Nol + AN1);
-                                        }
 
 //                                        tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN);
 //                                        tvblnkmrn.setText(bulankmrn1);
 //                                        tvblnkmrn0.setText(bulankmrn2);
 //                                        tvblnskrg.setText(bulan);
+                                        }
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            succDocAdapter.addAll(results);
                         }
-                        succDocAdapter.addAll(results);
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
+                        @Override
+                        public void onError(ANError anError) {
 
-                    }
-                });
+                        }
+                    });
+        }
     }
 
 
@@ -429,30 +470,38 @@ public class AddSeqActivity extends AppCompatActivity {
         prf = getSharedPreferences("Ip", MODE_PRIVATE);
         Log.e("ip = ", prf.getString("tvip", null));
 
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
+
 //        AndroidNetworking.post(GlobalVars.BASE_IP +"index.php/simpanheader")
-        AndroidNetworking.post(prf.getString("tvip", null) +"index.php/simpanheader")
-                .addJSONObjectBody(jsonObject)
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            Log.e("Date 1===========" ,tvtglmulai7.getText().toString());
+//        AndroidNetworking.post(prf.getString("tvip", null) +"index.php/simpanheader")
+            AndroidNetworking.post(c.getAddress() + "index.php/simpanheader")
+                    .addJSONObjectBody(jsonObject)
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                Log.e("Date 1===========", tvtglmulai7.getText().toString());
 
-                            String message = response.getString("message");
-                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "JSONExceptions"+ e, Toast.LENGTH_SHORT).show();
+                                String message = response.getString("message");
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "JSONExceptions" + e, Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
-                        Toast.makeText(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onError(ANError anError) {
+                            Toast.makeText(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
 
 

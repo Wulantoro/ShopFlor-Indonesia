@@ -31,10 +31,12 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.WorkcenterAdapter;
 import com.example.shopfloor.MainActivity;
+import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.Models.User;
 import com.example.shopfloor.Models.Workcenter;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
+import com.example.shopfloor.Utils.RealmHelper;
 import com.example.shopfloor.Utils.SharedPrefManager;
 import com.google.gson.Gson;
 
@@ -46,6 +48,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -79,6 +85,10 @@ public class HomeActivity extends AppCompatActivity {
     private Button btnLogout;
 
     public SharedPreferences pref, prf;
+
+    Realm realm;
+    RealmHelper realmHelper;
+    List<ServerModel> serverModels;
 
     private DrawerLayout mDrawerLayout;
     private NavigationView navigationView;
@@ -137,9 +147,25 @@ public class HomeActivity extends AppCompatActivity {
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
         tvwc.setText(prf.getString("tvworkcenter", null));
 
-        TextView tvipadd = findViewById(R.id.tvip1);
-        prf = getSharedPreferences("Ip", MODE_PRIVATE);
-        tvipadd.setText(prf.getString("tvip", null));
+//        TextView tvipadd = findViewById(R.id.tvip1);
+//        prf = getSharedPreferences("Ip", MODE_PRIVATE);
+//        tvipadd.setText(prf.getString("tvip", null));
+
+        //        Setup Realm
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+
+        realmHelper = new RealmHelper(realm);
+        serverModels = new ArrayList<>();
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
+        }
+        tvip1.setText(text);
 
         /************result workcenter terpilih***********************/
         if (getIntent().hasExtra("keywc")) {
@@ -172,12 +198,13 @@ public class HomeActivity extends AppCompatActivity {
         btnWorkcenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pref = getSharedPreferences("Ip", MODE_PRIVATE);
+//                pref = getSharedPreferences("Ip", MODE_PRIVATE);
+//
+//                String tvipadd = tvip1.getText().toString();
+//                SharedPreferences.Editor editor = pref.edit();
+//                editor.putString("tvip", tvipadd);
+//                editor.commit();
                 Intent iWork = new Intent(getApplicationContext(), WorkcenterListActivity.class);
-                String tvipadd = tvip1.getText().toString();
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("tvip", tvipadd);
-                editor.commit();
                 startActivity(iWork);
             }
         });
@@ -209,11 +236,11 @@ public class HomeActivity extends AppCompatActivity {
                     editor2.putString("tvnamewc", tvnamewc);
                     editor2.commit();
 
-                    pref = getSharedPreferences("Ip", MODE_PRIVATE);
-                    String tvipadd = tvip1.getText().toString();
-                    SharedPreferences.Editor editor3 = pref.edit();
-                    editor3.putString("tvip", tvipadd);
-                    editor3.commit();
+//                    pref = getSharedPreferences("Ip", MODE_PRIVATE);
+//                    String tvipadd = tvip1.getText().toString();
+//                    SharedPreferences.Editor editor3 = pref.edit();
+//                    editor3.putString("tvip", tvipadd);
+//                    editor3.commit();
 //
                     startActivity(iStart);
                 } else {
@@ -247,11 +274,11 @@ public class HomeActivity extends AppCompatActivity {
                     editor2.putString("keynamawc1", tvnamewc);
                     editor2.commit();
 
-                    pref = getSharedPreferences("Ip", MODE_PRIVATE);
-                    String tvipadd = tvip1.getText().toString();
-                    SharedPreferences.Editor editor3 = pref.edit();
-                    editor3.putString("tvip", tvipadd);
-                    editor3.commit();
+//                    pref = getSharedPreferences("Ip", MODE_PRIVATE);
+//                    String tvipadd = tvip1.getText().toString();
+//                    SharedPreferences.Editor editor3 = pref.edit();
+//                    editor3.putString("tvip", tvipadd);
+//                    editor3.commit();
 
                     startActivity(iOpen);
                 } else {
