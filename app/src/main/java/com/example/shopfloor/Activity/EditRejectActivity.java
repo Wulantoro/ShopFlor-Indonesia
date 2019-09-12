@@ -207,7 +207,7 @@ public class EditRejectActivity extends AppCompatActivity {
 
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/reject")
-            AndroidNetworking.get(c.getAddress() + "index.php/reject")
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/reject")
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
@@ -267,7 +267,7 @@ public class EditRejectActivity extends AppCompatActivity {
             text = text + c.getAddress();
 
 //            AndroidNetworking.put(GlobalVars.BASE_IP + "index.php/inputreject?docEntry")
-            AndroidNetworking.put(c.getAddress()+ "index.php/inputreject?docEntry")
+            AndroidNetworking.put(c.getAddress()+ "shopfloor2/index.php/inputreject?docEntry")
                     .addJSONObjectBody(jsonObject)
                     .setPriority(Priority.MEDIUM)
                     .build()

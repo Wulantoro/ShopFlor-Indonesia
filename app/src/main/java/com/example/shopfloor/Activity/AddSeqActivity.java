@@ -289,7 +289,7 @@ public class AddSeqActivity extends AppCompatActivity {
             text = text + c.getAddress();
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastid?mobileId=" + mobile)
-            AndroidNetworking.get(c.getAddress() + "index.php/lastid?mobileId=" + mobile)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/lastid?mobileId=" + mobile)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
                         @Override
@@ -341,7 +341,7 @@ public class AddSeqActivity extends AppCompatActivity {
             text = text + c.getAddress();
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastdocnum")
-            AndroidNetworking.get(c.getAddress() + "index.php/lastdocnum")
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/lastdocnum")
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
@@ -478,7 +478,7 @@ public class AddSeqActivity extends AppCompatActivity {
 
 //        AndroidNetworking.post(GlobalVars.BASE_IP +"index.php/simpanheader")
 //        AndroidNetworking.post(prf.getString("tvip", null) +"index.php/simpanheader")
-            AndroidNetworking.post(c.getAddress() + "index.php/simpanheader")
+            AndroidNetworking.post(c.getAddress() + "shopfloor2/index.php/simpanheader")
                     .addJSONObjectBody(jsonObject)
                     .setPriority(Priority.MEDIUM)
                     .build()

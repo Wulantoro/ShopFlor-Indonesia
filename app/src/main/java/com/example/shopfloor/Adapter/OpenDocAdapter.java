@@ -47,14 +47,14 @@ public class OpenDocAdapter extends RecyclerView.Adapter<OpenDocAdapter.ViewHold
 
         holder.tvdate1.setText(header.getDocDate().substring(0,10));
         holder.tvdocnum.setText(header.getDocNum());
-        holder.tvposted1.setText(String.valueOf(header.getPosted()));
+//        holder.tvposted1.setText(String.valueOf(header.getPosted()));
         holder.tvprodno1.setText(header.getProdNo());
         holder.tvsequence2.setText(header.getSequence());
         holder.tvinputqty2.setText(String.valueOf(header.getInQty().replace(".000000","")));
-        holder.tvoutputqty2.setText(header.getOutQty());
+        holder.tvoutputqty2.setText(header.getOutQty().replace(".000000",""));
         holder.tvworkcenter2.setText(header.getWorkCenter());
         holder.tvdocentry.setText(String.valueOf(header.getDocEntry()));
-        holder.tvposted1.setText(header.getStatus());
+        holder.tvposted1.setText(String.valueOf(header.getPosted()));
         holder.tvusername4.setText(header.getUserId());
         holder.tvid2.setText(String.valueOf(header.getId()));
 

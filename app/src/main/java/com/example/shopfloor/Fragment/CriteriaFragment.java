@@ -108,7 +108,7 @@ public class CriteriaFragment extends Fragment {
             Log.e("criteria haha = ", tvdocentry6.getText().toString());
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/upcriteria?docEntry="+docentry)
-            AndroidNetworking.get(c.getAddress() + "index.php/upcriteria?hostHeadEntry=" + hostHeadEntry)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/upcriteria?hostHeadEntry=" + hostHeadEntry)
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {

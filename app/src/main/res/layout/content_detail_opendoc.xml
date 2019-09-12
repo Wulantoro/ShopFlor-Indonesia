@@ -286,7 +286,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvSquence_Qty1"
                 android:layout_toRightOf="@+id/tvstrip"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="105dp"
                 android:layout_marginTop="20dp"
                 android:text="shift"
                 />

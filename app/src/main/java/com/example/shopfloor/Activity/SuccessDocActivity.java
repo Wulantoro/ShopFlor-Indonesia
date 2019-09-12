@@ -189,6 +189,7 @@ public class SuccessDocActivity extends AppCompatActivity {
         progress.setMessage("Sedang proses");
         progress.setTitle("Sedang prosess");
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.show();
 
         if (adapter != null) {
             adapter.clearAll();
@@ -206,7 +207,7 @@ public class SuccessDocActivity extends AppCompatActivity {
 
 
 //            AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/completeheader?workCenter="+prf.getString("workcenter", null))
-                AndroidNetworking.get(c.getAddress() + "index.php/completeheader?workCenter=" + prf.getString("workcenter", null))
+                AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/completeheader?workCenter=" + prf.getString("workcenter", null))
                         .setPriority(Priority.MEDIUM)
                         .build()
                         .getAsJSONObject(new JSONObjectRequestListener() {
@@ -269,7 +270,7 @@ public class SuccessDocActivity extends AppCompatActivity {
                 final List<Header> filteredList = new ArrayList<>();
 
                 for (int i = 0; i < list.size(); i++) {
-                    final String text = list.get(i).getTanggalSelesai().toLowerCase();
+                    final String text = list.get(i).getDocDate().toLowerCase();
                     if (text.contains(query.toString())) {
                         filteredList.add(list.get(i));
                     }

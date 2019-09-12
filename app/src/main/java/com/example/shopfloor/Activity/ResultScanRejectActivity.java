@@ -16,8 +16,10 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.InputRejectAdapter;
 import com.example.shopfloor.Models.InputReject;
 import com.example.shopfloor.Models.Reject;
+import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
+import com.example.shopfloor.Utils.RealmHelper;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -26,6 +28,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 public class ResultScanRejectActivity extends AppCompatActivity {
     private TextView tvcodereject0;
@@ -39,6 +45,11 @@ public class ResultScanRejectActivity extends AppCompatActivity {
     public String str ="";
     float i,num,numtemp;
     private InputRejectAdapter adapter2;
+    private TextView tvip17;
+
+    Realm realm;
+    RealmHelper realmHelper;
+    List<ServerModel> serverModels;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +61,24 @@ public class ResultScanRejectActivity extends AppCompatActivity {
         btnSimpan = findViewById(R.id.btnSimpan);
         tvRejectQty = findViewById(R.id.tvRejectQty);
         tvlinenumb0 = findViewById(R.id.tvlinenumb0);
+        tvip17 = findViewById(R.id.tvip17);
         gson = new Gson();
         adapter2 = new InputRejectAdapter(this);
+
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+
+        realmHelper = new RealmHelper(realm);
+        serverModels = new ArrayList<>();
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
+        }
+        tvip17.setText(text);
 
         tvdocentry4 = findViewById(R.id.tvdocentry4);
         TextView tvdocentry = findViewById(R.id.tvdocentry4);
@@ -92,90 +119,105 @@ public class ResultScanRejectActivity extends AppCompatActivity {
 
     public void loadReject(final String codeReject) {
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/ScanReject?code="+codeReject)
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<Reject> result = new ArrayList<>();
-                        try {
-                            Log.e("scanreject = ", response.toString(1));
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
 
-                            if (result != null) {
-                                result.clear();
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/ScanReject?code="+codeReject)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/ScanReject?code=" + codeReject)
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            List<Reject> result = new ArrayList<>();
+                            try {
+                                Log.e("scanreject = ", response.toString(1));
 
-                                String message = response.getString("message");
+                                if (result != null) {
+                                    result.clear();
 
-                                if (message.equals("ScanReject were found")) {
-                                    String records = response.getString("data");
+                                    String message = response.getString("message");
 
-                                    JSONArray dataArr = new JSONArray(records);
+                                    if (message.equals("ScanReject were found")) {
+                                        String records = response.getString("data");
 
-                                    if (dataArr.length() > 0) {
-                                        for (int i = 0; i < dataArr.length(); i++) {
-                                            Reject reject = gson.fromJson(dataArr.getJSONObject(i).toString(), Reject.class);
-                                            result.add(reject);
-                                            tvReject3.setText(reject.getName());
+                                        JSONArray dataArr = new JSONArray(records);
+
+                                        if (dataArr.length() > 0) {
+                                            for (int i = 0; i < dataArr.length(); i++) {
+                                                Reject reject = gson.fromJson(dataArr.getJSONObject(i).toString(), Reject.class);
+                                                result.add(reject);
+                                                tvReject3.setText(reject.getName());
+                                            }
                                         }
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
+                        @Override
+                        public void onError(ANError anError) {
 
-                    }
-                });
+                        }
+                    });
+        }
     }
 
     public void loadDatalastReject(String docentry) {
         if (adapter2 != null)
             adapter2.clearAll();
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastreject?docEntry="+docentry)
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<InputReject> result = new ArrayList<>();
-                        try {
-                            Log.e("Item reject = ", response.toString(1));
-                            if (result != null)
-                                result.clear();
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
 
-                            String message = response.getString("message");
-                            if (message.equals("Item reject where found")) {
-                                String records = response.getString("data");
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "shopfloor2/index.php/lastreject?docEntry="+docentry)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/lastreject?docEntry=" + docentry)
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            List<InputReject> result = new ArrayList<>();
+                            try {
+                                Log.e("Item reject = ", response.toString(1));
+                                if (result != null)
+                                    result.clear();
 
-                                JSONArray dataArr = new JSONArray(records);
+                                String message = response.getString("message");
+                                if (message.equals("Item reject where found")) {
+                                    String records = response.getString("data");
 
-                                if (dataArr.length() > 0) {
-                                    for (int i = 0; i < dataArr.length(); i++) {
-                                        InputReject inputReject = gson.fromJson(dataArr.getJSONObject(i).toString(), InputReject.class);
-                                        result.add(inputReject);
-                                        tvlinenumb0.setText(String.valueOf(inputReject.getLineNumber()+1));
+                                    JSONArray dataArr = new JSONArray(records);
+
+                                    if (dataArr.length() > 0) {
+                                        for (int i = 0; i < dataArr.length(); i++) {
+                                            InputReject inputReject = gson.fromJson(dataArr.getJSONObject(i).toString(), InputReject.class);
+                                            result.add(inputReject);
+                                            tvlinenumb0.setText(String.valueOf(inputReject.getLineNumber() + 1));
+                                        }
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        }catch (JSONException e) {
-                            e.printStackTrace();
+                            adapter2.addAll(result);
                         }
-                        adapter2.addAll(result);
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
+                        @Override
+                        public void onError(ANError anError) {
 
-                    }
-                });
+                        }
+                    });
 
-
+        }
     }
 
     public void simpanReject() {
@@ -190,28 +232,36 @@ public class ResultScanRejectActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/inputreject")
-                .addJSONObjectBody(jsonObject)
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String message = response.getString("message");
-                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        }catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "JSONEXceptions"+ e, Toast.LENGTH_SHORT).show();
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
+
+//        AndroidNetworking.post(GlobalVars.BASE_IP + "shopfloor2/index.php/inputreject")
+            AndroidNetworking.post(c.getAddress() + "shopfloor2/index.php/inputreject")
+                    .addJSONObjectBody(jsonObject)
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                String message = response.getString("message");
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
-                        Toast.makeText(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_SHORT).show();
+                        @Override
+                        public void onError(ANError anError) {
+                            Toast.makeText(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_SHORT).show();
 
-                    }
-                });
+                        }
+                    });
+        }
     }
 
     public void btn1Clicked(View v) {

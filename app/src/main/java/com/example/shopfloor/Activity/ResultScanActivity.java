@@ -3,6 +3,7 @@ package com.example.shopfloor.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -25,8 +26,10 @@ import com.example.shopfloor.Adapter.SuccDocAdapter;
 import com.example.shopfloor.Models.Header;
 import com.example.shopfloor.Models.Poscan;
 import com.example.shopfloor.Models.Productorder;
+import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
+import com.example.shopfloor.Utils.RealmHelper;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -39,6 +42,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+import io.realm.RealmResults;
 
 public class ResultScanActivity extends AppCompatActivity {
 
@@ -81,6 +88,12 @@ public class ResultScanActivity extends AppCompatActivity {
     private TextView tvnamawc2;
     private Productorder productorder;
     private Poscan poscan;
+    private TextView tvip16;
+    private Handler mHandler;
+
+    Realm realm;
+    RealmHelper realmHelper;
+    List<ServerModel> serverModels;
 
     //barcode
     private static final String TAG = ResultScanActivity.class.getSimpleName();
@@ -121,6 +134,7 @@ public class ResultScanActivity extends AppCompatActivity {
         tvnamawc2 = findViewById(R.id.tvnamawc2);
         tvSquence1 = findViewById(R.id.tvSquence1);
         tvSquence_Qty1 = findViewById(R.id.tvSquence_Qty1);
+        tvip16 = findViewById(R.id.tvip16);
 
         /*************************BARCODE*******************************/
         String barcode = getIntent().getStringExtra("wccode");
@@ -149,8 +163,36 @@ public class ResultScanActivity extends AppCompatActivity {
         TextView tgl_mulai = findViewById(R.id.tvTgl_mulai1);
         tgl_mulai.setText(date);
 
-        LastDocnum();
+        //        Setup Realm
+        Realm.init(getApplicationContext());
+        RealmConfiguration configuration = new RealmConfiguration.Builder().build();
+        realm = Realm.getInstance(configuration);
+
+        realmHelper = new RealmHelper(realm);
+        serverModels = new ArrayList<>();
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
+        }
+        tvip16.setText(text);
+
+        /***************reload otomatis****************/
+        this.mHandler = new Handler();
+        m_Runnable.run();
+
     }
+
+    private final Runnable m_Runnable = new Runnable() {
+        @Override
+        public void run() {
+//            Toast.makeText(getApplicationContext(),"in runnable",Toast.LENGTH_SHORT).show();
+            LastDocnum();
+            ResultScanActivity.this.mHandler.postDelayed(m_Runnable, 2000);
+        }
+    };
 
     //ketika klik back loncat ke home activity
     public void onBackPressed() {
@@ -360,118 +402,134 @@ public class ResultScanActivity extends AppCompatActivity {
         if (adapter3 != null)
             adapter3.clearAll();
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastdocnum")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<Header> results = new ArrayList<>();
-                        try {
-                            Log.e("tampil last = ", response.toString(1));
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
 
-                            if (results != null)
-                                results.clear();
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastdocnum")
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/lastdocnum")
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            List<Header> results = new ArrayList<>();
+                            try {
+                                Log.e("tampil last = ", response.toString(1));
 
-                            String message = response.getString("message");
+                                if (results != null)
+                                    results.clear();
 
-                            if (message.equals("data ketemu")) {
-                                String records = response.getString("data");
+                                String message = response.getString("message");
 
-                                JSONArray dataArr = new JSONArray(records);
+                                if (message.equals("data ketemu")) {
+                                    String records = response.getString("data");
 
-                                if (dataArr.length() > 0) {
-                                    for (int i = 0; i < dataArr.length(); i++) {
-                                        Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
-                                        results.add(header);
+                                    JSONArray dataArr = new JSONArray(records);
 
-                                        String S = "S";
-                                        String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-                                        String docnum = header.getDocNum().substring(9);
-                                        String AN = "" + (Integer.parseInt(docnum) + 1);
-                                        Log.e("aaannn", AN);
-                                        String Nol = "";
+                                    if (dataArr.length() > 0) {
+                                        for (int i = 0; i < dataArr.length(); i++) {
+                                            Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
+                                            results.add(header);
 
-                                        if (AN.length() == 1) {
-                                            Nol = "00";
-                                        } else if (AN.length() == 2) {
-                                            Nol = "0";
-                                        } else if (AN.length() == 3) {
-                                            Nol = "";
+                                            String S = "S";
+                                            String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+                                            String docnum = header.getDocNum().substring(9);
+                                            String AN = "" + (Integer.parseInt(docnum) + 1);
+                                            Log.e("aaannn", AN);
+                                            String Nol = "";
+
+                                            if (AN.length() == 1) {
+                                                Nol = "00";
+                                            } else if (AN.length() == 2) {
+                                                Nol = "0";
+                                            } else if (AN.length() == 3) {
+                                                Nol = "";
+                                            }
+
+                                            tvNo_doc1.setText(S + nodoc + Nol + AN);
+
+
                                         }
-
-                                        tvNo_doc1.setText(S + nodoc + Nol + AN);
-
-
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        }catch (JSONException e) {
-                            e.printStackTrace();
+                            adapter3.addAll(results);
                         }
-                        adapter3.addAll(results);
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
+                        @Override
+                        public void onError(ANError anError) {
 
-                    }
-                });
+                        }
+                    });
+        }
     }
 
     //    barcode
     private void searchBarcode(final String docnum1, final String seq1) {
 
-        Log.e("docnumbaru", tvNo_Prod1.getText().toString());
-        Log.e("seq11", tvSquence1.getText().toString());
-        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
-        prf.getString("workcenter", null);
-        Log.e("workcenter1111 = ", prf.getString("workcenter", null));
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c : results1) {
+            text = text + c.getAddress();
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/poscan?wccode=" + prf.getString("workcenter", null) + "&DocNum=" + docnum1 + "&seq=" + seq1)
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<Poscan> result = new ArrayList<>();
-                        try {
-                            Log.e("scanbarcode", response.toString(1));
+            Log.e("docnumbaru", tvNo_Prod1.getText().toString());
+            Log.e("seq11", tvSquence1.getText().toString());
+            prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
+            prf.getString("workcenter", null);
+            Log.e("workcenter1111 = ", prf.getString("workcenter", null));
 
-                            if (result != null)
-                                result.clear();
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/poscan?wccode=" + prf.getString("workcenter", null) + "&DocNum=" + docnum1 + "&seq=" + seq1)
+            AndroidNetworking.get(c.getAddress() + "index.php/poscan?wccode=" + prf.getString("workcenter", null) + "&DocNum=" + docnum1 + "&seq=" + seq1)
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            List<Poscan> result = new ArrayList<>();
+                            try {
+                                Log.e("scanbarcode", response.toString(1));
 
-                            String message = response.getString("message");
+                                if (result != null)
+                                    result.clear();
 
-                            if (message.equals("Scan were found")) {
-                                String records = response.getString("data");
+                                String message = response.getString("message");
 
-                                JSONArray dataArr = new JSONArray(records);
+                                if (message.equals("Scan were found")) {
+                                    String records = response.getString("data");
 
-                                if (dataArr.length() > 0) {
-                                    for (int i = 0; i < dataArr.length(); i++) {
-                                        Poscan poscan = gson.fromJson(dataArr.getJSONObject(i).toString(), Poscan.class);
-                                        result.add(poscan);
+                                    JSONArray dataArr = new JSONArray(records);
+
+                                    if (dataArr.length() > 0) {
+                                        for (int i = 0; i < dataArr.length(); i++) {
+                                            Poscan poscan = gson.fromJson(dataArr.getJSONObject(i).toString(), Poscan.class);
+                                            result.add(poscan);
 //                                        tvNo_prod1.setText(String.valueOf(productorder.getDocNum()));
-                                        tvprod1.setText(poscan.getItemCode());
-                                        tvNm_prod1.setText(poscan.getItemName());
-                                        tvRoute_Code1.setText(poscan.getCode());
-                                        tvRoute_Code2.setText(poscan.getName());
-                                        tvQty_rencProd1.setText(poscan.getPlannedQty().replace(".000000",""));
-                                        tvSts_Prod1.setText(poscan.getStatus());
-                                        tvSquence_Qty1.setText(poscan.getUQuantity().replace(".000000",""));
+                                            tvprod1.setText(poscan.getItemCode());
+                                            tvNm_prod1.setText(poscan.getItemName());
+                                            tvRoute_Code1.setText(poscan.getCode());
+                                            tvRoute_Code2.setText(poscan.getName());
+                                            tvQty_rencProd1.setText(poscan.getPlannedQty().replace(".000000", ""));
+                                            tvSts_Prod1.setText(poscan.getStatus());
+                                            tvSquence_Qty1.setText(poscan.getUQuantity().replace(".000000", ""));
+                                        }
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
+                        @Override
+                        public void onError(ANError anError) {
 
-                    }
-                });
+                        }
+                    });
+        }
     }
 }

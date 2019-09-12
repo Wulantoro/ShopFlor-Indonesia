@@ -27,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="20dp"
+                android:background="@drawable/button"
                 android:text="Pilih Produksi"/>
 
             <TextView
@@ -174,7 +175,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvusername2"
+                android:textColor="@color/white"
                 android:text="wcname"/>
+
+            <TextView
+                android:id="@+id/tvip16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvusername2"
+                android:layout_toRightOf="@id/tvnamawc2"
+                android:textColor="@color/white"
+                android:layout_marginLeft="5dp"
+                android:text="ip server"/>
 
 
         </RelativeLayout>
@@ -190,6 +202,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
+                android:background="@drawable/button"
                 android:text="Pilih Sequence"/>
 
             <TextView

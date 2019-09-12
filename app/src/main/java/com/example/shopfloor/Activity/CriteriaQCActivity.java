@@ -361,7 +361,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
 
 
 //            AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/criteria?wccode="+wccode + "&docNum="+docnum + "&seq="+sequence)
-            AndroidNetworking.get(c.getAddress() + "index.php/criteria?wccode=" + wccode + "&docNum=" + docnum + "&seq=" + sequence)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/criteria?wccode=" + wccode + "&docNum=" + docnum + "&seq=" + sequence)
                     .setTag(this)
                     .setPriority(Priority.MEDIUM)
                     .build()
@@ -633,7 +633,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
 
 
 //                    AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/upcriteria")
-            AndroidNetworking.post(c.getAddress() + "index.php/upcriteria")
+            AndroidNetworking.post(c.getAddress() + "shopfloor2/index.php/upcriteria")
                     .addJSONArrayBody(jsonArray)
                     .setPriority(Priority.MEDIUM)
                     .build()

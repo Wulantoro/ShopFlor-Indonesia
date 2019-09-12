@@ -104,7 +104,7 @@ public class InputRejectAdapter extends RecyclerView.Adapter<InputRejectAdapter.
                                                     text = text + c.getAddress();
 
 //                                                    AndroidNetworking.delete(GlobalVars.BASE_IP + "index.php/inputreject?id=" + inputReject.getId())
-                                                    AndroidNetworking.delete(c.getAddress() + "index.php/inputreject?docEntry=" + inputReject.getDocEntry())
+                                                    AndroidNetworking.delete(c.getAddress() + "shopfloor2/index.php/inputreject?docEntry=" + inputReject.getDocEntry())
                                                             .setPriority(Priority.MEDIUM)
                                                             .build()
                                                             .getAsJSONObject(new JSONObjectRequestListener() {

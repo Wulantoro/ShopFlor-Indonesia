@@ -125,7 +125,7 @@ public class WorkcenterListActivity extends AppCompatActivity {
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/workcenter")
 //        AndroidNetworking.get(prf.getString("tvip", null) + "index.php/workcenter")
-            AndroidNetworking.get(c.getAddress() + "index.php/workcenter")
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/workcenter")
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {

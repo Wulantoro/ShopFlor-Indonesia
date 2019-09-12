@@ -356,7 +356,7 @@ public class RejectActivity extends AppCompatActivity {
 
             Log.e("ip server = ", c.getAddress());
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/inputreject?hostHeadEntry="+ docentry)
-            AndroidNetworking.get(c.getAddress() + "index.php/inputreject?hostHeadEntry=" + docentry)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/inputreject?hostHeadEntry=" + docentry)
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
@@ -443,7 +443,7 @@ public class RejectActivity extends AppCompatActivity {
         for (ServerModel c : results1) {
             text = text + c.getAddress();
             Log.e("ip address = ", c.getAddress());
-            AndroidNetworking.put(c.getAddress() + "index.php/simpanheader?docEntry")
+            AndroidNetworking.put(c.getAddress() + "shopfloor2/index.php/simpanheader?docEntry")
 //        AndroidNetworking.put(GlobalVars.BASE_IP + "index.php/simpanheader?docEntry")
                     .addJSONObjectBody(jsonObject)
                     .setPriority(Priority.MEDIUM)

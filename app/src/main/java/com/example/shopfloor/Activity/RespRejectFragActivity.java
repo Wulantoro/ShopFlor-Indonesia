@@ -159,7 +159,7 @@ public class RespRejectFragActivity extends AppCompatActivity {
 
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastid?mobileId=" + mobile)
-            AndroidNetworking.get(c.getAddress() + "index.php/lastid?mobileId=" + mobile)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/lastid?mobileId=" + mobile)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
                         @Override
@@ -276,7 +276,7 @@ public class RespRejectFragActivity extends AppCompatActivity {
 
 
 //            AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/reject")
-            AndroidNetworking.get(c.getAddress() + "index.php/reject")
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/reject")
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
@@ -338,7 +338,7 @@ public class RespRejectFragActivity extends AppCompatActivity {
 
             Log.e("ip server = ", c.getAddress());
 //            AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/inputreject")
-            AndroidNetworking.post(c.getAddress() + "index.php/inputreject")
+            AndroidNetworking.post(c.getAddress() + "shopfloor2/index.php/inputreject")
                     .addJSONObjectBody(jsonObject)
                     .setPriority(Priority.MEDIUM)
                     .build()
@@ -374,7 +374,7 @@ public class RespRejectFragActivity extends AppCompatActivity {
         for (ServerModel c : results) {
             text = text + c.getAddress();
 
-            AndroidNetworking.get(c.getAddress() + "index.php/lastreject?hostHeadEntry=" + docentry)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/lastreject?hostHeadEntry=" + docentry)
 //            AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastreject?hostHeadEntry=" + docentry)
                     .setPriority(Priority.MEDIUM)
                     .build()

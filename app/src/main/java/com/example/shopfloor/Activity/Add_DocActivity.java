@@ -416,7 +416,7 @@ public class Add_DocActivity extends AppCompatActivity {
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/productorder?wccode="+prf.getString("workcenter", null))
 //        AndroidNetworking.get(prf.getString("tvip", null) + "index.php/productorder?wccode="+wccode)
-            AndroidNetworking.get(c.getAddress() + "index.php/productorder?wccode=" + wccode)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/productorder?wccode=" + wccode)
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
@@ -479,7 +479,7 @@ public class Add_DocActivity extends AppCompatActivity {
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sequence?wccode="+prf.getString("workcenter", null)+"&docnum="+docnum)
 //        AndroidNetworking.get(prf.getString("tvip", null) + "index.php/sequence?wccode="+wccode+"&docnum="+docnum)
-            AndroidNetworking.get(c.getAddress() + "index.php/sequence?wccode=" + wccode + "&docnum=" + docnum)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/sequence?wccode=" + wccode + "&docnum=" + docnum)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
                         @Override
@@ -534,7 +534,7 @@ public class Add_DocActivity extends AppCompatActivity {
             text = text + c.getAddress();
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastdocnum")
-            AndroidNetworking.get(c.getAddress() + "index.php/lastdocnum")
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/lastdocnum")
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
