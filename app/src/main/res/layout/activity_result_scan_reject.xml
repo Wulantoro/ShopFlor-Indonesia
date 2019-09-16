@@ -41,12 +41,22 @@
             android:text="line numb"/>
 
         <TextView
-            android:id="@+id/tvip17"
+            android:id="@+id/tvid6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvlinenumb0"
+            android:layout_marginLeft="5dp"
             android:textColor="@color/white"
-            android:text="ip server"/>
+            android:text="id"/>
+
+        <TextView
+            android:id="@+id/tvmobileid1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tvid6"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:text="mobileid"/>
 
 
         <TextView
@@ -91,8 +101,15 @@
             android:textSize="20sp"
             android:layout_below="@id/btnReject"
             android:background="@drawable/button"
-            android:layout_marginTop="20dp"
-            />
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/tvip17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnSimpan"
+            android:text="ip server"/>
+
 
     </RelativeLayout>
 

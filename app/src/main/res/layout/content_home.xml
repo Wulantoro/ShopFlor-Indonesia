@@ -162,7 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/line10"
             android:layout_marginLeft="10dp"
-
+            android:textColor="@color/white"
             android:text="ip address"/>
 </RelativeLayout>
     <!--    -->

@@ -2,6 +2,7 @@ package com.example.shopfloor.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,7 +15,9 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.InputRejectAdapter;
+import com.example.shopfloor.Models.Header;
 import com.example.shopfloor.Models.InputReject;
+import com.example.shopfloor.Models.LastId;
 import com.example.shopfloor.Models.Reject;
 import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.R;
@@ -47,6 +50,9 @@ public class ResultScanRejectActivity extends AppCompatActivity {
     private InputRejectAdapter adapter2;
     private TextView tvip17;
 
+    private TextView tvmobileid1;
+    private TextView tvid6;
+
     Realm realm;
     RealmHelper realmHelper;
     List<ServerModel> serverModels;
@@ -62,6 +68,8 @@ public class ResultScanRejectActivity extends AppCompatActivity {
         tvRejectQty = findViewById(R.id.tvRejectQty);
         tvlinenumb0 = findViewById(R.id.tvlinenumb0);
         tvip17 = findViewById(R.id.tvip17);
+        tvmobileid1 = findViewById(R.id.tvmobileid1);
+        tvid6 = findViewById(R.id.tvid6);
         gson = new Gson();
         adapter2 = new InputRejectAdapter(this);
 
@@ -80,10 +88,16 @@ public class ResultScanRejectActivity extends AppCompatActivity {
         }
         tvip17.setText(text);
 
+        tvmobileid1.setText(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
+//        lastId(tvdocentry4.getText().toString());
+//        Log.e("docentryyyyyyy", String.valueOf(tvdocentry4.getText().toString()));
+
         tvdocentry4 = findViewById(R.id.tvdocentry4);
         TextView tvdocentry = findViewById(R.id.tvdocentry4);
         prf = getSharedPreferences("Docentry", MODE_PRIVATE);
         tvdocentry.setText(prf.getString("tvdocentry", null));
+
+        lastId(tvdocentry4.getText().toString());
 
 
         /****************BARCODE******************************/
@@ -115,6 +129,57 @@ public class ResultScanRejectActivity extends AppCompatActivity {
 
 
         loadDatalastReject(tvdocentry4.getText().toString());
+    }
+
+    public void lastId(String docentry) {
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c : results) {
+            text = text + c.getAddress();
+
+
+//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastid?mobileId=" + mobile)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/lastid?docEntry=" + docentry)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            List<Header> result = new ArrayList<>();
+                            try {
+                                Log.e("tampil last = ", response.toString(1));
+                                String message = response.getString("message");
+
+                                if (message.equals("id ketemu")) {
+                                    String records = response.getString("data");
+
+                                    JSONArray dataArr = new JSONArray(records);
+                                    Log.e("iddd", result.toString());
+
+                                    if (dataArr.length() > 0) {
+                                        for (int i = 0; i < dataArr.length(); i++) {
+                                            Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
+                                            result.add(header);
+                                            tvid6.setText(String.valueOf(header.getId()));
+
+
+                                        }
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+
+                            }
+                        }
+
+                        @Override
+                        public void onError(ANError anError) {
+
+                        }
+                    });
+        }
+
     }
 
     public void loadReject(final String codeReject) {
@@ -179,7 +244,7 @@ public class ResultScanRejectActivity extends AppCompatActivity {
             text = text + c.getAddress();
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "shopfloor2/index.php/lastreject?docEntry="+docentry)
-            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/lastreject?docEntry=" + docentry)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/lastreject?hostHeadEntry=" + docentry)
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
@@ -220,10 +285,13 @@ public class ResultScanRejectActivity extends AppCompatActivity {
         }
     }
 
+
+
     public void simpanReject() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("docEntry", tvdocentry4.getText().toString());
+            jsonObject.put("hostHeadEntry", tvdocentry4.getText().toString());
+            jsonObject.put("id", tvid6.getText().toString());
             jsonObject.put("lineNumber", tvlinenumb0.getText().toString());
             jsonObject.put("rejectCode", tvcodereject0.getText().toString());
             jsonObject.put("rejectName", tvReject3.getText().toString());

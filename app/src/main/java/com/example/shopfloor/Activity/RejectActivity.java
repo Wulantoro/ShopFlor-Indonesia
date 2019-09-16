@@ -91,6 +91,7 @@ public class RejectActivity extends AppCompatActivity {
     private ImageButton ibscan;
     private TextView tvip10;
     private TextView tvdocentry01;
+    private TextView tvid7;
 
     Realm realm;
     RealmHelper realmHelper;
@@ -142,6 +143,7 @@ public class RejectActivity extends AppCompatActivity {
         tvmobileid0 = findViewById(R.id.tvmobileid0);
         tvip10 = findViewById(R.id.tvip10);
 //        tvdocentry01 = findViewById(R.id.tvdocentry01);
+        tvid7 = findViewById(R.id.tvid7);
 
         openDocAdapter = new OpenDocAdapter(this);
 
@@ -195,6 +197,10 @@ public class RejectActivity extends AppCompatActivity {
         prf = getSharedPreferences("Docentry", MODE_PRIVATE);
         tvdocentry.setText(String.valueOf(prf.getString("tvdocentry", null)));
         Log.e("docemtry", prf.getString("tvdocentry", null));
+
+        TextView tvidd = findViewById(R.id.tvid7);
+        prf = getSharedPreferences("Id", MODE_PRIVATE);
+        tvidd.setText(String.valueOf(prf.getString("tvid", null)));
 
 
 
@@ -310,7 +316,14 @@ public class RejectActivity extends AppCompatActivity {
                     if (Integer.parseInt(String.valueOf(tvInputQty1.getText())) == Integer.parseInt(String.valueOf(tvOutputQty1.getText()))) {
                         Toast.makeText(getApplicationContext(), "Tidak perlu", Toast.LENGTH_SHORT).show();
                     }else {
+                        SharedPreferences prf, pref;
                         Intent intent = new Intent(RejectActivity.this, RespRejectFragActivity.class);
+
+                        pref = getSharedPreferences("Id", MODE_PRIVATE);
+                        String tvid = tvid7.getText().toString();
+                        SharedPreferences.Editor editor22 = pref.edit();
+                        editor22.putString("tvid", tvid);
+                        editor22.commit();
                         startActivity(intent);
                     }
 

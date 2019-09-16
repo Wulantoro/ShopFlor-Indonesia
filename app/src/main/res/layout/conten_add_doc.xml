@@ -179,12 +179,12 @@
 
             <TextView
                 android:id="@+id/tvip4"
-                android:layout_width="wrap_content"
+                android:layout_width="45dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:layout_below="@id/tvusername2"
-
-                android:text="ip server"/>
+                android:layout_marginLeft="5dp"
+                android:text="ip server"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/tvblnkmrn"
@@ -192,14 +192,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvusername2"
                 android:layout_toRightOf="@id/tvip4"
-                android:textColor="@color/white"
+
                 android:layout_marginLeft="5dp"/>
 
             <TextView
                 android:id="@+id/tvblnkmrn0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+
                 android:layout_below="@id/tvblnkmrn"
                 />
 
@@ -210,7 +210,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/tvblnkmrn0"
                 android:layout_below="@id/tvblnkmrn"
-                android:textColor="@color/white"
+
                 android:text="bulan sekarang"/>
 
 

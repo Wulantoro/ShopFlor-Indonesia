@@ -288,13 +288,15 @@ public class AddSeqActivity extends AppCompatActivity {
         for (ServerModel c:results1) {
             text = text + c.getAddress();
 
+            Log.e("Sequence = ", c.getAddress() + "shopfloor2/index.php/LastIdheader?mobileId=" + mobile);
+
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastid?mobileId=" + mobile)
-            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/lastid?mobileId=" + mobile)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/LastIdheader?mobileId=" + mobile)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            List<LastId> result = new ArrayList<>();
+                            List<Header> result = new ArrayList<>();
                             try {
 
                                 Log.e("tampil last = ", response.toString(1));
@@ -309,10 +311,10 @@ public class AddSeqActivity extends AppCompatActivity {
                                     if (dataArr.length() > 0) {
                                         for (int i = 0; i < dataArr.length(); i++) {
 
-                                            LastId lastId = gson.fromJson(dataArr.getJSONObject(i).toString(), LastId.class);
-                                            result.add(lastId);
+                                            Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
+                                            result.add(header);
 
-                                            tvid.setText(String.valueOf(lastId.getId() + 1));
+                                            tvid.setText(String.valueOf(header.getId() + 1));
                                         }
                                     }
                                 }

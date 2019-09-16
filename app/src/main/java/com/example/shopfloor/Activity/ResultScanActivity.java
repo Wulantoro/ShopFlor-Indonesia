@@ -105,9 +105,15 @@ public class ResultScanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result_scan);
 
         /**************Toolbar**********************************/
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setTitle(null);
+//        Toolbar topToolbar = findViewById(R.id.toolbar);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         setTitle(null);
         Toolbar topToolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(topToolbar);
         /*******************************************************/
 
         gson = new Gson();
@@ -434,22 +440,70 @@ public class ResultScanActivity extends AppCompatActivity {
                                             Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
                                             results.add(header);
 
+//                                            String S = "S";
+//                                            String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+//                                            String docnum = header.getDocNum().substring(9);
+//                                            String AN = "" + (Integer.parseInt(docnum) + 1);
+//                                            Log.e("aaannn", AN);
+//                                            String Nol = "";
+//
+//                                            if (AN.length() == 1) {
+//                                                Nol = "00";
+//                                            } else if (AN.length() == 2) {
+//                                                Nol = "0";
+//                                            } else if (AN.length() == 3) {
+//                                                Nol = "";
+//                                            }
+//
+//                                            tvNo_doc1.setText(S + nodoc + Nol + AN);
+
                                             String S = "S";
-                                            String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
+                                            String bulan = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
+                                            String tahun = new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date());
+                                            String hari = new SimpleDateFormat("dd", Locale.getDefault()).format(new Date());
                                             String docnum = header.getDocNum().substring(9);
+                                            String bulankmrn1 = header.getDocNum().substring(5);
+                                            String bulankmrn2 = bulankmrn1.substring(0, 2);
                                             String AN = "" + (Integer.parseInt(docnum) + 1);
                                             Log.e("aaannn", AN);
                                             String Nol = "";
 
-                                            if (AN.length() == 1) {
-                                                Nol = "00";
-                                            } else if (AN.length() == 2) {
-                                                Nol = "0";
-                                            } else if (AN.length() == 3) {
-                                                Nol = "";
+//                                        if (AN.length() == 1) {
+//                                                Nol = "00";
+//                                            } else if (AN.length() == 2) {
+//                                                Nol = "0";
+//                                            } else if (AN.length() == 3) {
+//                                                Nol = "";
+//                                            }
+
+
+//                                        if (AN.length() == 1 ) {
+//                                            Nol = "00";
+//
+//                                        } else if (AN.length() == 2) {
+//                                            Nol = "0";
+//                                        } else if (AN.length() == 3) {
+//                                            Nol = "";
+//                                        }
+
+                                            //masih salah
+
+                                            if (bulan.equals(bulankmrn2)) {
+                                                if (AN.length() == 1) {
+                                                    Nol = "00";
+
+                                                } else if (AN.length() == 2) {
+                                                    Nol = "0";
+                                                } else if (AN.length() == 3) {
+                                                    Nol = "";
+                                                }
+
+                                                tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN);
+                                            } else if (bulan != bulankmrn2) {
+                                                String AN1 = "001";
+                                                tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN1);
                                             }
 
-                                            tvNo_doc1.setText(S + nodoc + Nol + AN);
 
 
                                         }
@@ -485,7 +539,7 @@ public class ResultScanActivity extends AppCompatActivity {
             Log.e("workcenter1111 = ", prf.getString("workcenter", null));
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/poscan?wccode=" + prf.getString("workcenter", null) + "&DocNum=" + docnum1 + "&seq=" + seq1)
-            AndroidNetworking.get(c.getAddress() + "index.php/poscan?wccode=" + prf.getString("workcenter", null) + "&DocNum=" + docnum1 + "&seq=" + seq1)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/poscan?wccode=" + prf.getString("workcenter", null) + "&DocNum=" + docnum1 + "&seq=" + seq1)
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {

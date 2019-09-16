@@ -104,8 +104,12 @@ public class RespRejectFragActivity extends AppCompatActivity {
 
 
         tvmobileid1.setText(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
-        lastId(tvmobileid1.getText().toString());
+//        lastId(tvmobileid1.getText().toString());
 
+
+        TextView tvid = findViewById(R.id.tvid6);
+        prf = getSharedPreferences("Id", MODE_PRIVATE);
+        tvid.setText(String.valueOf(prf.getString("tvid", null)));
 
         tvdocentry4 = findViewById(R.id.tvdocentry4);
         TextView tvdocentry = findViewById(R.id.tvdocentry4);
@@ -149,55 +153,57 @@ public class RespRejectFragActivity extends AppCompatActivity {
 
     }
 
-    public void lastId(String mobile) {
 
-        Realm realm = Realm.getDefaultInstance();
-        RealmResults<ServerModel> results = realm.where(ServerModel.class).findAll();
-        String text = "";
-        for (ServerModel c : results) {
-            text = text + c.getAddress();
+//tidak terpakai
+//    public void lastId(String mobile) {
+//
+//        Realm realm = Realm.getDefaultInstance();
+//        RealmResults<ServerModel> results = realm.where(ServerModel.class).findAll();
+//        String text = "";
+//        for (ServerModel c : results) {
+//            text = text + c.getAddress();
+//
+//
+////        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastid?mobileId=" + mobile)
+//            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/lastid?mobileId=" + mobile)
+//                    .build()
+//                    .getAsJSONObject(new JSONObjectRequestListener() {
+//                        @Override
+//                        public void onResponse(JSONObject response) {
+//                            List<LastId> result = new ArrayList<>();
+//                            try {
+//                                Log.e("tampil last = ", response.toString(1));
+//                                String message = response.getString("message");
+//
+//                                if (message.equals("id ketemu")) {
+//                                    String records = response.getString("data");
+//
+//                                    JSONArray dataArr = new JSONArray(records);
+//                                    Log.e("iddd", result.toString());
+//
+//                                    if (dataArr.length() > 0) {
+//                                        for (int i = 0; i < dataArr.length(); i++) {
+//                                            LastId lastId = gson.fromJson(dataArr.getJSONObject(i).toString(), LastId.class);
+//                                            result.add(lastId);
+////                                            tvid6.setText(String.valueOf(lastId.getId()));
+//
+//                                        }
+//                                    }
+//                                }
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onError(ANError anError) {
+//
+//                        }
+//                    });
+//        }
 
-
-//        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastid?mobileId=" + mobile)
-            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/lastid?mobileId=" + mobile)
-                    .build()
-                    .getAsJSONObject(new JSONObjectRequestListener() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            List<LastId> result = new ArrayList<>();
-                            try {
-                                Log.e("tampil last = ", response.toString(1));
-                                String message = response.getString("message");
-
-                                if (message.equals("id ketemu")) {
-                                    String records = response.getString("data");
-
-                                    JSONArray dataArr = new JSONArray(records);
-                                    Log.e("iddd", result.toString());
-
-                                    if (dataArr.length() > 0) {
-                                        for (int i = 0; i < dataArr.length(); i++) {
-                                            LastId lastId = gson.fromJson(dataArr.getJSONObject(i).toString(), LastId.class);
-                                            result.add(lastId);
-                                            tvid6.setText(String.valueOf(lastId.getId()));
-
-                                        }
-                                    }
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-
-                            }
-                        }
-
-                        @Override
-                        public void onError(ANError anError) {
-
-                        }
-                    });
-        }
-
-    }
+//    }
 
     public void showDialog() {
 
