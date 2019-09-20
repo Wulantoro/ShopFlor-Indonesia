@@ -235,8 +235,8 @@ public class AddSeqActivity extends AppCompatActivity {
         }
         tvip5.setText(text);
 
-        TextView tvstatus = findViewById(R.id.tvstatus);
-        tvstatus.setText("0");
+//        TextView tvstatus = findViewById(R.id.tvstatus);
+//        tvstatus.setText("0");
 
         TextView tvposted = findViewById(R.id.tvposted3);
         tvposted.setText("0");
@@ -469,7 +469,7 @@ public class AddSeqActivity extends AppCompatActivity {
             jsonObject.put("jamMulai", tvjammulai7.getText().toString());
             jsonObject.put("inQty", tvInputSeq.getText().toString());
             jsonObject.put("workCenter", tvwc3.getText().toString());
-            jsonObject.put("status", tvstatus.getText().toString());
+//            jsonObject.put("status", tvstatus.getText().toString());
             jsonObject.put("posted", tvposted3.getText().toString());
             jsonObject.put("userId", tvusername3.getText().toString());
 

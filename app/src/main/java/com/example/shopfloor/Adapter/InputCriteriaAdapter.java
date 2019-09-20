@@ -41,6 +41,8 @@ public class InputCriteriaAdapter extends RecyclerView.Adapter<InputCriteriaAdap
         list_item = list;
     }
 
+
+
     @NonNull
     @Override
     public InputCriteriaAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

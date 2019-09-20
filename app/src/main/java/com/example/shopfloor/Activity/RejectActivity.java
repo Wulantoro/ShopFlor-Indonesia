@@ -23,15 +23,19 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.shopfloor.Adapter.CriteriaAdapter;
+import com.example.shopfloor.Adapter.InputCriteriaAdapter;
 import com.example.shopfloor.Adapter.InputRejectAdapter;
 
 import com.example.shopfloor.Adapter.OpenDocAdapter;
+import com.example.shopfloor.Models.Criteria;
 import com.example.shopfloor.Models.InputReject;
 import com.example.shopfloor.Models.Productorder;
 import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.Models.SincHeader;
 import com.example.shopfloor.Models.SincReject;
 import com.example.shopfloor.Models.Totreject;
+import com.example.shopfloor.Models.Upcriteria;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
 import com.example.shopfloor.Utils.RealmHelper;
@@ -93,12 +97,12 @@ public class RejectActivity extends AppCompatActivity {
     private TextView tvip10;
     private TextView tvdocentry01;
     private TextView tvid7;
+    private InputCriteriaAdapter inputCriteriaAdapter;
 
 
     Realm realm;
     RealmHelper realmHelper;
     List<ServerModel> serverModels;
-
 
 
     @Override
@@ -149,6 +153,7 @@ public class RejectActivity extends AppCompatActivity {
 
 
         openDocAdapter = new OpenDocAdapter(this);
+        inputCriteriaAdapter = new InputCriteriaAdapter(this);
 
         tvmobileid0.setText(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
 
@@ -162,7 +167,8 @@ public class RejectActivity extends AppCompatActivity {
 
         TextView tvusername = findViewById(R.id.tvusername8);
         prf = getSharedPreferences("Username", MODE_PRIVATE);
-        tvusername.setText(prf.getString("tvusername", null));;
+        tvusername.setText(prf.getString("tvusername", null));
+        ;
 
         TextView tvworkcenter = findViewById(R.id.tvworkcenter6);
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
@@ -204,7 +210,6 @@ public class RejectActivity extends AppCompatActivity {
         TextView tvidd = findViewById(R.id.tvid7);
         prf = getSharedPreferences("Id", MODE_PRIVATE);
         tvidd.setText(String.valueOf(prf.getString("tvid", null)));
-
 
 
 //        TextView tvdocentry1 = findViewById(R.id.tvdocentry01);
@@ -257,33 +262,33 @@ public class RejectActivity extends AppCompatActivity {
         jamsel.setText(String.valueOf(prf.getString("tvjamsel", null)));
         Log.e("jam selesai = ", String.valueOf(prf.getString("jamsel", null)));
 
-       TextView tvdocsts = findViewById(R.id.tvdocsts2);
-       prf = getSharedPreferences("Docsts", MODE_PRIVATE);
-       tvdocsts.setText(prf.getString("tvdocsts", null));
+        TextView tvdocsts = findViewById(R.id.tvdocsts2);
+        prf = getSharedPreferences("Docsts", MODE_PRIVATE);
+        tvdocsts.setText(prf.getString("tvdocsts", null));
 
-       TextView tvinqty = findViewById(R.id.tvInputQty1);
-       prf = getSharedPreferences("Inqty", MODE_PRIVATE);
-       tvinqty.setText(prf.getString("tvinqty", null));
+        TextView tvinqty = findViewById(R.id.tvInputQty1);
+        prf = getSharedPreferences("Inqty", MODE_PRIVATE);
+        tvinqty.setText(prf.getString("tvinqty", null));
 
-       TextView tvoutqty = findViewById(R.id.tvOutputQty1);
-       prf = getSharedPreferences("Outqty", MODE_PRIVATE);
-       tvoutqty.setText(prf.getString("tvoutqty", null));
+        TextView tvoutqty = findViewById(R.id.tvOutputQty1);
+        prf = getSharedPreferences("Outqty", MODE_PRIVATE);
+        tvoutqty.setText(prf.getString("tvoutqty", null));
 
-       TextView tvshift = findViewById(R.id.tvshift4);
-       prf = getSharedPreferences("Shift", MODE_PRIVATE);
-       tvshift.setText(prf.getString("tvshift", null));
+        TextView tvshift = findViewById(R.id.tvshift4);
+        prf = getSharedPreferences("Shift", MODE_PRIVATE);
+        tvshift.setText(prf.getString("tvshift", null));
 
-       TextView tvcodesh = findViewById(R.id.tvcodeshift4);
-       prf = getSharedPreferences("Codeshift", MODE_PRIVATE);
-       tvcodesh.setText(prf.getString("tvcodeshift", null));
+        TextView tvcodesh = findViewById(R.id.tvcodeshift4);
+        prf = getSharedPreferences("Codeshift", MODE_PRIVATE);
+        tvcodesh.setText(prf.getString("tvcodeshift", null));
 
-       TextView tvnamawc = findViewById(R.id.tvnamawc6);
-       prf = getSharedPreferences("Namawc", MODE_PRIVATE);
-       tvnamawc.setText(prf.getString("tvnamawc", null));
+        TextView tvnamawc = findViewById(R.id.tvnamawc6);
+        prf = getSharedPreferences("Namawc", MODE_PRIVATE);
+        tvnamawc.setText(prf.getString("tvnamawc", null));
 
-       TextView tvid = findViewById(R.id.tvid5);
-       prf = getSharedPreferences("Id", MODE_PRIVATE);
-       tvid.setText(String.valueOf(prf.getString("tvid", null)));
+        TextView tvid = findViewById(R.id.tvid5);
+        prf = getSharedPreferences("Id", MODE_PRIVATE);
+        tvid.setText(String.valueOf(prf.getString("tvid", null)));
 
         TextView tvstatus = findViewById(R.id.tvstatus0);
         tvstatus.setText("Completed");
@@ -308,41 +313,41 @@ public class RejectActivity extends AppCompatActivity {
         tvip10.setText(text);
 
 
-            btnFrag = findViewById(R.id.btnFrag);
-            btnFrag.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        btnFrag = findViewById(R.id.btnFrag);
+        btnFrag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                    if (Integer.parseInt(String.valueOf(tvInputQty1.getText())) == Integer.parseInt(String.valueOf(tvOutputQty1.getText())) ) {
-                        Toast.makeText(getApplicationContext(), "Tidak perlu", Toast.LENGTH_SHORT).show();
-                    }else {
-                        SharedPreferences prf, pref;
-                        Intent intent = new Intent(RejectActivity.this, RespRejectFragActivity.class);
+                if (Integer.parseInt(String.valueOf(tvInputQty1.getText())) == Integer.parseInt(String.valueOf(tvOutputQty1.getText()))) {
+                    Toast.makeText(getApplicationContext(), "Tidak perlu", Toast.LENGTH_SHORT).show();
+                } else {
+                    SharedPreferences prf, pref;
+                    Intent intent = new Intent(RejectActivity.this, RespRejectFragActivity.class);
 
-                        pref = getSharedPreferences("Id", MODE_PRIVATE);
-                        String tvid = tvid7.getText().toString();
-                        SharedPreferences.Editor editor22 = pref.edit();
-                        editor22.putString("tvid", tvid);
-                        editor22.commit();
+                    pref = getSharedPreferences("Id", MODE_PRIVATE);
+                    String tvid = tvid7.getText().toString();
+                    SharedPreferences.Editor editor22 = pref.edit();
+                    editor22.putString("tvid", tvid);
+                    editor22.commit();
 
 
-                        pref = getSharedPreferences("Inqty", MODE_PRIVATE);
-                        String tvin = tvInputQty1.getText().toString();
-                        SharedPreferences.Editor editor1 = pref.edit();
-                        editor1.putString("tvinqty", tvin);
-                        editor1.commit();
+                    pref = getSharedPreferences("Inqty", MODE_PRIVATE);
+                    String tvin = tvInputQty1.getText().toString();
+                    SharedPreferences.Editor editor1 = pref.edit();
+                    editor1.putString("tvinqty", tvin);
+                    editor1.commit();
 
-                        pref = getSharedPreferences("Outqty", MODE_PRIVATE);
-                        String tvout = tvOutputQty1.getText().toString();
-                        SharedPreferences.Editor editor2 = pref.edit();
-                        editor2.putString("tvoutqty", tvout);
-                        editor2.commit();
+                    pref = getSharedPreferences("Outqty", MODE_PRIVATE);
+                    String tvout = tvOutputQty1.getText().toString();
+                    SharedPreferences.Editor editor2 = pref.edit();
+                    editor2.putString("tvoutqty", tvout);
+                    editor2.commit();
 
-                        startActivity(intent);
-                    }
-
+                    startActivity(intent);
                 }
-            });
+
+            }
+        });
 
 
         ibscan.setOnClickListener(new View.OnClickListener() {
@@ -353,13 +358,13 @@ public class RejectActivity extends AppCompatActivity {
             }
         });
 
-       gson = new Gson();
-       rv = findViewById(R.id.rvInputReject);
-       adapter = new InputRejectAdapter(this);
-       rv.setAdapter(adapter);
-       rv.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-       loadData(tvdocentry0.getText().toString());
-       rv.setAdapter(adapter);
+        gson = new Gson();
+        rv = findViewById(R.id.rvInputReject);
+        adapter = new InputRejectAdapter(this);
+        rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        loadData(tvdocentry0.getText().toString());
+        rv.setAdapter(adapter);
     }
 
 
@@ -465,7 +470,6 @@ public class RejectActivity extends AppCompatActivity {
         }
 
 
-
         Realm realm = Realm.getDefaultInstance();
         RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
         String text = "";
@@ -546,7 +550,74 @@ public class RejectActivity extends AppCompatActivity {
         } else if (id == R.id.upsap1) {
             TextView tvposted1 = findViewById(R.id.tvposted7);
             tvposted1.setText("1");
-            uploadSapHeader();
+//           / uploadSapHeader();
+
+            /*******************Upload Criteria ke Sap***********************************/
+            String element1 = gson.toJson(
+                    inputCriteriaAdapter.getData(),
+                    new TypeToken<ArrayList<Upcriteria>>() {
+
+                    }.getType());
+
+            try {
+                JSONArray array = new JSONArray(element1);
+                Log.e("arrraaayyyy = ", array.toString(1));
+
+                JSONArray newArr = new JSONArray();
+
+                for (int i = 0; i < array.length(); i++) {
+                    Upcriteria upcriteria = gson.fromJson(array.getJSONObject(i).toString(), Upcriteria.class);
+
+                    JSONObject object = new JSONObject();
+                    object.put("hostHeadEntry", upcriteria.getHostHeadEntry());
+                    object.put("id", upcriteria.getId());
+                    object.put("criteria", upcriteria.getCriteria());
+                    object.put("criteriaDesc", upcriteria.getCriteriaDesc());
+                    object.put("standard", upcriteria.getStandard());
+                    object.put("lineNumber", upcriteria.getLineNumber());
+                    object.put("actualResult", upcriteria.getActualResult());
+
+                    newArr.put(object);
+                }
+                Log.e("coba input crit = ", newArr.toString(1));
+                simpanSincCriteria(newArr);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            /*******************Upload Reject ke Sap***********************************/
+//            String element = gson.toJson(
+//
+//                    adapter.getData(),
+//                    new TypeToken<ArrayList<SincReject>>() {
+//                    }.getType());
+//
+//            try {
+//                JSONArray array = new JSONArray(element);
+//                Log.e("arrraaayyyy = ", array.toString(1));
+//
+//                JSONArray newArr = new JSONArray();
+//
+//                for (int i = 0; i < array.length(); i++) {
+//                    InputReject inputReject = gson.fromJson(array.getJSONObject(i).toString(), InputReject.class);
+//
+//                    JSONObject object = new JSONObject();
+//                    object.put("hostHeadEntry", tvdocentry0.getText().toString());
+//                    object.put("lineNumber", inputReject.getLineNumber());
+//                    object.put("rejectName", inputReject.getRejectName());
+//                    object.put("rejectQty", inputReject.getRejectQty());
+//                    object.put("rejectCode", inputReject.getRejectCode());
+//                    object.put("id", inputReject.getId());
+//
+//                    newArr.put(object);
+//                }
+//                Log.e("coba sinc reject = ", newArr.toString(1));
+////                simpanSincreject(newArr);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+
             startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
 
         }
@@ -562,7 +633,7 @@ public class RejectActivity extends AppCompatActivity {
     //tidak dipake
     public void loadPRDSPECH() {
 
-        AndroidNetworking.get(GlobalVars.BASE_IP +"index.php/sincheader")
+        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sincheader")
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -580,8 +651,8 @@ public class RejectActivity extends AppCompatActivity {
                                     for (int i = 0; i < dataArr.length(); i++) {
                                         SincHeader sincHeader = gson.fromJson(dataArr.getJSONObject(i).toString(), SincHeader.class);
                                         result.add(sincHeader);
-                                        tvdocentry7.setText(String.valueOf(sincHeader.getDocEntry()+1));
-                                        tvdocnum2.setText(String.valueOf(sincHeader.getDocNum()+1));
+                                        tvdocentry7.setText(String.valueOf(sincHeader.getDocEntry() + 1));
+                                        tvdocnum2.setText(String.valueOf(sincHeader.getDocNum() + 1));
                                     }
                                 }
                             }
@@ -597,7 +668,7 @@ public class RejectActivity extends AppCompatActivity {
                 });
     }
 
-//    tidak di pake
+
     public void uploadSapHeader() {
         JSONObject jsonObject = new JSONObject();
 
@@ -643,7 +714,7 @@ public class RejectActivity extends AppCompatActivity {
         Realm realm = Realm.getDefaultInstance();
         RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
         String text = "";
-        for (ServerModel c:results1) {
+        for (ServerModel c : results1) {
             text = text + c.getAddress();
 
 //            AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/UploadSap")
@@ -686,17 +757,17 @@ public class RejectActivity extends AppCompatActivity {
                         try {
                             String message = response.getString("message");
                             if (message.equals("SincReject ketemu")) {
-                               String records = response.getString("data");
+                                String records = response.getString("data");
 
-                               JSONArray dataArr = new JSONArray(records);
+                                JSONArray dataArr = new JSONArray(records);
 
-                               if (dataArr.length() > 0) {
-                                   for (int i = 0; i < dataArr.length(); i++) {
-                                       SincReject sincReject = gson.fromJson(dataArr.getJSONObject(i).toString(), SincReject.class);
-                                       result.add(sincReject);
-                                       tvPRDSPECD2.setText(String.valueOf(sincReject.getDocEntry()+1));
-                                   }
-                               }
+                                if (dataArr.length() > 0) {
+                                    for (int i = 0; i < dataArr.length(); i++) {
+                                        SincReject sincReject = gson.fromJson(dataArr.getJSONObject(i).toString(), SincReject.class);
+                                        result.add(sincReject);
+                                        tvPRDSPECD2.setText(String.valueOf(sincReject.getDocEntry() + 1));
+                                    }
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -713,27 +784,65 @@ public class RejectActivity extends AppCompatActivity {
 
     public void simpanSincreject(JSONArray jsonArray) {
 
-        AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/SincReject")
-                .addJSONArrayBody(jsonArray)
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String message = response.getString("message");
-                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_SHORT).show();
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c : results1) {
+            text = text + c.getAddress();
+
+//        AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/SincReject")
+            AndroidNetworking.post(c.getAddress() + "index.php/SincReject")
+                    .addJSONArrayBody(jsonArray)
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                String message = response.getString("message");
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onError(ANError anError) {
-                        Toast.makeText(getApplicationContext(), "Gagal menambah Criteria", Toast.LENGTH_SHORT).show();
+                        @Override
+                        public void onError(ANError anError) {
+                            Toast.makeText(getApplicationContext(), "Gagal Simpan Reject", Toast.LENGTH_SHORT).show();
 
-                    }
-                });
+                        }
+                    });
+        }
+    }
+
+    public void simpanSincCriteria(JSONArray jsonArray) {
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c : results) {
+            text = text + c.getAddress();
+            AndroidNetworking.post(c.getAddress() + "index.php/sinccriteria")
+                    .addJSONArrayBody(jsonArray)
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                String message = response.getString("message");
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onError(ANError anError) {
+                            Toast.makeText(getApplicationContext(), "Gagal Sync Criteria", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
 }
