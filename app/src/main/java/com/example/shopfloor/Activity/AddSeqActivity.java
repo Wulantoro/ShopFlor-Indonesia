@@ -249,6 +249,16 @@ public class AddSeqActivity extends AppCompatActivity {
 
         Log.e("Date 2 " ,tvtglmulai7.getText().toString());
 
+
+        String S = "S";
+        String bulan = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
+        String tahun = new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date());
+        String hari = new SimpleDateFormat("dd", Locale.getDefault()).format(new Date());
+
+//        tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN);
+
+        tvlastdocnum.setText(S+tahun+bulan+hari+"001");
+
 /***************reload otomatis****************/
         this.mHandler = new Handler();
         m_Runnable.run();
@@ -409,6 +419,8 @@ public class AddSeqActivity extends AppCompatActivity {
                                             } else if (bulan != bulankmrn2) {
                                                 String AN1 = "001";
                                                 tvlastdocnum.setText(S + tahun + bulan + hari + Nol + AN1);
+                                            } else {
+                                                tvlastdocnum.setText(S + tahun + bulan + hari + "001");
                                             }
 
 //                                        tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN);
@@ -457,7 +469,7 @@ public class AddSeqActivity extends AppCompatActivity {
             jsonObject.put("jamMulai", tvjammulai7.getText().toString());
             jsonObject.put("inQty", tvInputSeq.getText().toString());
             jsonObject.put("workCenter", tvwc3.getText().toString());
-//            jsonObject.put("status", tvstatus.getText().toString());
+            jsonObject.put("status", tvstatus.getText().toString());
             jsonObject.put("posted", tvposted3.getText().toString());
             jsonObject.put("userId", tvusername3.getText().toString());
 

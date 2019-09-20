@@ -152,6 +152,18 @@ public class Add_DocActivity extends AppCompatActivity {
         tvblnkmrn0 = findViewById(R.id.tvblnkmrn0);
         tvblnskrg = findViewById(R.id.tvblnskrg);
 
+
+
+        String S = "S";
+        String bulan = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
+        String tahun = new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date());
+        String hari = new SimpleDateFormat("dd", Locale.getDefault()).format(new Date());
+
+//        tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN);
+
+        tvNo_doc1.setText(S+tahun+bulan+hari+"001");
+
+
         /************************ga kepake*************************/
 //        barcode
 //        String barcode = getIntent().getStringExtra("wccode");
@@ -559,22 +571,7 @@ public class Add_DocActivity extends AppCompatActivity {
                                             Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
                                             results.add(header);
 
-//                                            String S = "S";
-//                                            String nodoc = new SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(new Date());
-//                                            String docnum = header.getDocNum().substring(9);
-//                                            String AN = "" + (Integer.parseInt(docnum) + 1);
-//                                            Log.e("aaannn", AN);
-//                                            String Nol = "";
-//
-//                                            if (AN.length() == 1) {
-//                                                Nol = "00";
-//                                            } else if (AN.length() == 2) {
-//                                                Nol = "0";
-//                                            } else if (AN.length() == 3) {
-//                                                Nol = "";
-//                                            }
-//
-//                                            tvNo_doc1.setText(S + nodoc + Nol + AN);
+                                            /******************************************************************************************/
                                             String S = "S";
                                             String bulan = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
                                             String tahun = new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date());
@@ -586,30 +583,12 @@ public class Add_DocActivity extends AppCompatActivity {
                                             Log.e("aaannn", AN);
                                             String Nol = "";
 
-//                                        if (AN.length() == 1) {
-//                                                Nol = "00";
-//                                            } else if (AN.length() == 2) {
-//                                                Nol = "0";
-//                                            } else if (AN.length() == 3) {
-//                                                Nol = "";
-//                                            }
 
-
-//                                        if (AN.length() == 1 ) {
-//                                            Nol = "00";
-//
-//                                        } else if (AN.length() == 2) {
-//                                            Nol = "0";
-//                                        } else if (AN.length() == 3) {
-//                                            Nol = "";
-//                                        }
-
-                                            //masih salah
-
+//                                            TextView kosong = findViewById(R.id.tvNo_doc1);
+//                                            TextView diocc = findViewById(R.id.tvNo_prod1);
                                             if (bulan.equals(bulankmrn2)) {
                                                 if (AN.length() == 1) {
                                                     Nol = "00";
-
                                                 } else if (AN.length() == 2) {
                                                     Nol = "0";
                                                 } else if (AN.length() == 3) {
@@ -618,14 +597,39 @@ public class Add_DocActivity extends AppCompatActivity {
 
                                                 tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN);
                                             } else if (bulan != bulankmrn2) {
-                                                String AN1 = "001";
-                                                tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN1);
+                                                String AN2 = "001";
+                                                tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN2);
                                             }
+                                    /*****************************************************************************************/
+//                                            System.out.println("bulan = " + bulan);
+//
+//                                            if (bulan == null) {
+//                                                //jika belum ada inputan
+//                                                tvNo_doc1.setText(S + tahun + bulan + hari + "001");
+//                                            } else {
+//                                                if (bulan != bulankmrn2) {
+//                                                    String AN2 = "001";
+//                                                    tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN2);
+//                                                } else if (bulan.equals(bulankmrn2)) {
+//                                                    if (AN.length() == 1) {
+//                                                        Nol = "00";
+//                                                    } else if (AN.length() == 2) {
+//                                                        Nol = "0";
+//                                                    } else if (AN.length() == 3) {
+//                                                        Nol = "";
+//                                                    }
+//
+//                                                    tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN);
+//                                                }
+//                                            }
 
-//                                        tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN);
+
                                             tvblnkmrn.setText("BULAN KMRN1" + bulankmrn1);
                                             tvblnkmrn0.setText("BULAN KMRN2 " + bulankmrn2);
                                             tvblnskrg.setText("BULAN SKRG " + bulan);
+//
+//
+
                                         }
                                     }
                                 }

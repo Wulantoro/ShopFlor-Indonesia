@@ -31,6 +31,7 @@ import com.example.shopfloor.Models.Productorder;
 import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.Models.SincHeader;
 import com.example.shopfloor.Models.SincReject;
+import com.example.shopfloor.Models.Totreject;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
 import com.example.shopfloor.Utils.RealmHelper;
@@ -93,6 +94,7 @@ public class RejectActivity extends AppCompatActivity {
     private TextView tvdocentry01;
     private TextView tvid7;
 
+
     Realm realm;
     RealmHelper realmHelper;
     List<ServerModel> serverModels;
@@ -144,6 +146,7 @@ public class RejectActivity extends AppCompatActivity {
         tvip10 = findViewById(R.id.tvip10);
 //        tvdocentry01 = findViewById(R.id.tvdocentry01);
         tvid7 = findViewById(R.id.tvid7);
+
 
         openDocAdapter = new OpenDocAdapter(this);
 
@@ -288,9 +291,6 @@ public class RejectActivity extends AppCompatActivity {
         TextView tvposted = findViewById(R.id.tvdocsts2);
         tvposted.setText("Pending1");
 
-        TextView tvposted1 = findViewById(R.id.tvposted7);
-        tvposted1.setText("1");
-
         //        Setup Realm
         Realm.init(getApplicationContext());
         RealmConfiguration configuration = new RealmConfiguration.Builder().build();
@@ -313,7 +313,7 @@ public class RejectActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    if (Integer.parseInt(String.valueOf(tvInputQty1.getText())) == Integer.parseInt(String.valueOf(tvOutputQty1.getText()))) {
+                    if (Integer.parseInt(String.valueOf(tvInputQty1.getText())) == Integer.parseInt(String.valueOf(tvOutputQty1.getText())) ) {
                         Toast.makeText(getApplicationContext(), "Tidak perlu", Toast.LENGTH_SHORT).show();
                     }else {
                         SharedPreferences prf, pref;
@@ -324,6 +324,20 @@ public class RejectActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor22 = pref.edit();
                         editor22.putString("tvid", tvid);
                         editor22.commit();
+
+
+                        pref = getSharedPreferences("Inqty", MODE_PRIVATE);
+                        String tvin = tvInputQty1.getText().toString();
+                        SharedPreferences.Editor editor1 = pref.edit();
+                        editor1.putString("tvinqty", tvin);
+                        editor1.commit();
+
+                        pref = getSharedPreferences("Outqty", MODE_PRIVATE);
+                        String tvout = tvOutputQty1.getText().toString();
+                        SharedPreferences.Editor editor2 = pref.edit();
+                        editor2.putString("tvoutqty", tvout);
+                        editor2.commit();
+
                         startActivity(intent);
                     }
 
@@ -347,6 +361,7 @@ public class RejectActivity extends AppCompatActivity {
        loadData(tvdocentry0.getText().toString());
        rv.setAdapter(adapter);
     }
+
 
     public void loadData(String docentry) {
         final ProgressDialog progres = new ProgressDialog(this);
@@ -391,6 +406,7 @@ public class RejectActivity extends AppCompatActivity {
                                         for (int i = 0; i < dataArr.length(); i++) {
                                             InputReject inputReject = gson.fromJson(dataArr.getJSONObject(i).toString(), InputReject.class);
                                             result.add(inputReject);
+
                                         }
                                     }
                                 }
@@ -482,14 +498,16 @@ public class RejectActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.update_header, menu);
+        getMenuInflater().inflate(R.menu.upsap, menu);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.update_header) {
+        if (id == R.id.uptemp) {
+            TextView tvposted1 = findViewById(R.id.tvposted7);
+            tvposted1.setText("0");
             editHeader();
 //            sincHeader();
 
@@ -524,7 +542,13 @@ public class RejectActivity extends AppCompatActivity {
             }catch (JSONException e) {
                 e.printStackTrace();
             }*/
+//
+        } else if (id == R.id.upsap1) {
+            TextView tvposted1 = findViewById(R.id.tvposted7);
+            tvposted1.setText("1");
+            uploadSapHeader();
             startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -574,35 +598,39 @@ public class RejectActivity extends AppCompatActivity {
     }
 
 //    tidak di pake
-    public void sincHeader() {
+    public void uploadSapHeader() {
         JSONObject jsonObject = new JSONObject();
 
         try {
             JSONArray newArr = new JSONArray();
-            jsonObject.put("DocNum", tvdocnum2.getText().toString());
-            jsonObject.put("DocEntry", tvdocentry7.getText().toString());
-            jsonObject.put("CreateDate", tvdocdate0.getText().toString());
-            jsonObject.put("U_DocDate", tvdocdate0.getText().toString());
-            jsonObject.put("U_PD_No", tvnoprod1.getText().toString());
-            jsonObject.put("U_Sequence", tvsequence1.getText().toString());
-            jsonObject.put("U_Product", tvprodcode0.getText().toString());
-            jsonObject.put("U_ProductDesc", tvnmprod1.getText().toString());
-            jsonObject.put("U_PlannedQty", tvprodplanqty0.getText().toString());
-            jsonObject.put("U_SequenceQty", tvseqqty1.getText().toString());
-            jsonObject.put("U_WCCode", tvworkcenter6.getText().toString());
-            jsonObject.put("U_InputQty", tvInputQty1.getText().toString());
-            jsonObject.put("U_OutputQty", tvOutputQty1.getText().toString());
-            jsonObject.put("U_Shift", tvcodeshift4.getText().toString());
-            jsonObject.put("U_WCDesc", tvnamawc6.getText().toString());
-            jsonObject.put("U_PD_Status", tvprodstatus2.getText().toString());
-            jsonObject.put("U_RouteCode", tvroutecode2.getText().toString());
-            jsonObject.put("U_RouteDesc", tvroutename2.getText().toString());
-            jsonObject.put("U_ShiftDesc", tvshift4.getText().toString());
-            jsonObject.put("U_TglMulai", tvdocdate0.getText().toString());
-            jsonObject.put("U_TglSelesai", tvtglsel1.getText().toString());
-//            jsonObject.put("U_JamMulai", tvjammulai2.getText().toString());
-//            jsonObject.put("U_JamSelesai", tvjamsel1.getText().toString());
-            jsonObject.put("U_Operator", tvusername8.getText().toString());
+            jsonObject.put("docEntry", tvdocentry0.getText().toString());
+            jsonObject.put("docNum", tvdocnum1.getText().toString());
+            jsonObject.put("prodNo", tvnoprod1.getText().toString());
+            jsonObject.put("prodCode", tvprodcode0.getText().toString());
+            jsonObject.put("prodName", tvnmprod1.getText().toString());
+            jsonObject.put("prodPlanQty", tvprodplanqty0.getText().toString());
+            jsonObject.put("prodStatus", tvprodstatus2.getText().toString());
+            jsonObject.put("routeCode", tvroutecode2.getText().toString());
+            jsonObject.put("routeName", tvroutename2.getText().toString());
+            jsonObject.put("sequence", tvsequence1.getText().toString());
+            jsonObject.put("sequenceQty", tvseqqty1.getText().toString());
+            jsonObject.put("shiftName", tvshift4.getText().toString());
+            jsonObject.put("shift", tvcodeshift4.getText().toString());
+            jsonObject.put("docDate", tvdocdate0.getText().toString());
+            jsonObject.put("tanggalMulai", tvdocdate0.getText().toString());
+            jsonObject.put("jamMulai", tvjammulai2.getText().toString());
+            jsonObject.put("inQty", tvInputQty1.getText().toString());
+            jsonObject.put("outQty", tvOutputQty1.getText().toString());
+            jsonObject.put("workCenter", tvworkcenter6.getText().toString());
+            jsonObject.put("tanggalSelesai", tvtglsel1.getText().toString());
+            jsonObject.put("jamSelesai", tvjamsel1.getText().toString());
+//            jsonObject.put("status", tvstatus0.getText().toString());  muncul otomatis
+            jsonObject.put("posted", tvposted7.getText().toString());
+//            jsonObject.put("UploadTime", tvjamsel1.getText().toString()); muncul otomatis
+//            jsonObject.put("QcName", tvqcname4.getText().toString());
+            jsonObject.put("userId", tvusername8.getText().toString());
+            jsonObject.put("id", tvid5.getText().toString());
+            jsonObject.put("mobileId", tvmobileid0.getText().toString());
 
             newArr.put(jsonObject);
             Log.e("coba input put put = ", newArr.toString(1));
@@ -612,30 +640,38 @@ public class RejectActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/sincheader")
-                .addJSONObjectBody(jsonObject)
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c:results1) {
+            text = text + c.getAddress();
 
-                            String message = response.getString("message");
-                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "JSONExceptions"+ e, Toast.LENGTH_SHORT).show();
+//            AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/UploadSap")
+            AndroidNetworking.post(c.getAddress() + "shopfloor2/index.php/UploadSap")
+                    .addJSONObjectBody(jsonObject)
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+
+                                String message = response.getString("message");
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Toast.makeText(getApplicationContext(), "JSONExceptions" + e, Toast.LENGTH_SHORT).show();
+                            }
+
                         }
 
-                    }
+                        @Override
+                        public void onError(ANError anError) {
+                            Toast.makeText(getApplicationContext(), "Gagal synchron data", Toast.LENGTH_SHORT).show();
 
-                    @Override
-                    public void onError(ANError anError) {
-                        Toast.makeText(getApplicationContext(), "Gagal synchron data", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
+                        }
+                    });
+        }
     }
 
     public void loadPRDSPECD2() {

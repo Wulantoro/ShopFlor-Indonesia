@@ -112,7 +112,46 @@
             android:layout_marginTop="20dp"
             />
 
+
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvtotreject1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lineReject"
+        android:textColor="@color/white"
+        android:text="total reject"/>
+
+    <TextView
+        android:id="@+id/tvinqty1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tvtotreject1"
+        android:layout_marginLeft="5dp"
+        android:text="in qqty"
+        android:textColor="@color/white"
+        android:layout_below="@id/lineReject"/>
+
+    <TextView
+        android:id="@+id/tvoutqty1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tvinqty1"
+        android:layout_below="@id/lineReject"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/white"
+        android:text="out qty"/>
+
+    <TextView
+        android:id="@+id/tvgrantot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tvoutqty1"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/lineReject"
+        android:textColor="@color/white"
+        android:text="grantot"/>
 
     <RelativeLayout
         android:id="@+id/relinputRej"

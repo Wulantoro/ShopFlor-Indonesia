@@ -46,7 +46,7 @@
                 android:layout_below="@+id/acPilihProd"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="70dp"
-                android:text="nodoc"
+                android:text="DOCNUM"
                 />
             <TextView
                 android:id="@+id/tvNo_prod"
@@ -192,14 +192,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvusername2"
                 android:layout_toRightOf="@id/tvip4"
-
+                android:text="bulan kemaren"
                 android:layout_marginLeft="5dp"/>
 
             <TextView
                 android:id="@+id/tvblnkmrn0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:text="bulan kemaren"
                 android:layout_below="@id/tvblnkmrn"
                 />
 
@@ -210,7 +210,6 @@
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/tvblnkmrn0"
                 android:layout_below="@id/tvblnkmrn"
-
                 android:text="bulan sekarang"/>
 
 

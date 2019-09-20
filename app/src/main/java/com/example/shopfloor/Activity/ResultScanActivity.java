@@ -142,6 +142,16 @@ public class ResultScanActivity extends AppCompatActivity {
         tvSquence_Qty1 = findViewById(R.id.tvSquence_Qty1);
         tvip16 = findViewById(R.id.tvip16);
 
+
+        String S = "S";
+        String bulan = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
+        String tahun = new SimpleDateFormat("yyyy", Locale.getDefault()).format(new Date());
+        String hari = new SimpleDateFormat("dd", Locale.getDefault()).format(new Date());
+
+//        tvNo_doc1.setText(S + tahun + bulan + hari + Nol + AN);
+
+        tvNo_doc1.setText(S+tahun+bulan+hari+"001");
+
         /*************************BARCODE*******************************/
         String barcode = getIntent().getStringExtra("wccode");
         tvNo_prod1.setText(barcode.substring(0, 8));

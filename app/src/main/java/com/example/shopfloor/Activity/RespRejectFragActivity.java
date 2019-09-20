@@ -62,6 +62,10 @@ public class RespRejectFragActivity extends AppCompatActivity {
     private TextView tvmobileid1;
     private TextView tvid6;
     private TextView tvip14;
+    private TextView tvtotreject1;
+    private TextView tvinqty1;
+    private TextView tvoutqty1;
+    private TextView tvgrantot;
 
     Realm realm;
     RealmHelper realmHelper;
@@ -86,6 +90,10 @@ public class RespRejectFragActivity extends AppCompatActivity {
         tvmobileid1 = findViewById(R.id.tvmobileid1);
         tvid6 = findViewById(R.id.tvid6);
         tvip14 = findViewById(R.id.tvip14);
+        tvtotreject1 = findViewById(R.id.tvtotreject1);
+        tvinqty1 = findViewById(R.id.tvinqty1);
+        tvoutqty1 = findViewById(R.id.tvoutqty1);
+        tvgrantot = findViewById(R.id.tvgrantot);
 
         Realm.init(getApplicationContext());
         RealmConfiguration configuration = new RealmConfiguration.Builder().build();
@@ -116,6 +124,21 @@ public class RespRejectFragActivity extends AppCompatActivity {
         prf = getSharedPreferences("Docentry", MODE_PRIVATE);
         tvdocentry.setText(prf.getString("tvdocentry", null));
 
+        tvtotreject1 = findViewById(R.id.tvtotreject1);
+        prf = getSharedPreferences("Tot", MODE_PRIVATE);
+        tvtotreject1.setText(String.valueOf(prf.getString("tvtot", null)));
+
+        TextView outqty = findViewById(R.id.tvoutqty1);
+        prf = getSharedPreferences("Outqty", MODE_PRIVATE);
+        tvoutqty1.setText(String.valueOf(prf.getString("tvoutqty", null)));
+
+        TextView inqty = findViewById(R.id.tvinqty1);
+        prf = getSharedPreferences("Inqty", MODE_PRIVATE);
+        tvinqty1.setText(String.valueOf(prf.getString("tvinqty", null)));
+
+//
+
+
         btnSimpan = findViewById(R.id.btnSimpan);
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,8 +151,7 @@ public class RespRejectFragActivity extends AppCompatActivity {
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Reject Qty atau Reject tidak boleh kosong", Toast.LENGTH_SHORT).show();
-//                    simpanReject();
-//                    startActivity(new Intent(getApplicationContext(), RejectActivity.class));
+//
                 }
             }
         });

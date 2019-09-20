@@ -47,7 +47,7 @@
             android:id="@+id/tvlastdocnum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+           android:text="docnum"
             android:layout_marginLeft="5dp"/>
 
         <TextView
@@ -55,13 +55,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
+
             android:text="1"/>
 
         <TextView
             android:id="@+id/tvmobileid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:textColor="@color/white"
             android:layout_marginLeft="5dp"/>
 
 

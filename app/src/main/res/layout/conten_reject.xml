@@ -398,6 +398,8 @@
                     android:textColor="@color/white"
                     android:text="id head"/>
 
+
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvInputReject"
             android:layout_below="@id/btnFrag"
