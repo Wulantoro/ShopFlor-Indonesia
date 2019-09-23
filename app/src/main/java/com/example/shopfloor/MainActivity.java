@@ -37,6 +37,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
@@ -108,7 +109,8 @@ public class MainActivity extends AppCompatActivity {
         {
             if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable() && conMgr.getActiveNetworkInfo().isConnected()) {
             }else {
-                Toast.makeText(getApplicationContext(), "No Internet Connecting", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "No Internet Connecting", Toast.LENGTH_LONG).show();
+                Toasty.error(getApplicationContext(), "No Internet Connecting", Toast.LENGTH_LONG).show();
             }
         }
 
@@ -131,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "No Internet Connecting", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "Kolom tidak boleh kosong", Toast.LENGTH_SHORT).show();
+                    Toasty.error(getApplicationContext(), "Kolom tidak boleh kosong", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -202,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 String message = response.getString("message");
                                 String success = response.getString("success");
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                Toasty.success(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
 
 
                                 if (success.equals("1")) {
@@ -228,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
 //                                finish();
                                     startActivity(intent);
                                 } else {
-                                    Toast.makeText(MainActivity.this, "Password atau Username salah", Toast.LENGTH_SHORT).show();
+                                    Toasty.error(MainActivity.this, "Password atau Username salah", Toast.LENGTH_SHORT).show();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -238,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
 
                         @Override
                         public void onError(ANError anError) {
-                            Toast.makeText(getApplicationContext(), "Gagal Login", Toast.LENGTH_LONG).show();
+                            Toasty .error(getApplicationContext(), "Gagal Login", Toast.LENGTH_LONG).show();
                         }
                     });
         }
