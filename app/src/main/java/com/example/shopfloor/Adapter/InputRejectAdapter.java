@@ -34,6 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -112,7 +113,7 @@ public class InputRejectAdapter extends RecyclerView.Adapter<InputRejectAdapter.
                                                                 public void onResponse(JSONObject response) {
                                                                     try {
                                                                         String message = response.getString("message");
-                                                                        Toast.makeText(v.getContext(), message, Toast.LENGTH_SHORT).show();
+                                                                        Toasty.success(v.getContext(), message, Toast.LENGTH_SHORT).show();
                                                                     } catch (JSONException e) {
                                                                         e.printStackTrace();
                                                                         Toast.makeText(v.getContext(), "JSONExceptions" + e, Toast.LENGTH_SHORT).show();
@@ -122,7 +123,7 @@ public class InputRejectAdapter extends RecyclerView.Adapter<InputRejectAdapter.
 
                                                                 @Override
                                                                 public void onError(ANError anError) {
-                                                                    Toast.makeText(v.getContext(), "Gagal menghapus reject", Toast.LENGTH_SHORT).show();
+                                                                    Toasty.error(v.getContext(), "Gagal menghapus reject", Toast.LENGTH_SHORT).show();
 
                                                                 }
                                                             });

@@ -122,6 +122,12 @@
             android:layout_below="@id/tvdocsts3"
             android:text="ini doc status"
             />
+            <TextView
+                android:id="@+id/docsap0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvdocsts2"
+                android:text="doxcsap"/>
         </RelativeLayout>
 
         <!--in qty, out qty, woekcenter-->
@@ -183,6 +189,7 @@
             android:textColor="@color/blue_A700"
             android:textSize="18sp"
             android:text="workcemter"/>
+
 
         </RelativeLayout>
 
@@ -397,7 +404,6 @@
                     android:layout_toRightOf="@id/btnFrag"
                     android:textColor="@color/white"
                     android:text="id head"/>
-
 
 
         <android.support.v7.widget.RecyclerView

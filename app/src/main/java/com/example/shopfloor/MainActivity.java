@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
         for (ServerModel c : results1) {
             text = text + c.getAddress();
 
-        Log.e("ip address = " ,  c.getAddress());
+        Log.e("ip address = " ,  c.getAddress() + "shopfloor2/index.php/loginuser");
             Log.e("ip = ", String.valueOf(AndroidNetworking.post(c.getAddress() + "index.php/loginuser")));
 //            AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/loginuser")
             AndroidNetworking.post(c.getAddress() + "shopfloor2/index.php/loginuser")

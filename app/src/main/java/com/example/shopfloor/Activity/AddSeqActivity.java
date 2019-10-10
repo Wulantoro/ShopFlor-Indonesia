@@ -42,6 +42,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import es.dmoral.toasty.Toasty;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
@@ -503,7 +504,7 @@ public class AddSeqActivity extends AppCompatActivity {
                                 Log.e("Date 1===========", tvtglmulai7.getText().toString());
 
                                 String message = response.getString("message");
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                Toasty.success(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Toast.makeText(getApplicationContext(), "JSONExceptions" + e, Toast.LENGTH_SHORT).show();
@@ -512,7 +513,7 @@ public class AddSeqActivity extends AppCompatActivity {
 
                         @Override
                         public void onError(ANError anError) {
-                            Toast.makeText(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_SHORT).show();
+                            Toasty.error(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_SHORT).show();
                         }
                     });
         }

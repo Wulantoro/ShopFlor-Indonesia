@@ -29,6 +29,7 @@ import com.example.shopfloor.Adapter.InputRejectAdapter;
 
 import com.example.shopfloor.Adapter.OpenDocAdapter;
 import com.example.shopfloor.Models.Criteria;
+import com.example.shopfloor.Models.Header;
 import com.example.shopfloor.Models.InputReject;
 import com.example.shopfloor.Models.Productorder;
 import com.example.shopfloor.Models.ServerModel;
@@ -49,6 +50,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
@@ -98,6 +100,7 @@ public class RejectActivity extends AppCompatActivity {
     private TextView tvdocentry01;
     private TextView tvid7;
     private InputCriteriaAdapter inputCriteriaAdapter;
+    private TextView docsap0;
 
 
     Realm realm;
@@ -150,6 +153,7 @@ public class RejectActivity extends AppCompatActivity {
         tvip10 = findViewById(R.id.tvip10);
 //        tvdocentry01 = findViewById(R.id.tvdocentry01);
         tvid7 = findViewById(R.id.tvid7);
+        docsap0 = findViewById(R.id.docsap0);
 
 
         openDocAdapter = new OpenDocAdapter(this);
@@ -168,7 +172,7 @@ public class RejectActivity extends AppCompatActivity {
         TextView tvusername = findViewById(R.id.tvusername8);
         prf = getSharedPreferences("Username", MODE_PRIVATE);
         tvusername.setText(prf.getString("tvusername", null));
-        ;
+
 
         TextView tvworkcenter = findViewById(R.id.tvworkcenter6);
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
@@ -461,7 +465,7 @@ public class RejectActivity extends AppCompatActivity {
             jsonObject.put("workCenter", tvworkcenter6.getText().toString());
             jsonObject.put("tanggalSelesai", tvtglsel1.getText().toString());
             jsonObject.put("jamSelesai", tvjamsel1.getText().toString());
-//            jsonObject.put("status", tvstatus0.getText().toString());  muncul otomatis
+//            jsonObject.put("status", tvstatus0.getText().toString());
             jsonObject.put("posted", tvposted7.getText().toString());
 //            jsonObject.put("UploadTime", tvjamsel1.getText().toString()); muncul otomatis
 //            jsonObject.put("QcName", tvqcname4.getText().toString());
@@ -490,7 +494,7 @@ public class RejectActivity extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             try {
                                 String message = response.getString("message");
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                Toasty.success(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Toast.makeText(getApplicationContext(), "JSONExceptions" + e, Toast.LENGTH_SHORT).show();
@@ -499,7 +503,7 @@ public class RejectActivity extends AppCompatActivity {
 
                         @Override
                         public void onError(ANError anError) {
-                            Toast.makeText(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_SHORT).show();
+                            Toasty.error(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_SHORT).show();
                         }
                     });
         }
@@ -569,41 +573,48 @@ public class RejectActivity extends AppCompatActivity {
         } else if (id == R.id.upsap1) {
             TextView tvposted1 = findViewById(R.id.tvposted7);
             tvposted1.setText("1");
-//            uploadSapHeader();
+
+//            TextView tvstatus = findViewById(R.id.tvstatus0);
+//            tvstatus.setText("Complete");
+
+            uploadSapHeader();
+            loadHeaderStem(tvworkcenter6.getText().toString(), tvmobileid0.getText().toString());
+            Log.e("workcenter", tvworkcenter6.getText().toString());
+            Log.e("mobile", tvmobileid0.getText().toString());
 
             /*******************Upload Criteria ke Sap***********************************/
-//            String element1 = gson.toJson(
-//                    inputCriteriaAdapter.getData(),
-//                    new TypeToken<ArrayList<Upcriteria>>() {
-//
-//                    }.getType());
-//
-//            try {
-//                JSONArray array = new JSONArray(element1);
-//                Log.e("arrraaayyyy = ", array.toString(1));
-//
-//                JSONArray newArr = new JSONArray();
-//
-//                for (int i = 0; i < array.length(); i++) {
-//                    Upcriteria upcriteria = gson.fromJson(array.getJSONObject(i).toString(), Upcriteria.class);
-//
-//                    JSONObject object = new JSONObject();
-//                    object.put("hostHeadEntry", upcriteria.getHostHeadEntry());
-//                    object.put("id", upcriteria.getId());
-//                    object.put("criteria", upcriteria.getCriteria());
-//                    object.put("criteriaDesc", upcriteria.getCriteriaDesc());
-//                    object.put("standard", upcriteria.getStandard());
-//                    object.put("lineNumber", upcriteria.getLineNumber());
-//                    object.put("actualResult", upcriteria.getActualResult());
-//                    object.put("valueType", upcriteria.getValueType());
-//
-//                    newArr.put(object);
-//                }
-//                Log.e("input crit ", newArr.toString(1));
+            String element1 = gson.toJson(
+                    inputCriteriaAdapter.getData(),
+                    new TypeToken<ArrayList<Upcriteria>>() {
+
+                    }.getType());
+
+            try {
+                JSONArray array = new JSONArray(element1);
+                Log.e("arrraaayyyy = ", array.toString(1));
+
+                JSONArray newArr = new JSONArray();
+
+                for (int i = 0; i < array.length(); i++) {
+                    Upcriteria upcriteria = gson.fromJson(array.getJSONObject(i).toString(), Upcriteria.class);
+
+                    JSONObject object = new JSONObject();
+                    object.put("hostHeadEntry", upcriteria.getHostHeadEntry());
+                    object.put("id", upcriteria.getId());
+                    object.put("criteria", upcriteria.getCriteria());
+                    object.put("criteriaDesc", upcriteria.getCriteriaDesc());
+                    object.put("standard", upcriteria.getStandard());
+                    object.put("lineNumber", upcriteria.getLineNumber());
+                    object.put("actualResult", upcriteria.getActualResult());
+                    object.put("valueType", upcriteria.getValueType());
+
+                    newArr.put(object);
+                }
+                Log.e("input crit ", newArr.toString(1));
 //                simpanSincCriteria(newArr);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
 
             /*******************Upload Reject ke Sap***********************************/
@@ -633,12 +644,12 @@ public class RejectActivity extends AppCompatActivity {
                     newArr.put(object);
                 }
                 Log.e("coba sinc reject = ", newArr.toString(1));
-                simpanSincreject(newArr);
+//                simpanSincreject(newArr);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
+//            startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
 
         }
         return super.onOptionsItemSelected(item);
@@ -648,6 +659,57 @@ public class RejectActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), Open_DocActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void loadHeaderStem(String wccode, String mobil) {
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c : results1) {
+            text = text + c.getAddress();
+
+            Log.e("ip docsap", c.getAddress() + "shopfloor2/index.php/DocentriSap?workCenter="+wccode + "&mobileId=" + mobil);
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/DocentriSap?workCenter="+wccode + "&mobileId=" + mobil)
+                    .setTag(this)
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            List<Header> result = new ArrayList<>();
+
+                            try {
+                                if (result != null)
+                                    result.clear();
+
+                                Log.e("hasil = ", String.format("%s", response.toString(1)));
+
+                                String message = response.getString("message");
+                                if (message.equals("Docentrysap were found")) {
+                                    String records = response.getString("data");
+                                    JSONArray dataArr = new JSONArray(records);
+
+                                    if (dataArr.length() > 0) {
+                                        for (int i = 0; i < dataArr.length(); i++) {
+                                            Header header = gson.fromJson(dataArr.getJSONObject(i).toString(), Header.class);
+                                            result.add(header);
+                                            docsap0.setText(String.valueOf(header.getDocEntry()));
+                                        }
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onError(ANError anError) {
+
+                        }
+                    });
+
+        }
     }
 
     //tidak dipake
@@ -715,7 +777,7 @@ public class RejectActivity extends AppCompatActivity {
             jsonObject.put("workCenter", tvworkcenter6.getText().toString());
             jsonObject.put("tanggalSelesai", tvtglsel1.getText().toString());
             jsonObject.put("jamSelesai", tvjamsel1.getText().toString());
-//            jsonObject.put("status", tvstatus0.getText().toString());  muncul otomatis
+            jsonObject.put("status", tvstatus0.getText().toString());
             jsonObject.put("posted", tvposted7.getText().toString());
 //            jsonObject.put("UploadTime", tvjamsel1.getText().toString()); muncul otomatis
 //            jsonObject.put("QcName", tvqcname4.getText().toString());
@@ -726,7 +788,6 @@ public class RejectActivity extends AppCompatActivity {
             newArr.put(jsonObject);
             Log.e("coba input put put = ", newArr.toString(1));
 
-//            jsonObject.put("U_PD_Status", )
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -748,7 +809,7 @@ public class RejectActivity extends AppCompatActivity {
                             try {
 
                                 String message = response.getString("message");
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                Toasty.success(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Toast.makeText(getApplicationContext(), "JSONExceptions" + e, Toast.LENGTH_SHORT).show();
@@ -758,13 +819,14 @@ public class RejectActivity extends AppCompatActivity {
 
                         @Override
                         public void onError(ANError anError) {
-                            Toast.makeText(getApplicationContext(), "Gagal synchron data", Toast.LENGTH_SHORT).show();
+                            Toasty.error(getApplicationContext(), "Gagal synchron data", Toast.LENGTH_SHORT).show();
 
                         }
                     });
         }
     }
 
+//    tidak terpakai
     public void loadPRDSPECD2() {
 
         AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/SincReject")
@@ -820,7 +882,7 @@ public class RejectActivity extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             try {
                                 String message = response.getString("message");
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                Toasty.success(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_SHORT).show();
@@ -829,7 +891,7 @@ public class RejectActivity extends AppCompatActivity {
 
                         @Override
                         public void onError(ANError anError) {
-                            Toast.makeText(getApplicationContext(), "Gagal Simpan Reject", Toast.LENGTH_SHORT).show();
+                            Toasty.error(getApplicationContext(), "Gagal Simpan Reject", Toast.LENGTH_SHORT).show();
 
                         }
                     });
@@ -851,7 +913,7 @@ public class RejectActivity extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             try {
                                 String message = response.getString("message");
-                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                Toasty.success(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_SHORT).show();
@@ -860,7 +922,7 @@ public class RejectActivity extends AppCompatActivity {
 
                         @Override
                         public void onError(ANError anError) {
-                            Toast.makeText(getApplicationContext(), "Gagal Sync Criteria", Toast.LENGTH_SHORT).show();
+                            Toasty.error(getApplicationContext(), "Gagal Sync Criteria", Toast.LENGTH_SHORT).show();
                         }
                     });
         }

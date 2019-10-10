@@ -23,6 +23,7 @@ import com.example.shopfloor.Utils.RealmHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
@@ -87,7 +88,7 @@ public class KonfigurasiActivity extends AppCompatActivity {
                     serverModel.setAddress(saddress);
                     realmHelper = new RealmHelper(realm);
                     realmHelper.save(serverModel);
-                    Toast.makeText(getApplicationContext(), "Berhasil Disimpan!", Toast.LENGTH_SHORT).show();
+                    Toasty.success(getApplicationContext(), "Berhasil Disimpan!", Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
@@ -98,7 +99,7 @@ public class KonfigurasiActivity extends AppCompatActivity {
             public void onClick(View view) {
                 realmHelper.delete();
 
-                Toast.makeText(getApplicationContext(), "Berhasil dihapus", Toast.LENGTH_SHORT).show();
+                Toasty.success(getApplicationContext(), "Berhasil dihapus", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -325,4 +325,3 @@ public class Open_DocActivity extends AppCompatActivity {
     }
 
     }
-
