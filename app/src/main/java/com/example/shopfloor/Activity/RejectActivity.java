@@ -101,6 +101,7 @@ public class RejectActivity extends AppCompatActivity {
     private TextView tvid7;
     private InputCriteriaAdapter inputCriteriaAdapter;
     private TextView docsap0;
+    private static String TAG = RejectActivity.class.getSimpleName();
 
 
     Realm realm;
@@ -254,6 +255,7 @@ public class RejectActivity extends AppCompatActivity {
         TextView tvsequenceqty = findViewById(R.id.tvseqqty1);
         prf = getSharedPreferences("SequenceQty", MODE_PRIVATE);
         tvsequenceqty.setText(prf.getString("tvsequenceqty", null));
+        Log.e(TAG, "sequemce qty >> " + prf.getString("tvsequenceqty", null));
 
         /*******************tglsel*************************************************/
         TextView tglsel = findViewById(R.id.tvtglsel1);
@@ -269,6 +271,7 @@ public class RejectActivity extends AppCompatActivity {
         TextView tvdocsts = findViewById(R.id.tvdocsts2);
         prf = getSharedPreferences("Docsts", MODE_PRIVATE);
         tvdocsts.setText(prf.getString("tvdocsts", null));
+        Log.e(TAG, "docsts >> " + prf.getString("tvdocsts", null));
 
         TextView tvinqty = findViewById(R.id.tvInputQty1);
         prf = getSharedPreferences("Inqty", MODE_PRIVATE);
@@ -515,6 +518,7 @@ public class RejectActivity extends AppCompatActivity {
         RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
         String text = "";
         for (ServerModel c : results1) {
+            Log.e(TAG, "host" + hostHeadEntry);
 
             AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/upcriteria?hostHeadEntry=" + hostHeadEntry)
                     .setPriority(Priority.MEDIUM)
@@ -577,10 +581,51 @@ public class RejectActivity extends AppCompatActivity {
 //            TextView tvstatus = findViewById(R.id.tvstatus0);
 //            tvstatus.setText("Complete");
 
-            uploadSapHeader();
+//            uploadSapHeader();
             loadHeaderStem(tvworkcenter6.getText().toString(), tvmobileid0.getText().toString());
             Log.e("workcenter", tvworkcenter6.getText().toString());
             Log.e("mobile", tvmobileid0.getText().toString());
+
+            JSONObject jsonObject = new JSONObject();
+
+            try {
+//                JSONArray newArr = new JSONArray();
+                jsonObject.put("docEntry", tvdocentry0.getText().toString());
+                jsonObject.put("docNum", tvdocnum1.getText().toString());
+                jsonObject.put("prodNo", tvnoprod1.getText().toString());
+                jsonObject.put("prodCode", tvprodcode0.getText().toString());
+                jsonObject.put("prodName", tvnmprod1.getText().toString());
+                jsonObject.put("prodPlanQty", tvprodplanqty0.getText().toString());
+                jsonObject.put("prodStatus", tvprodstatus2.getText().toString());
+                jsonObject.put("routeCode", tvroutecode2.getText().toString());
+                jsonObject.put("routeName", tvroutename2.getText().toString());
+                jsonObject.put("sequence", tvsequence1.getText().toString());
+                jsonObject.put("sequenceQty", tvseqqty1.getText().toString());
+                jsonObject.put("shiftName", tvshift4.getText().toString());
+                jsonObject.put("shift", tvcodeshift4.getText().toString());
+                jsonObject.put("docDate", tvdocdate0.getText().toString());
+                jsonObject.put("tanggalMulai", tvdocdate0.getText().toString());
+                jsonObject.put("jamMulai", tvjammulai2.getText().toString());
+                jsonObject.put("inQty", tvInputQty1.getText().toString());
+                jsonObject.put("outQty", tvOutputQty1.getText().toString());
+                jsonObject.put("workCenter", tvworkcenter6.getText().toString());
+                jsonObject.put("tanggalSelesai", tvtglsel1.getText().toString());
+                jsonObject.put("jamSelesai", tvjamsel1.getText().toString());
+                jsonObject.put("status", tvstatus0.getText().toString());
+                jsonObject.put("posted", tvposted7.getText().toString());
+//            jsonObject.put("UploadTime", tvjamsel1.getText().toString()); muncul otomatis
+//            jsonObject.put("QcName", tvqcname4.getText().toString());
+                jsonObject.put("userId", tvusername8.getText().toString());
+                jsonObject.put("id", tvid5.getText().toString());
+                jsonObject.put("mobileId", tvmobileid0.getText().toString());
+
+//                newArr.put(jsonObject);
+//                Log.e(TAG, "coba input put put = " + newArr.toString(1));
+//                simpanSincreject(newArr);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
 
             /*******************Upload Criteria ke Sap***********************************/
             String element1 = gson.toJson(
@@ -600,7 +645,7 @@ public class RejectActivity extends AppCompatActivity {
 
                     JSONObject object = new JSONObject();
                     object.put("hostHeadEntry", upcriteria.getHostHeadEntry());
-                    object.put("id", upcriteria.getId());
+                    object.put("id", tvid5.getText().toString());
                     object.put("criteria", upcriteria.getCriteria());
                     object.put("criteriaDesc", upcriteria.getCriteriaDesc());
                     object.put("standard", upcriteria.getStandard());
@@ -611,13 +656,15 @@ public class RejectActivity extends AppCompatActivity {
                     newArr.put(object);
                 }
                 Log.e("input crit ", newArr.toString(1));
+                jsonObject.put("detail1", newArr);
 //                simpanSincCriteria(newArr);
+//                simpanSincreject(newArr);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
-            /*******************Upload Reject ke Sap***********************************/
+//
+//
+//            /*******************Upload Reject ke Sap***********************************/
             String element = gson.toJson(
 
                     adapter.getData(),
@@ -643,13 +690,47 @@ public class RejectActivity extends AppCompatActivity {
 
                     newArr.put(object);
                 }
-                Log.e("coba sinc reject = ", newArr.toString(1));
-//                simpanSincreject(newArr);
+                Log.e(TAG, "coba sinc reject = " + newArr.toString(1));
+                jsonObject.put("detail", newArr);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
+            Realm realm = Realm.getDefaultInstance();
+            RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+            String text = "";
+            for (ServerModel c : results1) {
+                text = text + c.getAddress();
+
+//        AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/SincReject")
+                AndroidNetworking.post(c.getAddress() + "shopfloor2/index.php/UploadSap")
+                        .addJSONObjectBody(jsonObject)
+                        .setPriority(Priority.MEDIUM)
+                        .build()
+                        .getAsJSONObject(new JSONObjectRequestListener() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    String message = response.getString("message");
+                                    Toasty.success(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onError(ANError anError) {
+                                Toasty.error(getApplicationContext(), "Gagal Synchron SAP", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+            }
+
 //            startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
+
+
 
         }
         return super.onOptionsItemSelected(item);
@@ -712,43 +793,6 @@ public class RejectActivity extends AppCompatActivity {
         }
     }
 
-    //tidak dipake
-    public void loadPRDSPECH() {
-
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/sincheader")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<SincHeader> result = new ArrayList<>();
-                        try {
-                            String message = response.getString("message");
-                            if (message.equals("SincHeader where found")) {
-                                String records = response.getString("data");
-
-                                JSONArray dataArr = new JSONArray(records);
-
-                                if (dataArr.length() > 0) {
-                                    for (int i = 0; i < dataArr.length(); i++) {
-                                        SincHeader sincHeader = gson.fromJson(dataArr.getJSONObject(i).toString(), SincHeader.class);
-                                        result.add(sincHeader);
-                                        tvdocentry7.setText(String.valueOf(sincHeader.getDocEntry() + 1));
-                                        tvdocnum2.setText(String.valueOf(sincHeader.getDocNum() + 1));
-                                    }
-                                }
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-
-                    }
-                });
-    }
 
 
     public void uploadSapHeader() {
@@ -786,7 +830,7 @@ public class RejectActivity extends AppCompatActivity {
             jsonObject.put("mobileId", tvmobileid0.getText().toString());
 
             newArr.put(jsonObject);
-            Log.e("coba input put put = ", newArr.toString(1));
+            Log.e(TAG, "coba input put put = "+ newArr.toString(1));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -826,43 +870,7 @@ public class RejectActivity extends AppCompatActivity {
         }
     }
 
-//    tidak terpakai
-    public void loadPRDSPECD2() {
 
-        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/SincReject")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        List<SincReject> result = new ArrayList<>();
-                        try {
-                            String message = response.getString("message");
-                            if (message.equals("SincReject ketemu")) {
-                                String records = response.getString("data");
-
-                                JSONArray dataArr = new JSONArray(records);
-
-                                if (dataArr.length() > 0) {
-                                    for (int i = 0; i < dataArr.length(); i++) {
-                                        SincReject sincReject = gson.fromJson(dataArr.getJSONObject(i).toString(), SincReject.class);
-                                        result.add(sincReject);
-                                        tvPRDSPECD2.setText(String.valueOf(sincReject.getDocEntry() + 1));
-                                    }
-                                }
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-
-                    }
-                });
-
-    }
 
     public void simpanSincreject(JSONArray jsonArray) {
 
@@ -873,7 +881,7 @@ public class RejectActivity extends AppCompatActivity {
             text = text + c.getAddress();
 
 //        AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/SincReject")
-            AndroidNetworking.post(c.getAddress() + "shopfloor2/index.php/SincReject")
+            AndroidNetworking.post(c.getAddress() + "shopfloor2/index.php/UploadSap")
                     .addJSONArrayBody(jsonArray)
                     .setPriority(Priority.MEDIUM)
                     .build()

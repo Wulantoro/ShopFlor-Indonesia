@@ -88,7 +88,8 @@ public class CriteriaQCActivity extends AppCompatActivity {
     private Gson gson;
     private Criteria criteria;
     private List<Criteria> list;
-    private static final String TAG = "MyActivity";
+//    private static final String TAG = "MyActivity";
+private static String TAG = CriteriaQCActivity.class.getSimpleName();
     private TextView tvsequence1;
     private TextView tvnamawc5;
     private TextView tvid4;
@@ -175,6 +176,7 @@ public class CriteriaQCActivity extends AppCompatActivity {
         TextView tvseqqty = findViewById(R.id.tvseqqty1);
         prf = getSharedPreferences("SequenceQty", MODE_PRIVATE);
         tvseqqty.setText(prf.getString("tvseqqty", null));
+        Log.e(TAG, "seqqty >> " + prf.getString("tvseqqty", null));
 
         TextView tvdocentry = findViewById(R.id.tvdocentry3);
         prf = getSharedPreferences("docEntry", MODE_PRIVATE);
@@ -589,6 +591,12 @@ public class CriteriaQCActivity extends AppCompatActivity {
             SharedPreferences.Editor editor22 = pref.edit();
             editor22.putString("tvid", tvid);
             editor22.commit();
+
+            pref = getSharedPreferences("SequenceQty", MODE_PRIVATE);
+            String tvseqqty = tvseqqty1.getText().toString();
+            SharedPreferences.Editor editor23 = pref.edit();
+            editor23.putString("tvsequenceqty", tvseqqty);
+            editor23.commit();
 
 //            Intent intent = new Intent(getApplicationContext(), RejectActivity.class);
             startActivity(new Intent(getApplicationContext(), RejectActivity.class));
