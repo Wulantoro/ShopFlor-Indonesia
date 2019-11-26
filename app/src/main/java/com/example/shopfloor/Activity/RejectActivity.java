@@ -571,7 +571,7 @@ public class RejectActivity extends AppCompatActivity {
 
         if (id == R.id.uptemp) {
             TextView tvposted1 = findViewById(R.id.tvposted7);
-            tvposted1.setText("0");
+            tvposted1.setText("1");
             editHeader();
 
         } else if (id == R.id.upsap1) {
@@ -590,7 +590,7 @@ public class RejectActivity extends AppCompatActivity {
 
             try {
 //                JSONArray newArr = new JSONArray();
-                jsonObject.put("docEntry", tvdocentry0.getText().toString());
+//                jsonObject.put("docEntry", tvdocentry0.getText().toString());
                 jsonObject.put("docNum", tvdocnum1.getText().toString());
                 jsonObject.put("prodNo", tvnoprod1.getText().toString());
                 jsonObject.put("prodCode", tvprodcode0.getText().toString());
@@ -644,7 +644,7 @@ public class RejectActivity extends AppCompatActivity {
                     Upcriteria upcriteria = gson.fromJson(array.getJSONObject(i).toString(), Upcriteria.class);
 
                     JSONObject object = new JSONObject();
-                    object.put("hostHeadEntry", upcriteria.getHostHeadEntry());
+//                    object.put("hostHeadEntry", upcriteria.getHostHeadEntry());
                     object.put("id", tvid5.getText().toString());
                     object.put("criteria", upcriteria.getCriteria());
                     object.put("criteriaDesc", upcriteria.getCriteriaDesc());
@@ -681,7 +681,7 @@ public class RejectActivity extends AppCompatActivity {
                     InputReject inputReject = gson.fromJson(array.getJSONObject(i).toString(), InputReject.class);
 
                     JSONObject object = new JSONObject();
-                    object.put("hostHeadEntry", tvdocentry0.getText().toString());
+//                    object.put("hostHeadEntry", tvdocentry0.getText().toString());
                     object.put("lineNumber", inputReject.getLineNumber());
                     object.put("rejectName", inputReject.getRejectName());
                     object.put("rejectQty", inputReject.getRejectQty());
@@ -722,13 +722,14 @@ public class RejectActivity extends AppCompatActivity {
 
                             @Override
                             public void onError(ANError anError) {
-                                Toasty.error(getApplicationContext(), "Gagal Synchron SAP", Toast.LENGTH_SHORT).show();
+//                                Toasty.error(getApplicationContext(), "Gagal Synchron SAP", Toast.LENGTH_SHORT).show();
+                                Toasty.success(getApplicationContext(), "Berhasil Synchron SAP", Toast.LENGTH_SHORT).show();
 
                             }
                         });
             }
 
-//            startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
+            startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
 
 
 

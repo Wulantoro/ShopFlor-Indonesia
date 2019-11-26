@@ -50,6 +50,7 @@ public class CriteriaFragment extends Fragment {
     private Gson gson;
     private Header header;
     private TextView tvip12;
+    private static final String TAG = CriteriaFragment.class.getName();
 
     Realm realm;
     RealmHelper realmHelper;
@@ -108,7 +109,8 @@ public class CriteriaFragment extends Fragment {
             Log.e("criteria haha = ", tvdocentry6.getText().toString());
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/upcriteria?docEntry="+docentry)
-            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/upcriteria?hostHeadEntry=" + hostHeadEntry)
+            Log.e(TAG, "ip = " + c.getAddress() + "shopfloor2/index.php/CriteriaSucc?hostHeadEntry=" + hostHeadEntry);
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/CriteriaSucc?hostHeadEntry=" + hostHeadEntry)
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {

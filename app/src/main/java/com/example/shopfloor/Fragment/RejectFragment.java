@@ -113,7 +113,7 @@ public class RejectFragment extends Fragment {
 
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP+ "index.php/inputreject?hostHeadEntry="+hostHeadEntry)
-            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/inputreject?hostHeadEntry=" + hostHeadEntry)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/succreject?hostHeadEntry=" + hostHeadEntry)
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
