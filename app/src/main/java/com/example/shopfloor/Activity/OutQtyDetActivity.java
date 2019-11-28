@@ -69,7 +69,14 @@ public class OutQtyDetActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle(null);
+        setTitle("Output Quantity");
+
+        TextView toolbarText = findViewById(R.id.toolbar_text);
+        if(toolbarText!=null && toolbar!=null) {
+            toolbarText.setText(getTitle());
+            setSupportActionBar(toolbar);
+        }
+
         Toolbar topToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(topToolbar);
 
@@ -348,8 +355,8 @@ public class OutQtyDetActivity extends AppCompatActivity {
 
         if (id == R.id.action_seq && tvOutputSeq1.length() == 0) {
             Toast.makeText(getApplicationContext(), "Output Quantity tidak boleh kosong", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.action_seq && Integer.parseInt(String.valueOf(tvOutputSeq1.getText())) > Integer.parseInt(String.valueOf(tvinqty3.getText()))) {
-            Toast.makeText(getApplicationContext(), "Output Quantity tidak boleh besar dari Input Quantity", Toast.LENGTH_SHORT).show();
+//        } else if (id == R.id.action_seq && Integer.parseInt(String.valueOf(tvOutputSeq1.getText())) > Integer.parseInt(String.valueOf(tvinqty3.getText()))) {
+//            Toast.makeText(getApplicationContext(), "Output Quantity tidak boleh besar dari Input Quantity", Toast.LENGTH_SHORT).show();
         } else {
             pref = getSharedPreferences("inQty", MODE_PRIVATE);
             String tvinqty = tvinqty3.getText().toString();
@@ -473,6 +480,7 @@ public class OutQtyDetActivity extends AppCompatActivity {
 
             startActivity(new Intent(getApplicationContext(), CriteriaQCActivity.class));
         }
+
         return true;
     }
 

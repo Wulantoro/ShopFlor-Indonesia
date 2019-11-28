@@ -99,6 +99,9 @@ public class AddSeqActivity extends AppCompatActivity {
     RealmHelper realmHelper;
     List<ServerModel> serverModels;
 
+    private static final String TAG = AddSeqActivity.class.getName();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -244,9 +247,15 @@ public class AddSeqActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle(null);
-        Toolbar topToolBar = findViewById(R.id.toolbar);
-        setSupportActionBar(topToolBar);
+        setTitle("Input Quantity");
+//        Toolbar topToolBar = findViewById(R.id.toolbar);
+//        setSupportActionBar(topToolBar);
+
+        TextView toolbarText = findViewById(R.id.toolbar_text);
+        if(toolbarText!=null && toolbar!=null) {
+            toolbarText.setText(getTitle());
+            setSupportActionBar(toolbar);
+        }
 
         Log.e("Date 2 " ,tvtglmulai7.getText().toString());
 

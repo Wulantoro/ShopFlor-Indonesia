@@ -102,6 +102,7 @@ public class Add_DocActivity extends AppCompatActivity {
     private TextView tvblnkmrn0;
     private TextView tvblnskrg;
     private Handler mHandler;
+    private TextView toolbar_text;
 
     Realm realm;
     RealmHelper realmHelper;
@@ -118,9 +119,15 @@ public class Add_DocActivity extends AppCompatActivity {
         /**************Toolbar**********************************/
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle(null);
-        Toolbar topToolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(topToolbar);
+        setTitle("Add Document");
+//        Toolbar topToolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(topToolbar);
+
+        TextView toolbarText = findViewById(R.id.toolbar_text);
+        if(toolbarText!=null && toolbar!=null) {
+            toolbarText.setText(getTitle());
+            setSupportActionBar(toolbar);
+        }
         /*******************************************************/
 
         gson = new Gson();
@@ -151,6 +158,7 @@ public class Add_DocActivity extends AppCompatActivity {
         tvblnkmrn = findViewById(R.id.tvblnkmrn);
         tvblnkmrn0 = findViewById(R.id.tvblnkmrn0);
         tvblnskrg = findViewById(R.id.tvblnskrg);
+        toolbar_text = findViewById(R.id.toolbar_text);
 
 
 

@@ -145,7 +145,14 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle(null);
+        setTitle("Input Criteria");
+
+        TextView toolbarText = findViewById(R.id.toolbar_text);
+        if(toolbarText!=null && toolbar!=null) {
+            toolbarText.setText(getTitle());
+            setSupportActionBar(toolbar);
+        }
+
         Toolbar topToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(topToolbar);
 
@@ -410,7 +417,7 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.update_header, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -418,7 +425,7 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
         int id = item.getItemId();
 
 
-        if (id == R.id.update_header) {
+        if (id == R.id.action_seq) {
 
             String element = gson.toJson(
 

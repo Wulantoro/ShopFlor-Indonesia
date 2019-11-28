@@ -116,7 +116,14 @@ public class RejectActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle(null);
+        setTitle("Input Reject");
+
+        TextView toolbarText = findViewById(R.id.toolbar_text);
+        if(toolbarText!=null && toolbar!=null) {
+            toolbarText.setText(getTitle());
+            setSupportActionBar(toolbar);
+        }
+
         Toolbar topToolBar = findViewById(R.id.toolbar);
         setSupportActionBar(topToolBar);
 

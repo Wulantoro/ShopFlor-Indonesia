@@ -193,6 +193,7 @@
                 android:layout_below="@id/tvusername2"
                 android:layout_toRightOf="@id/tvip4"
                 android:text="bulan kemaren"
+                android:textColor="@color/white"
                 android:layout_marginLeft="5dp"/>
 
             <TextView
@@ -201,6 +202,7 @@
                 android:layout_height="wrap_content"
                 android:text="bulan kemaren"
                 android:layout_below="@id/tvblnkmrn"
+                android:textColor="@color/white"
                 />
 
             <TextView
@@ -210,6 +212,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/tvblnkmrn0"
                 android:layout_below="@id/tvblnkmrn"
+                android:textColor="@color/white"
                 android:text="bulan sekarang"/>
 
 

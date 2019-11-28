@@ -4,14 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center"
+        android:background="@mipmap/ic_logo_foreground"/>
+
     <TextView
-        android:id="@+id/tvip0"
+        android:id="@+id/tvIndo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/logo"
+        android:layout_marginTop="40dp"
+        android:textSize="26sp"
+        android:text="Indoplat"/>
+
+    <TextView
+        android:id="@+id/tvText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="ip server"/>
+        android:layout_below="@id/logo"
+        android:layout_marginTop="30dp"
+        android:textSize="36sp"
+        android:layout_centerHorizontal="true"
+        android:text="MOBILE SHOPFLOOR"/>
 
     <LinearLayout
         android:id="@+id/line9"
@@ -19,14 +40,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:layout_marginTop="70dp"
+        android:layout_below="@id/tvText"
         android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:background="@mipmap/idoplat" />
 
 
         <android.support.design.widget.TextInputLayout
@@ -62,6 +78,7 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/rvButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/line9"
@@ -91,7 +108,14 @@
             android:textColor="#FFF"
             android:text="KONFIGURASI"
             />
-    </RelativeLayout>
 
+        <TextView
+            android:id="@+id/tvip0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_below="@+id/btnKonf"
+            android:text="ip server"/>
+    </RelativeLayout>
 
 </RelativeLayout>

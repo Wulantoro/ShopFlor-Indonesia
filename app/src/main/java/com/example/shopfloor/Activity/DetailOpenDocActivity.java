@@ -129,7 +129,13 @@ public class DetailOpenDocActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle(null);
+        setTitle("Open Document");
+
+        TextView toolbarText = findViewById(R.id.toolbar_text);
+        if(toolbarText!=null && toolbar!=null) {
+            toolbarText.setText(getTitle());
+            setSupportActionBar(toolbar);
+        }
         Toolbar topToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(topToolbar);
 

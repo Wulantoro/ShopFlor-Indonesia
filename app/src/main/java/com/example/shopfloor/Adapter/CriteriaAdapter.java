@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -153,7 +154,8 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
             etactual1 = itemView.findViewById(R.id.etactual1);
             tvvalue = itemView.findViewById(R.id.tvvalue);
             tvlinenumber = itemView.findViewById(R.id.tvlinenumber);
-
+//            etactual1.setImeOptions(EditorInfo.IME_ACTION_DONE | EditorInfo.IME_FLAG_NO_EXTRACT_UI);
+//            etactual1.setImeOptions(EditorInfo.IME_FLAG_NO_EXTRACT_UI);
         }
     }
 }

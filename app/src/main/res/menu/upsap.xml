@@ -6,18 +6,13 @@
     <item
         android:id="@+id/uptemp"
         android:orderInCategory="300"
-        android:title="Update Header"
-        android:icon="@drawable/ic_upload"
+        android:title="Simpan"
         app:showAsAction="ifRoom"></item>
 
     <item
         android:id="@+id/upsap1"
         android:orderInCategory="300"
-        android:title="Update Header"
-        android:icon="@drawable/roket"
+        android:title="Upload SAP"
         app:showAsAction="ifRoom"></item>
-
-
-
 
 </menu>
