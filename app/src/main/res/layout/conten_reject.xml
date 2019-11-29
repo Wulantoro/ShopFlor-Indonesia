@@ -128,6 +128,16 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvdocsts2"
                 android:text="doxcsap"/>
+
+            <TextView
+                android:id="@+id/tvid5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_below="@id/tvdocsts2"
+                android:layout_toRightOf="@id/docsap0"
+                android:paddingLeft="5dp"
+                android:text="id"/>
         </RelativeLayout>
 
         <!--in qty, out qty, woekcenter-->
@@ -632,14 +642,7 @@
             android:layout_marginLeft="5dp"
             android:text="ip sever"/>
 
-        <TextView
-            android:id="@+id/tvid5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tvip10"
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
-            android:text="id"/>
+
     </RelativeLayout>
 </RelativeLayout>
 
