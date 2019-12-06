@@ -5,9 +5,13 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputConnection;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -52,30 +56,34 @@ public class InputCriteriaAdapter extends RecyclerView.Adapter<InputCriteriaAdap
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         final Upcriteria upcriteria = list_item.get(holder.getAdapterPosition());
 
         holder.tvcriteria2.setText(String.valueOf(upcriteria.getCriteria()));
         holder.tvcritdesc2.setText(String.valueOf(upcriteria.getCriteriaDesc()));
         holder.tvstandard2.setText(String.valueOf(upcriteria.getStandard()));
         holder.tvactual2.setText(String.valueOf(upcriteria.getActualResult()));
-//        holder.etactual1.addTextChangedListener(new TextWatcher() {
+//        holder.etactual1.addTextChangedListener(new EditTextSaverWatcher(upcriteria));
+
+
+
+//        holder.etactual1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 //            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//                upcriteria.setActualResult(s.toString());
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
+//            public void onFocusChange(View view, boolean b) {
+//                if (b == false) {
+//                    hideKeyboard(view.getContext(), view);
+//                }
 //            }
 //        });
+//    }
 
+//    public static void hideKeyboard(Context context, View view) {
+//        if ((context == null) || (view == null)) {
+//            return;
+//        }
+//        InputMethodManager mgr =
+//                (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+//        mgr.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override
@@ -139,6 +147,31 @@ public class InputCriteriaAdapter extends RecyclerView.Adapter<InputCriteriaAdap
             tvstandard2 = itemView.findViewById(R.id.tvstandard2);
             tvactual2 = itemView.findViewById(R.id.tvactual2);
             etactual1 = itemView.findViewById(R.id.etactual1);
+        }
+    }
+
+
+    public class EditTextSaverWatcher implements TextWatcher {
+
+        private Upcriteria upcriteria;
+
+        public EditTextSaverWatcher(Upcriteria upcriteria) {
+            this.upcriteria= upcriteria;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            // Another option is to save name here
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            upcriteria.setActualResult(s.toString());
         }
     }
 }

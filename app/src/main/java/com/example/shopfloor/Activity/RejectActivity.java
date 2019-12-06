@@ -597,7 +597,9 @@ public class RejectActivity extends AppCompatActivity {
             JSONObject jsonObject = new JSONObject();
 
             try {
+                //ntar arrau nya diilangin lagi ya
 //                JSONArray newArr = new JSONArray();
+
 //                jsonObject.put("docEntry", tvdocentry0.getText().toString());
                 jsonObject.put("docNum", tvdocnum1.getText().toString());
                 jsonObject.put("prodNo", tvnoprod1.getText().toString());
@@ -629,13 +631,14 @@ public class RejectActivity extends AppCompatActivity {
 
 //                newArr.put(jsonObject);
 //                Log.e(TAG, "coba input put put = " + newArr.toString(1));
-//                simpanSincreject(newArr);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
 
             /*******************Upload Criteria ke Sap***********************************/
+            //ini yang dipakai*****************************************************************************************
             String element1 = gson.toJson(
                     inputCriteriaAdapter.getData(),
                     new TypeToken<ArrayList<Upcriteria>>() {
@@ -646,30 +649,33 @@ public class RejectActivity extends AppCompatActivity {
                 JSONArray array = new JSONArray(element1);
                 Log.e("arrraaayyyy = ", array.toString(1));
 
-                JSONArray newArr = new JSONArray();
+                JSONArray newArr1 = new JSONArray();
 
                 for (int i = 0; i < array.length(); i++) {
                     Upcriteria upcriteria = gson.fromJson(array.getJSONObject(i).toString(), Upcriteria.class);
 
                     JSONObject object = new JSONObject();
-//                    object.put("hostHeadEntry", upcriteria.getHostHeadEntry());
-                    object.put("id", tvid5.getText().toString());
+                    object.put("hostHeadEntry", upcriteria.getHostHeadEntry());
+//                    object.put("id", tvid5.getText().toString());
+                    object.put("id", upcriteria.getId());
                     object.put("criteria", upcriteria.getCriteria());
                     object.put("criteriaDesc", upcriteria.getCriteriaDesc());
                     object.put("standard", upcriteria.getStandard());
                     object.put("lineNumber", upcriteria.getLineNumber());
                     object.put("actualResult", upcriteria.getActualResult());
                     object.put("valueType", upcriteria.getValueType());
+                    object.put("actualRemarks", upcriteria.getActualRemarks());
 
-                    newArr.put(object);
+                    newArr1.put(object);
                 }
-                Log.e("input crit ", newArr.toString(1));
-                jsonObject.put("detail1", newArr);
+                Log.e("input crit ", newArr1.toString(1));
+                jsonObject.put("detail1", newArr1);
 //                simpanSincCriteria(newArr);
 //                simpanSincreject(newArr);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
 
 
             String element = gson.toJson(
@@ -688,6 +694,7 @@ public class RejectActivity extends AppCompatActivity {
                     InputReject inputReject = gson.fromJson(array.getJSONObject(i).toString(), InputReject.class);
 
                         JSONObject object = new JSONObject();
+                        object.put("hostHeadEntry", inputReject.getHostHeadEntry());
                         object.put("lineNumber", inputReject.getLineNumber());
                         object.put("rejectName", inputReject.getRejectName());
                         object.put("rejectQty", inputReject.getRejectQty());
@@ -701,7 +708,7 @@ public class RejectActivity extends AppCompatActivity {
                     Log.e(TAG, "coba sinc reject4 = " + newArr.toString(1));
                     Log.e(TAG, "array 4 = " + newArr.length());
                 } else {
-                    JSONArray newArr1 = new JSONArray();
+                    JSONArray newArr2 = new JSONArray();
                     JSONObject object1 = new JSONObject();
 
                         object1.put("lineNumber", "0");
@@ -709,76 +716,16 @@ public class RejectActivity extends AppCompatActivity {
                         object1.put("rejectQty", "0");
                         object1.put("rejectCode", "");
                         object1.put("id", tvid5.getText().toString());
-                        newArr1.put(object1);
-                    jsonObject.put("detail", newArr1);
-                    Log.e(TAG, "coba sinc reject3 = " + newArr1.toString(1));
-                    Log.e(TAG, "array 3 = " + newArr1.length());
+                        newArr2.put(object1);
+                    jsonObject.put("detail", newArr2);
+                    Log.e(TAG, "coba sinc reject3 = " + newArr2.toString(1));
+                    Log.e(TAG, "array 3 = " + newArr2.length());
 
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-//
-
-//
-//            /*******************Upload Reject ke Sap***********************************/
-//            String element = gson.toJson(
-//
-//                    adapter.getData(),
-//                    new TypeToken<ArrayList<SincReject>>() {
-//                    }.getType());
-//
-//            try {
-//                JSONArray array = new JSONArray(element);
-//                Log.e("arrraaayyyy = ", array.toString(1));
-//
-//                JSONArray newArr = new JSONArray();
-//                JSONArray newArr1 = new JSONArray();
-//
-//                if (newArr.equals("")) {
-//                    for (int i = 0; i < array.length(); i++) {
-//                        InputReject inputReject = gson.fromJson(array.getJSONObject(i).toString(), InputReject.class);
-//
-//                        JSONObject object = new JSONObject();
-////                    object.put("hostHeadEntry", tvdocentry0.getText().toString());
-//                        object.put("lineNumber", inputReject.getLineNumber());
-//                        object.put("rejectName", inputReject.getRejectName());
-//                        object.put("rejectQty", inputReject.getRejectQty());
-//                        object.put("rejectCode", inputReject.getRejectCode());
-////                    object.put("id", inputReject.getId());
-//                        object.put("id", tvid5.getText().toString());
-//
-//                        newArr.put(object);
-//
-//                        Log.e(TAG, "id reject " + tvid5.getText().toString());
-//                    }
-//                    Log.e(TAG, "id reject2 " + tvid5.getText().toString());
-//                    Log.e(TAG, "coba sinc reject = " + newArr.toString(1));
-//                    jsonObject.put("detail", newArr);
-//                } else {
-////
-//                    JSONObject object1 = new JSONObject();
-////                    object.put("hostHeadEntry", tvdocentry0.getText().toString());
-//                    object1.put("lineNumber", "0");
-//                    object1.put("rejectName", "");
-//                    object1.put("rejectQty", "0");
-//                    object1.put("rejectCode", "");
-////                    object1.put("id", "1");
-//                    object1.put("id", tvid5.getText().toString());
-//
-//                    newArr1.put(object1);
-//
-//                    Log.e(TAG, "id reject " + tvid5.getText().toString());
-//                }
-//                Log.e(TAG, "id reject2 " + tvid5.getText().toString());
-//                Log.e(TAG, "coba sinc reject2 = " + newArr1.toString(1));
-//                jsonObject.put("detail", newArr1);
-//
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
 
             Realm realm = Realm.getDefaultInstance();
             RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
@@ -786,6 +733,8 @@ public class RejectActivity extends AppCompatActivity {
             for (ServerModel c : results1) {
                 text = text + c.getAddress();
 
+
+                //ini yang dibapaki
 //        AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/SincReject")
                 AndroidNetworking.post(c.getAddress() + "shopfloor2/index.php/UploadSap")
                         .addJSONObjectBody(jsonObject)
@@ -812,7 +761,7 @@ public class RejectActivity extends AppCompatActivity {
                         });
             }
 
-            startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
+//            startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
 
 
 
@@ -880,11 +829,14 @@ public class RejectActivity extends AppCompatActivity {
 
 
     public void uploadSapHeader() {
+
         JSONObject jsonObject = new JSONObject();
 
         try {
-            JSONArray newArr = new JSONArray();
-            jsonObject.put("docEntry", tvdocentry0.getText().toString());
+            //ntar arrau nya diilangin lagi ya
+                JSONArray newArr = new JSONArray();
+
+//                jsonObject.put("docEntry", tvdocentry0.getText().toString());
             jsonObject.put("docNum", tvdocnum1.getText().toString());
             jsonObject.put("prodNo", tvnoprod1.getText().toString());
             jsonObject.put("prodCode", tvprodcode0.getText().toString());
@@ -907,14 +859,49 @@ public class RejectActivity extends AppCompatActivity {
             jsonObject.put("jamSelesai", tvjamsel1.getText().toString());
             jsonObject.put("status", tvstatus0.getText().toString());
             jsonObject.put("posted", tvposted7.getText().toString());
-//            jsonObject.put("UploadTime", tvjamsel1.getText().toString()); muncul otomatis
-//            jsonObject.put("QcName", tvqcname4.getText().toString());
             jsonObject.put("userId", tvusername8.getText().toString());
             jsonObject.put("id", tvid5.getText().toString());
             jsonObject.put("mobileId", tvmobileid0.getText().toString());
 
-            newArr.put(jsonObject);
-            Log.e(TAG, "coba input put put = "+ newArr.toString(1));
+                newArr.put(jsonObject);
+                Log.e(TAG, "coba input put put = " + newArr.toString(1));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        /*******************Upload Criteria ke Sap***********************************/
+        String element1 = gson.toJson(
+                inputCriteriaAdapter.getData(),
+                new TypeToken<ArrayList<Upcriteria>>() {
+
+                }.getType());
+
+        try {
+            JSONArray array = new JSONArray(element1);
+            Log.e("arrraaayyyy = ", array.toString(1));
+
+            JSONArray newArr = new JSONArray();
+
+            for (int i = 0; i < array.length(); i++) {
+                Upcriteria upcriteria = gson.fromJson(array.getJSONObject(i).toString(), Upcriteria.class);
+
+                JSONObject object = new JSONObject();
+                object.put("hostHeadEntry", upcriteria.getHostHeadEntry());
+                object.put("id", upcriteria.getId());
+                object.put("criteria", upcriteria.getCriteria());
+                object.put("criteriaDesc", upcriteria.getCriteriaDesc());
+                object.put("standard", upcriteria.getStandard());
+                object.put("lineNumber", upcriteria.getLineNumber());
+                object.put("actualResult", upcriteria.getActualResult());
+                object.put("valueType", upcriteria.getValueType());
+
+                newArr.put(object);
+            }
+
+            jsonObject.put("detail", newArr);
+            Log.e("input crit ", newArr.toString(1));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -926,7 +913,7 @@ public class RejectActivity extends AppCompatActivity {
         for (ServerModel c : results1) {
             text = text + c.getAddress();
 
-//            AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/UploadSap")
+//        AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/SincReject")
             AndroidNetworking.post(c.getAddress() + "shopfloor2/index.php/UploadSap")
                     .addJSONObjectBody(jsonObject)
                     .setPriority(Priority.MEDIUM)
@@ -935,20 +922,17 @@ public class RejectActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
-
                                 String message = response.getString("message");
                                 Toasty.success(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Toast.makeText(getApplicationContext(), "JSONExceptions" + e, Toast.LENGTH_SHORT).show();
                             }
-
                         }
 
                         @Override
                         public void onError(ANError anError) {
-                            Toasty.error(getApplicationContext(), "Gagal synchron data", Toast.LENGTH_SHORT).show();
-
+                            Toasty.error(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_SHORT).show();
                         }
                     });
         }

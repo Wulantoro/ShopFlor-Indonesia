@@ -45,6 +45,7 @@
             android:id="@+id/tvvalue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:text=""
             />
 
@@ -52,7 +53,10 @@
             android:id="@+id/etactual1"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
+            android:imeOptions="flagNoFullscreen|actionNext"
            android:hint="Actual"/>
+
+
     </LinearLayout>
 
 
