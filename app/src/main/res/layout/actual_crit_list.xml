@@ -53,7 +53,9 @@
             android:id="@+id/etactual1"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:imeOptions="flagNoFullscreen|actionNext"
+            android:imeOptions="flagNoExtractUi"
+            android:maxLines="1"
+            android:inputType="text"
            android:hint="Actual"/>
 
 

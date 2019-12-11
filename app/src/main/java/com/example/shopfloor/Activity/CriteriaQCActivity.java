@@ -658,7 +658,7 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
                         public void onResponse(JSONObject response) {
                             try {
                                 String message = response.getString("message");
-                                Toasty.success(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                Toasty.success(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_SHORT).show();
@@ -668,7 +668,7 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 
                         @Override
                         public void onError(ANError anError) {
-                            Toasty.error(getApplicationContext(), "Gagal menambah Criteria", Toast.LENGTH_SHORT).show();
+                            Toasty.error(getApplicationContext(), "Gagal menambah Criteria", Toast.LENGTH_LONG).show();
                         }
                     });
         }

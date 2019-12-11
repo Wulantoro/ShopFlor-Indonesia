@@ -212,6 +212,7 @@ public class Open_DocActivity extends AppCompatActivity {
 
 //            AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/simpanheader?workCenter="+prf.getString("workcenter", null))
 //            AndroidNetworking.get(prf.getString("tvip", null) + "index.php/simpanheader?workCenter="+wccode)
+                Log.e("ipppp", c.getAddress() + "shopfloor2/index.php/simpanheader?workCenter=" + wccode);
                 AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/simpanheader?workCenter=" + wccode)
                         .setPriority(Priority.MEDIUM)
                         .build()

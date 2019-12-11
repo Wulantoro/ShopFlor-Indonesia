@@ -21,7 +21,9 @@
         <activity android:name=".Activity.KonfigurasiActivity" />
         <activity android:name=".Activity.EditRejectActivity" />
         <activity android:name=".Activity.DetailSuccDocActivity" />
-        <activity android:name=".Activity.CriteriaQCActivity" />
+        <activity
+            android:name=".Activity.CriteriaQCActivity"
+            android:screenOrientation="landscape"/>
         <activity android:name=".Activity.OutQtyDetActivity" />
         <activity android:name=".Activity.RejectListActivity" />
         <activity android:name=".Activity.RespRejectFragActivity" />

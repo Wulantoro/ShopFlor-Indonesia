@@ -9,6 +9,7 @@
     tools:context=".Activity.CriteriaQCActivity"
     tools:showIn="@layout/activity_criteria_qc">
 
+
     <LinearLayout
         android:id="@+id/line"
         android:layout_width="match_parent"
@@ -123,13 +124,16 @@
         </RelativeLayout>
 
 
-
+<ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
         <!--in qty, out qty, woekcenter-->
         <RelativeLayout
             android:id="@+id/dashboard2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             >
+
 
             <RelativeLayout
                 android:id="@+id/content1"
@@ -403,7 +407,9 @@
 
             </TableLayout>
         </RelativeLayout>
+</ScrollView>
     </LinearLayout>
+
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -539,6 +545,7 @@
             android:layout_toRightOf="@id/tvnamawc5"
             android:text="ip server"/>
 </RelativeLayout>
+
 
 </RelativeLayout>
 

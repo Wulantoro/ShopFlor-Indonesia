@@ -585,11 +585,12 @@ public class RejectActivity extends AppCompatActivity {
         } else if (id == R.id.upsap1) {
             TextView tvposted1 = findViewById(R.id.tvposted7);
             tvposted1.setText("1");
-
+//            editHeader();
 //            TextView tvstatus = findViewById(R.id.tvstatus0);
 //            tvstatus.setText("Complete");
 
 //            uploadSapHeader();
+            editStatusHeader();
             loadHeaderStem(tvworkcenter6.getText().toString(), tvmobileid0.getText().toString());
             Log.e("workcenter", tvworkcenter6.getText().toString());
             Log.e("mobile", tvmobileid0.getText().toString());
@@ -745,21 +746,23 @@ public class RejectActivity extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
                                 try {
                                     String message = response.getString("message");
-                                    Toasty.success(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                    Toasty.success(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
-                                    Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_LONG).show();
                                 }
                             }
 
                             @Override
                             public void onError(ANError anError) {
-                                Toasty.error(getApplicationContext(), "Gagal Synchron SAP", Toast.LENGTH_SHORT).show();
+                                Toasty.error(getApplicationContext(), "Gagal Synchron SAP", Toast.LENGTH_LONG).show();
                                 //Toasty.success(getApplicationContext(), "Berhasil Synchron SAP", Toast.LENGTH_SHORT).show();
 
                             }
                         });
             }
+//                editHeader();
 
 //            startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
 
@@ -828,7 +831,7 @@ public class RejectActivity extends AppCompatActivity {
 
 
 
-    public void uploadSapHeader() {
+    public void editStatusHeader() {
 
         JSONObject jsonObject = new JSONObject();
 
@@ -836,7 +839,7 @@ public class RejectActivity extends AppCompatActivity {
             //ntar arrau nya diilangin lagi ya
                 JSONArray newArr = new JSONArray();
 
-//                jsonObject.put("docEntry", tvdocentry0.getText().toString());
+            jsonObject.put("docEntry", tvdocentry0.getText().toString());
             jsonObject.put("docNum", tvdocnum1.getText().toString());
             jsonObject.put("prodNo", tvnoprod1.getText().toString());
             jsonObject.put("prodCode", tvprodcode0.getText().toString());
@@ -857,11 +860,40 @@ public class RejectActivity extends AppCompatActivity {
             jsonObject.put("workCenter", tvworkcenter6.getText().toString());
             jsonObject.put("tanggalSelesai", tvtglsel1.getText().toString());
             jsonObject.put("jamSelesai", tvjamsel1.getText().toString());
-            jsonObject.put("status", tvstatus0.getText().toString());
-            jsonObject.put("posted", tvposted7.getText().toString());
+//            jsonObject.put("status", tvstatus0.getText().toString());
+            jsonObject.put("posted", 2);
+//            jsonObject.put("UploadTime", tvjamsel1.getText().toString()); muncul otomatis
+//            jsonObject.put("QcName", tvqcname4.getText().toString());
             jsonObject.put("userId", tvusername8.getText().toString());
             jsonObject.put("id", tvid5.getText().toString());
             jsonObject.put("mobileId", tvmobileid0.getText().toString());
+
+//                jsonObject.put("docEntry", tvdocentry0.getText().toString());
+//            jsonObject.put("docNum", tvdocnum1.getText().toString());
+//            jsonObject.put("prodNo", tvnoprod1.getText().toString());
+//            jsonObject.put("prodCode", tvprodcode0.getText().toString());
+//            jsonObject.put("prodName", tvnmprod1.getText().toString());
+//            jsonObject.put("prodPlanQty", tvprodplanqty0.getText().toString());
+//            jsonObject.put("prodStatus", tvprodstatus2.getText().toString());
+//            jsonObject.put("routeCode", tvroutecode2.getText().toString());
+//            jsonObject.put("routeName", tvroutename2.getText().toString());
+//            jsonObject.put("sequence", tvsequence1.getText().toString());
+//            jsonObject.put("sequenceQty", tvseqqty1.getText().toString());
+//            jsonObject.put("shiftName", tvshift4.getText().toString());
+//            jsonObject.put("shift", tvcodeshift4.getText().toString());
+//            jsonObject.put("docDate", tvdocdate0.getText().toString());
+//            jsonObject.put("tanggalMulai", tvdocdate0.getText().toString());
+//            jsonObject.put("jamMulai", tvjammulai2.getText().toString());
+//            jsonObject.put("inQty", tvInputQty1.getText().toString());
+//            jsonObject.put("outQty", tvOutputQty1.getText().toString());
+//            jsonObject.put("workCenter", tvworkcenter6.getText().toString());
+//            jsonObject.put("tanggalSelesai", tvtglsel1.getText().toString());
+//            jsonObject.put("jamSelesai", tvjamsel1.getText().toString());
+//            jsonObject.put("status", tvstatus0.getText().toString());
+//            jsonObject.put("posted", tvposted7.getText().toString());
+//            jsonObject.put("userId", tvusername8.getText().toString());
+//            jsonObject.put("id", tvid5.getText().toString());
+//            jsonObject.put("mobileId", tvmobileid0.getText().toString());
 
                 newArr.put(jsonObject);
                 Log.e(TAG, "coba input put put = " + newArr.toString(1));
@@ -872,40 +904,40 @@ public class RejectActivity extends AppCompatActivity {
 
 
         /*******************Upload Criteria ke Sap***********************************/
-        String element1 = gson.toJson(
-                inputCriteriaAdapter.getData(),
-                new TypeToken<ArrayList<Upcriteria>>() {
+//        String element1 = gson.toJson(
+//                inputCriteriaAdapter.getData(),
+//                new TypeToken<ArrayList<Upcriteria>>() {
+//
+//                }.getType());
+//
+//        try {
+//            JSONArray array = new JSONArray(element1);
+//            Log.e("arrraaayyyy = ", array.toString(1));
+//
+//            JSONArray newArr = new JSONArray();
+//
+//            for (int i = 0; i < array.length(); i++) {
+//                Upcriteria upcriteria = gson.fromJson(array.getJSONObject(i).toString(), Upcriteria.class);
+//
+//                JSONObject object = new JSONObject();
+//                object.put("hostHeadEntry", upcriteria.getHostHeadEntry());
+//                object.put("id", upcriteria.getId());
+//                object.put("criteria", upcriteria.getCriteria());
+//                object.put("criteriaDesc", upcriteria.getCriteriaDesc());
+//                object.put("standard", upcriteria.getStandard());
+//                object.put("lineNumber", upcriteria.getLineNumber());
+//                object.put("actualResult", upcriteria.getActualResult());
+//                object.put("valueType", upcriteria.getValueType());
+//
+//                newArr.put(object);
+//            }
+//
+//            jsonObject.put("detail", newArr);
+//            Log.e("input crit ", newArr.toString(1));
 
-                }.getType());
-
-        try {
-            JSONArray array = new JSONArray(element1);
-            Log.e("arrraaayyyy = ", array.toString(1));
-
-            JSONArray newArr = new JSONArray();
-
-            for (int i = 0; i < array.length(); i++) {
-                Upcriteria upcriteria = gson.fromJson(array.getJSONObject(i).toString(), Upcriteria.class);
-
-                JSONObject object = new JSONObject();
-                object.put("hostHeadEntry", upcriteria.getHostHeadEntry());
-                object.put("id", upcriteria.getId());
-                object.put("criteria", upcriteria.getCriteria());
-                object.put("criteriaDesc", upcriteria.getCriteriaDesc());
-                object.put("standard", upcriteria.getStandard());
-                object.put("lineNumber", upcriteria.getLineNumber());
-                object.put("actualResult", upcriteria.getActualResult());
-                object.put("valueType", upcriteria.getValueType());
-
-                newArr.put(object);
-            }
-
-            jsonObject.put("detail", newArr);
-            Log.e("input crit ", newArr.toString(1));
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
         Realm realm = Realm.getDefaultInstance();
         RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
@@ -914,7 +946,8 @@ public class RejectActivity extends AppCompatActivity {
             text = text + c.getAddress();
 
 //        AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/SincReject")
-            AndroidNetworking.post(c.getAddress() + "shopfloor2/index.php/UploadSap")
+            AndroidNetworking.put(c.getAddress() + "shopfloor2/index.php/simpanheader?docEntry")
+//            AndroidNetworking.post(c.getAddress() + "shopfloor2/index.php/UploadSap")
                     .addJSONObjectBody(jsonObject)
                     .setPriority(Priority.MEDIUM)
                     .build()
@@ -923,16 +956,16 @@ public class RejectActivity extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             try {
                                 String message = response.getString("message");
-                                Toasty.success(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                Toasty.success(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                             } catch (JSONException e) {
                                 e.printStackTrace();
-                                Toast.makeText(getApplicationContext(), "JSONExceptions" + e, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "JSONExceptions" + e, Toast.LENGTH_LONG).show();
                             }
                         }
 
                         @Override
                         public void onError(ANError anError) {
-                            Toasty.error(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_SHORT).show();
+                            Toasty.error(getApplicationContext(), "Gagal menambah data", Toast.LENGTH_LONG).show();
                         }
                     });
         }
