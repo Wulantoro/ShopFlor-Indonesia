@@ -415,6 +415,22 @@
                     android:textColor="@color/white"
                     android:text="id head"/>
 
+                <TextView
+                    android:id="@+id/tvtotreject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tvid7"
+                    android:text="total reject"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/tvtotok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tvtotreject"
+                    android:text="total ok"
+                    android:layout_marginLeft="5dp"/>
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvInputReject"

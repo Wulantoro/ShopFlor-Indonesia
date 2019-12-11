@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.provider.Settings;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,22 +22,17 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.example.shopfloor.Adapter.CriteriaAdapter;
 import com.example.shopfloor.Adapter.InputCriteriaAdapter;
 import com.example.shopfloor.Adapter.InputRejectAdapter;
 
 import com.example.shopfloor.Adapter.OpenDocAdapter;
-import com.example.shopfloor.Models.Criteria;
 import com.example.shopfloor.Models.Header;
 import com.example.shopfloor.Models.InputReject;
-import com.example.shopfloor.Models.Productorder;
 import com.example.shopfloor.Models.ServerModel;
-import com.example.shopfloor.Models.SincHeader;
 import com.example.shopfloor.Models.SincReject;
-import com.example.shopfloor.Models.Totreject;
+import com.example.shopfloor.Models.TotalReject;
 import com.example.shopfloor.Models.Upcriteria;
 import com.example.shopfloor.R;
-import com.example.shopfloor.Utils.GlobalVars;
 import com.example.shopfloor.Utils.RealmHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -85,6 +79,7 @@ public class RejectActivity extends AppCompatActivity {
     private TextView tvtglmulai2;
     private TextView tvid5;
     private TextView tvmobileid0;
+    private TextView tvtotreject;
 
     private TextView tvdocentry7;
     private TextView tvdocnum2;
@@ -101,6 +96,7 @@ public class RejectActivity extends AppCompatActivity {
     private TextView tvid7;
     private InputCriteriaAdapter inputCriteriaAdapter;
     private TextView docsap0;
+    private TextView tvtotok;
     private static String TAG = RejectActivity.class.getSimpleName();
 
 
@@ -162,6 +158,8 @@ public class RejectActivity extends AppCompatActivity {
 //        tvdocentry01 = findViewById(R.id.tvdocentry01);
         tvid7 = findViewById(R.id.tvid7);
         docsap0 = findViewById(R.id.docsap0);
+        tvtotreject = findViewById(R.id.tvtotreject);
+        tvtotok = findViewById(R.id.tvtotok);
 
 
         openDocAdapter = new OpenDocAdapter(this);
@@ -311,9 +309,17 @@ public class RejectActivity extends AppCompatActivity {
         TextView tvposted = findViewById(R.id.tvdocsts2);
         tvposted.setText("Pending1");
 
+        int totOk = Integer.parseInt(String.valueOf(tvInputQty1.getText())) - Integer.parseInt(String.valueOf(tvOutputQty1.getText()));
+        tvtotok.setText(String.valueOf(totOk));
+        Log.e(TAG, "total ok = " + totOk);
+
 //        load criteria yang sudah terisi
         loadCriteriaIsi(tvdocentry0.getText().toString());
         Log.e("hostentry", tvdocentry0.getText().toString());
+
+//        load total rejecr
+        totalReject(tvdocentry0.getText().toString());
+        Log.e("hostreject", tvdocentry0.getText().toString());
 
         //        Setup Realm
         Realm.init(getApplicationContext());
@@ -337,8 +343,13 @@ public class RejectActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+               int totOk = Integer.parseInt(String.valueOf(tvInputQty1.getText())) - Integer.parseInt(String.valueOf(tvOutputQty1.getText()));
+               Log.e(TAG, "total ok = " + totOk);
+
                 if (Integer.parseInt(String.valueOf(tvInputQty1.getText())) == Integer.parseInt(String.valueOf(tvOutputQty1.getText()))) {
                     Toast.makeText(getApplicationContext(), "Tidak perlu", Toast.LENGTH_SHORT).show();
+//                } else if () {
+
                 } else {
                     SharedPreferences prf, pref;
                     Intent intent = new Intent(RejectActivity.this, RespRejectFragActivity.class);
@@ -386,6 +397,62 @@ public class RejectActivity extends AppCompatActivity {
         rv.setAdapter(adapter);
     }
 
+    public void totalReject(String host) {
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c : results1) {
+            text = text + c.getAddress();
+
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/Totreject?hostHeadEntry=" + host)
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            List<TotalReject> results = new ArrayList<>();
+                            try {
+                                Log.e(TAG, "totReject " + response.toString(1));
+
+                                if (results != null)
+                                    results.clear();
+
+                                String message = response.getString("message");
+
+                                if (message.equals("tot ketemu")) {
+                                    String records = response.getString("data");
+
+                                    JSONArray dataArr = new JSONArray(records);
+
+                                    if (dataArr.length() > 0) {
+                                        for (int i = 0; i < dataArr.length(); i++) {
+                                            TotalReject totalReject = gson.fromJson(dataArr.getJSONObject(i).toString(), TotalReject.class);
+                                            results.add(totalReject);
+                                            int g = 0;
+                                            if (totalReject.getTotReject() == null) {
+                                                tvtotreject.setText(String.valueOf(0));
+                                            } else {
+                                                tvtotreject.setText(totalReject.getTotReject().replace(".000000", ""));
+                                                Log.e(TAG, "total rejecr = " + totalReject.getTotReject());
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+
+                        @Override
+                        public void onError(ANError anError) {
+
+                        }
+                    });
+        }
+
+    }
+
 
     public void loadData(String docentry) {
         final ProgressDialog progres = new ProgressDialog(this);
@@ -430,7 +497,6 @@ public class RejectActivity extends AppCompatActivity {
                                         for (int i = 0; i < dataArr.length(); i++) {
                                             InputReject inputReject = gson.fromJson(dataArr.getJSONObject(i).toString(), InputReject.class);
                                             result.add(inputReject);
-
                                         }
                                     }
                                 }
@@ -576,13 +642,25 @@ public class RejectActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        int totOk = Integer.parseInt(String.valueOf(tvInputQty1.getText())) - Integer.parseInt(String.valueOf(tvOutputQty1.getText()));
+        tvtotok.setText(String.valueOf(totOk));
+        Log.e(TAG, "total ok = " + totOk);
+
+        int totNG = Integer.parseInt(tvtotreject.getText().toString());
+
+//        TextView  = findViewById(R.id.tvdocsts2);
+//        tvposted.setText("Pending1");
+
+
 
         if (id == R.id.uptemp) {
             TextView tvposted1 = findViewById(R.id.tvposted7);
             tvposted1.setText("1");
             editHeader();
 
-        } else if (id == R.id.upsap1) {
+//            Integer.parseInt(String.valueOf(tvInputQty1.getText())) == Integer.parseInt(String.valueOf(tvOutputQty1.getText()))
+
+        } else if (id == R.id.upsap1 && totOk == totNG) {
             TextView tvposted1 = findViewById(R.id.tvposted7);
             tvposted1.setText("1");
 //            editHeader();
@@ -768,6 +846,8 @@ public class RejectActivity extends AppCompatActivity {
 
 
 
+        } else{
+            Toasty.error(getApplicationContext(), "Total Reject dan Quantity tidak sama", Toasty.LENGTH_LONG).show();
         }
         return super.onOptionsItemSelected(item);
     }
