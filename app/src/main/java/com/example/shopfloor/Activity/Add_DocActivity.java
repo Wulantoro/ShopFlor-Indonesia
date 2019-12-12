@@ -667,7 +667,7 @@ public class Add_DocActivity extends AppCompatActivity {
 
         if (id == R.id.action_seq) {
             /*************jam mulaui************************/
-            String jam = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+            String jam = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
             TextView jam_mulai = findViewById(R.id.tvJam_mulai1);
             jam_mulai.setText(jam);
 

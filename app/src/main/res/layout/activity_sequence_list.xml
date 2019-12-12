@@ -11,7 +11,8 @@
         android:id="@+id/searchSeq"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:imeOptions="flagNoExtractUi"/>
+        android:imeOptions="flagNoExtractUi"
+        android:hint="Cari Disini"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvSequenceList"

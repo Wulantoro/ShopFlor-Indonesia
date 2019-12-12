@@ -424,8 +424,32 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        List<Criteria> data = adapter.getData();
+        EditText etactual1;
+        TextView tvlinenumber;
+        tvlinenumber = findViewById(R.id.tvlinenumber);
+        etactual1 = findViewById(R.id.etactual1);
 
-        if (id == R.id.action_seq) {
+        if (data != null) {
+            for (Criteria x : data) {
+                Log.e(TAG, "respone: " + x.getUCriteria() + " " + x.getUCriteriaName() + " " + x.getUStandard() + " " + x.getUValueType() + " " + x.getActualResult());
+//                if (x.getActualResult() != null) {
+//                    JSONObject jsonObject = new JSONObject();
+//                    try {
+//                        jsonObject.put("docEntry", tvdocentry3.getText().toString());
+//                        jsonObject.put("criteria", x.getUCriteria());
+//                        jsonObject.put("criteriaDesc", x.getUCriteriaName().toString());
+//                        jsonObject.put("standard", x.getUStandard());
+//                        jsonObject.put("lineNumber", tvlinenumber.getText());
+//                        jsonObject.put("actualResult", etactual1.getText());
+//                        jsonObject.put("valueType", x.getUValueType());
+
+
+        if (id == R.id.action_seq && etactual1.getText() != null) {
+
+//            Toasty.error(getApplicationContext(), "Criteria belum diisi", Toasty.LENGTH_LONG).show();
+//            Toast.makeText(this, "Criteria blm diisi", Toast.LENGTH_SHORT).show();
+//        } else{
 
             String element = gson.toJson(
 
@@ -607,12 +631,26 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 
 //            Intent intent = new Intent(getApplicationContext(), RejectActivity.class);
             startActivity(new Intent(getApplicationContext(), RejectActivity.class));
+
+
         } else {
-            Toast.makeText(getApplicationContext(), "Ada Yang kosong", Toast.LENGTH_SHORT).show();
+            Toasty.error(getApplicationContext(), "Criteria Harus diisi semua", Toasty.LENGTH_LONG).show();
         }
+
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+            }
+        }
+//        else {
+//            Toast.makeText(getApplicationContext(), "Ada Yang kosong", Toast.LENGTH_SHORT).show();
+//        }
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
     public void SimpanCriteria(JSONArray jsonArray) {
 

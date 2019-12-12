@@ -653,14 +653,15 @@ public class RejectActivity extends AppCompatActivity {
 
 
 
-        if (id == R.id.uptemp) {
-            TextView tvposted1 = findViewById(R.id.tvposted7);
-            tvposted1.setText("1");
-            editHeader();
-
-//            Integer.parseInt(String.valueOf(tvInputQty1.getText())) == Integer.parseInt(String.valueOf(tvOutputQty1.getText()))
-
-        } else if (id == R.id.upsap1 && totOk == totNG) {
+//        if (id == R.id.uptemp) {
+//            TextView tvposted1 = findViewById(R.id.tvposted7);
+//            tvposted1.setText("1");
+////            editHeader();
+//            editStatusHeader();
+////            Integer.parseInt(String.valueOf(tvInputQty1.getText())) == Integer.parseInt(String.valueOf(tvOutputQty1.getText()))
+//
+//        } else
+            if (id == R.id.upsap1 && totOk == totNG) {
             TextView tvposted1 = findViewById(R.id.tvposted7);
             tvposted1.setText("1");
 //            editHeader();
@@ -975,8 +976,8 @@ public class RejectActivity extends AppCompatActivity {
 //            jsonObject.put("id", tvid5.getText().toString());
 //            jsonObject.put("mobileId", tvmobileid0.getText().toString());
 
-                newArr.put(jsonObject);
-                Log.e(TAG, "coba input put put = " + newArr.toString(1));
+//                newArr.put(jsonObject);
+//                Log.e(TAG, "coba input put put = " + newArr.toString(1));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1012,9 +1013,59 @@ public class RejectActivity extends AppCompatActivity {
 //                newArr.put(object);
 //            }
 //
-//            jsonObject.put("detail", newArr);
+//            jsonObject.put("detail1", newArr);
 //            Log.e("input crit ", newArr.toString(1));
-
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//        String element = gson.toJson(
+//
+//                adapter.getData(),
+//                new TypeToken<ArrayList<SincReject>>() {
+//                }.getType());
+//
+//        try {
+//            JSONArray array = new JSONArray(element);
+//
+//            JSONArray newArr = new JSONArray();
+//
+//            for (int i = 0; i < array.length(); i++) {
+//
+//                InputReject inputReject = gson.fromJson(array.getJSONObject(i).toString(), InputReject.class);
+//
+//                JSONObject object = new JSONObject();
+//                object.put("hostHeadEntry", inputReject.getHostHeadEntry());
+//                object.put("lineNumber", inputReject.getLineNumber());
+//                object.put("rejectName", inputReject.getRejectName());
+//                object.put("rejectQty", inputReject.getRejectQty());
+//                object.put("rejectCode", inputReject.getRejectCode());
+//                object.put("id", inputReject.getId());
+//                newArr.put(object);
+//            }
+//
+//            if (array.length() > 0) {
+//                jsonObject.put("detail", newArr);
+//                Log.e(TAG, "coba sinc reject4 = " + newArr.toString(1));
+//                Log.e(TAG, "array 4 = " + newArr.length());
+//            } else {
+//                JSONArray newArr2 = new JSONArray();
+//                JSONObject object1 = new JSONObject();
+//
+//                object1.put("lineNumber", "0");
+//                object1.put("rejectName", "");
+//                object1.put("rejectQty", "0");
+//                object1.put("rejectCode", "");
+//                object1.put("id", tvid5.getText().toString());
+//                newArr2.put(object1);
+//                jsonObject.put("detail", newArr2);
+//                Log.e(TAG, "coba sinc reject3 = " + newArr2.toString(1));
+//                Log.e(TAG, "array 3 = " + newArr2.length());
+//
+//            }
+//
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }

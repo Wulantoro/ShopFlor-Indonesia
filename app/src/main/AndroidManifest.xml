@@ -14,20 +14,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.ResultScanRejectActivity"></activity>
-        <activity android:name=".Activity.ScanRejectActivity" />
-        <activity android:name=".Activity.ResultScanActivity" />
-        <activity android:name=".Activity.ScanActivity" />
-        <activity android:name=".Activity.KonfigurasiActivity" />
-        <activity android:name=".Activity.EditRejectActivity" />
-        <activity android:name=".Activity.DetailSuccDocActivity" />
+        <activity
+            android:name=".Activity.ResultScanRejectActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".Activity.ScanRejectActivity"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".Activity.ResultScanActivity"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".Activity.ScanActivity"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".Activity.KonfigurasiActivity"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".Activity.EditRejectActivity"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".Activity.DetailSuccDocActivity"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".Activity.CriteriaQCActivity"
             android:screenOrientation="landscape"/>
-        <activity android:name=".Activity.OutQtyDetActivity" />
+        <activity
+            android:name=".Activity.OutQtyDetActivity"
+            android:screenOrientation="landscape"/>
         <activity android:name=".Activity.RejectListActivity" />
-        <activity android:name=".Activity.RespRejectFragActivity" />
-        <activity android:name=".Activity.RejectActivity" />
+        <activity
+            android:name=".Activity.RespRejectFragActivity"
+            android:screenOrientation="landscape"/>
+        <activity
+            android:name=".Activity.RejectActivity"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".CriteriaActivity"
             android:screenOrientation="landscape" />
@@ -37,6 +57,7 @@
         <activity
             android:name=".Activity.AddSeqActivity"
             android:label="@string/title_activity_add_seq"
+            android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.SequenceListActivity"

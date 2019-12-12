@@ -307,7 +307,8 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         editor22.putString("tvid", tvid);
         editor22.commit();
 
-        startActivity(new Intent(getApplicationContext(), OutQtyDetActivity.class));
+//        startActivity(new Intent(getApplicationContext(), OutQtyDetActivity.class));
+        startActivity(new Intent(getApplicationContext(), AddSeq1Activity.class));
         return true;
     }
 

@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <item
-        android:id="@+id/uptemp"
-        android:orderInCategory="300"
-        android:title="Simpan"
-        app:showAsAction="ifRoom"></item>
+<!--    <item-->
+<!--        android:id="@+id/uptemp"-->
+<!--        android:orderInCategory="300"-->
+<!--        android:title="Simpan"-->
+<!--        app:showAsAction="ifRoom"></item>-->
 
     <item
         android:id="@+id/upsap1"

@@ -178,7 +178,8 @@ public class HomeActivity extends AppCompatActivity {
         /*******************************************************************/
 
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String getCurentDate = sdf.format(c.getTime());
         tvTanggalHome.setText(getCurentDate);
 
