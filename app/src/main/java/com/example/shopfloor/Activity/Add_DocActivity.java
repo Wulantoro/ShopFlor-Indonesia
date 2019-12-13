@@ -220,8 +220,8 @@ public class Add_DocActivity extends AppCompatActivity {
         }
         tvip4.setText(text);
 
-        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-//        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+//        String date = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         TextView tgl_mulai = findViewById(R.id.tvTgl_mulai1);
         tgl_mulai.setText(date);
 

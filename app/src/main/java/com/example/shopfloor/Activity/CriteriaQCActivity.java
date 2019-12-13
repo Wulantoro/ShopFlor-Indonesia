@@ -432,8 +432,8 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 
         if (data != null) {
             for (Criteria x : data) {
-                Log.e(TAG, "respone: " + x.getUCriteria() + " " + x.getUCriteriaName() + " " + x.getUStandard() + " " + x.getUValueType() + " " + x.getActualResult());
-//                if (x.getActualResult() != null) {
+//                Log.e(TAG, "respone: " + x.getUCriteria() + " " + x.getUCriteriaName() + " " + x.getUStandard() + " " + x.getUValueType() + " " + x.getActualResult());
+                if (x.getActualResult() != null) {
 //                    JSONObject jsonObject = new JSONObject();
 //                    try {
 //                        jsonObject.put("docEntry", tvdocentry3.getText().toString());
@@ -634,13 +634,14 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 
 
         } else {
-            Toasty.error(getApplicationContext(), "Criteria Harus diisi semua", Toasty.LENGTH_LONG).show();
+//            Toasty.error(getApplicationContext(), "Criteria Harus diisi semua", Toasty.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Ada Yang kosong", Toast.LENGTH_SHORT).show();
         }
 
 //                    } catch (JSONException e) {
 //                        e.printStackTrace();
 //                    }
-//                }
+                }
             }
         }
 //        else {

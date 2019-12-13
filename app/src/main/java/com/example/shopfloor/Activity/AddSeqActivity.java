@@ -485,7 +485,7 @@ public class AddSeqActivity extends AppCompatActivity {
 
             Log.e("Username 1===========" ,tvusername3.getText().toString());
             newArr.put(jsonObject);
-            Log.e("coba input = ", newArr.toString(1));
+            Log.e(TAG,"coba input = "+ newArr.toString(1));
 
         } catch (JSONException e) {
             e.printStackTrace();
