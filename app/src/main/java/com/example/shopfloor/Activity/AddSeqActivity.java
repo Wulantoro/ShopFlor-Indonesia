@@ -294,7 +294,7 @@ public class AddSeqActivity extends AppCompatActivity {
 
         if (id == R.id.action_upHeader && tvInputSeq.length() != 0) {
             upHeader();
-            startActivity(new Intent(getApplicationContext(), Add_DocActivity.class));
+//            startActivity(new Intent(getApplicationContext(), Add_DocActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
@@ -514,6 +514,7 @@ public class AddSeqActivity extends AppCompatActivity {
 
                                 String message = response.getString("message");
                                 Toasty.success(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Toast.makeText(getApplicationContext(), "JSONExceptions" + e, Toast.LENGTH_SHORT).show();

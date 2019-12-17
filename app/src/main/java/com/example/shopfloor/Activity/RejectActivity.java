@@ -3,6 +3,7 @@ package com.example.shopfloor.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -97,6 +98,7 @@ public class RejectActivity extends AppCompatActivity {
     private InputCriteriaAdapter inputCriteriaAdapter;
     private TextView docsap0;
     private TextView tvtotok;
+    private Handler mHandler;
     private static String TAG = RejectActivity.class.getSimpleName();
 
 
@@ -319,7 +321,7 @@ public class RejectActivity extends AppCompatActivity {
 
 //        load total rejecr
         totalReject(tvdocentry0.getText().toString());
-        Log.e("hostreject", tvdocentry0.getText().toString());
+//        Log.e("hostreject", tvdocentry0.getText().toString());
 
         //        Setup Realm
         Realm.init(getApplicationContext());
@@ -395,7 +397,22 @@ public class RejectActivity extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         loadData(tvdocentry0.getText().toString());
         rv.setAdapter(adapter);
+
+
+        this.mHandler = new Handler();
+        m_Runnable.run();
     }
+
+
+    private final Runnable m_Runnable = new Runnable() {
+        @Override
+        public void run() {
+//            Toast.makeText(getApplicationContext(),"in runnable",Toast.LENGTH_SHORT).show();
+            totalReject(tvdocentry0.getText().toString());
+            Log.e("hostreject", tvdocentry0.getText().toString());
+            RejectActivity.this.mHandler.postDelayed(m_Runnable, 2000);
+        }
+    };
 
     public void totalReject(String host) {
         Realm realm = Realm.getDefaultInstance();
@@ -669,7 +686,7 @@ public class RejectActivity extends AppCompatActivity {
 //            tvstatus.setText("Complete");
 
 //            uploadSapHeader();
-            editStatusHeader();
+//            editStatusHeader();
             loadHeaderStem(tvworkcenter6.getText().toString(), tvmobileid0.getText().toString());
             Log.e("workcenter", tvworkcenter6.getText().toString());
             Log.e("mobile", tvmobileid0.getText().toString());
@@ -826,6 +843,7 @@ public class RejectActivity extends AppCompatActivity {
                                 try {
                                     String message = response.getString("message");
                                     Toasty.success(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                                    editStatusHeader();
                                     startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
                                 } catch (JSONException e) {
                                     e.printStackTrace();

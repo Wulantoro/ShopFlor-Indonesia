@@ -428,11 +428,12 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
         EditText etactual1;
         TextView tvlinenumber;
         tvlinenumber = findViewById(R.id.tvlinenumber);
-        etactual1 = findViewById(R.id.etactual1);
+        etactual1 = (EditText) findViewById(R.id.etactual1);
 
         if (data != null) {
             for (Criteria x : data) {
 //                Log.e(TAG, "respone: " + x.getUCriteria() + " " + x.getUCriteriaName() + " " + x.getUStandard() + " " + x.getUValueType() + " " + x.getActualResult());
+
                 if (x.getActualResult() != null) {
 //                    JSONObject jsonObject = new JSONObject();
 //                    try {
@@ -445,11 +446,12 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 //                        jsonObject.put("valueType", x.getUValueType());
 
 
-        if (id == R.id.action_seq && etactual1.getText() != null) {
+        if (id == R.id.action_seq && etactual1.getText().toString().equalsIgnoreCase("")) {
 
 //            Toasty.error(getApplicationContext(), "Criteria belum diisi", Toasty.LENGTH_LONG).show();
-//            Toast.makeText(this, "Criteria blm diisi", Toast.LENGTH_SHORT).show();
-//        } else{
+            Toast.makeText(this, "Criteria blm diisi", Toast.LENGTH_SHORT).show();
+
+        } else{
 
             String element = gson.toJson(
 
@@ -633,9 +635,10 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
             startActivity(new Intent(getApplicationContext(), RejectActivity.class));
 
 
-        } else {
-//            Toasty.error(getApplicationContext(), "Criteria Harus diisi semua", Toasty.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(), "Ada Yang kosong", Toast.LENGTH_SHORT).show();
+//        }
+//        else {
+////            Toasty.error(getApplicationContext(), "Criteria Harus diisi semua", Toasty.LENGTH_LONG).show();
+//            Toast.makeText(getApplicationContext(), "Ada Yang kosong", Toast.LENGTH_SHORT).show();
         }
 
 //                    } catch (JSONException e) {
