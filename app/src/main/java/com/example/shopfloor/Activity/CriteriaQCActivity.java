@@ -288,45 +288,46 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
         tvip9.setText(text);
 
 
-//        tvCrit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String element = gson.toJson(
-//
-//                        adapter.getData(),
-//                        new TypeToken<ArrayList<Upcriteria>>() {
-//                        }.getType());
-//
-//                try {
-//                    JSONArray array = new JSONArray(element);
-//                    Log.e("arrraaayyyy = ", array.toString(1));
-//
-//                    JSONArray newArr = new JSONArray();
-//
-//                    for (int i = 0; i < array.length(); i++) {
-//                        Criteria criteria = gson.fromJson(array.getJSONObject(i).toString(), Criteria.class);
-//
-//                        JSONObject object = new JSONObject();
-//                        object.put("hostHeadEntry", tvdocentry3.getText().toString());
-//                        object.put("id", tvid4.getText().toString());
-//                        object.put("criteria", criteria.getUCriteria());
-//                        object.put("criteriaDesc", criteria.getUCriteriaName());
-//                        object.put("standard", criteria.getUStandard());
-//                        object.put("lineNumber", i + 1);
-//                        object.put("actualResult", criteria.getActualResult());
-//                        object.put("valueType", criteria.getUValueType());
-//
-//                        newArr.put(object);
-//                    }
-//                    Log.e("coba input = ", newArr.toString(1));
-//
-//                    SimpanCriteria(newArr);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        });
+        tvCrit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String element = gson.toJson(
+
+                        adapter.getData(),
+                        new TypeToken<ArrayList<Upcriteria>>() {
+                        }.getType());
+
+                try {
+                    JSONArray array = new JSONArray(element);
+                    Log.e("arrraaayyyy = ", array.toString(1));
+
+                    JSONArray newArr = new JSONArray();
+
+                    for (int i = 0; i < array.length(); i++) {
+                        Criteria criteria = gson.fromJson(array.getJSONObject(i).toString(), Criteria.class);
+
+                        JSONObject object = new JSONObject();
+                        object.put("hostHeadEntry", tvdocentry3.getText().toString());
+                        object.put("id", tvid4.getText().toString());
+                        object.put("criteria", criteria.getUCriteria());
+                        object.put("criteriaDesc", criteria.getUCriteriaName());
+                        object.put("standard", criteria.getUStandard());
+                        object.put("lineNumber", i + 1);
+                        object.put("actualResult", criteria.getActualResult());
+                        object.put("valueType", criteria.getUValueType());
+
+                        newArr.put(object);
+                    }
+                    Log.e("coba input = ", newArr.toString(1));
+
+                    SimpanCriteria(newArr);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
 
         /*******************Ambil data criteria************************/
         gson = new Gson();
@@ -436,11 +437,11 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
         tvlinenumber = findViewById(R.id.tvlinenumber);
         etactual1 = (EditText) findViewById(R.id.etactual1);
 
-//        if (data != null) {
-//            for (Criteria x : data) {
-//                Log.e(TAG, "respone: " + x.getUCriteria() + " " + x.getUCriteriaName() + " " + x.getUStandard() + " " + x.getUValueType() + " " + x.getActualResult());
+        if (data != null) {
+            for (Criteria x : data) {
+                Log.e(TAG, "respone: " + x.getUCriteria() + " " + x.getUCriteriaName() + " " + x.getUStandard() + " " + x.getUValueType() + " " + x.getActualResult());
 
-//                if (x.getActualResult() != null) {
+                if (x.getActualResult() != null) {
 //                    JSONObject jsonObject = new JSONObject();
 //                    try {
 //                        jsonObject.put("docEntry", tvdocentry3.getText().toString());
@@ -452,200 +453,201 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 //                        jsonObject.put("valueType", x.getUValueType());
 
 
-        if (id == R.id.action_seq ) {
+                    if (id == R.id.action_seq && etactual1.getText().toString().equalsIgnoreCase("")) {
 
-//            Toasty.error(getApplicationContext(), "Criteria belum diisi", Toasty.LENGTH_LONG).show();
-//            Toast.makeText(this, "Criteria blm diisi", Toast.LENGTH_SHORT).show();
+                        Toasty.error(getApplicationContext(), "Criteria belum diisi", Toasty.LENGTH_LONG).show();
+//                        Toast.makeText(this, "Criteria blm diisi", Toast.LENGTH_SHORT).show();
 
-//        } else{
+                    } else {
 
-            String element = gson.toJson(
+                        String element = gson.toJson(
 
-                    adapter.getData(),
-                    new TypeToken<ArrayList<Upcriteria>>() {
-                    }.getType());
+                                adapter.getData(),
+                                new TypeToken<ArrayList<Upcriteria>>() {
+                                }.getType());
 
-            try {
-                JSONArray array = new JSONArray(element);
-                Log.e("arrraaayyyy = ", array.toString(1));
+                        try {
+                            JSONArray array = new JSONArray(element);
+                            Log.e("arrraaayyyy = ", array.toString(1));
 
-                JSONArray newArr = new JSONArray();
+                            JSONArray newArr = new JSONArray();
 
-                for (int i = 0; i < array.length(); i++) {
-                    Criteria criteria = gson.fromJson(array.getJSONObject(i).toString(), Criteria.class);
+                            for (int i = 0; i < array.length(); i++) {
+                                Criteria criteria = gson.fromJson(array.getJSONObject(i).toString(), Criteria.class);
 
-                    JSONObject object = new JSONObject();
-                    object.put("hostHeadEntry", tvdocentry3.getText().toString());
-                    object.put("id", tvid4.getText().toString());
-                    object.put("criteria", criteria.getUCriteria());
-                    object.put("criteriaDesc", criteria.getUCriteriaName());
-                    object.put("standard", criteria.getUStandard());
-                    object.put("lineNumber", i + 1);
-                    object.put("actualResult", criteria.getActualResult());
-                    object.put("valueType", criteria.getUValueType());
+                                JSONObject object = new JSONObject();
+                                object.put("hostHeadEntry", tvdocentry3.getText().toString());
+                                object.put("id", tvid4.getText().toString());
+                                object.put("criteria", criteria.getUCriteria());
+                                object.put("criteriaDesc", criteria.getUCriteriaName());
+                                object.put("standard", criteria.getUStandard());
+                                object.put("lineNumber", i + 1);
+                                object.put("actualResult", criteria.getActualResult());
+                                object.put("valueType", criteria.getUValueType());
 
-                    newArr.put(object);
-                }
-                Log.e("coba input = ", newArr.toString(1));
+                                newArr.put(object);
+                            }
+                            Log.e("coba input = ", newArr.toString(1));
 
 //                SimpanCriteria(newArr);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-            pref = getSharedPreferences("Docentry", MODE_PRIVATE);
-            String tvdocentry = tvdocentry3.getText().toString();
-            SharedPreferences.Editor editor = pref.edit();
-            editor.putString("tvdocentry", tvdocentry);
-            editor.commit();
+                        pref = getSharedPreferences("Docentry", MODE_PRIVATE);
+                        String tvdocentry = tvdocentry3.getText().toString();
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString("tvdocentry", tvdocentry);
+                        editor.commit();
 
-            pref = getSharedPreferences("Jamsel", MODE_PRIVATE);
-            String tvjamsel = tvjamsel1.getText().toString();
-            SharedPreferences.Editor editor1 = pref.edit();
-            editor1.putString("tvjamsel", tvjamsel);
-            editor1.commit();
+                        pref = getSharedPreferences("Jamsel", MODE_PRIVATE);
+                        String tvjamsel = tvjamsel1.getText().toString();
+                        SharedPreferences.Editor editor1 = pref.edit();
+                        editor1.putString("tvjamsel", tvjamsel);
+                        editor1.commit();
 
-            pref = getSharedPreferences("Tglsel", MODE_PRIVATE);
-            String tvtglsel = tvtglsel1.getText().toString();
-            SharedPreferences.Editor editor2 = pref.edit();
-            editor2.putString("tvtglsel", tvtglsel);
-            editor2.commit();
+                        pref = getSharedPreferences("Tglsel", MODE_PRIVATE);
+                        String tvtglsel = tvtglsel1.getText().toString();
+                        SharedPreferences.Editor editor2 = pref.edit();
+                        editor2.putString("tvtglsel", tvtglsel);
+                        editor2.commit();
 
-            pref = getSharedPreferences("Namaprod", MODE_PRIVATE);
-            String tvnamaprod = tvnmprod1.getText().toString();
-            SharedPreferences.Editor editor3 = pref.edit();
-            editor3.putString("tvnamaprod", tvnamaprod);
-            editor3.commit();
+                        pref = getSharedPreferences("Namaprod", MODE_PRIVATE);
+                        String tvnamaprod = tvnmprod1.getText().toString();
+                        SharedPreferences.Editor editor3 = pref.edit();
+                        editor3.putString("tvnamaprod", tvnamaprod);
+                        editor3.commit();
 
-            pref = getSharedPreferences("Docsts", MODE_PRIVATE);
-            String tvdocsts = tvdocsts1.getText().toString();
-            SharedPreferences.Editor editor4 = pref.edit();
-            editor4.putString("tvdocsts", tvdocsts);
-            editor4.commit();
+                        pref = getSharedPreferences("Docsts", MODE_PRIVATE);
+                        String tvdocsts = tvdocsts1.getText().toString();
+                        SharedPreferences.Editor editor4 = pref.edit();
+                        editor4.putString("tvdocsts", tvdocsts);
+                        editor4.commit();
 
-            pref = getSharedPreferences("Inqty", MODE_PRIVATE);
-            String tvinqty = tvInputQty3.getText().toString();
-            SharedPreferences.Editor editor5 = pref.edit();
-            editor5.putString("tvinqty", tvinqty);
-            editor5.commit();
+                        pref = getSharedPreferences("Inqty", MODE_PRIVATE);
+                        String tvinqty = tvInputQty3.getText().toString();
+                        SharedPreferences.Editor editor5 = pref.edit();
+                        editor5.putString("tvinqty", tvinqty);
+                        editor5.commit();
 
-            pref = getSharedPreferences("Outqty", MODE_PRIVATE);
-            String tvoutqty = tvOutputQty1.getText().toString();
-            SharedPreferences.Editor editor6 = pref.edit();
-            editor6.putString("tvoutqty", tvoutqty);
-            editor6.commit();
+                        pref = getSharedPreferences("Outqty", MODE_PRIVATE);
+                        String tvoutqty = tvOutputQty1.getText().toString();
+                        SharedPreferences.Editor editor6 = pref.edit();
+                        editor6.putString("tvoutqty", tvoutqty);
+                        editor6.commit();
 
-            pref = getSharedPreferences("Docnum", MODE_PRIVATE);
-            String tvdocnum = tvdocnum5.getText().toString();
-            SharedPreferences.Editor editor7 = pref.edit();
-            editor7.putString("docnum", tvdocnum);
-            editor7.commit();
+                        pref = getSharedPreferences("Docnum", MODE_PRIVATE);
+                        String tvdocnum = tvdocnum5.getText().toString();
+                        SharedPreferences.Editor editor7 = pref.edit();
+                        editor7.putString("docnum", tvdocnum);
+                        editor7.commit();
 
-            pref = getSharedPreferences("prodCode", MODE_PRIVATE);
-            String tvprodcode1 = tvprodcode.getText().toString();
-            SharedPreferences.Editor editor8 = pref.edit();
-            editor.putString("tvprodcode", tvprodcode1);
-            editor8.commit();
+                        pref = getSharedPreferences("prodCode", MODE_PRIVATE);
+                        String tvprodcode1 = tvprodcode.getText().toString();
+                        SharedPreferences.Editor editor8 = pref.edit();
+                        editor.putString("tvprodcode", tvprodcode1);
+                        editor8.commit();
 
-            pref = getSharedPreferences("Prodplanqty", MODE_PRIVATE);
-            String tvprodplanqty = tvprodplanqty2.getText().toString();
-            SharedPreferences.Editor editor9 = pref.edit();
-            editor9.putString("tvprodplanqty", tvprodplanqty);
-            editor9.commit();
+                        pref = getSharedPreferences("Prodplanqty", MODE_PRIVATE);
+                        String tvprodplanqty = tvprodplanqty2.getText().toString();
+                        SharedPreferences.Editor editor9 = pref.edit();
+                        editor9.putString("tvprodplanqty", tvprodplanqty);
+                        editor9.commit();
 
-            pref = getSharedPreferences("Prodstatus", MODE_PRIVATE);
-            String tvprodststus = tvprodstatus1.getText().toString();
-            SharedPreferences.Editor editor10 = pref.edit();
-            editor10.putString("tvprodstatus", tvprodststus);
-            editor10.commit();
+                        pref = getSharedPreferences("Prodstatus", MODE_PRIVATE);
+                        String tvprodststus = tvprodstatus1.getText().toString();
+                        SharedPreferences.Editor editor10 = pref.edit();
+                        editor10.putString("tvprodstatus", tvprodststus);
+                        editor10.commit();
 
-            pref = getSharedPreferences("Routecode", MODE_PRIVATE);
-            String tvroutecode = tvroutecode1.getText().toString();
-            SharedPreferences.Editor editor11 = pref.edit();
-            editor11.putString("tvroutecode", tvroutecode);
-            editor11.commit();
+                        pref = getSharedPreferences("Routecode", MODE_PRIVATE);
+                        String tvroutecode = tvroutecode1.getText().toString();
+                        SharedPreferences.Editor editor11 = pref.edit();
+                        editor11.putString("tvroutecode", tvroutecode);
+                        editor11.commit();
 
-            pref = getSharedPreferences("Routename", MODE_PRIVATE);
-            String tvroutename = tvroutename1.getText().toString();
-            SharedPreferences.Editor editor12 = pref.edit();
-            editor12.putString("tvroutename", tvroutename);
-            editor12.commit();
+                        pref = getSharedPreferences("Routename", MODE_PRIVATE);
+                        String tvroutename = tvroutename1.getText().toString();
+                        SharedPreferences.Editor editor12 = pref.edit();
+                        editor12.putString("tvroutename", tvroutename);
+                        editor12.commit();
 
-            pref = getSharedPreferences("Docdate", MODE_PRIVATE);
-            String tvdocdate = tvtglmulai1.getText().toString();
-            SharedPreferences.Editor editor13 = pref.edit();
-            editor13.putString("tvdocdate", tvdocdate);
-            editor13.commit();
+                        pref = getSharedPreferences("Docdate", MODE_PRIVATE);
+                        String tvdocdate = tvtglmulai1.getText().toString();
+                        SharedPreferences.Editor editor13 = pref.edit();
+                        editor13.putString("tvdocdate", tvdocdate);
+                        editor13.commit();
 
-            pref = getSharedPreferences("Jammulai", MODE_PRIVATE);
-            String tvjammulai = tvjammulai1.getText().toString();
-            SharedPreferences.Editor editor14 = pref.edit();
-            editor14.putString("tvjammulai", tvjammulai);
-            editor14.commit();
+                        pref = getSharedPreferences("Jammulai", MODE_PRIVATE);
+                        String tvjammulai = tvjammulai1.getText().toString();
+                        SharedPreferences.Editor editor14 = pref.edit();
+                        editor14.putString("tvjammulai", tvjammulai);
+                        editor14.commit();
 
-            pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
-            String tvworkcenter = tvWorkcenter.getText().toString();
-            SharedPreferences.Editor editor15 = pref.edit();
-            editor15.putString("tvworkcenter", tvworkcenter);
-            editor15.commit();
+                        pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+                        String tvworkcenter = tvWorkcenter.getText().toString();
+                        SharedPreferences.Editor editor15 = pref.edit();
+                        editor15.putString("tvworkcenter", tvworkcenter);
+                        editor15.commit();
 
-            pref = getSharedPreferences("Status", MODE_PRIVATE);
-            String tvstatus = tvstatus2.getText().toString();
-            SharedPreferences.Editor editor16 = pref.edit();
-            editor16.putString("tvstatus", tvstatus);
-            editor16.commit();
+                        pref = getSharedPreferences("Status", MODE_PRIVATE);
+                        String tvstatus = tvstatus2.getText().toString();
+                        SharedPreferences.Editor editor16 = pref.edit();
+                        editor16.putString("tvstatus", tvstatus);
+                        editor16.commit();
 
-            pref = getSharedPreferences("Username", MODE_PRIVATE);
-            String tvusername = tvusername7.getText().toString();
-            SharedPreferences.Editor editor17 = pref.edit();
-            editor17.putString("tvusername", tvusername);
-            editor17.commit();
+                        pref = getSharedPreferences("Username", MODE_PRIVATE);
+                        String tvusername = tvusername7.getText().toString();
+                        SharedPreferences.Editor editor17 = pref.edit();
+                        editor17.putString("tvusername", tvusername);
+                        editor17.commit();
 
-            pref = getSharedPreferences("Qcname", MODE_PRIVATE);
-            String tvqcname = tvqcname3.getText().toString();
-            SharedPreferences.Editor editor18 = pref.edit();
-            editor18.putString("tvqcname", tvqcname);
-            editor18.commit();
+                        pref = getSharedPreferences("Qcname", MODE_PRIVATE);
+                        String tvqcname = tvqcname3.getText().toString();
+                        SharedPreferences.Editor editor18 = pref.edit();
+                        editor18.putString("tvqcname", tvqcname);
+                        editor18.commit();
 
-            pref = getSharedPreferences("Shift", MODE_PRIVATE);
-            String tvshift = tvshift2.getText().toString();
-            SharedPreferences.Editor editor19 = pref.edit();
-            editor19.putString("tvshift", tvshift);
-            editor19.commit();
+                        pref = getSharedPreferences("Shift", MODE_PRIVATE);
+                        String tvshift = tvshift2.getText().toString();
+                        SharedPreferences.Editor editor19 = pref.edit();
+                        editor19.putString("tvshift", tvshift);
+                        editor19.commit();
 
-            pref = getSharedPreferences("Codeshift", MODE_PRIVATE);
-            String tvcodesh = tvcodeshift3.getText().toString();
-            SharedPreferences.Editor editor20 = pref.edit();
-            editor20.putString("tvcodeshift", tvcodesh);
-            editor20.commit();
+                        pref = getSharedPreferences("Codeshift", MODE_PRIVATE);
+                        String tvcodesh = tvcodeshift3.getText().toString();
+                        SharedPreferences.Editor editor20 = pref.edit();
+                        editor20.putString("tvcodeshift", tvcodesh);
+                        editor20.commit();
 
-            pref = getSharedPreferences("Namawc", MODE_PRIVATE);
-            String tvnamawc = tvnamawc5.getText().toString();
-            SharedPreferences.Editor editor21 = pref.edit();
-            editor21.putString("tvnamawc", tvnamawc);
-            editor21.commit();
+                        pref = getSharedPreferences("Namawc", MODE_PRIVATE);
+                        String tvnamawc = tvnamawc5.getText().toString();
+                        SharedPreferences.Editor editor21 = pref.edit();
+                        editor21.putString("tvnamawc", tvnamawc);
+                        editor21.commit();
 
-            pref = getSharedPreferences("Id", MODE_PRIVATE);
-            String tvid = tvid4.getText().toString();
-            SharedPreferences.Editor editor22 = pref.edit();
-            editor22.putString("tvid", tvid);
-            editor22.commit();
+                        pref = getSharedPreferences("Id", MODE_PRIVATE);
+                        String tvid = tvid4.getText().toString();
+                        SharedPreferences.Editor editor22 = pref.edit();
+                        editor22.putString("tvid", tvid);
+                        editor22.commit();
 
-            pref = getSharedPreferences("SequenceQty", MODE_PRIVATE);
-            String tvseqqty = tvseqqty1.getText().toString();
-            SharedPreferences.Editor editor23 = pref.edit();
-            editor23.putString("tvsequenceqty", tvseqqty);
-            editor23.commit();
+                        pref = getSharedPreferences("SequenceQty", MODE_PRIVATE);
+                        String tvseqqty = tvseqqty1.getText().toString();
+                        SharedPreferences.Editor editor23 = pref.edit();
+                        editor23.putString("tvsequenceqty", tvseqqty);
+                        editor23.commit();
 
 //            Intent intent = new Intent(getApplicationContext(), RejectActivity.class);
-            startActivity(new Intent(getApplicationContext(), RejectActivity.class));
+                        startActivity(new Intent(getApplicationContext(), RejectActivity.class));
+
+                    }
+
+                }
+            }
+
 
         }
-
-//
-//                }
-//            }
-//        }
 //
 
         return super.onOptionsItemSelected(item);
@@ -688,11 +690,16 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 
                                                 prf = getSharedPreferences("workCenter", MODE_PRIVATE);
                                                 String.valueOf(prf.getString("tvworkcenter", null));
-                                                Log.e("wccode = ", prf.getString("tvworkcenter", null));
+                                                Log.e(TAG+"wccode = ", prf.getString("tvworkcenter", null));
 
                                                 prf = getSharedPreferences("Noprod", MODE_PRIVATE);
                                                 String.valueOf(prf.getString("tvnoprod", null));
-                                                Log.e("docnum = ", prf.getString("tvnoprod", null));
+                                                Log.e(TAG+"docnum = ", prf.getString("tvnoprod", null));
+
+                                                TextView tvsequence = findViewById(R.id.tvsequence1);
+                                                prf = getSharedPreferences("Sequence", MODE_PRIVATE);
+                                                tvsequence.setText(prf.getString("tvsequence", null));
+                                                Log.e(TAG, "seqyence if " + prf.getString("tvsequence", null));
 
 
 //                                                loadData(tvWorkcenter.getText().toString(), tvnoprod0.getText().toString(), tvsequence1.getText().toString());
@@ -738,6 +745,7 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 
                                             } else {
                                                 Toast.makeText(CriteriaQCActivity.this, "Criteria Sudah ada", Toast.LENGTH_SHORT).show();
+//                                                String sudah ada
                                             }
                                         }
                                     }
