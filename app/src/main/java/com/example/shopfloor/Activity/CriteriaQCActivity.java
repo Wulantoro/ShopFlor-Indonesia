@@ -96,6 +96,8 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
     private Button tvCrit;
     private TextView tvip9;
 
+    private InputCriteriaAdapter inputCriteriaAdapter;
+
     Realm realm;
     RealmHelper realmHelper;
     List<ServerModel> serverModels;
@@ -139,6 +141,8 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
         tvid4 = findViewById(R.id.tvid4);
         tvCrit = findViewById(R.id.tvCrit);
         tvip9 = findViewById(R.id.tvip9);
+
+        inputCriteriaAdapter = new InputCriteriaAdapter(this);
 
 
         /*************************************************************/
@@ -188,6 +192,8 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
         TextView tvdocentry = findViewById(R.id.tvdocentry3);
         prf = getSharedPreferences("docEntry", MODE_PRIVATE);
         tvdocentry.setText(prf.getString("tvdocentry", null));
+
+        loadCriteriaIsi(tvdocentry3.getText().toString());
 
         TextView tvdocnum = findViewById(R.id.tvdocnum5);
         prf = getSharedPreferences("Docnum", MODE_PRIVATE);
@@ -282,45 +288,45 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
         tvip9.setText(text);
 
 
-        tvCrit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String element = gson.toJson(
-
-                        adapter.getData(),
-                        new TypeToken<ArrayList<Upcriteria>>() {
-                        }.getType());
-
-                try {
-                    JSONArray array = new JSONArray(element);
-                    Log.e("arrraaayyyy = ", array.toString(1));
-
-                    JSONArray newArr = new JSONArray();
-
-                    for (int i = 0; i < array.length(); i++) {
-                        Criteria criteria = gson.fromJson(array.getJSONObject(i).toString(), Criteria.class);
-
-                        JSONObject object = new JSONObject();
-                        object.put("hostHeadEntry", tvdocentry3.getText().toString());
-                        object.put("id", tvid4.getText().toString());
-                        object.put("criteria", criteria.getUCriteria());
-                        object.put("criteriaDesc", criteria.getUCriteriaName());
-                        object.put("standard", criteria.getUStandard());
-                        object.put("lineNumber", i + 1);
-                        object.put("actualResult", criteria.getActualResult());
-                        object.put("valueType", criteria.getUValueType());
-
-                        newArr.put(object);
-                    }
-                    Log.e("coba input = ", newArr.toString(1));
-
-                    SimpanCriteria(newArr);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
+//        tvCrit.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String element = gson.toJson(
+//
+//                        adapter.getData(),
+//                        new TypeToken<ArrayList<Upcriteria>>() {
+//                        }.getType());
+//
+//                try {
+//                    JSONArray array = new JSONArray(element);
+//                    Log.e("arrraaayyyy = ", array.toString(1));
+//
+//                    JSONArray newArr = new JSONArray();
+//
+//                    for (int i = 0; i < array.length(); i++) {
+//                        Criteria criteria = gson.fromJson(array.getJSONObject(i).toString(), Criteria.class);
+//
+//                        JSONObject object = new JSONObject();
+//                        object.put("hostHeadEntry", tvdocentry3.getText().toString());
+//                        object.put("id", tvid4.getText().toString());
+//                        object.put("criteria", criteria.getUCriteria());
+//                        object.put("criteriaDesc", criteria.getUCriteriaName());
+//                        object.put("standard", criteria.getUStandard());
+//                        object.put("lineNumber", i + 1);
+//                        object.put("actualResult", criteria.getActualResult());
+//                        object.put("valueType", criteria.getUValueType());
+//
+//                        newArr.put(object);
+//                    }
+//                    Log.e("coba input = ", newArr.toString(1));
+//
+//                    SimpanCriteria(newArr);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        });
 
         /*******************Ambil data criteria************************/
         gson = new Gson();
@@ -430,11 +436,11 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
         tvlinenumber = findViewById(R.id.tvlinenumber);
         etactual1 = (EditText) findViewById(R.id.etactual1);
 
-        if (data != null) {
-            for (Criteria x : data) {
+//        if (data != null) {
+//            for (Criteria x : data) {
 //                Log.e(TAG, "respone: " + x.getUCriteria() + " " + x.getUCriteriaName() + " " + x.getUStandard() + " " + x.getUValueType() + " " + x.getActualResult());
 
-                if (x.getActualResult() != null) {
+//                if (x.getActualResult() != null) {
 //                    JSONObject jsonObject = new JSONObject();
 //                    try {
 //                        jsonObject.put("docEntry", tvdocentry3.getText().toString());
@@ -446,12 +452,12 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 //                        jsonObject.put("valueType", x.getUValueType());
 
 
-        if (id == R.id.action_seq && etactual1.getText().toString().equalsIgnoreCase("")) {
+        if (id == R.id.action_seq ) {
 
 //            Toasty.error(getApplicationContext(), "Criteria belum diisi", Toasty.LENGTH_LONG).show();
-            Toast.makeText(this, "Criteria blm diisi", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Criteria blm diisi", Toast.LENGTH_SHORT).show();
 
-        } else{
+//        } else{
 
             String element = gson.toJson(
 
@@ -634,24 +640,121 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 //            Intent intent = new Intent(getApplicationContext(), RejectActivity.class);
             startActivity(new Intent(getApplicationContext(), RejectActivity.class));
 
-
-//        }
-//        else {
-////            Toasty.error(getApplicationContext(), "Criteria Harus diisi semua", Toasty.LENGTH_LONG).show();
-//            Toast.makeText(getApplicationContext(), "Ada Yang kosong", Toast.LENGTH_SHORT).show();
         }
 
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-                }
-            }
-        }
-//        else {
-//            Toast.makeText(getApplicationContext(), "Ada Yang kosong", Toast.LENGTH_SHORT).show();
+//
+//                }
+//            }
 //        }
+//
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void loadCriteriaIsi(String hostHeadEntry) {
+
+        Realm realm = Realm.getDefaultInstance();
+        RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
+        String text = "";
+        for (ServerModel c : results1) {
+            Log.e(TAG, "host" + hostHeadEntry);
+
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/upcriteria?hostHeadEntry=" + hostHeadEntry)
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            List<Upcriteria> result = new ArrayList<>();
+                            try {
+                                Log.e(TAG,"criteria = "+ response.toString(1));
+
+                                if (result != null)
+                                    result.clear();
+
+                                String message = response.getString("message");
+
+                                if (message.equals("Criteria were found")) {
+                                    String records = response.getString("data");
+
+                                    JSONArray dataArr = new JSONArray(records);
+
+                                    if (dataArr.length() > 0) {
+                                        for (int i = 0; i < dataArr.length(); i++) {
+                                            Upcriteria upcriteria = gson.fromJson(dataArr.getJSONObject(i).toString(), Upcriteria.class);
+                                            result.add(upcriteria);
+
+                                            if (upcriteria.getActualResult() == null) {
+
+                                                prf = getSharedPreferences("workCenter", MODE_PRIVATE);
+                                                String.valueOf(prf.getString("tvworkcenter", null));
+                                                Log.e("wccode = ", prf.getString("tvworkcenter", null));
+
+                                                prf = getSharedPreferences("Noprod", MODE_PRIVATE);
+                                                String.valueOf(prf.getString("tvnoprod", null));
+                                                Log.e("docnum = ", prf.getString("tvnoprod", null));
+
+
+//                                                loadData(tvWorkcenter.getText().toString(), tvnoprod0.getText().toString(), tvsequence1.getText().toString());
+//                                                tvCrit.setOnClickListener(new View.OnClickListener() {
+//                                                    @Override
+//                                                    public void onClick(View v) {
+//                                                        String element = gson.toJson(
+//
+//                                                                adapter.getData(),
+//                                                                new TypeToken<ArrayList<Upcriteria>>() {
+//                                                                }.getType());
+//
+//                                                        try {
+//                                                            JSONArray array = new JSONArray(element);
+//                                                            Log.e("arrraaayyyy = ", array.toString(1));
+//
+//                                                            JSONArray newArr = new JSONArray();
+//
+//                                                            for (int i = 0; i < array.length(); i++) {
+//                                                                Criteria criteria = gson.fromJson(array.getJSONObject(i).toString(), Criteria.class);
+//
+//                                                                JSONObject object = new JSONObject();
+//                                                                object.put("hostHeadEntry", tvdocentry3.getText().toString());
+//                                                                object.put("id", tvid4.getText().toString());
+//                                                                object.put("criteria", criteria.getUCriteria());
+//                                                                object.put("criteriaDesc", criteria.getUCriteriaName());
+//                                                                object.put("standard", criteria.getUStandard());
+//                                                                object.put("lineNumber", i + 1);
+//                                                                object.put("actualResult", criteria.getActualResult());
+//                                                                object.put("valueType", criteria.getUValueType());
+//
+//                                                                newArr.put(object);
+//                                                            }
+//                                                            Log.e("coba input = ", newArr.toString(1));
+//
+//                                                            SimpanCriteria(newArr);
+//                                                        } catch (JSONException e) {
+//                                                            e.printStackTrace();
+//                                                        }
+//
+//                                                    }
+//                                                });
+
+                                            } else {
+                                                Toast.makeText(CriteriaQCActivity.this, "Criteria Sudah ada", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            inputCriteriaAdapter.addAll(result);
+
+                        }
+
+                        @Override
+                        public void onError(ANError anError) {
+
+                        }
+                    });
+        }
     }
 
 

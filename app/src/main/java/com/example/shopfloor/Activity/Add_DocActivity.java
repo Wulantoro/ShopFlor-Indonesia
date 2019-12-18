@@ -677,6 +677,8 @@ public class Add_DocActivity extends AppCompatActivity {
             SimpleDateFormat sdf1 = new SimpleDateFormat("EEEE");
             String getCurentDay = sdf1.format(c.getTime());
 
+            Log.e(TAG, "hari ini " + getCurentDay);
+
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
             String getCurentTime = sdf.format(c.getTime());
             String getTestTime = "07:00";
@@ -688,9 +690,10 @@ public class Add_DocActivity extends AppCompatActivity {
             if (getCurentTime.compareTo(getTestTime) > 0 && getTestTime1.compareTo(getCurentTime) > 0) {
                 shift.setText(getCurentDay + " " + "-" + " " + "Shift 1");
             }else if (getCurentTime.compareTo(getTestTime1) > 0 && getTestTime2.compareTo(getCurentTime) > 0) {
-                shift.setText(getCurentDay+" "+"-"+" "+"Shift 2");
-            }else if (getCurentTime.compareTo(getTestTime2) > 0) {
-                shift.setText(getCurentDay+ "-"+" "+"Shift 3");
+                shift.setText(getCurentDay + " " + "-" + " " + "Shift 2");
+//            }else if (getCurentTime.compareTo(getTestTime2) > 0 && getTestTime.compareTo(getCurentTime) > 0) {
+            }else{
+                shift.setText(getCurentDay + " " + "-" + " " +"Shift 3");
             }
 
             //Code shift
