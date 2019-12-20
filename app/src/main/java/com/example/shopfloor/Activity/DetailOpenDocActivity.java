@@ -1,23 +1,30 @@
 package com.example.shopfloor.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.OpenDocAdapter;
 import com.example.shopfloor.Adapter.WorkcenterAdapter;
 import com.example.shopfloor.Models.Header;
+import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.Models.Workcenter;
 import com.example.shopfloor.R;
 import com.example.shopfloor.Utils.GlobalVars;
@@ -29,6 +36,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class DetailOpenDocActivity extends AppCompatActivity {
     private TabLayout tabLayout;
@@ -61,9 +72,12 @@ public class DetailOpenDocActivity extends AppCompatActivity {
     private WorkcenterAdapter workcenterAdapter;
     private TextView tvnamawc3;
     private TextView tvid1;
+    private Button bthapus;
+    private String TAG = DetailOpenDocActivity.class.getName();
 
     public SharedPreferences pref;
     SharedPreferences prf;
+    String docentryy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +107,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvcodeshift1 = findViewById(R.id.tvcodeshift1);
         tvnamawc3 = findViewById(R.id.tvnamawc3);
         tvid1 = findViewById(R.id.tvid1);
+        bthapus = findViewById(R.id.bthapus);
 
         adapter = new OpenDocAdapter(this);
         gson = new Gson();
@@ -123,6 +138,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvid1.setText(String.valueOf(header.getId()));
 
 
+
         TextView tvqcname = findViewById(R.id.tvqcname1);
         prf = getSharedPreferences("Qcname", MODE_PRIVATE);
         tvqcname.setText(prf.getString("tvqcname", null));
@@ -141,25 +157,72 @@ public class DetailOpenDocActivity extends AppCompatActivity {
 
         loadData(tvworkcenter3.getText().toString());
 
+        bthapus.setOnClickListener(new View.OnClickListener() {
 
-      /* tabLayout = (TabLayout) findViewById(R.id.tabs);
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
 
-        init();
+            @Override
+            public void onClick(View view) {
+                deleteHeader(tvdocentry1.getText().toString());
+            }
+        });
+
     }
 
-    protected void init() {
-        setupViewPager(viewPager);
-        tabLayout.setupWithViewPager(viewPager);
-    }
+    public void deleteHeader(final String docentry) {
 
-    private void setupViewPager(final ViewPager viewPager) {
-        MainPagerAdapter pagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), this);
-        viewPager.setAdapter(pagerAdapter);
-        viewPager.setOffscreenPageLimit(3);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        new AlertDialog.Builder(DetailOpenDocActivity.this)
+                .setTitle("Hapus")
+                .setMessage("Anda yakin ingin menghapus?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
 
-        tabLayout.setTabsFromPagerAdapter(pagerAdapter);*/
+                        Realm realm = Realm.getDefaultInstance();
+                        RealmResults<ServerModel> results = realm.where(ServerModel.class).findAll();
+                        String text = "";
+                        for (ServerModel c : results) {
+                            text = text + c.getAddress();
+
+                            TextView docentot = findViewById(R.id.tvdocentry1);
+//                                    prf = getSharedPreferences("docentry", MODE_PRIVATE);
+                            docentot.setText(String.valueOf(header.getDocEntry()));
+                            Log.e(TAG, "docentot = " + docentot);
+                            Log.e(TAG, "ip delete = " + c.getAddress() + "shopfloor2/index.php/simpanheader?docEntry=" + docentry );
+
+                            AndroidNetworking.delete(c.getAddress() + "shopfloor2/index.php/simpanheader?docEntry=" +  docentry)
+                                    .setPriority(Priority.MEDIUM)
+                                    .build()
+                                    .getAsJSONObject(new JSONObjectRequestListener() {
+                                        @Override
+                                        public void onResponse(JSONObject response) {
+                                            try {
+                                                String message = response.getString("message");
+                                                Toasty.success(getApplicationContext(), message, Toasty.LENGTH_LONG).show();
+                                                Intent intent = new Intent(getApplicationContext(), Open_DocActivity.class);
+                                                startActivity(intent);
+                                                finish();
+
+                                            }catch (JSONException e) {
+                                                e.printStackTrace();
+                                                Toasty.error(getApplicationContext(), "JSONExceptions", Toasty.LENGTH_LONG).show();
+
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onError(ANError anError) {
+                                            Toasty.error(getApplicationContext(), "Gagal menghapus reject", Toast.LENGTH_LONG).show();
+
+                                        }
+                                    });
+
+                        }
+
+
+                    }
+                }).show();
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -159,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvQty_rencProd"
                 android:layout_toRightOf="@id/tvinqty4"
-                android:textColor="@color/white"
+
                 android:text="ini docentry"
                 android:layout_marginLeft="5dp"/>
 
@@ -349,6 +349,7 @@
 <RelativeLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
     android:layout_below="@id/line">
     <TextView
         android:id="@+id/tvnamawc3"
@@ -356,5 +357,20 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:text="namawc"/>
+
+    <Button
+        android:id="@+id/bthapus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvnamawc3"
+        android:text="Hapus"/>
+
+    <Button
+        android:id="@+id/btedit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/bthapus"
+        android:layout_below="@id/tvnamawc3"
+        android:text="Edit"/>
 </RelativeLayout>
 </RelativeLayout>
