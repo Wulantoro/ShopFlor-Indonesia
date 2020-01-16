@@ -60,6 +60,7 @@ public class OpenDocAdapter extends RecyclerView.Adapter<OpenDocAdapter.ViewHold
 
 
 
+
         // itemview jika di klik
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

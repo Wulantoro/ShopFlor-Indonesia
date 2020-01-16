@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activity.DetailOpenDocActivity"
+    tools:showIn="@layout/activity_edit_open_doc">
+
+    <LinearLayout
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rel2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="8">
+            <TextView
+                android:id="@+id/tvNo_doc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/acPilihProd"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:text="No. Document" />
+            <TextView
+                android:id="@+id/tvNo_doc1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvNo_doc"
+                android:layout_below="@+id/acPilihProd"
+                android:layout_marginLeft="36dp"
+                android:layout_marginTop="20dp"
+                android:text="ini no Document"
+                />
+            <TextView
+                android:id="@+id/tvNo_prod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNo_doc"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:text="No. Produksi" />
+            <TextView
+                android:id="@+id/tvNo_prod1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNo_doc1"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="39dp"
+                android:layout_toRightOf="@id/tvNo_doc"
+                android:text="ini no produksi"
+                />
+            <TextView
+                android:id="@+id/tvprod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNo_prod"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Product" />
+            <TextView
+                android:id="@+id/tvprod1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNo_prod1"
+                android:layout_toRightOf="@+id/tvprod"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="20dp"
+                android:text="ini Produk"
+                />
+
+            <LinearLayout
+                android:id="@+id/linenamaprod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvprod">
+                <TextView
+                    android:id="@+id/tvNm_prod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Nama Product" />
+                <TextView
+                    android:id="@+id/tvNm_prod1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvprod1"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@+id/tvNm_prod"
+                    android:layout_marginLeft="40dp"
+                    android:text="ini nama produksi"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvRoute_Code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linenamaprod"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:text="Route Code" />
+            <TextView
+                android:id="@+id/tvRoute_Code1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linenamaprod"
+                android:layout_toRightOf="@+id/tvRoute_Code"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="60dp"
+                android:text="0"
+                />
+            <TextView
+                android:id="@+id/tvRoute_Code2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linenamaprod"
+                android:layout_toRightOf="@+id/tvRoute_Code"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="100dp"
+                android:text="0"
+                />
+
+            <TextView
+                android:id="@+id/tvQty_rencProd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvRoute_Code"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Qty Renc Produksi" />
+            <TextView
+                android:id="@+id/tvQty_rencProd1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvRoute_Code1"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/tvQty_rencProd"
+                android:layout_marginTop="20dp"
+                android:text="ini Qty rencana produksi"
+                />
+            <TextView
+                android:id="@+id/tvinqty4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvQty_rencProd"
+                android:textColor="@color/white"
+                android:text="inqty"
+                />
+            <TextView
+                android:id="@+id/tvdocentry1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvQty_rencProd"
+                android:layout_toRightOf="@id/tvinqty4"
+                android:textColor="@color/white"
+                android:text="ini docentry"
+                android:layout_marginLeft="5dp"/>
+
+            <TextView
+                android:id="@+id/tvstatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvdocentry1"
+                android:textColor="@color/white"
+                android:text="ini statyus"/>
+
+            <TextView
+                android:id="@+id/tvposted4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvdocentry1"
+                android:layout_toRightOf="@id/tvstatus"
+                android:textColor="@color/white"
+                android:text="statusss"
+                />
+
+            <TextView
+                android:id="@+id/tvqcname1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvdocentry1"
+                android:layout_toRightOf="@id/tvposted4"
+                android:textColor="@color/white"
+                android:text="qcname"/>
+
+            <TextView
+                android:id="@+id/tvusername5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvdocentry1"
+                android:layout_toRightOf="@id/tvqcname1"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/white"
+                android:text="username"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="12">
+            <TextView
+                android:id="@+id/tvSts_prod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/acPilihSeq"
+                android:layout_marginTop="20dp"
+                android:text="Status Produksi" />
+            <TextView
+                android:id="@+id/tvSts_prod1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tvSts_prod"
+                android:layout_below="@+id/acPilihSeq"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="ini status produksi"
+                />
+            <TextView
+                android:id="@+id/tvSquence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSts_prod"
+                android:layout_marginTop="20dp"
+                android:text="Squence" />
+            <TextView
+                android:id="@+id/tvSquence1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSts_prod"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/tvSquence"
+                android:layout_marginLeft="67dp"
+                android:text="0"
+                />
+            <TextView
+                android:id="@+id/tvSquence_Qty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSquence"
+                android:layout_marginTop="20dp"
+                android:text="Squence Qty" />
+            <TextView
+                android:id="@+id/tvSquence_Qty1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSquence1"
+                android:layout_marginLeft="40dp"
+                android:layout_toRightOf="@+id/tvSquence_Qty"
+                android:layout_marginTop="20dp"
+                android:text="ini squence qty "
+                />
+            <TextView
+                android:id="@+id/tvShift"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSquence_Qty"
+                android:layout_marginTop="20dp"
+                android:text="Shift" />
+            <TextView
+                android:id="@+id/tvcodeshift1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvShift"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@id/tvSquence_Qty"
+                android:layout_marginTop="20dp"
+                android:text="code shift"/>
+            <TextView
+                android:id="@+id/tvstrip0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tvcodeshift1"
+                android:layout_below="@id/tvSquence_Qty"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:text=" - "/>
+            <Spinner
+                android:id="@+id/tvShift1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSquence_Qty1"
+                android:layout_toRightOf="@+id/tvstrip"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="17dp"
+                android:text="shift"
+                />
+
+            <TextView
+                android:id="@+id/tvTgl_mulai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvShift"
+                android:layout_marginTop="20dp"
+                android:text="Tgl. Mulai" />
+
+            <EditText
+                android:id="@+id/tvTgl_mulai1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvShift1"
+                android:inputType="date"
+                android:layout_toRightOf="@+id/tvTgl_mulai"
+                android:layout_marginLeft="40dp"
+                android:text="ini tanggal mulai"
+                />
+
+<!--            <View-->
+<!--                android:id="@+id/v3"-->
+<!--                android:layout_width="1dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="5dp"-->
+<!--                android:layout_toRightOf="@id/tvTgl_mulai1"-->
+<!--                android:layout_below="@+id/tvShift1"-->
+<!--                android:background="@color/grey_400" />-->
+
+            <ImageView
+                android:id="@+id/imgTgl"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_margin="11dp"
+
+                android:layout_toRightOf="@id/tvTgl_mulai1"
+                android:layout_below="@+id/tvShift1"
+                android:background="@drawable/ic_calendar" />
+
+            <TextView
+                android:id="@+id/tvJam_mulai"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTgl_mulai"
+                android:layout_marginTop="20dp"
+                android:text="Jam Mulai" />
+
+            <TextView
+                android:id="@+id/tvJam_mulai1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvTgl_mulai1"
+                android:layout_toRightOf="@+id/tvJam_mulai"
+                android:layout_marginLeft="55dp"
+                android:layout_marginTop="20dp"
+                android:text="ini jam mulai"
+                />
+            <TextView
+                android:id="@+id/tvworkcenter3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvJam_mulai1"
+                android:textColor="@color/white"
+                android:text="ini workcenter"/>
+
+            <TextView
+                android:id="@+id/tvid1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvworkcenter3"
+                android:textColor="@color/white"
+                android:text="id"/>
+
+            <TextView
+                android:id="@+id/tvmobileid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvworkcenter3"
+                android:layout_marginLeft="5dp"
+                android:text="mobileid"
+                android:layout_toRightOf="@id/tvid1"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/line">
+        <TextView
+            android:id="@+id/tvnamawc3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="namawc"/>
+
+        <Button
+            android:id="@+id/btsimpan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvnamawc3"
+            android:background="@drawable/button"
+            android:text="Simpan"/>
+
+<!--        <Button-->
+<!--            android:id="@+id/btedit"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_toRightOf="@id/bthapus"-->
+<!--            android:layout_below="@id/tvnamawc3"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:background="@drawable/button"-->
+<!--            android:text="Edit"/>-->
+    </RelativeLayout>
+</RelativeLayout>
