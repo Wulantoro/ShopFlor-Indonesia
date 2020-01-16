@@ -698,51 +698,51 @@ public class Add_DocActivity extends AppCompatActivity {
 
             //Code shift
             TextView codeshitf = findViewById(R.id.tvcodeshift);
-            if (shift.getText().toString().equalsIgnoreCase("Senin - Shift 1")) {
-                codeshitf.setText("SS1");
-            }else if (shift.getText().toString().equalsIgnoreCase("Senin - Shift 2")) {
-                codeshitf.setText("SS2");
-            }else if (shift.getText().toString().equalsIgnoreCase("Senin - Shift 3")) {
-                codeshitf.setText("SS3");
-            }else if (shift.getText().toString().equalsIgnoreCase("Selasa - Shift 1")) {
-                codeshitf.setText("SlS1");
-            }else if (shift.getText().toString().equalsIgnoreCase("Selasa - Shift 2")) {
-                codeshitf.setText("SlS2");
-            }else if (shift.getText().toString().equalsIgnoreCase("Selasa - Shift 3")) {
-                codeshitf.setText("SlS3");
-            }else if (shift.getText().toString().equalsIgnoreCase("Rabu - Shift 1")) {
-                codeshitf.setText("RbS1");
-            }else if (shift.getText().toString().equalsIgnoreCase("Rabu - Shift 2")) {
-                codeshitf.setText("RbS2");
-            }else if (shift.getText().toString().equalsIgnoreCase("Rabu - Shift 3")) {
-                codeshitf.setText("RbS3");
-            }else if (shift.getText().toString().equalsIgnoreCase("Kamis - Shift 1")) {
-                codeshitf.setText("KmS1");
-            }else if (shift.getText().toString().equalsIgnoreCase("Kamis - Shift 2")) {
-                codeshitf.setText("KmS2");
-            }else if (shift.getText().toString().equalsIgnoreCase("Kamis - Shift 3")) {
-                codeshitf.setText("KmS3");
-            }else if (shift.getText().toString().equalsIgnoreCase("Jumat - Shift 1")) {
-                codeshitf.setText("JmS1");
-            }else if (shift.getText().toString().equalsIgnoreCase("Jumat - Shift 2")) {
-                codeshitf.setText("JmS1");
-            }else if (shift.getText().toString().equalsIgnoreCase("Jumat - Shift 3")) {
-                codeshitf.setText("JmS3");
-            }else if (shift.getText().toString().equalsIgnoreCase("Sabtu - Shift 1")) {
-                codeshitf.setText("SbS1");
-            }else if (shift.getText().toString().equalsIgnoreCase("Sabtu - Shift 2")) {
-                codeshitf.setText("SbS2");
-            }else if (shift.getText().toString().equalsIgnoreCase("Sabtu - Shift 3")) {
-                codeshitf.setText("SbS3");
-            }else if (shift.getText().toString().equalsIgnoreCase("Minggu - Shift 1")) {
-                codeshitf.setText("MgS1");
-            }else if (shift.getText().toString().equalsIgnoreCase("Minggu - Shift 2")) {
-                codeshitf.setText("MgS2");
-            }else if (shift.getText().toString().equalsIgnoreCase("Minggu - Shift 3")) {
-                codeshitf.setText("MgS3");
-            }
-
+        if (shift.getText().toString().equalsIgnoreCase("Senin - Shift 1")) {
+            codeshitf.setText("SS1");
+        }else if (shift.getText().toString().equalsIgnoreCase("Senin - Shift 2")) {
+            codeshitf.setText("SS2");
+        }else if (shift.getText().toString().equalsIgnoreCase("Senin - Shift 3")) {
+            codeshitf.setText("SS3");
+        }else if (shift.getText().toString().equalsIgnoreCase("Selasa - Shift 1")) {
+            codeshitf.setText("SlS1");
+        }else if (shift.getText().toString().equalsIgnoreCase("Selasa - Shift 2")) {
+            codeshitf.setText("SlS2");
+        }else if (shift.getText().toString().equalsIgnoreCase("Selasa - Shift 3")) {
+            codeshitf.setText("SlS3");
+        }else if (shift.getText().toString().equalsIgnoreCase("Rabu - Shift 1")) {
+            codeshitf.setText("RbS1");
+        }else if (shift.getText().toString().equalsIgnoreCase("Rabu - Shift 2")) {
+            codeshitf.setText("RbS2");
+        }else if (shift.getText().toString().equalsIgnoreCase("Rabu - Shift 3")) {
+            codeshitf.setText("RbS3");
+        }else if (shift.getText().toString().equalsIgnoreCase("Kamis - Shift 1")) {
+            codeshitf.setText("KmS1");
+        }else if (shift.getText().toString().equalsIgnoreCase("Kamis - Shift 2")) {
+            codeshitf.setText("KmS2");
+        }else if (shift.getText().toString().equalsIgnoreCase("Kamis - Shift 3")) {
+            codeshitf.setText("KmS3");
+        }else if (shift.getText().toString().equalsIgnoreCase("Jumat - Shift 1")) {
+            codeshitf.setText("JmS1");
+        }else if (shift.getText().toString().equalsIgnoreCase("Jumat - Shift 2")) {
+            codeshitf.setText("JmS1");
+        }else if (shift.getText().toString().equalsIgnoreCase("Jumat - Shift 3")) {
+            codeshitf.setText("JmS3");
+        }else if (shift.getText().toString().equalsIgnoreCase("Sabtu - Shift 1")) {
+            codeshitf.setText("SbS1");
+        }else if (shift.getText().toString().equalsIgnoreCase("Sabtu - Shift 2")) {
+            codeshitf.setText("SbS2");
+        }else if (shift.getText().toString().equalsIgnoreCase("Sabtu - Shift 3")) {
+            codeshitf.setText("SbS3");
+        }else if (shift.getText().toString().equalsIgnoreCase("Minggu - Shift 1")) {
+            codeshitf.setText("MgS1");
+        }else if (shift.getText().toString().equalsIgnoreCase("Minggu - Shift 2")) {
+            codeshitf.setText("MgS2");
+        }else if (shift.getText().toString().equalsIgnoreCase("Minggu - Shift 3")) {
+            codeshitf.setText("MgS3");
         }
+
+    }
 
         if (id == R.id.action_seq && tvSquence_Qty1.length() != 0 && tvNo_Prod1.length() != 0) {
             pref = getSharedPreferences("Noprod",MODE_PRIVATE);  //prodno

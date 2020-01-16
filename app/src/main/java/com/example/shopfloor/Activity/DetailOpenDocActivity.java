@@ -1,8 +1,10 @@
 package com.example.shopfloor.Activity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
@@ -41,6 +43,9 @@ import es.dmoral.toasty.Toasty;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class DetailOpenDocActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -72,17 +77,25 @@ public class DetailOpenDocActivity extends AppCompatActivity {
     private WorkcenterAdapter workcenterAdapter;
     private TextView tvnamawc3;
     private TextView tvid1;
+    private TextView tvmobileid;
     private Button bthapus;
+    private Button btedit;
+    private Button btnref;
+    private Handler mHandler;
     private String TAG = DetailOpenDocActivity.class.getName();
 
     public SharedPreferences pref;
     SharedPreferences prf;
     String docentryy;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_open_doc);
+
+
+
 
         tvNo_doc1 = findViewById(R.id.tvNo_doc1);
         tvNo_prod1 = findViewById(R.id.tvNo_prod1);
@@ -107,7 +120,11 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvcodeshift1 = findViewById(R.id.tvcodeshift1);
         tvnamawc3 = findViewById(R.id.tvnamawc3);
         tvid1 = findViewById(R.id.tvid1);
+        tvmobileid = findViewById(R.id.tvmobileid);
         bthapus = findViewById(R.id.bthapus);
+        btedit = findViewById(R.id.btedit);
+        btnref = findViewById(R.id.btnref);
+
 
         adapter = new OpenDocAdapter(this);
         gson = new Gson();
@@ -115,7 +132,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
 
         //key dari opendocadapter
         header = getIntent().getParcelableExtra("key_opendoc");
-        tvNo_doc1.setText(header.getDocNum());
+        tvNo_doc1.setText(String.valueOf(header.getDocNum()));
         tvNo_prod1.setText(header.getProdNo());
         tvprod1.setText(header.getProdCode());
         tvNm_prod1.setText(header.getProdName());
@@ -136,6 +153,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvusername5.setText(header.getUserId());
         tvcodeshift1.setText(header.getShift());
         tvid1.setText(String.valueOf(header.getId()));
+        tvmobileid.setText(header.getMobileId());
 
 
 
@@ -147,6 +165,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setTitle("Open Document");
 
+
         TextView toolbarText = findViewById(R.id.toolbar_text);
         if(toolbarText!=null && toolbar!=null) {
             toolbarText.setText(getTitle());
@@ -157,6 +176,16 @@ public class DetailOpenDocActivity extends AppCompatActivity {
 
         loadData(tvworkcenter3.getText().toString());
 
+        btedit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), EditOpenDocActivity.class);
+//                intent.putExtra("edit_doc", header);
+//                startActivity(intent);
+                Toasty.info(getApplicationContext(), "Sedang tahap pengembangan", Toasty.LENGTH_LONG).show();
+            }
+        });
+
         bthapus.setOnClickListener(new View.OnClickListener() {
 
 
@@ -166,7 +195,80 @@ public class DetailOpenDocActivity extends AppCompatActivity {
             }
         });
 
+        btnref.setOnClickListener(new View.OnClickListener() {
+            private Handler mHandler;
+
+            @Override
+            public void onClick(View view) {
+//                Intent intent=new Intent(DetailOpenDocActivity.this,DetailOpenDocActivity.class);
+//                startActivity(intent);
+//                finish();
+
+//                mHandler = new Handler();
+//                m_Runnable.run();
+
+                Toasty.info(getApplicationContext(), "Sedang tahap pengembangan", Toasty.LENGTH_LONG).show();
+            }
+        });
+
+
+//        this.mHandler = new Handler();
+//        m_Runnable.run();
+
     }
+
+    private void updateTextView() {
+        tvShift1.getText().toString();
+        tvTgl_mulai1.getText().toString();
+        tvcodeshift1.getText().toString();
+    }
+
+
+    private final Runnable m_Runnable = new Runnable() {
+        @Override
+        public void run() {
+            Toast.makeText(getApplicationContext(),"in runnable",Toast.LENGTH_SHORT).show();
+//            tvShift1.setText(header.getShiftName());
+//            tvTgl_mulai1.setText(header.getTanggalMulai().substring(0,10));
+//            tvcodeshift1.setText(header.getShift());
+            adapter.clearAll();
+//            tvShift1.getText().toString();
+//            tvTgl_mulai1.getText().toString();
+//            tvcodeshift1.getText().toString();
+
+
+//            adapter = new OpenDocAdapter(this);
+//            gson = new Gson();
+////            workcenterAdapter = new WorkcenterAdapter(this);
+//
+//            //key dari opendocadapter
+//            header = getIntent().getParcelableExtra("key_opendoc");
+//            tvNo_doc1.setText(String.valueOf(header.getDocNum()));
+//            tvNo_prod1.setText(header.getProdNo());
+//            tvprod1.setText(header.getProdCode());
+//            tvNm_prod1.setText(header.getProdName());
+//            tvRoute_Code1.setText(header.getRouteCode());
+//            tvRoute_Code2.setText(header.getRouteName());
+//            tvQty_rencProd1.setText(header.getProdPlanQty().replace(".000000",""));
+//            tvSts_prod1.setText(header.getProdStatus());
+//            tvSquence1.setText(header.getSequence());
+//            tvSquence_Qty1.setText(header.getSequenceQty().replace(".000000",""));
+//            tvShift1.setText(header.getShiftName());
+//            tvTgl_mulai1.setText(header.getTanggalMulai().substring(0,10));
+//            tvJam_mulai1.setText(header.getJamMulai());
+//            tvinqty4.setText(header.getInQty());
+//            tvworkcenter3.setText(header.getWorkCenter());
+//            tvdocentry1.setText(String.valueOf(header.getDocEntry()));
+//            tvstatus.setText(header.getStatus());
+//            tvposted4.setText(String.valueOf(header.getPosted()));
+//            tvusername5.setText(header.getUserId());
+//            tvcodeshift1.setText(header.getShift());
+//            tvid1.setText(String.valueOf(header.getId()));
+//            tvmobileid.setText(header.getMobileId());
+
+           mHandler.postDelayed(m_Runnable, 2000);
+        }
+    };
 
     public void deleteHeader(final String docentry) {
 
@@ -199,8 +301,10 @@ public class DetailOpenDocActivity extends AppCompatActivity {
                                             try {
                                                 String message = response.getString("message");
                                                 Toasty.success(getApplicationContext(), message, Toasty.LENGTH_LONG).show();
-                                                Intent intent = new Intent(getApplicationContext(), Open_DocActivity.class);
-                                                startActivity(intent);
+//                                                Intent intent = new Intent(getApplicationContext(), Open_DocActivity.class);
+//
+//                                               intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+//                                                startActivity(intent);
                                                 finish();
 
                                             }catch (JSONException e) {

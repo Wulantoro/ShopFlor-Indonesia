@@ -159,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvQty_rencProd"
                 android:layout_toRightOf="@id/tvinqty4"
-
+                android:textColor="@color/white"
                 android:text="ini docentry"
                 android:layout_marginLeft="5dp"/>
 
@@ -344,6 +344,15 @@
                 android:textColor="@color/white"
                 android:text="id"/>
 
+            <TextView
+                android:id="@+id/tvmobileid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvworkcenter3"
+                android:layout_marginLeft="5dp"
+                android:text="mobileid"
+                android:layout_toRightOf="@id/tvid1"/>
+
         </RelativeLayout>
     </LinearLayout>
 <RelativeLayout
@@ -363,6 +372,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvnamawc3"
+        android:background="@drawable/button"
         android:text="Hapus"/>
 
     <Button
@@ -371,6 +381,20 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/bthapus"
         android:layout_below="@id/tvnamawc3"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/button"
         android:text="Edit"/>
+
+    <Button
+        android:id="@+id/btnref"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/btedit"
+        android:layout_below="@id/tvnamawc3"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/button"
+        android:text="Refresh"/>
+
+
 </RelativeLayout>
 </RelativeLayout>

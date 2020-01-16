@@ -403,7 +403,15 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
                                             Criteria criteria = gson.fromJson(dataArr.getJSONObject(i).toString(), Criteria.class);
                                             results.add(criteria);
                                             Log.e("onResponseeeeeeee ", dataArr.getJSONObject(i).toString());
-//                                      tvlinenumber.setText(String.valueOf(criteria.getLineNumber())+1);
+
+                                            if (criteria.getUCriteriaName() == null) {
+                                                tvCrit.setVisibility(tvCrit.GONE);
+
+
+                                            }
+
+
+
                                         }
                                     }
                                 }
@@ -453,12 +461,15 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 //                        jsonObject.put("valueType", x.getUValueType());
 
 
-                    if (id == R.id.action_seq && etactual1.getText().toString().equalsIgnoreCase("")) {
+                    if (id == R.id.action_seq && etactual1.getText().toString().equalsIgnoreCase("") ) {
 
                         Toasty.error(getApplicationContext(), "Criteria belum diisi", Toasty.LENGTH_LONG).show();
 //                        Toast.makeText(this, "Criteria blm diisi", Toast.LENGTH_SHORT).show();
 
-                    } else {
+                    } else if(x.getUCriteriaName() == null) {
+                        Toasty.error(getApplicationContext(), "Criteria Tidak ada", Toasty.LENGTH_LONG).show();
+
+                    }else {
 
                         String element = gson.toJson(
 
@@ -744,7 +755,8 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 //                                                });
 
                                             } else {
-                                                Toast.makeText(CriteriaQCActivity.this, "Criteria Sudah ada", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(CriteriaQCActivity.this, "Criteria Sudah ada, Lanjut saja", Toast.LENGTH_SHORT).show();
+                                                tvCrit.setVisibility(tvCrit.GONE);
 //                                                String sudah ada
                                             }
                                         }
