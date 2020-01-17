@@ -755,7 +755,7 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 //                                                });
 
                                             } else {
-                                                Toast.makeText(CriteriaQCActivity.this, "Criteria Sudah ada, Lanjut saja", Toast.LENGTH_SHORT).show();
+                                                Toasty.info(CriteriaQCActivity.this, "Criteria Sudah di input, Lanjut saja", Toast.LENGTH_SHORT).show();
                                                 tvCrit.setVisibility(tvCrit.GONE);
 //                                                String sudah ada
                                             }
