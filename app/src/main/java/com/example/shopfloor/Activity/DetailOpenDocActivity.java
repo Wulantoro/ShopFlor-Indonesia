@@ -301,10 +301,9 @@ public class DetailOpenDocActivity extends AppCompatActivity {
                                             try {
                                                 String message = response.getString("message");
                                                 Toasty.success(getApplicationContext(), message, Toasty.LENGTH_LONG).show();
-//                                                Intent intent = new Intent(getApplicationContext(), Open_DocActivity.class);
-//
+                                                Intent intent = new Intent(getApplicationContext(), Open_DocActivity.class);
 //                                               intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
-//                                                startActivity(intent);
+                                                startActivity(intent);
                                                 finish();
 
                                             }catch (JSONException e) {
