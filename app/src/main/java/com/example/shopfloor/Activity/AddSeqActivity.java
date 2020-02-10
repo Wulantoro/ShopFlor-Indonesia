@@ -1,16 +1,14 @@
 package com.example.shopfloor.Activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,10 +23,8 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Adapter.SuccDocAdapter;
 import com.example.shopfloor.Models.Header;
-import com.example.shopfloor.Models.LastId;
 import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.R;
-import com.example.shopfloor.Utils.GlobalVars;
 import com.example.shopfloor.Utils.RealmHelper;
 import com.google.gson.Gson;
 
@@ -54,38 +50,9 @@ public class AddSeqActivity extends AppCompatActivity {
     Character op = 'q';
     float i,num,numtemp;
     SharedPreferences prf;
-    private TextView tvcoba;
-    private TextView tvNo_doc1;
-    private TextView tvNo_prod1;
-    private TextView tvprod1;
-    private TextView tvNm_prod1;
-    private TextView tvRoute_Code1;
-    private TextView tvRoute_Code2;
-    private TextView tvQty_rencProd1;
-    private TextView tvSts_prod1;
-    private TextView tvSquence1;
-    private TextView tvSquence_Qty1;
-    private TextView tvShift1;
-    private TextView tvTgl_mulai1;
-    private TextView tvJam_mulai1;
-    private TextView tvprod7;
-    private TextView tvprodcode7;
-    private TextView tvnmprod7;
-    private TextView tvdocnum7;
-    private TextView tvprodplanqty7;
-    public static TextView tvstsprod7;
-    private TextView tvroutecode7;
-    private TextView tvroutename7;
-    private TextView tvsequence7;
-    private TextView tvsequenceqty7;
-    private TextView tvtglmulai7;
-    private TextView tvjammulai7;
-    private TextView tvwc3;
+
     private TextView tvstatus;
     private TextView tvposted3;
-    private TextView tvusername3;
-    private TextView tvshift0;
-    private TextView tvcodeshift0;
     private Button btnBack;
     private TextView tvlastdocnum;
     private SuccDocAdapter succDocAdapter;
@@ -93,7 +60,23 @@ public class AddSeqActivity extends AppCompatActivity {
     private Handler mHandler;
     private TextView tvmobileid;
     private TextView tvid;
-    private TextView tvip5;
+
+    private String workcenter;
+    private String username;
+    private String noprod;
+    private String prodcode;
+    private String nmprod;
+    private String docnum;
+    private String prodplanqty;
+    private String stsprod;
+    private String routecode;
+    private String routname;
+    private String sequence;
+    private String shift;
+    private String sequenceqty;
+    private String tglmulai;
+    private String codeshift;
+    private String jammulai;
 
     Realm realm;
     RealmHelper realmHelper;
@@ -108,38 +91,12 @@ public class AddSeqActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_seq);
 
-        tvNo_doc1 = findViewById(R.id.tvNo_doc1);
-        tvNo_prod1 = findViewById(R.id.tvNo_prod1);
-        tvprod1 = findViewById(R.id.tvprod1);
-        tvNm_prod1 = findViewById(R.id.tvNm_prod1);
-        tvRoute_Code1 = findViewById(R.id.tvRoute_Code1);
-        tvRoute_Code2 = findViewById(R.id.tvRoute_Code2);
-        tvQty_rencProd1 = findViewById(R.id.tvQty_rencProd1);
-        tvShift1 = findViewById(R.id.tvShift1);
-        tvTgl_mulai1 = findViewById(R.id.tvTgl_mulai1);
-        tvJam_mulai1 = findViewById(R.id.tvJam_mulai1);
-        tvprod7 = findViewById(R.id.tvprod7);
-        tvprodcode7 = findViewById(R.id.tvprodcode7);
-        tvnmprod7 = findViewById(R.id.tvnmprod7);
-        tvdocnum7 = findViewById(R.id.tvdocnum7);
-        tvprodplanqty7 = findViewById(R.id.tvprodplanqty7);
-        tvstsprod7 = findViewById(R.id.tvstsprod7);
-        tvroutecode7 = findViewById(R.id.tvroutecode7);
-        tvroutename7 = findViewById(R.id.tvroutename7);
-        tvsequence7 = findViewById(R.id.tvsequence7);
-        tvsequenceqty7 = findViewById(R.id.tvsequenceqty7);
-        tvtglmulai7 = findViewById(R.id.tvtglmulai7);
-        tvjammulai7 = findViewById(R.id.tvjammulai7);
-        tvwc3 = findViewById(R.id.tvwc3);
         tvstatus = findViewById(R.id.tvstatus);
         tvposted3 = findViewById(R.id.tvposted3);
-        tvusername3 = findViewById(R.id.tvusername3);
-        tvshift0 = findViewById(R.id.tvshift0);
-        tvcodeshift0 = findViewById(R.id.tvcodeshift0);
         tvlastdocnum = findViewById(R.id.tvlastdocnum);
         tvmobileid = findViewById(R.id.tvmobileid);
         tvid = findViewById(R.id.tvid);
-        tvip5 = findViewById(R.id.tvip5);
+
         succDocAdapter = new SuccDocAdapter(this);
 
         gson = new Gson();
@@ -151,77 +108,69 @@ public class AddSeqActivity extends AppCompatActivity {
         pref = getSharedPreferences("inQty", MODE_PRIVATE);
         prf = getSharedPreferences("Noprod", MODE_PRIVATE);
 
-        TextView tvprod7 = findViewById(R.id.tvprod7);
-        prf = getSharedPreferences("Noprod", MODE_PRIVATE);
-        tvprod7.setText(prf.getString("tvnoprod", null));
+        pref = getSharedPreferences("Noprod", MODE_PRIVATE);
+        noprod = pref.getString("tvnoprod", null);
+        Log.e(TAG, "noprod = "+ noprod);
 
-        TextView tvprodcode7 = findViewById(R.id.tvprodcode7);
-        prf = getSharedPreferences("Itemcode", MODE_PRIVATE);
-        tvprodcode7.setText(prf.getString("tvitemcode", null));
+        pref = getSharedPreferences("Itemcode", MODE_PRIVATE);
+        prodcode = pref.getString("tvitemcode", null);
+        Log.e(TAG, "itemcode = " + prodcode);
 
-        TextView tvnmprod7 = findViewById(R.id.tvnmprod7);
-        prf = getSharedPreferences("Nmprod", MODE_PRIVATE);
-        tvnmprod7.setText(prf.getString("tvnmprod", null));
+        pref = getSharedPreferences("Nmprod", MODE_PRIVATE);
+        nmprod = pref.getString("tvnmprod", null);
+        Log.e(TAG, "nmprod = " + nmprod);
 
-        TextView tvdocnum7 = findViewById(R.id.tvdocnum7);
-        prf = getSharedPreferences("docNum", MODE_PRIVATE);
-        tvdocnum7.setText(prf.getString("tvdocnum", null));
+        pref = getSharedPreferences("docNum", MODE_PRIVATE);
+        docnum = pref.getString("tvdocnum", null);
+        Log.e(TAG, "docnum = " + docnum);
 
-        TextView tvprodplanqty7 = findViewById(R.id.tvprodplanqty7);
-        prf = getSharedPreferences("ProdPlanQty", MODE_PRIVATE);
-        tvprodplanqty7.setText(prf.getString("tvprodplanqty", null));
+        pref = getSharedPreferences("ProdPlanQty", MODE_PRIVATE);
+        prodplanqty = pref.getString("tvprodplanqty", null);
+        Log.e(TAG, "prodplanqty = "+ prodplanqty);
 
-        TextView tvstsprod7 = findViewById(R.id.tvstsprod7);
-        prf = getSharedPreferences("StsProd", MODE_PRIVATE);
-        tvstsprod7.setText(prf.getString("tvstsprod", null));
+        pref = getSharedPreferences("StsProd", MODE_PRIVATE);
+        stsprod = pref.getString("tvstsprod", null);
+        Log.e(TAG, "stsprod = " + stsprod);
 
-        TextView tvroutecode7 = findViewById(R.id.tvroutecode7);
-        prf = getSharedPreferences("RouteCode", MODE_PRIVATE);
-        tvroutecode7.setText(prf.getString("tvroutecode", null));
+        pref = getSharedPreferences("RouteCode", MODE_PRIVATE);
+        routecode = pref.getString("tvroutecode", null);
+        Log.e(TAG, "routrcode = " + routecode);
 
-        TextView tvroutename7 = findViewById(R.id.tvroutename7);
-        prf = getSharedPreferences("RouteName", MODE_PRIVATE);
-        tvroutename7.setText(prf.getString("tvroutename", null));
+        pref = getSharedPreferences("RouteName", MODE_PRIVATE);
+        routname = pref.getString("tvroutename", null);
+        Log.e(TAG, "routename = " + routname);
 
-        Log.e("Route name", " " + prf.getString("tvroutename", null));
+        pref = getSharedPreferences("Sequence", MODE_PRIVATE);
+        sequence = pref.getString("tvsequence", null);
+        Log.e(TAG, "sequence = " + sequence);
 
-        TextView tvsequence7 = findViewById(R.id.tvsequence7);
-        prf = getSharedPreferences("Sequence", MODE_PRIVATE);
-        tvsequence7.setText(prf.getString("tvsequence", null));
+        pref = getSharedPreferences("SequenceQty", MODE_PRIVATE);
+        sequenceqty = pref.getString("tvsequenceqty", null);
+        Log.e(TAG, "sequenceqty = "+ sequenceqty);
 
-        TextView tvsequenceqty7 = findViewById(R.id.tvsequenceqty7);
-        prf = getSharedPreferences("SequenceQty", MODE_PRIVATE);
-        tvsequenceqty7.setText(prf.getString("tvsequenceqty", null));
+        pref = getSharedPreferences("TglMulai", MODE_PRIVATE);
+        tglmulai = pref.getString("tvtglmulai", null);
+        Log.e(TAG, "tglmulai = "+ tglmulai);
 
-        TextView tvtglmulai7 = findViewById(R.id.tvtglmulai7);
-        prf = getSharedPreferences("TglMulai", MODE_PRIVATE);
-        tvtglmulai7.setText(prf.getString("tvtglmulai", null));
+        pref = getSharedPreferences("jamMulai", MODE_PRIVATE);
+        jammulai = pref.getString("tvjammulai", null);
+        Log.e(TAG, "jam mulai = " + jammulai);
 
-        Log.e("tanggal mulai", prf.getString("tvtglmulai", null));
+        pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+        workcenter = pref.getString("workcenter1", null);
+        Log.e(TAG, " workcwnter = " + workcenter);
 
-        TextView tvjammulai7 = findViewById(R.id.tvjammulai7);
-        prf = getSharedPreferences("jamMulai", MODE_PRIVATE);
-        tvjammulai7.setText(prf.getString("tvjammulai", null));
+        pref = getSharedPreferences("userId", MODE_PRIVATE);
+        username = pref.getString("tvuserid0", null);
+        Log.e(TAG, "username = " + username);
 
-        TextView tvwc = findViewById(R.id.tvwc3);
-        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
-        tvwc.setText(prf.getString("workcenter", null));
+        pref = getSharedPreferences("Shift", MODE_PRIVATE);
+        shift = pref.getString("tvshift", null);
+        Log.e(TAG, "shifr = " + shift);
 
-        TextView tvuserid = findViewById(R.id.tvusername3);
-        prf = getSharedPreferences("userId", MODE_PRIVATE);
-        tvuserid.setText(prf.getString("tvuserid", null));
-
-        TextView tvshift = findViewById(R.id.tvshift0);
-        prf = getSharedPreferences("Shift", MODE_PRIVATE);
-        tvshift.setText(prf.getString("tvshift", null));
-
-        TextView tvcodeshift1 = findViewById(R.id.tvcodeshift0);
-        prf = getSharedPreferences("Codeshift", MODE_PRIVATE);
-        tvcodeshift1.setText(prf.getString("tvcodeshift1", null));
-
-//        TextView tvipadd = findViewById(R.id.tvip5);
-//        prf = getSharedPreferences("Ip", MODE_PRIVATE);
-//        tvipadd.setText(prf.getString("tvip", null));
+        pref = getSharedPreferences("Codeshift", MODE_PRIVATE);
+        codeshift = pref.getString("tvcodeshift1", null);
+        Log.e(TAG, "codeishifr = " + codeshift);
 
         //        Setup Realm
         Realm.init(getApplicationContext());
@@ -237,7 +186,7 @@ public class AddSeqActivity extends AppCompatActivity {
         for (ServerModel c:results1) {
             text = text + c.getAddress();
         }
-        tvip5.setText(text);
+//        tvip5.setText(text);
 
 //        TextView tvstatus = findViewById(R.id.tvstatus);
 //        tvstatus.setText("0");
@@ -257,8 +206,6 @@ public class AddSeqActivity extends AppCompatActivity {
             setSupportActionBar(toolbar);
         }
 
-        Log.e("Date 2 " ,tvtglmulai7.getText().toString());
-
 
         String S = "S";
         String bulan = new SimpleDateFormat("MM", Locale.getDefault()).format(new Date());
@@ -272,7 +219,6 @@ public class AddSeqActivity extends AppCompatActivity {
 /***************reload otomatis****************/
         this.mHandler = new Handler();
         m_Runnable.run();
-
     }
 
     private final Runnable m_Runnable = new Runnable() {
@@ -459,31 +405,31 @@ public class AddSeqActivity extends AppCompatActivity {
         JSONObject jsonObject = new JSONObject();
 
         try {
+
             JSONArray newArr = new JSONArray();
             jsonObject.put("id", tvid.getText().toString());
             jsonObject.put("mobileId", tvmobileid.getText().toString());
             jsonObject.put("docNum", tvlastdocnum.getText().toString());
-            jsonObject.put("prodNo", tvprod7.getText().toString());
-            jsonObject.put("prodCode", tvprodcode7.getText().toString());
-            jsonObject.put("prodName", tvnmprod7.getText().toString());
-            jsonObject.put("prodPlanQty", tvprodplanqty7.getText().toString());
-            jsonObject.put("prodStatus", tvstsprod7.getText().toString());
-            jsonObject.put("routeCode", tvroutecode7.getText().toString());
-            jsonObject.put("routeName", tvroutename7.getText().toString());
-            jsonObject.put("sequence", tvsequence7.getText().toString());
-            jsonObject.put("sequenceQty", tvsequenceqty7.getText().toString());
-            jsonObject.put("shiftName", tvshift0.getText().toString());
-            jsonObject.put("shift", tvcodeshift0.getText().toString());
-            jsonObject.put("docDate", tvtglmulai7.getText().toString());
-            jsonObject.put("tanggalMulai", tvtglmulai7.getText().toString());
-            jsonObject.put("jamMulai", tvjammulai7.getText().toString());
+            jsonObject.put("prodNo", noprod);
+            jsonObject.put("prodCode", prodcode);
+            jsonObject.put("prodName", nmprod);
+            jsonObject.put("prodPlanQty", prodplanqty);
+            jsonObject.put("prodStatus", stsprod);
+            jsonObject.put("routeCode", routecode);
+            jsonObject.put("routeName", routname);
+            jsonObject.put("sequence", sequence);
+            jsonObject.put("sequenceQty", sequenceqty);
+            jsonObject.put("shiftName", shift);
+            jsonObject.put("shift", codeshift);
+            jsonObject.put("docDate", tglmulai);
+            jsonObject.put("tanggalMulai", tglmulai);
+            jsonObject.put("jamMulai", jammulai);
             jsonObject.put("inQty", tvInputSeq.getText().toString());
-            jsonObject.put("workCenter", tvwc3.getText().toString());
+            jsonObject.put("workCenter", workcenter);
 //            jsonObject.put("status", tvstatus.getText().toString());
             jsonObject.put("posted", tvposted3.getText().toString());
-            jsonObject.put("userId", tvusername3.getText().toString());
+            jsonObject.put("userId", username);
 
-            Log.e("Username 1===========" ,tvusername3.getText().toString());
             newArr.put(jsonObject);
             Log.e(TAG,"coba input = "+ newArr.toString(1));
 
@@ -510,8 +456,6 @@ public class AddSeqActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
-                                Log.e("Date 1===========", tvtglmulai7.getText().toString());
-
                                 String message = response.getString("message");
                                 Toasty.success(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
@@ -529,11 +473,9 @@ public class AddSeqActivity extends AppCompatActivity {
         }
     }
 
-
     public void btn1Clicked(View v) {
         insert(1);
     }
-
     public void btn2Clicked(View v) {
         insert(2);
     }

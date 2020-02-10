@@ -2,15 +2,14 @@ package com.example.shopfloor;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +19,6 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Activity.RejectActivity;
 import com.example.shopfloor.Adapter.CriteriaAdapter;
-import com.example.shopfloor.Adapter.ProductorderAdapter;
 import com.example.shopfloor.Models.Criteria;
 import com.example.shopfloor.Utils.GlobalVars;
 import com.google.gson.Gson;

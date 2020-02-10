@@ -5,12 +5,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.tabs.TabLayout;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,9 +44,6 @@ import java.util.List;
 import es.dmoral.toasty.Toasty;
 import io.realm.Realm;
 import io.realm.RealmResults;
-
-import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 public class DetailOpenDocActivity extends AppCompatActivity {
     private TabLayout tabLayout;

@@ -1,17 +1,16 @@
 package com.example.shopfloor.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.shopfloor.Activity.Add_DocActivity;
-import com.example.shopfloor.Activity.SequenceListActivity;
 import com.example.shopfloor.Models.Sequence;
 import com.example.shopfloor.R;
 

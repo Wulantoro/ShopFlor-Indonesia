@@ -1,12 +1,10 @@
 package com.example.shopfloor.Fragment;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +19,8 @@ import com.example.shopfloor.Adapter.InputRejectAdapter;
 import com.example.shopfloor.Adapter.SuccDocAdapter;
 import com.example.shopfloor.Models.Header;
 import com.example.shopfloor.Models.InputReject;
-import com.example.shopfloor.Models.Productorder;
 import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.R;
-import com.example.shopfloor.Utils.GlobalVars;
 import com.example.shopfloor.Utils.RealmHelper;
 import com.google.gson.Gson;
 
