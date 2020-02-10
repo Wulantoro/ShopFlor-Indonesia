@@ -1,2 +1,2 @@
 //<?xml version="1
-include ':app'
+include ':app', ':dynamicsizeslib'

@@ -5,13 +5,12 @@ import android.content.Intent;
 
 import android.content.SharedPreferences;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
@@ -21,7 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
@@ -42,10 +41,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -103,6 +98,10 @@ public class Add_DocActivity extends AppCompatActivity {
     private TextView tvblnskrg;
     private Handler mHandler;
     private TextView toolbar_text;
+
+    private String workcenter;
+    private String username;
+    private String namawc;
 
     Realm realm;
     RealmHelper realmHelper;
@@ -188,17 +187,29 @@ public class Add_DocActivity extends AppCompatActivity {
         dateView = findViewById(R.id.tvTgl_mulai1);
 
         //workcenter
-        TextView tvwc = findViewById(R.id.tvwc1);
-        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
-        tvwc.setText(prf.getString("workcenter", null));
+//        TextView tvwc = findViewById(R.id.tvwc1);
+//        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
+//        tvwc.setText(prf.getString("workcenter1", null));
+        pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+        workcenter = pref.getString("workcenter1", null);
+        Log.e(TAG, " workcwnter = " + workcenter);
 
-        TextView tvuserid = findViewById(R.id.tvusername2);
-        prf = getSharedPreferences("userId", MODE_PRIVATE);
-        tvuserid.setText(prf.getString("tvuserid", null));
+
+//        TextView tvuserid = findViewById(R.id.tvusername2);
+//        prf = getSharedPreferences("userId", MODE_PRIVATE);
+//        tvuserid.setText(prf.getString("tvuserid0", null));
+        pref = getSharedPreferences("userId", MODE_PRIVATE);
+        username = pref.getString("tvuserid0", null);
+        Log.e(TAG, " usernametot = " + username);
+
 
 //        TextView tvnamawc = findViewById(R.id.tvnamawc2);
 //        prf = getSharedPreferences("Namewc", MODE_PRIVATE);
 //        tvnamawc.setText(prf.getString("tvnamewc", null));
+        pref = getSharedPreferences("Namewc", MODE_PRIVATE);
+        namawc = pref.getString("tvnamewc", null);
+        Log.e(TAG, "nama wc = " + namawc);
+
 
 //        TextView tvipadd = findViewById(R.id.tvip4);
 //        prf = getSharedPreferences("Ip", MODE_PRIVATE);
@@ -279,13 +290,21 @@ public class Add_DocActivity extends AppCompatActivity {
 
     //ketika klik back loncat ke home activity
     public void onBackPressed(){
-        pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
-        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
-        String wc = tvwc1.getText().toString();
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("tvworkcenter", wc);
-        editor.commit();
+//        pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+//        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+//        String wc = tvwc1.getText().toString();
+//        SharedPreferences.Editor editor = pref.edit();
+//        editor.putString("tvworkcenter", wc);
+//        editor.commit();
 
+        pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+        workcenter = pref.getString("workcenter0", null);
+        SharedPreferences.Editor editor12 = pref.edit();
+        editor12.putString("workcenter1", workcenter);
+        editor12.commit();
+
+
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(intent);
     }
 
@@ -303,7 +322,8 @@ public class Add_DocActivity extends AppCompatActivity {
 
         final List<Sequence> list = adapter1.getList_item();
 
-        loadData(tvNo_Prod1.getText().toString(), adapter1, tvwc1.getText().toString());
+//        loadData(tvNo_Prod1.getText().toString(), adapter1, tvwc1.getText().toString());
+        loadData(tvNo_Prod1.getText().toString(), adapter1, workcenter);
 
         rv1.setAdapter(adapter1);
         rv1.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
@@ -368,7 +388,8 @@ public class Add_DocActivity extends AppCompatActivity {
 
     final List<Productorder> list = adapter2.getList_item();
 
-    loadData2(adapter2, tvwc1.getText().toString());
+//    loadData2(adapter2, tvwc1.getText().toString());
+        loadData2(adapter2, workcenter);
 
         rv2.setAdapter(adapter2);
         rv2.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
@@ -425,7 +446,7 @@ public class Add_DocActivity extends AppCompatActivity {
         prf = getSharedPreferences("Ip", MODE_PRIVATE);
         prf.getString("tvip", null);
         Log.e("ip server",  prf.getString("tvip", null));
-        Log.e("workcenter = ", tvwc1.getText().toString());
+//        Log.e("workcenter = ", tvwc1.getText().toString());
 
 
         Realm realm = Realm.getDefaultInstance();
@@ -486,7 +507,7 @@ public class Add_DocActivity extends AppCompatActivity {
         Log.e("ip server",  "check ip server " + prf.getString("tvip", null));
 
         Log.e("docnum1000 == ", "check docnum = " + tvNo_Prod1.getText().toString());
-        Log.e("Workcenter = ", tvwc1.getText().toString());
+//        Log.e("Workcenter = ", tvwc1.getText().toString());
 
 //        prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
 //        Log.e("workcenterr", prf.getString("workcenter", null));
@@ -817,17 +838,28 @@ public class Add_DocActivity extends AppCompatActivity {
             editor11.putString("tvjammulai", tvjammulai);
             editor11.commit();
 
+//            pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+//            String tvwc = tvwc1.getText().toString();
+//            SharedPreferences.Editor editor12 = pref.edit();
+//            editor12.putString("workcenter", tvwc);
+//            editor12.commit();
             pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
-            String tvwc = tvwc1.getText().toString();
+            workcenter = pref.getString("workcenter0", null);
             SharedPreferences.Editor editor12 = pref.edit();
-            editor12.putString("workcenter", tvwc);
+            editor12.putString("workcenter1", workcenter);
             editor12.commit();
 
+//            pref = getSharedPreferences("userId", MODE_PRIVATE);
+//            String tvuserid = tvusername2.getText().toString();
+//            SharedPreferences.Editor editor13 = pref.edit();
+//            editor13.putString("tvuserid", tvuserid);
+//            editor13.commit();
             pref = getSharedPreferences("userId", MODE_PRIVATE);
-            String tvuserid = tvusername2.getText().toString();
+            username = pref.getString("tvuserid", null);
             SharedPreferences.Editor editor13 = pref.edit();
-            editor13.putString("tvuserid", tvuserid);
+            editor13.putString("tvuserid0", username);
             editor13.commit();
+
 
             pref = getSharedPreferences("Shift", MODE_PRIVATE);
             String tvshift = tvShift1.getText().toString();

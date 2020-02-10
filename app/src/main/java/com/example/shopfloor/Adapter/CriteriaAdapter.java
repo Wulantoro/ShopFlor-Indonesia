@@ -1,27 +1,22 @@
 package com.example.shopfloor.Adapter;
 
 import android.content.Context;
-import android.print.PrinterId;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.shopfloor.Models.Criteria;
-import com.example.shopfloor.Models.Upcriteria;
 import com.example.shopfloor.R;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHolder> {
 

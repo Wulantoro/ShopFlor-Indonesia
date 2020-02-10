@@ -1,22 +1,18 @@
 package com.example.shopfloor.Activity;
 
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseArray;
 import android.widget.Toast;
 
-import com.example.shopfloor.Models.Productorder;
 import com.example.shopfloor.R;
 import com.google.android.gms.vision.barcode.Barcode;
-import com.google.zxing.Result;
 
 import java.util.List;
 
 import info.androidhive.barcode.BarcodeReader;
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 
 public class ScanActivity extends AppCompatActivity implements BarcodeReader.BarcodeReaderListener {

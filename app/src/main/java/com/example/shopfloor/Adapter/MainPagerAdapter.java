@@ -1,15 +1,10 @@
 package com.example.shopfloor.Adapter;
 
-import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.shopfloor.Activity.DetailOpenDocActivity;
-import com.example.shopfloor.Fragment.CriteriaFragment;
-import com.example.shopfloor.Fragment.InfoFragment;
-import com.example.shopfloor.Fragment.RejectFragment;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

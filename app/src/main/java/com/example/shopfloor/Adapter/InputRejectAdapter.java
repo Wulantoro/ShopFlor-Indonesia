@@ -1,18 +1,16 @@
 package com.example.shopfloor.Adapter;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.PopupMenu;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.PopupMenu;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,12 +19,10 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.shopfloor.Activity.EditRejectActivity;
-import com.example.shopfloor.Activity.RejectActivity;
 import com.example.shopfloor.Fragment.RejectFragment;
 import com.example.shopfloor.Models.InputReject;
 import com.example.shopfloor.Models.ServerModel;
 import com.example.shopfloor.R;
-import com.example.shopfloor.Utils.GlobalVars;
 
 import org.json.JSONException;
 import org.json.JSONObject;

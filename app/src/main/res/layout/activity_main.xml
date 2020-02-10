@@ -45,7 +45,7 @@
         android:orientation="vertical">
 
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_below="@+id/user_profile_photo"
             android:layout_height="wrap_content">
@@ -57,9 +57,9 @@
                 android:imeOptions="flagNoExtractUi"
                 android:hint="Username"
                 android:inputType="textEmailAddress" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -73,7 +73,7 @@
                 android:inputType="textPassword"
                  />
 <!--            android:inputType="numberPassword"-->
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 

@@ -35,7 +35,7 @@
             android:textColor="@color/white"
             android:text="ip address"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvInputReject"
         android:layout_below="@id/tvFrag"
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
         android:layout_marginTop="5dp"
         android:layout_height="wrap_content"
         tools:listitem="@layout/item_reject_row">
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
     </RelativeLayout>
 
 

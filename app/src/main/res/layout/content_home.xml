@@ -64,7 +64,6 @@
         android:layout_toRightOf="@id/tvWC"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:text=""
         android:layout_marginLeft="5dp"/>
 
     <TextView
