@@ -201,18 +201,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvdocentry1"
                 android:layout_toRightOf="@id/tvposted4"
-
                 android:text="qcname"/>
 
-            <TextView
-                android:id="@+id/tvusername5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvdocentry1"
-                android:layout_toRightOf="@id/tvqcname1"
-                android:layout_marginLeft="5dp"
 
-                android:text="username"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -392,18 +383,11 @@
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
     android:layout_below="@id/line">
-    <TextView
-        android:id="@+id/tvnamawc3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="namawc"/>
 
     <Button
         android:id="@+id/bthapus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvnamawc3"
         android:background="@drawable/button"
         android:text="Hapus"/>
 
@@ -412,7 +396,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/bthapus"
-        android:layout_below="@id/tvnamawc3"
         android:layout_marginLeft="20dp"
         android:background="@drawable/button"
         android:text="Edit"/>
@@ -422,11 +405,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/btedit"
-        android:layout_below="@id/tvnamawc3"
         android:layout_marginLeft="20dp"
         android:background="@drawable/button"
         android:text="Refresh"/>
-
-
 </RelativeLayout>
 </RelativeLayout>

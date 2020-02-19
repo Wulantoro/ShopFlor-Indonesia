@@ -121,6 +121,7 @@ public class RejectActivity extends AppCompatActivity {
     private String posted;
     private String namawc;
     private String id;
+    String statusup = "Completed";
 
 
     Realm realm;
@@ -147,38 +148,20 @@ public class RejectActivity extends AppCompatActivity {
         setSupportActionBar(topToolBar);
 
         tvdocentry0 = findViewById(R.id.tvdocentry0);
-        tvdocnum1 = findViewById(R.id.tvdocnum1);
         tvprodcode0 = findViewById(R.id.tvprodcode0);
         tvnoprod1 = findViewById(R.id.tvnoprod1);
         tvnmprod1 = findViewById(R.id.tvnmprod1);
-        tvprodplanqty0 = findViewById(R.id.tvprodplanqty0);
-        tvprodstatus2 = findViewById(R.id.tvprodstatus2);
-        tvroutecode2 = findViewById(R.id.tvroutecode2);
-        tvroutename2 = findViewById(R.id.tvroutename2);
         tvsequence1 = findViewById(R.id.tvsequence1);
         tvseqqty1 = findViewById(R.id.tvseqqty1);
-        tvdocdate0 = findViewById(R.id.tvdocdate0);
-        tvjammulai2 = findViewById(R.id.tvjammulai2);
         tvInputQty1 = findViewById(R.id.tvInputQty1);
         tvOutputQty1 = findViewById(R.id.tvOutputQty1);
         tvworkcenter6 = findViewById(R.id.tvworkcenter6);
         tvtglsel1 = findViewById(R.id.tvtglsel1);
         tvjamsel1 = findViewById(R.id.tvjamsel1);
-        tvstatus0 = findViewById(R.id.tvstatus0);
         tvposted7 = findViewById(R.id.tvposted7);
-        tvusername8 = findViewById(R.id.tvusername8);
-        tvqcname4 = findViewById(R.id.tvqcname4);
-        tvshift4 = findViewById(R.id.tvshift4);
-        tvcodeshift4 = findViewById(R.id.tvcodeshift4);
-//        tvtglmulai2 = findViewById(R.id.tvtglmulai2);
-        tvdocnum2 = findViewById(R.id.tvdocnum2);
-        tvdocentry7 = findViewById(R.id.tvdocentry7);
-        tvnamawc6 = findViewById(R.id.tvnamawc6);
         ibscan = findViewById(R.id.ibscan);
         tvid5 = findViewById(R.id.tvid5);
         tvmobileid0 = findViewById(R.id.tvmobileid0);
-        tvip10 = findViewById(R.id.tvip10);
-//        tvdocentry01 = findViewById(R.id.tvdocentry01);
         tvid7 = findViewById(R.id.tvid7);
         docsap0 = findViewById(R.id.docsap0);
         tvtotreject = findViewById(R.id.tvtotreject);
@@ -308,17 +291,18 @@ public class RejectActivity extends AppCompatActivity {
         codeshift = pref.getString("tvcodeshift", null);
         Log.e(TAG, "code shifr = " + codeshift);
 
-        TextView tvnamawc = findViewById(R.id.tvnamawc6);
-        prf = getSharedPreferences("Namawc", MODE_PRIVATE);
-        tvnamawc.setText(prf.getString("tvnamawc", null));
+//        TextView tvnamawc = findViewById(R.id.tvnamawc6);
+//        prf = getSharedPreferences("Namawc", MODE_PRIVATE);
+//        tvnamawc.setText(prf.getString("tvnamawc", null));
 
         TextView tvid = findViewById(R.id.tvid5);
         prf = getSharedPreferences("Id", MODE_PRIVATE);
         tvid.setText(String.valueOf(prf.getString("tvid", null)));
         Log.e(TAG, "tvid5 = " + String.valueOf(prf.getString("tvid", null)));
 
-        TextView tvstatus = findViewById(R.id.tvstatus0);
-        tvstatus.setText("Completed");
+//        TextView tvstatus = findViewById(R.id.tvstatus0);
+//        tvstatus.setText("Completed");
+
 
         TextView tvposted = findViewById(R.id.tvdocsts2);
         tvposted.setText("Pending1");
@@ -349,7 +333,7 @@ public class RejectActivity extends AppCompatActivity {
         for (ServerModel c : results1) {
             text = text + c.getAddress();
         }
-        tvip10.setText(text);
+//        tvip10.setText(text);
 
 
         btnFrag = findViewById(R.id.btnFrag);
@@ -711,7 +695,7 @@ public class RejectActivity extends AppCompatActivity {
                 jsonObject.put("workCenter", tvworkcenter6.getText().toString());
                 jsonObject.put("tanggalSelesai", tvtglsel1.getText().toString());
                 jsonObject.put("jamSelesai", tvjamsel1.getText().toString());
-                jsonObject.put("status", tvstatus0.getText().toString());
+                jsonObject.put("status", statusup);
                 jsonObject.put("posted", tvposted7.getText().toString());
                 jsonObject.put("userId", username);
                 jsonObject.put("id", tvid5.getText().toString());
@@ -950,7 +934,7 @@ public class RejectActivity extends AppCompatActivity {
             jsonObject.put("workCenter", tvworkcenter6.getText().toString());
             jsonObject.put("tanggalSelesai", tvtglsel1.getText().toString());
             jsonObject.put("jamSelesai", tvjamsel1.getText().toString());
-            jsonObject.put("status", tvstatus0.getText().toString());
+            jsonObject.put("status", statusup);
             jsonObject.put("posted", 2);
             jsonObject.put("userId", username);
             jsonObject.put("id", tvid5.getText().toString());
@@ -1080,6 +1064,7 @@ public class RejectActivity extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
 
+        Realm.init(getApplicationContext());
         Realm realm = Realm.getDefaultInstance();
         RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
         String text = "";

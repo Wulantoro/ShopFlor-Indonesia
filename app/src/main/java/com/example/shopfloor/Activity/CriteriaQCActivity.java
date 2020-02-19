@@ -133,7 +133,6 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
         tvjamsel1 = findViewById(R.id.tvjamsel1);
         tvInputQty3 = findViewById(R.id.tvInputQty3);
         tvdocentry3 = findViewById(R.id.tvdocentry3);
-        tvdocnum5 = findViewById(R.id.tvdocnum5);
         tvnoprod0 = findViewById(R.id.tvnoprod0);
         tvprodcode = findViewById(R.id.tvprodcode);
         tvnmprod1 = findViewById(R.id.tvnmprod1);
@@ -657,10 +656,12 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
 
     private void loadCriteriaIsi(String hostHeadEntry) {
 
+        Realm.init(getApplicationContext());
         Realm realm = Realm.getDefaultInstance();
         RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
         String text = "";
         for (ServerModel c : results1) {
+            text = text + c.getAddress();
             Log.e(TAG, "host" + hostHeadEntry);
 
             AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/upcriteria?hostHeadEntry=" + hostHeadEntry)
