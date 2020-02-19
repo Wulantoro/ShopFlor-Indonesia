@@ -318,7 +318,7 @@ public class HomeActivity extends AppCompatActivity {
                     Intent iOpen = new Intent(HomeActivity.this, Open_DocActivity.class);
                     String wc1 = tvWCtampil1.getText().toString();
                     SharedPreferences.Editor editor = pref.edit();
-                    editor.putString("workcenter", wc1);
+                    editor.putString("workcenter1", wc1);
                     editor.commit();
 
                     pref = getSharedPreferences("Username", MODE_PRIVATE);

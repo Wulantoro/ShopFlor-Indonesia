@@ -412,7 +412,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/btnFrag"
-                    android:textColor="@color/white"
+
                     android:text="id head"/>
 
                 <TextView
@@ -467,7 +467,7 @@
             android:id="@+id/tvdocentry0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+
             android:text="docentryyyyyyyy"/>
         <TextView
             android:id="@+id/tvdocnum1"
@@ -475,7 +475,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvdocentry0"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="docnum"/>
         <TextView
             android:id="@+id/tvprodcode0"
@@ -483,7 +483,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvdocnum1"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="prodcode"/>
         <TextView
             android:id="@+id/tvprodplanqty0"
@@ -491,7 +491,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvprodcode0"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="prodplanqty"/>
         <TextView
             android:id="@+id/tvprodstatus2"
@@ -499,7 +499,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvprodplanqty0"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="prod status"/>
         <TextView
             android:id="@+id/tvroutecode2"
@@ -507,7 +507,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvprodstatus2"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="route codecode"/>
         <TextView
             android:id="@+id/tvroutename2"
@@ -515,7 +515,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvroutecode2"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="routenmae"/>
 
         <TextView
@@ -523,7 +523,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvdocentry0"
-            android:textColor="@color/white"
+
             android:text="jam mulai"/>
         <TextView
             android:id="@+id/tvworkcenter6"
@@ -532,7 +532,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvjammulai2"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="workcenter"/>
         <TextView
             android:id="@+id/tvstatus0"
@@ -541,7 +541,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvworkcenter6"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="status"/>
         <TextView
             android:id="@+id/tvposted7"
@@ -550,7 +550,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvstatus0"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="posted"/>
         <TextView
             android:id="@+id/tvusername8"
@@ -559,7 +559,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvposted7"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="username"/>
         <TextView
             android:id="@+id/tvqcname4"
@@ -568,7 +568,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvusername8"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="qcname"/>
 
         <TextView
@@ -578,7 +578,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvqcname4"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             />
 
         <TextView
@@ -588,7 +588,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvdocnum5"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="shifffff"/>
 
         <TextView
@@ -598,7 +598,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/tvshift4"
-            android:textColor="@color/white"
+
             android:text="code shift"
             />
 
@@ -608,9 +608,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvdocentry0"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:layout_toRightOf="@id/tvcodeshift4"
-            android:text="docentry++"/>
+            android:text="docentry"/>
 
         <TextView
             android:id="@+id/tvdocnum2"
@@ -618,7 +618,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_below="@id/tvjammulai2"
-            android:textColor="@color/white"
+
             android:text="docnum++"/>
 
         <TextView
@@ -627,7 +627,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_below="@id/tvjammulai2"
-            android:textColor="@color/white"
+
             android:layout_toRightOf="@id/tvdocnum2"
             android:text="namawc"/>
 
@@ -638,7 +638,7 @@
             android:layout_toRightOf="@id/tvdocnum2"
             android:layout_marginLeft="5dp"
             android:layout_below="@id/tvjammulai2"
-            android:textColor="@color/white"
+
             android:text="docdate"/>
 
         <TextView
@@ -646,7 +646,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvdocdate0"
-            android:textColor="@color/white"
+
             android:text="mobileid"/>
 
         <TextView
@@ -654,7 +654,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvmobileid0"
-            android:textColor="@color/white"
+
             android:layout_marginLeft="5dp"
             android:text="ip sever"/>
 
