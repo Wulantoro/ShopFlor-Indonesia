@@ -51,7 +51,7 @@ import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
 public class RejectActivity extends AppCompatActivity {
-    SharedPreferences prf;
+    SharedPreferences prf, pref;
     private Button btnFrag;
     private TextView tvdocentry0;
     private TextView tvdocnum1;
@@ -101,6 +101,28 @@ public class RejectActivity extends AppCompatActivity {
     private Handler mHandler;
     private static String TAG = RejectActivity.class.getSimpleName();
 
+    private String docnum;
+    private String noprod;
+    private String workcenter;
+    private String username;
+    private String prodcode;
+    private String nmprod;
+    private String prodplanqty;
+    private String stsprod;
+    private String routecode;
+    private String routname;
+    private String sequence;
+    private String shift;
+    private String sequenceqty;
+    private String tglmulai;
+    private String codeshift;
+    private String jammulai;
+    private String docentry;
+    private String posted;
+    private String namawc;
+    private String id;
+    String statusup = "Completed";
+
 
     Realm realm;
     RealmHelper realmHelper;
@@ -126,38 +148,20 @@ public class RejectActivity extends AppCompatActivity {
         setSupportActionBar(topToolBar);
 
         tvdocentry0 = findViewById(R.id.tvdocentry0);
-        tvdocnum1 = findViewById(R.id.tvdocnum1);
         tvprodcode0 = findViewById(R.id.tvprodcode0);
         tvnoprod1 = findViewById(R.id.tvnoprod1);
         tvnmprod1 = findViewById(R.id.tvnmprod1);
-        tvprodplanqty0 = findViewById(R.id.tvprodplanqty0);
-        tvprodstatus2 = findViewById(R.id.tvprodstatus2);
-        tvroutecode2 = findViewById(R.id.tvroutecode2);
-        tvroutename2 = findViewById(R.id.tvroutename2);
         tvsequence1 = findViewById(R.id.tvsequence1);
         tvseqqty1 = findViewById(R.id.tvseqqty1);
-        tvdocdate0 = findViewById(R.id.tvdocdate0);
-        tvjammulai2 = findViewById(R.id.tvjammulai2);
         tvInputQty1 = findViewById(R.id.tvInputQty1);
         tvOutputQty1 = findViewById(R.id.tvOutputQty1);
         tvworkcenter6 = findViewById(R.id.tvworkcenter6);
         tvtglsel1 = findViewById(R.id.tvtglsel1);
         tvjamsel1 = findViewById(R.id.tvjamsel1);
-        tvstatus0 = findViewById(R.id.tvstatus0);
         tvposted7 = findViewById(R.id.tvposted7);
-        tvusername8 = findViewById(R.id.tvusername8);
-        tvqcname4 = findViewById(R.id.tvqcname4);
-        tvshift4 = findViewById(R.id.tvshift4);
-        tvcodeshift4 = findViewById(R.id.tvcodeshift4);
-//        tvtglmulai2 = findViewById(R.id.tvtglmulai2);
-        tvdocnum2 = findViewById(R.id.tvdocnum2);
-        tvdocentry7 = findViewById(R.id.tvdocentry7);
-        tvnamawc6 = findViewById(R.id.tvnamawc6);
         ibscan = findViewById(R.id.ibscan);
         tvid5 = findViewById(R.id.tvid5);
         tvmobileid0 = findViewById(R.id.tvmobileid0);
-        tvip10 = findViewById(R.id.tvip10);
-//        tvdocentry01 = findViewById(R.id.tvdocentry01);
         tvid7 = findViewById(R.id.tvid7);
         docsap0 = findViewById(R.id.docsap0);
         tvtotreject = findViewById(R.id.tvtotreject);
@@ -169,46 +173,42 @@ public class RejectActivity extends AppCompatActivity {
 
         tvmobileid0.setText(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
 
-        TextView tvdocnum = findViewById(R.id.tvdocnum1);
-        prf = getSharedPreferences("Docnum", MODE_PRIVATE);
-        tvdocnum.setText(prf.getString("docnum", null));
+        pref = getSharedPreferences("docNum", MODE_PRIVATE);
+        docnum = pref.getString("tvnodoc", null);
+        Log.e(TAG, "docnum2 = " + docnum);
 
-        TextView tvqcname = findViewById(R.id.tvqcname4);
-        prf = getSharedPreferences("Qcname", MODE_PRIVATE);
-        tvqcname.setText(prf.getString("tvqcname", null));
-
-        TextView tvusername = findViewById(R.id.tvusername8);
-        prf = getSharedPreferences("Username", MODE_PRIVATE);
-        tvusername.setText(prf.getString("tvusername", null));
+        pref = getSharedPreferences("Username", MODE_PRIVATE);
+        username = pref.getString("tvusername", null);
+        Log.e(TAG, "username = " + username);
 
 
         TextView tvworkcenter = findViewById(R.id.tvworkcenter6);
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
         tvworkcenter.setText(prf.getString("tvworkcenter", null));
 
-        TextView tvjammulai = findViewById(R.id.tvjammulai2);
-        prf = getSharedPreferences("Jammulai", MODE_PRIVATE);
-        tvjammulai.setText(prf.getString("tvjammulai", null));
+        pref = getSharedPreferences("jamMulai", MODE_PRIVATE);
+        jammulai = pref.getString("tvjammulai", null);
+        Log.e(TAG, "jam mulai = " + jammulai);
 
-        TextView tvdocdate = findViewById(R.id.tvdocdate0);
-        prf = getSharedPreferences("Docdate", MODE_PRIVATE);
-        tvdocdate.setText(prf.getString("tvdocdate", null));
+        pref = getSharedPreferences("tanggalMulai", MODE_PRIVATE);
+        tglmulai = pref.getString("tvtglmulai", null);
+        Log.e(TAG, "tgkmulai = " + tglmulai);
 
-        TextView tvroutename = findViewById(R.id.tvroutename2);
-        prf = getSharedPreferences("Routename", MODE_PRIVATE);
-        tvroutename.setText(prf.getString("tvroutename", null));
+        pref = getSharedPreferences("routeName", MODE_PRIVATE);
+        routname = pref.getString("tvroutename", null);
+        Log.e(TAG, "routename = " + routname);
 
-        TextView tvroutecode = findViewById(R.id.tvroutecode2);
-        prf = getSharedPreferences("Routecode", MODE_PRIVATE);
-        tvroutecode.setText(prf.getString("tvroutecode", null));
+        pref = getSharedPreferences("routeCode", MODE_PRIVATE);
+        routecode = pref.getString("tvroutecode", null);
+        Log.e(TAG, "routecode = " + routecode);
 
-        TextView tvprodstatus = findViewById(R.id.tvprodstatus2);
-        prf = getSharedPreferences("Prodstatus", MODE_PRIVATE);
-        tvprodstatus.setText(prf.getString("tvprodstatus", null));
+        pref = getSharedPreferences("prodStatus", MODE_PRIVATE);
+        stsprod = pref.getString("tvprodstatus", null);
+        Log.e(TAG, "stsprod = " + stsprod);
 
-        TextView tvprodplanqty = findViewById(R.id.tvprodplanqty0);
-        prf = getSharedPreferences("Prodplanqty", MODE_PRIVATE);
-        tvprodplanqty.setText(prf.getString("tvprodplanqty", null));
+        pref = getSharedPreferences("prodPlanQty", MODE_PRIVATE);
+        prodplanqty = pref.getString("tvprodplanqty", null);
+        Log.e(TAG, "Prodplanqty = " + prodplanqty);
 
         TextView tvprodcode = findViewById(R.id.tvprodcode0);
         prf = getSharedPreferences("prodCode", MODE_PRIVATE);
@@ -222,11 +222,6 @@ public class RejectActivity extends AppCompatActivity {
         TextView tvidd = findViewById(R.id.tvid7);
         prf = getSharedPreferences("Id", MODE_PRIVATE);
         tvidd.setText(String.valueOf(prf.getString("tvid", null)));
-
-
-//        TextView tvdocentry1 = findViewById(R.id.tvdocentry01);
-//        prf = getSharedPreferences("Docentry", MODE_PRIVATE);
-//        tvdocentry1.setText(String.valueOf(prf.getString("tvdocentry", null)));
 
         /*****************qtyin**********************/
         TextView inqty = findViewById(R.id.tvInputQty1);
@@ -288,25 +283,26 @@ public class RejectActivity extends AppCompatActivity {
         prf = getSharedPreferences("Outqty", MODE_PRIVATE);
         tvoutqty.setText(prf.getString("tvoutqty", null));
 
-        TextView tvshift = findViewById(R.id.tvshift4);
-        prf = getSharedPreferences("Shift", MODE_PRIVATE);
-        tvshift.setText(prf.getString("tvshift", null));
+        pref = getSharedPreferences("Shift", MODE_PRIVATE);
+        shift = pref.getString("tvshift", null);
+        Log.e(TAG, "shift = " + shift );
 
-        TextView tvcodesh = findViewById(R.id.tvcodeshift4);
-        prf = getSharedPreferences("Codeshift", MODE_PRIVATE);
-        tvcodesh.setText(prf.getString("tvcodeshift", null));
+        pref = getSharedPreferences("Codeshift", MODE_PRIVATE);
+        codeshift = pref.getString("tvcodeshift", null);
+        Log.e(TAG, "code shifr = " + codeshift);
 
-        TextView tvnamawc = findViewById(R.id.tvnamawc6);
-        prf = getSharedPreferences("Namawc", MODE_PRIVATE);
-        tvnamawc.setText(prf.getString("tvnamawc", null));
+//        TextView tvnamawc = findViewById(R.id.tvnamawc6);
+//        prf = getSharedPreferences("Namawc", MODE_PRIVATE);
+//        tvnamawc.setText(prf.getString("tvnamawc", null));
 
         TextView tvid = findViewById(R.id.tvid5);
         prf = getSharedPreferences("Id", MODE_PRIVATE);
         tvid.setText(String.valueOf(prf.getString("tvid", null)));
         Log.e(TAG, "tvid5 = " + String.valueOf(prf.getString("tvid", null)));
 
-        TextView tvstatus = findViewById(R.id.tvstatus0);
-        tvstatus.setText("Completed");
+//        TextView tvstatus = findViewById(R.id.tvstatus0);
+//        tvstatus.setText("Completed");
+
 
         TextView tvposted = findViewById(R.id.tvdocsts2);
         tvposted.setText("Pending1");
@@ -337,7 +333,7 @@ public class RejectActivity extends AppCompatActivity {
         for (ServerModel c : results1) {
             text = text + c.getAddress();
         }
-        tvip10.setText(text);
+//        tvip10.setText(text);
 
 
         btnFrag = findViewById(R.id.btnFrag);
@@ -544,7 +540,7 @@ public class RejectActivity extends AppCompatActivity {
             jsonObject.put("prodCode", tvprodcode0.getText().toString());
             jsonObject.put("prodName", tvnmprod1.getText().toString());
             jsonObject.put("prodPlanQty", tvprodplanqty0.getText().toString());
-            jsonObject.put("prodStatus", tvprodstatus2.getText().toString());
+            jsonObject.put("prodStatus", stsprod);
             jsonObject.put("routeCode", tvroutecode2.getText().toString());
             jsonObject.put("routeName", tvroutename2.getText().toString());
             jsonObject.put("sequence", tvsequence1.getText().toString());
@@ -665,28 +661,10 @@ public class RejectActivity extends AppCompatActivity {
 
         int totNG = Integer.parseInt(tvtotreject.getText().toString());
 
-//        TextView  = findViewById(R.id.tvdocsts2);
-//        tvposted.setText("Pending1");
-
-
-
-//        if (id == R.id.uptemp) {
-//            TextView tvposted1 = findViewById(R.id.tvposted7);
-//            tvposted1.setText("1");
-////            editHeader();
-//            editStatusHeader();
-////            Integer.parseInt(String.valueOf(tvInputQty1.getText())) == Integer.parseInt(String.valueOf(tvOutputQty1.getText()))
-//
-//        } else
             if (id == R.id.upsap1 && totOk == totNG) {
             TextView tvposted1 = findViewById(R.id.tvposted7);
             tvposted1.setText("1");
-//            editHeader();
-//            TextView tvstatus = findViewById(R.id.tvstatus0);
-//            tvstatus.setText("Complete");
 
-//            uploadSapHeader();
-//            editStatusHeader();
             loadHeaderStem(tvworkcenter6.getText().toString(), tvmobileid0.getText().toString());
             Log.e("workcenter", tvworkcenter6.getText().toString());
             Log.e("mobile", tvmobileid0.getText().toString());
@@ -697,32 +675,29 @@ public class RejectActivity extends AppCompatActivity {
                 //ntar arrau nya diilangin lagi ya
 //                JSONArray newArr = new JSONArray();
 
-//                jsonObject.put("docEntry", tvdocentry0.getText().toString());
-                jsonObject.put("docNum", tvdocnum1.getText().toString());
+                jsonObject.put("docNum", docnum);
                 jsonObject.put("prodNo", tvnoprod1.getText().toString());
                 jsonObject.put("prodCode", tvprodcode0.getText().toString());
                 jsonObject.put("prodName", tvnmprod1.getText().toString());
-                jsonObject.put("prodPlanQty", tvprodplanqty0.getText().toString());
-                jsonObject.put("prodStatus", tvprodstatus2.getText().toString());
-                jsonObject.put("routeCode", tvroutecode2.getText().toString());
-                jsonObject.put("routeName", tvroutename2.getText().toString());
+                jsonObject.put("prodPlanQty", prodplanqty);
+                jsonObject.put("prodStatus", stsprod);
+                jsonObject.put("routeCode", routecode);
+                jsonObject.put("routeName", routname);
                 jsonObject.put("sequence", tvsequence1.getText().toString());
                 jsonObject.put("sequenceQty", tvseqqty1.getText().toString());
-                jsonObject.put("shiftName", tvshift4.getText().toString());
-                jsonObject.put("shift", tvcodeshift4.getText().toString());
-                jsonObject.put("docDate", tvdocdate0.getText().toString());
-                jsonObject.put("tanggalMulai", tvdocdate0.getText().toString());
-                jsonObject.put("jamMulai", tvjammulai2.getText().toString());
+                jsonObject.put("shiftName", shift);
+                jsonObject.put("shift", codeshift);
+                jsonObject.put("docDate", tglmulai);
+                jsonObject.put("tanggalMulai", tglmulai);
+                jsonObject.put("jamMulai", jammulai);
                 jsonObject.put("inQty", tvInputQty1.getText().toString());
                 jsonObject.put("outQty", tvOutputQty1.getText().toString());
                 jsonObject.put("workCenter", tvworkcenter6.getText().toString());
                 jsonObject.put("tanggalSelesai", tvtglsel1.getText().toString());
                 jsonObject.put("jamSelesai", tvjamsel1.getText().toString());
-                jsonObject.put("status", tvstatus0.getText().toString());
+                jsonObject.put("status", statusup);
                 jsonObject.put("posted", tvposted7.getText().toString());
-//            jsonObject.put("UploadTime", tvjamsel1.getText().toString()); muncul otomatis
-//            jsonObject.put("QcName", tvqcname4.getText().toString());
-                jsonObject.put("userId", tvusername8.getText().toString());
+                jsonObject.put("userId", username);
                 jsonObject.put("id", tvid5.getText().toString());
                 jsonObject.put("mobileId", tvmobileid0.getText().toString());
 
@@ -939,35 +914,34 @@ public class RejectActivity extends AppCompatActivity {
                 JSONArray newArr = new JSONArray();
 
             jsonObject.put("docEntry", tvdocentry0.getText().toString());
-            jsonObject.put("docNum", tvdocnum1.getText().toString());
+            jsonObject.put("docNum", docnum);
             jsonObject.put("prodNo", tvnoprod1.getText().toString());
             jsonObject.put("prodCode", tvprodcode0.getText().toString());
             jsonObject.put("prodName", tvnmprod1.getText().toString());
-            jsonObject.put("prodPlanQty", tvprodplanqty0.getText().toString());
-            jsonObject.put("prodStatus", tvprodstatus2.getText().toString());
-            jsonObject.put("routeCode", tvroutecode2.getText().toString());
-            jsonObject.put("routeName", tvroutename2.getText().toString());
+            jsonObject.put("prodPlanQty", prodplanqty);
+            jsonObject.put("prodStatus", stsprod);
+            jsonObject.put("routeCode", routecode);
+            jsonObject.put("routeName", routname);
             jsonObject.put("sequence", tvsequence1.getText().toString());
             jsonObject.put("sequenceQty", tvseqqty1.getText().toString());
-            jsonObject.put("shiftName", tvshift4.getText().toString());
-            jsonObject.put("shift", tvcodeshift4.getText().toString());
-            jsonObject.put("docDate", tvdocdate0.getText().toString());
-            jsonObject.put("tanggalMulai", tvdocdate0.getText().toString());
-            jsonObject.put("jamMulai", tvjammulai2.getText().toString());
+            jsonObject.put("shiftName", shift);
+            jsonObject.put("shift", codeshift);
+            jsonObject.put("docDate", tglmulai);
+            jsonObject.put("tanggalMulai", tglmulai);
+            jsonObject.put("jamMulai", jammulai);
             jsonObject.put("inQty", tvInputQty1.getText().toString());
             jsonObject.put("outQty", tvOutputQty1.getText().toString());
             jsonObject.put("workCenter", tvworkcenter6.getText().toString());
             jsonObject.put("tanggalSelesai", tvtglsel1.getText().toString());
             jsonObject.put("jamSelesai", tvjamsel1.getText().toString());
-//            jsonObject.put("status", tvstatus0.getText().toString());
+            jsonObject.put("status", statusup);
             jsonObject.put("posted", 2);
-//            jsonObject.put("UploadTime", tvjamsel1.getText().toString()); muncul otomatis
-//            jsonObject.put("QcName", tvqcname4.getText().toString());
-            jsonObject.put("userId", tvusername8.getText().toString());
+            jsonObject.put("userId", username);
             jsonObject.put("id", tvid5.getText().toString());
             jsonObject.put("mobileId", tvmobileid0.getText().toString());
 
-//                jsonObject.put("docEntry", tvdocentry0.getText().toString());
+
+//            jsonObject.put("docEntry", tvdocentry0.getText().toString());
 //            jsonObject.put("docNum", tvdocnum1.getText().toString());
 //            jsonObject.put("prodNo", tvnoprod1.getText().toString());
 //            jsonObject.put("prodCode", tvprodcode0.getText().toString());
@@ -988,14 +962,16 @@ public class RejectActivity extends AppCompatActivity {
 //            jsonObject.put("workCenter", tvworkcenter6.getText().toString());
 //            jsonObject.put("tanggalSelesai", tvtglsel1.getText().toString());
 //            jsonObject.put("jamSelesai", tvjamsel1.getText().toString());
-//            jsonObject.put("status", tvstatus0.getText().toString());
-//            jsonObject.put("posted", tvposted7.getText().toString());
+////            jsonObject.put("status", tvstatus0.getText().toString());
+//            jsonObject.put("posted", 2);
+////            jsonObject.put("UploadTime", tvjamsel1.getText().toString()); muncul otomatis
+////            jsonObject.put("QcName", tvqcname4.getText().toString());
 //            jsonObject.put("userId", tvusername8.getText().toString());
 //            jsonObject.put("id", tvid5.getText().toString());
 //            jsonObject.put("mobileId", tvmobileid0.getText().toString());
 
-//                newArr.put(jsonObject);
-//                Log.e(TAG, "coba input put put = " + newArr.toString(1));
+                newArr.put(jsonObject);
+                Log.e(TAG, "coba edit sts header = " + newArr.toString(1));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1088,6 +1064,7 @@ public class RejectActivity extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
 
+        Realm.init(getApplicationContext());
         Realm realm = Realm.getDefaultInstance();
         RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
         String text = "";

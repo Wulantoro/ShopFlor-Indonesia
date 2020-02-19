@@ -121,7 +121,7 @@ public class Open_DocActivity extends AppCompatActivity {
         /************workcenter harus selalu berada di bawah biar tetap di baca*****************************/
         TextView tvworkcenter = findViewById(R.id.tvworkcenter0);
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
-        tvworkcenter.setText(prf.getString("workcenter", null));
+        tvworkcenter.setText(prf.getString("workcenter1", null));
         /******************************************************/
         dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 

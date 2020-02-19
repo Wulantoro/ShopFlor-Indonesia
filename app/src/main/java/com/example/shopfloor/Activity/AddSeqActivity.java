@@ -239,6 +239,11 @@ public class AddSeqActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_upHeader && tvInputSeq.length() != 0) {
+//            pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+//            workcenter = pref.getString("workcenter1", null);
+//            SharedPreferences.Editor editor15 = pref.edit();
+//            editor15.putString("workcenter", workcenter);
+//            editor15.commit();
             upHeader();
 //            startActivity(new Intent(getApplicationContext(), Add_DocActivity.class));
         }
@@ -458,6 +463,13 @@ public class AddSeqActivity extends AppCompatActivity {
                             try {
                                 String message = response.getString("message");
                                 Toasty.success(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+
+                                pref = getSharedPreferences("Workcenter", MODE_PRIVATE);
+                                workcenter = pref.getString("workcenter1", null);
+                                SharedPreferences.Editor editor15 = pref.edit();
+                                editor15.putString("workcenter1", workcenter);
+                                editor15.commit();
+
                                 startActivity(new Intent(getApplicationContext(), Open_DocActivity.class));
                             } catch (JSONException e) {
                                 e.printStackTrace();
