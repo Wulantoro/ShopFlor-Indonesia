@@ -87,7 +87,7 @@ public class RespRejectFragActivity extends AppCompatActivity {
         tvlinenumb0 = findViewById(R.id.tvlinenumb0);
         tvmobileid1 = findViewById(R.id.tvmobileid1);
         tvid6 = findViewById(R.id.tvid6);
-        tvip14 = findViewById(R.id.tvip14);
+
         tvtotreject1 = findViewById(R.id.tvtotreject1);
         tvinqty1 = findViewById(R.id.tvinqty1);
         tvoutqty1 = findViewById(R.id.tvoutqty1);
@@ -106,8 +106,6 @@ public class RespRejectFragActivity extends AppCompatActivity {
         for (ServerModel c : results) {
             text = text + c.getAddress();
         }
-        tvip14.setText(text);
-
 
         tvmobileid1.setText(Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID));
 //        lastId(tvmobileid1.getText().toString());

@@ -99,8 +99,8 @@ public class SuccessDocActivity extends AppCompatActivity {
 
         TextView tvworlcenter = findViewById(R.id.tvworkcenter4);
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
-        tvworlcenter.setText(prf.getString("workcenter", null));
-        Log.e("work vwjbgyg ", prf.getString("workcenter", null));
+        tvworlcenter.setText(prf.getString("workcenter1", null));
+        Log.e("work vwjbgyg ", prf.getString("workcenter1", null));
 
         /*************tampil data*********************/
         gson = new Gson();
@@ -286,7 +286,7 @@ public class SuccessDocActivity extends AppCompatActivity {
 
         String wc = tvworkcenter4.getText().toString();
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("tvworkcenter", wc);
+        editor.putString("workcenter1", wc);
         editor.commit();
 
 //        pref = getSharedPreferences("Namewc", MODE_PRIVATE);

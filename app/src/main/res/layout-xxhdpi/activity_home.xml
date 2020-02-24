@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvUser"
                 android:layout_toRightOf="@id/tvWCtampil1"
-
+                android:textColor="@color/white"
                 android:layout_marginLeft="5dp"/>
 
             <TextView

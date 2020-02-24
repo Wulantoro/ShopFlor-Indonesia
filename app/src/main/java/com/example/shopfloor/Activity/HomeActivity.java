@@ -138,7 +138,6 @@ public class HomeActivity extends AppCompatActivity {
 
         TextView tvwc = findViewById(R.id.tvWCtampil1);
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
-//        tvwc.setText(prf.getString("tvworkcenter", null));
         tvwc.setText(prf.getString("workcenter1", null));
 
 //        TextView tvipadd = findViewById(R.id.tvip1);
@@ -356,7 +355,7 @@ public class HomeActivity extends AppCompatActivity {
                     Intent iSuc = new Intent(getApplicationContext(), SuccessDocActivity.class);
                     String wc2 = tvWCtampil1.getText().toString();
                     SharedPreferences.Editor editor1 = pref.edit();
-                    editor1.putString("workcenter", wc2);
+                    editor1.putString("workcenter1", wc2);
                     editor1.commit();
 
 

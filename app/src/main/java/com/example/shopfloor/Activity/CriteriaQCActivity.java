@@ -177,8 +177,8 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
         tvwc.setText(String.valueOf(prf.getString("tvworkcenter", null)));
 
         TextView tvnoprod = findViewById(R.id.tvnoprod0);
-        prf = getSharedPreferences("Noprod", MODE_PRIVATE);
-        tvnoprod.setText(String.valueOf(prf.getString("tvnoprod", null)));
+        prf = getSharedPreferences("prodNo", MODE_PRIVATE);
+        tvnoprod.setText(String.valueOf(prf.getString("tvprodno", null)));
 
         TextView tvoutqty = findViewById(R.id.tvOutputQty1);
         prf = getSharedPreferences("outQty", MODE_PRIVATE);
@@ -351,9 +351,9 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
         String.valueOf(prf.getString("tvworkcenter", null));
         Log.e("wccode = ", prf.getString("tvworkcenter", null));
 
-        prf = getSharedPreferences("Noprod", MODE_PRIVATE);
-        String.valueOf(prf.getString("tvnoprod", null));
-        Log.e("docnum = ", prf.getString("tvnoprod", null));
+        prf = getSharedPreferences("prodNo", MODE_PRIVATE);
+        String.valueOf(prf.getString("tvprodno", null));
+        Log.e("docnumxx = ", prf.getString("tvprodno", null));
 
         Log.e("workcenter69 = ", tvWorkcenter.getText().toString());
         Log.e("Docnum69 = ", tvnoprod0.getText().toString());
@@ -535,12 +535,12 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
                         editor6.putString("tvoutqty", tvoutqty);
                         editor6.commit();
 
-//                        pref = getSharedPreferences("Docnum", MODE_PRIVATE);
-////                        String tvdocnum = tvdocnum5.getText().toString();
-//                        docnum = pref.getString("docnum", null);
-//                        SharedPreferences.Editor editor7 = pref.edit();
-//                        editor7.putString("docnum", docnum);
-//                        editor7.commit();
+                        pref = getSharedPreferences("prodNo", MODE_PRIVATE);
+                        String tvprodno = tvnoprod0.getText().toString();
+                        SharedPreferences.Editor editor24 = pref.edit();
+                        editor24.putString("tvprodno", tvprodno);
+                        editor24.commit();
+
                         pref = getSharedPreferences("docNum", MODE_PRIVATE);
                         docnum = pref.getString("tvnodoc", null);
                         SharedPreferences.Editor editor7 = pref.edit();
@@ -695,9 +695,9 @@ private static String TAG = CriteriaQCActivity.class.getSimpleName();
                                                 String.valueOf(prf.getString("tvworkcenter", null));
                                                 Log.e(TAG+"wccode22 = ", prf.getString("tvworkcenter", null));
 
-                                                prf = getSharedPreferences("Noprod", MODE_PRIVATE);
-                                                String.valueOf(prf.getString("tvnoprod", null));
-                                                Log.e(TAG+"docnum22 = ", prf.getString("tvnoprod", null));
+                                                prf = getSharedPreferences("prodNo", MODE_PRIVATE);
+                                                String.valueOf(prf.getString("tvprodno", null));
+                                                Log.e(TAG+"prodno = ", prf.getString("tvprodno", null));
 
                                                 TextView tvsequence = findViewById(R.id.tvsequence1);
                                                 prf = getSharedPreferences("Sequence", MODE_PRIVATE);

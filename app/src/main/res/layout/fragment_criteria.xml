@@ -26,7 +26,9 @@
         android:id="@+id/tabCrit1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_10mdp">
 
         <TableRow
             android:layout_width="fill_parent"
@@ -38,29 +40,29 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Criteria"
-                android:textSize="18dp" />
+                android:textSize="@dimen/_20font_mdp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="@dimen/_20mdp"
                 android:text="Criteria Desc"
-                android:textSize="18dp" />
+                android:textSize="@dimen/_20font_mdp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="@dimen/_20mdp"
                 android:text="Standard"
-                android:textSize="18dp" />
+                android:textSize="@dimen/_20font_mdp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="@dimen/_20mdp"
                 android:text="Actual"
-                android:textSize="18dp" />
+                android:textSize="@dimen/_20font_mdp" />
         </TableRow>
 
         <androidx.recyclerview.widget.RecyclerView

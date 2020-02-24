@@ -3,29 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:aandroid="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.InfoFragment">
 
    <LinearLayout
        android:id="@+id/line5"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
+       android:layout_centerHorizontal="true"
        android:orientation="horizontal">
     <TextView
         android:id="@+id/tvNo_doc_Frag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/_10font_mdp"
         android:text="@string/no_dokumen"
-        android:paddingTop="20dp"
-        android:layout_marginLeft="70dp"
+        android:paddingTop="@dimen/_20mdp"
+
         />
 
     <TextView
         android:id="@+id/tvNo_doc_Frag1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="S20190304001"
-        android:layout_marginLeft="10dp"
-        android:paddingTop="20dp"
+        android:text="ini nodoc"
+        android:layout_marginLeft="@dimen/_10mdp"
+        android:paddingTop="@dimen/_20mdp"
+        android:textSize="@dimen/_10font_mdp"
         android:textStyle="bold"/>
 
     <TextView
@@ -33,8 +37,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_produksi"
-        android:paddingTop="20dp"
-        android:layout_marginLeft="20dp"
+        android:paddingTop="@dimen/_20mdp"
+        android:textSize="@dimen/_10font_mdp"
+        android:layout_marginLeft="@dimen/_20mdp"
         />
 
     <TextView
@@ -42,8 +47,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="10015637"
-        android:paddingTop="20dp"
-        android:layout_marginLeft="10dp"
+        android:paddingTop="@dimen/_20mdp"
+        android:textSize="@dimen/_10font_mdp"
+        android:layout_marginLeft="@dimen/_10mdp"
         android:textStyle="bold"/>
 
     <TextView
@@ -51,16 +57,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tgl_dokumen"
-        android:paddingTop="20dp"
-        android:layout_marginLeft="20dp"/>
+        android:paddingTop="@dimen/_20mdp"
+        android:textSize="@dimen/_10font_mdp"
+        android:layout_marginLeft="@dimen/_20mdp"/>
 
     <TextView
         android:id="@+id/tv_tglDoc_frag1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="tanggal doc"
-        android:paddingTop="20dp"
-        android:layout_marginLeft="10dp"
+        android:paddingTop="@dimen/_20mdp"
+        android:textSize="@dimen/_10font_mdp"
+        android:layout_marginLeft="@dimen/_10mdp"
         android:textStyle="bold"/>
    </LinearLayout>
 
@@ -78,21 +86,23 @@
         android:layout_height="match_parent"
         android:layout_below="@id/line5"
         android:layout_marginLeft="5dp"
-        android:layout_weight="10">
+        android:layout_weight="12">
 
         <TextView
             android:id="@+id/tv_prodFrag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:text="Produk" />
 
         <TextView
             android:id="@+id/tv_prodFrag1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="130dp"
-            android:paddingTop="20dp"
+            android:paddingLeft="@dimen/_100mdp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:text="ini produk"
             android:textStyle="bold" />
 
@@ -105,15 +115,17 @@
             android:id="@+id/tv_nmProd_frag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="15dp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:text="Nama Produk" />
 
         <TextView
             android:id="@+id/tv_nmProd_frag1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="130dp"
-            android:paddingTop="15dp"
+            android:paddingLeft="@dimen/_100mdp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:text="nama produk"
             android:textStyle="bold" />
 
@@ -124,7 +136,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/relnamaprod"
-            android:paddingTop="15dp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:text="Qty Rencana Prod" />
 
         <TextView
@@ -132,8 +145,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/relnamaprod"
-            android:paddingLeft="130dp"
-            android:paddingTop="15dp"
+            android:paddingLeft="@dimen/_100mdp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:text="ini qty renc prod"
             android:textStyle="bold" />
 
@@ -142,7 +156,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_qty_rencana"
-            android:paddingTop="15dp"
+            android:textSize="@dimen/_10font_mdp"
+            android:paddingTop="@dimen/_10mdp"
             android:text="Status Produksi" />
 
         <TextView
@@ -150,8 +165,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_qty_rencana1"
-            android:paddingLeft="130dp"
-            android:paddingTop="15dp"
+            android:paddingLeft="@dimen/_100mdp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:text="ini sts prod"
             android:textStyle="bold" />
 
@@ -160,7 +176,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_sts_prod"
-            android:paddingTop="15dp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:text="Route Code" />
 
         <TextView
@@ -168,8 +185,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_sts_prod1"
-            android:paddingLeft="130dp"
-            android:paddingTop="15dp"
+            android:paddingLeft="@dimen/_100mdp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:text="route code"
             android:textStyle="bold" />
         <TextView
@@ -178,8 +196,9 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tv_route1"
             android:layout_below="@id/tv_sts_prod1"
-            android:layout_marginLeft="5dp"
-            android:paddingTop="15dp"
+            android:paddingLeft="@dimen/_10mdp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:textStyle="bold"
             android:text="route name"/>
 
@@ -188,7 +207,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_route"
-            android:paddingTop="15dp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:text="In Qty" />
 
         <TextView
@@ -196,8 +216,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_route"
-            android:paddingLeft="130dp"
-            android:paddingTop="15dp"
+            android:paddingLeft="@dimen/_100mdp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:text="ini in qty"
             android:textStyle="bold" />
 
@@ -206,7 +227,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_inQty"
-            android:paddingTop="15dp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:text="Out Qty" />
 
         <TextView
@@ -214,8 +236,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_inQty"
-            android:paddingLeft="130dp"
-            android:paddingTop="15dp"
+            android:paddingLeft="@dimen/_100mdp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:text="ini out qty"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -231,17 +254,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Squence"
-        android:paddingTop="20dp"
+        android:paddingTop="@dimen/_10mdp"
+        android:textSize="@dimen/_10font_mdp"
         />
 
     <TextView
         android:id="@+id/tv_seq1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tv_seq"
-        android:layout_marginLeft="40dp"
+        android:paddingLeft="@dimen/_70mdp"
+        android:paddingTop="@dimen/_10mdp"
+        android:textSize="@dimen/_10font_mdp"
         android:text="ini squence"
-        android:paddingTop="20dp"
         android:textStyle="bold"
         />
 
@@ -251,18 +275,19 @@
         android:layout_height="wrap_content"
         android:text="Squence Qty"
         android:layout_below="@id/tv_seq1"
-        android:paddingTop="15dp"
+        android:paddingTop="@dimen/_10mdp"
+        android:textSize="@dimen/_10font_mdp"
         />
 
     <TextView
         android:id="@+id/tv_seq_qty1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tv_seq_qty"
-        android:layout_marginLeft="20dp"
+        android:paddingLeft="@dimen/_70mdp"
+        android:paddingTop="@dimen/_10mdp"
+        android:textSize="@dimen/_10font_mdp"
         android:text="ini seq qty"
         android:layout_below="@id/tv_seq1"
-        android:paddingTop="15dp"
         android:textStyle="bold"
         />
 
@@ -272,7 +297,8 @@
         android:layout_height="wrap_content"
         android:text="Shift"
         android:layout_below="@id/tv_seq_qty"
-        android:paddingTop="15dp"
+        android:paddingTop="@dimen/_10mdp"
+        android:textSize="@dimen/_10font_mdp"
         />
 
     <TextView
@@ -280,10 +306,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ini shift"
-        android:layout_toRightOf="@id/tv_shift"
-        android:layout_marginLeft="40dp"
+        android:paddingLeft="@dimen/_70mdp"
+        android:paddingTop="@dimen/_10mdp"
+        android:textSize="@dimen/_10font_mdp"
         android:layout_below="@id/tv_seq_qty1"
-        android:paddingTop="15dp"
         android:textStyle="bold"
         />
         <TextView
@@ -291,7 +317,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_seq_qty1"
-            android:paddingTop="15dp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:layout_toRightOf="@id/tv_shift1"
             android:text=" - "
             android:textStyle="bold"/>
@@ -301,9 +328,10 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvstrip1"
             android:layout_below="@id/tv_seq_qty1"
-            android:paddingTop="15dp"
+            android:paddingTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:textStyle="bold"
-            android:text="nama shift"
+            android:text="shift"
             />
 
     <TextView
@@ -312,18 +340,20 @@
         android:layout_height="wrap_content"
         android:text="Tgl Mulai"
         android:layout_below="@id/tv_shift1"
-        android:paddingTop="15dp"
+        android:paddingTop="@dimen/_10mdp"
+        android:textSize="@dimen/_10font_mdp"
         />
 
     <TextView
         android:id="@+id/tv_tglMulai1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tv_tglMulai"
-        android:layout_marginLeft="40dp"
+
+        android:paddingLeft="@dimen/_70mdp"
+        android:paddingTop="@dimen/_10mdp"
+        android:textSize="@dimen/_10font_mdp"
         android:text="ini tgl mulai"
         android:layout_below="@id/tv_shift1"
-        android:paddingTop="15dp"
         android:textStyle="bold"
         />
 
@@ -333,18 +363,19 @@
         android:layout_height="wrap_content"
         android:text="Tgl Selesai"
         android:layout_below="@id/tv_tglMulai"
-        android:paddingTop="15dp"
+        android:paddingTop="@dimen/_10mdp"
+        android:textSize="@dimen/_10font_mdp"
         />
 
     <TextView
         android:id="@+id/tv_tglSelesai1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tv_tglSelesai"
-        android:layout_marginLeft="30dp"
+        android:paddingLeft="@dimen/_70mdp"
+        android:paddingTop="@dimen/_10mdp"
+        android:textSize="@dimen/_10font_mdp"
         android:text="ini tgl sel"
         android:layout_below="@id/tv_tglMulai"
-        android:paddingTop="15dp"
         android:textStyle="bold"
         />
 
@@ -354,7 +385,8 @@
         android:layout_height="wrap_content"
         android:text="jam Mulai"
         android:layout_below="@id/tv_tglSelesai"
-        android:paddingTop="15dp"
+        android:paddingTop="@dimen/_10mdp"
+        android:textSize="@dimen/_10font_mdp"
         />
 
     <TextView
@@ -362,10 +394,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
        android:text="ini jam mulai"
-        android:layout_toRightOf="@id/tv_jamMulai"
-        android:layout_marginLeft="40dp"
+        android:paddingLeft="@dimen/_70mdp"
+        android:paddingTop="@dimen/_10mdp"
+        android:textSize="@dimen/_10font_mdp"
         android:layout_below="@id/tv_tglSelesai"
-        android:paddingTop="15dp"
         android:textStyle="bold"
         />
 
@@ -375,18 +407,19 @@
         android:layout_height="wrap_content"
         android:text="jam Selesai"
         android:layout_below="@id/tv_jamMulai"
-        android:paddingTop="15dp"
+        android:paddingTop="@dimen/_10mdp"
+        android:textSize="@dimen/_10font_mdp"
         />
 
     <TextView
         android:id="@+id/tv_jamSelesai1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tv_jamSelesai"
-        android:layout_marginLeft="30dp"
+        android:paddingLeft="@dimen/_70mdp"
+        android:paddingTop="@dimen/_10mdp"
+        android:textSize="@dimen/_10font_mdp"
         android:text="ini jam selesai"
         android:layout_below="@id/tv_jamMulai"
-        android:paddingTop="15dp"
         android:textStyle="bold"
         />
     </RelativeLayout>
