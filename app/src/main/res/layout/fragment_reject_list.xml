@@ -3,22 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:ndroid="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.RejectListFragment">
 
 
     <RelativeLayout
         android:id="@+id/lineReject"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="@dimen/_200mdp"
+        android:layout_height="@dimen/_250mdp"
+        android:layout_marginLeft="@dimen/_10mdp"
+        android:layout_marginTop="@dimen/_10mdp"
         android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvReject2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="@dimen/_14font_mdp"
+        android:textStyle="bold"
         android:layout_marginTop="20dp"
         android:text="Choose Reject : "
         android:gravity="center_horizontal"
@@ -29,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvReject2"
-            android:textColor="@color/white"
+
             android:text="docentryyyyy"/>
 
         <TextView
@@ -38,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvdocentry4"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="line numb"/>
 
         <TextView
@@ -47,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvlinenumb0"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="id"/>
 
         <TextView
@@ -56,25 +58,16 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvid6"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
-            android:text="mobileid"/>
 
-        <TextView
-            android:id="@+id/tvip14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@id/tvmobileid1"
-            android:textColor="@color/white"
-            android:text="ip server"/>
+            android:text="mobileid"/>
 
         <TextView
             android:id="@+id/tvcodereject0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvReject2"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
+            android:layout_marginTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             android:hint="Code Reject"/>
 
         <TextView
@@ -84,10 +77,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_below="@id/tvReject2"
             android:layout_toRightOf="@id/tvcodereject0"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/_10mdp"
             android:text="Reject"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
+            android:layout_marginTop="@dimen/_10mdp"
+            android:textSize="@dimen/_10font_mdp"
             />
 
 
@@ -96,21 +89,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pilih Reject"
+            android:textSize="@dimen/_14font_mdp"
             android:gravity="center_horizontal"
             android:layout_below="@id/tvReject3"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="@dimen/_10mdp"/>
 
         <Button
             android:id="@+id/btnSimpan"
-            android:layout_width="350dp"
+            android:layout_width="@dimen/_250mdp"
             android:layout_height="match_parent"
             android:text="SIMPAN"
-            android:textSize="20sp"
+            android:textSize="@dimen/_16font_mdp"
             android:layout_below="@id/btnReject"
             android:background="@drawable/button"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_15mdp"
             />
 
 
@@ -131,7 +125,7 @@
         android:layout_toRightOf="@id/tvtotreject1"
         android:layout_marginLeft="5dp"
         android:text="in qqty"
-        android:textColor="@color/white"
+
         android:layout_below="@id/lineReject"/>
 
     <TextView
@@ -141,7 +135,7 @@
         android:layout_toRightOf="@id/tvinqty1"
         android:layout_below="@id/lineReject"
         android:layout_marginLeft="5dp"
-        android:textColor="@color/white"
+
         android:text="out qty"/>
 
     <TextView
@@ -151,17 +145,26 @@
         android:layout_toRightOf="@id/tvoutqty1"
         android:layout_marginLeft="5dp"
         android:layout_below="@id/lineReject"
-        android:textColor="@color/white"
+
         android:text="grantot"/>
+
 
     <RelativeLayout
         android:id="@+id/relinputRej"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/_15mdp"
         android:layout_toRightOf="@id/lineReject"
-        android:layout_marginTop="20dp"
-        >
+        android:layout_marginTop="@dimen/_10mdp">
+
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/relinputRej"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="4dp"-->
+<!--        android:layout_toRightOf="@id/lineReject"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        >-->
 
         <TextView
             android:id="@+id/tvRejectQty"
@@ -181,127 +184,116 @@
 
             <Button
                 android:id="@+id/btn1"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
-                android:background="@drawable/button"
-                android:onClick="btn1Clicked"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:text="1"
-                android:textSize="40sp" />
-
+                android:onClick="btn1Clicked"
+                android:background="@drawable/button"
+                android:textSize="@dimen/_35font_mdp"/>
             <Button
                 android:id="@+id/btn2"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_toRightOf="@id/btn1"
                 android:background="@drawable/button"
-                android:onClick="btn2Clicked"
                 android:text="2"
-                android:textSize="40sp" />
-
+                android:onClick="btn2Clicked"
+                android:textSize="@dimen/_35font_mdp"/>
             <Button
                 android:id="@+id/btn3"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_toRightOf="@id/btn2"
                 android:background="@drawable/button"
-                android:onClick="btn3Clicked"
                 android:text="3"
-                android:textSize="40sp" />
-
+                android:onClick="btn3Clicked"
+                android:textSize="@dimen/_35font_mdp"/>
             <Button
                 android:id="@+id/btn4"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn1"
                 android:background="@drawable/button"
-                android:onClick="btn4Clicked"
                 android:text="4"
-                android:textSize="40sp" />
-
+                android:onClick="btn4Clicked"
+                android:textSize="@dimen/_35font_mdp"/>
             <Button
                 android:id="@+id/btn5"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn2"
                 android:layout_toRightOf="@id/btn4"
                 android:background="@drawable/button"
-                android:onClick="btn5Clicked"
                 android:text="5"
-                android:textSize="40sp" />
-
+                android:onClick="btn5Clicked"
+                android:textSize="@dimen/_35font_mdp"/>
             <Button
                 android:id="@+id/btn6"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn3"
                 android:layout_toRightOf="@id/btn5"
                 android:background="@drawable/button"
-                android:onClick="btn6Clicked"
                 android:text="6"
-                android:textSize="40sp" />
-
+                android:onClick="btn6Clicked"
+                android:textSize="@dimen/_35font_mdp"/>
             <Button
                 android:id="@+id/btn7"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn4"
                 android:background="@drawable/button"
-                android:onClick="btn7Clicked"
                 android:text="7"
-                android:textSize="40sp" />
-
+                android:onClick="btn7Clicked"
+                android:textSize="@dimen/_35font_mdp"/>
             <Button
                 android:id="@+id/btn8"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn5"
                 android:layout_toRightOf="@id/btn7"
                 android:background="@drawable/button"
-                android:onClick="btn8Clicked"
                 android:text="8"
-                android:textSize="40sp" />
-
+                android:onClick="btn8Clicked"
+                android:textSize="@dimen/_35font_mdp"/>
             <Button
                 android:id="@+id/btn9"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn6"
                 android:layout_toRightOf="@id/btn8"
                 android:background="@drawable/button"
-                android:onClick="btn9Clicked"
                 android:text="9"
-                android:textSize="40sp" />
-
+                android:onClick="btn9Clicked"
+                android:textSize="@dimen/_35font_mdp"/>
             <Button
                 android:id="@+id/btnClear"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn7"
                 android:background="@drawable/button"
-                android:onClick="btnClearClic"
                 android:text="Clear"
-                android:textSize="20sp" />
-
+                android:onClick="btnClearClic"
+                android:textSize="20sp"/>
             <Button
                 android:id="@+id/btn0"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn8"
-                android:layout_toRightOf="@id/btnClear"
                 android:background="@drawable/button"
-                android:onClick="btn0Click"
+                android:layout_toRightOf="@id/btnClear"
                 android:text="0"
-                android:textSize="40sp" />
-
+                android:onClick="btn0Click"
+                android:textSize="@dimen/_35font_mdp"/>
             <Button
                 android:id="@+id/btnBack"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn9"
-                android:layout_toRightOf="@id/btn0"
                 android:background="@drawable/button"
+                android:layout_toRightOf="@id/btn0"
                 android:text="Back"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
         </RelativeLayout>
     </RelativeLayout>
 

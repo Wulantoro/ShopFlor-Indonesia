@@ -154,12 +154,6 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         tvid1.setText(String.valueOf(header.getId()));
         tvmobileid.setText(header.getMobileId());
 
-
-
-        TextView tvqcname = findViewById(R.id.tvqcname1);
-        prf = getSharedPreferences("Qcname", MODE_PRIVATE);
-        tvqcname.setText(prf.getString("tvqcname", null));
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("Open Document");
@@ -436,12 +430,6 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         editor16.putString("tvposted", tvposted);
         editor16.commit();
 
-        pref = getSharedPreferences("Qcname", MODE_PRIVATE);
-        String tvqcname = tvqcname1.getText().toString();
-        SharedPreferences.Editor editor17 = pref.edit();
-        editor17.putString("tvqcname", tvqcname);
-        editor17.commit();
-
         pref = getSharedPreferences("Username", MODE_PRIVATE);
         String tvusername = tvusername5.getText().toString();
         SharedPreferences.Editor editor18 = pref.edit();
@@ -459,12 +447,6 @@ public class DetailOpenDocActivity extends AppCompatActivity {
         SharedPreferences.Editor editor20 = pref.edit();
         editor20.putString("tvcodeshift", tvcodesh);
         editor20.commit();
-
-        pref = getSharedPreferences("Namawc", MODE_PRIVATE);
-        String tvnamawc = tvnamawc3.getText().toString();
-        SharedPreferences.Editor editor21 = pref.edit();
-        editor21.putString("tvnamawc", tvnamawc);
-        editor21.commit();
 
         pref = getSharedPreferences("Id", MODE_PRIVATE);
         String tvid = tvid1.getText().toString();

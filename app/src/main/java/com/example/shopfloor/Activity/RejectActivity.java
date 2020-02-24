@@ -240,8 +240,8 @@ public class RejectActivity extends AppCompatActivity {
 
         /*********************noprod****************************************/
         TextView tvnoprod = findViewById(R.id.tvnoprod1);
-        prf = getSharedPreferences("Noprod", MODE_PRIVATE);
-        tvnoprod.setText(prf.getString("tvnoprod", null));
+        prf = getSharedPreferences("prodNo", MODE_PRIVATE);
+        tvnoprod.setText(prf.getString("tvprodno", null));
 
         /********************************nmprod*******************************/
         TextView tvnmprod = findViewById(R.id.tvnmprod1);
@@ -601,6 +601,7 @@ public class RejectActivity extends AppCompatActivity {
 
     private void loadCriteriaIsi(String hostHeadEntry) {
 
+        Realm.init(getApplicationContext());
         Realm realm = Realm.getDefaultInstance();
         RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
         String text = "";

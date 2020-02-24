@@ -8,7 +8,8 @@
     <string name="no_dokumen">No Dokumen</string>
     <string name="produk">Produk</string>
     <string name="reject">Reject</string>
-    <string name="info">Info</string>
+    <string name="info"
+       size="@dimen/_15font_mdp" >Info</string>
     <string name="criteria">Criteria</string>
 
     <!-- TODO: Remove or change this placeholder text -->

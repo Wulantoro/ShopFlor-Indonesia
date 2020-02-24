@@ -198,10 +198,10 @@ public class OutQtyDetActivity extends AppCompatActivity {
             editor.putString("tvinqty", tvinqty);
             editor.commit();
 
-            pref = getSharedPreferences("Noprod", MODE_PRIVATE);
-            noprod = pref.getString("tvnoprod", null);
+            pref = getSharedPreferences("prodNo", MODE_PRIVATE);
+            noprod = pref.getString("tvprodno", null);
             SharedPreferences.Editor editor1 = pref.edit();
-            editor1.putString("tvnoprod", noprod);
+            editor1.putString("tvprodno", noprod);
             editor1.commit();
 
             pref = getSharedPreferences("outQty", MODE_PRIVATE);
