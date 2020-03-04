@@ -227,7 +227,7 @@
                android:id="@+id/relList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="@dimen/_10mdp"
                 android:layout_below="@id/content1"
                 >
         <Button
@@ -242,7 +242,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/btnFrag"
-
+                    android:textColor="@color/white"
                     android:text="id head"/>
 
                 <TextView
@@ -251,32 +251,34 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/tvid7"
                     android:text="total reject"
-                    android:layout_marginLeft="10dp"/>
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="@dimen/_10mdp"/>
 
                 <TextView
                     android:id="@+id/tvtotok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/tvtotreject"
+                    android:textColor="@color/white"
                     android:text="total ok"
-                    android:layout_marginLeft="5dp"/>
+                    android:layout_marginLeft="@dimen/_5mdp"/>
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvInputReject"
             android:layout_below="@id/btnFrag"
             android:layout_width="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_10mdp"
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_reject_row">
         </androidx.recyclerview.widget.RecyclerView>
 
                 <ImageButton
                     android:id="@+id/ibscan"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
+                    android:layout_width="@dimen/_90mdp"
+                    android:layout_height="@dimen/_90mdp"
                     android:layout_toRightOf="@id/btnFrag"
-                    android:layout_marginLeft="175dp"
+                    android:layout_marginLeft="@dimen/_100mdp"
                     android:background="@color/white"
                     android:src="@drawable/ic_camera"
                     />
@@ -290,7 +292,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/line"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/_10mdp"
         >
 
         <TextView
@@ -305,7 +307,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvdocentry0"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/_5mdp"
             android:textColor="@color/white"
             android:text="prodcode"/>
 
@@ -314,7 +316,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvprodcode0"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/_5mdp"
             android:textColor="@color/white"
             android:text="workcenter"/>
 
@@ -325,7 +327,7 @@
             android:layout_below="@id/tvdocentry0"
             android:layout_toRightOf="@id/tvworkcenter6"
             android:textColor="@color/white"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="@dimen/_5mdp"
             android:text="posted"/>
 
         <TextView

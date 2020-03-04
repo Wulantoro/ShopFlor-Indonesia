@@ -68,6 +68,7 @@ public class SuccessDocActivity extends AppCompatActivity {
     Realm realm;
     RealmHelper realmHelper;
     List<ServerModel> serverModels;
+    private static final String TAG = Add_DocActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,12 +197,13 @@ public class SuccessDocActivity extends AppCompatActivity {
 
 
                 prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
-                prf.getString("workcenter", null);
-                Log.e("work vwjbgyg ", prf.getString("workcenter", null));
+                prf.getString("workcenter1", null);
+                Log.e("work centot ", prf.getString("workcenter1", null));
 
 
 //            AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/completeheader?workCenter="+prf.getString("workcenter", null))
-                AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/completeheader?workCenter=" + prf.getString("workcenter", null))
+                Log.e(TAG, "ip = " + c.getAddress() + "shopfloor2/index.php/completeheader?workCenter=" + prf.getString("workcenter1", null));
+                AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/completeheader?workCenter=" + prf.getString("workcenter1", null))
                         .setPriority(Priority.MEDIUM)
                         .build()
                         .getAsJSONObject(new JSONObjectRequestListener() {

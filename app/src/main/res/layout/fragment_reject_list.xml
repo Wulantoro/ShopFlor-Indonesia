@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvReject2"
-
+            android:textColor="@color/white"
             android:text="docentryyyyy"/>
 
         <TextView
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvdocentry4"
             android:layout_marginLeft="5dp"
-
+            android:textColor="@color/white"
             android:text="line numb"/>
 
         <TextView
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvlinenumb0"
             android:layout_marginLeft="5dp"
-
+            android:textColor="@color/white"
             android:text="id"/>
 
         <TextView
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvid6"
             android:layout_marginLeft="5dp"
-
+            android:textColor="@color/white"
             android:text="mobileid"/>
 
         <TextView
@@ -125,7 +125,7 @@
         android:layout_toRightOf="@id/tvtotreject1"
         android:layout_marginLeft="5dp"
         android:text="in qqty"
-
+        android:textColor="@color/white"
         android:layout_below="@id/lineReject"/>
 
     <TextView
@@ -135,7 +135,7 @@
         android:layout_toRightOf="@id/tvinqty1"
         android:layout_below="@id/lineReject"
         android:layout_marginLeft="5dp"
-
+        android:textColor="@color/white"
         android:text="out qty"/>
 
     <TextView
@@ -145,7 +145,7 @@
         android:layout_toRightOf="@id/tvoutqty1"
         android:layout_marginLeft="5dp"
         android:layout_below="@id/lineReject"
-
+        android:textColor="@color/white"
         android:text="grantot"/>
 
 
