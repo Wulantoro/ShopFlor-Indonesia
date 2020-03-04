@@ -51,9 +51,7 @@ public class MainActivity extends AppCompatActivity {
     RealmHelper realmHelper;
     List<ServerModel> serverModels;
 
-    public final static String TAG_USERNAME = "U_STEM_Username";
-    public final static String TAG_PASSWORD = "U_STEM_Password";
-
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         btnKonf = findViewById(R.id.btnKonf);
 
 //        Setup Realm
+//        Realm realm = Realm.getDefaultInstance();
         Realm.init(getApplicationContext());
         RealmConfiguration configuration = new RealmConfiguration.Builder().build();
         realm = Realm.getInstance(configuration);
@@ -83,17 +82,6 @@ public class MainActivity extends AppCompatActivity {
             text = text + c.getAddress();
         }
         tvip0.setText(text);
-
-//        serverModels = realmHelper.getAllAddress();
-//        tvip0.setText(serverModel.getAddress());
-//        Log.e("ip address = ", String.valueOf(serverModel.getAddress()));
-
-//        TextView tvip = findViewById(R.id.tvip0);
-//        prf = getSharedPreferences("Ip", MODE_PRIVATE);
-//        tvip.setText(prf.getString("tvip", null));
-//        Log.e("ip2", String.valueOf(prf.getString("tvip", null)));
-
-
 
         if (sharedPrefManager.getSPSudahLogin()) {
             startActivity(new Intent(MainActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
@@ -112,9 +100,17 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                loginUser();
+
+//                pref = getSharedPreferences("username", MODE_PRIVATE);
 //                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+//                String username = etusername0.getText().toString();
+//                SharedPreferences.Editor editor = pref.edit();
+//                editor.putString("etusername", username);
+//                editor.commit();
 //                startActivity(intent);
 
+//                ntar dibalikin lagi ya
                 String username = etusername0.getText().toString();
                 String password = etpassword0.getText().toString();
 
@@ -122,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 if (username.trim().length() > 0 && password.trim().length() > 0) {
                     if (conMgr.getActiveNetworkInfo() != null && conMgr.getActiveNetworkInfo().isAvailable() && conMgr.getActiveNetworkInfo().isConnected()) {
                         checkLogin(username, password);
+
 
                     }else {
                         Toast.makeText(getApplicationContext(), "No Internet Connecting", Toast.LENGTH_SHORT).show();
@@ -155,6 +152,42 @@ public class MainActivity extends AppCompatActivity {
             startActivity(a);
         }
 
+        private void loginUser() {
+
+        String username99 = etusername0.getText().toString();
+        String password99 = etpassword0.getText().toString();
+
+            String[] user = {"nunu", "meli"};
+            String[] pass = {"12345", "1234"};
+
+            if (username99.equals("meli") && password99.equals("1234") || (username99.equals("nunu") && password99.equals("12345")) || (username99.equals("maria") && password99.equals("1234"))
+                 || (username99.equals("devi") && password99.equals("1234")) || (username99.equals("nina") && password99.equals("1234")) || (username99.equals("adrian") && password99.equals("1234"))
+                    || (username99.equals("buhari") && password99.equals("1234")) || (username99.equals("ichwan") && password99.equals("1234")) || (username99.equals("endang") && password99.equals("1234"))
+                    || (username99.equals("nabila") && password99.equals("1234")) || (username99.equals("nur") && password99.equals("1234")) || (username99.equals("Rahmawati") && password99.equals("1234"))
+                    || (username99.equals("Anita") && password99.equals("1234")) || (username99.equals("Anis") && password99.equals("1234")) || (username99.equals("Febriyani") && password99.equals("1234"))
+                    || (username99.equals("SRukmana") && password99.equals("1234")) || (username99.equals("Dewi") && password99.equals("dewi1")) || (username99.equals("Yuli") && password99.equals("yuli1"))
+                    || (username99.equals("Ghani") && password99.equals("1234")) || (username99.equals("rini") && password99.equals("ini01")) || (username99.equals("imas") && password99.equals("mas01"))
+                    || (username99.equals("Gita") && password99.equals("ita01")) || (username99.equals("Aisah") && password99.equals("isah01")) || (username99.equals("Aidah2") && password99.equals("idah01"))
+                    || (username99.equals("Rini") && password99.equals("ini01")) || (username99.equals("Aidah") && password99.equals("idah01")) || (username99.equals("fitri") && password99.equals("12345"))
+                    || (username99.equals("Mila") && password99.equals("1234"))) {
+
+                Log.e(TAG, "username = " + user);
+                Log.e(TAG, "pass = " + pass);
+
+                pref = getSharedPreferences("username", MODE_PRIVATE);
+                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                String username = etusername0.getText().toString();
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("etusername", username);
+                editor.commit();
+                startActivity(intent);
+
+
+            } else {
+                Toasty.error(MainActivity.this, "Password atau Username salah", Toast.LENGTH_SHORT).show();
+            }
+        }
+
 
     private void checkLogin(final String username, final String password) {
 
@@ -172,10 +205,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-//        Log.e("ip = ", String.valueOf(AndroidNetworking.post(prf.getString("tvip", null) + "index.php/loginuser")));
-//        AndroidNetworking.post(GlobalVars.BASE_IP + "index.php/loginuser")
-//        AndroidNetworking.post(prf.getString("tvip", null) + "index.php/loginuser")
 
         Realm realm = Realm.getDefaultInstance();
         RealmResults<ServerModel> results1 = realm.where(ServerModel.class).findAll();
@@ -202,8 +231,6 @@ public class MainActivity extends AppCompatActivity {
 
 
                                 if (success.equals("1")) {
-//                                String username = jObject.getString(TAG_USERNAME);
-//                                String password = jObject.getString(TAG_PASSWORD);
 
                                     sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, true);
 
@@ -214,15 +241,9 @@ public class MainActivity extends AppCompatActivity {
                                     editor.putString("etusername", username);
                                     editor.commit();
 
-//                                    pref = getSharedPreferences("Ip", MODE_PRIVATE);
-//                                    String tvipadd = tvip0.getText().toString();
-//                                    SharedPreferences.Editor editor1 = pref.edit();
-//                                    editor1.putString("tvip", tvipadd);
-//                                    editor1.commit();
-//                                intent.putExtra(TAG_USERNAME, username);
-//                                intent.putExtra(TAG_PASSWORD, password);
-//                                finish();
                                     startActivity(intent);
+
+//                                    //sementara di matiin dulu ya, ga bisa login soal nya
                                 } else {
                                     Toasty.error(MainActivity.this, "Password atau Username salah", Toast.LENGTH_SHORT).show();
                                 }

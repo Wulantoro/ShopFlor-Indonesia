@@ -8,8 +8,8 @@
     card_view:cardUseCompatPadding="true">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="@dimen/_160mdp"
+        android:layout_height="@dimen/_40mdp">
 
         <TextView
             android:id="@+id/tvcodereject1"
@@ -25,7 +25,7 @@
             android:id="@+id/tvqty0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:layout_marginLeft="@dimen/_200mdp"
+           android:layout_marginLeft="@dimen/_90mdp"
             android:text="Qty : "
             android:textSize="@dimen/_10font_mdp"
             android:textStyle="italic"/>
