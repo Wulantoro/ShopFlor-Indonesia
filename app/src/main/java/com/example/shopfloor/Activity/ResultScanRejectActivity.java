@@ -55,6 +55,8 @@ public class ResultScanRejectActivity extends AppCompatActivity {
     RealmHelper realmHelper;
     List<ServerModel> serverModels;
 
+    private static final String TAG = AddSeqActivity.class.getName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,10 +92,15 @@ public class ResultScanRejectActivity extends AppCompatActivity {
 //        lastId(tvdocentry4.getText().toString());
 //        Log.e("docentryyyyyyy", String.valueOf(tvdocentry4.getText().toString()));
 
+        TextView tvid = findViewById(R.id.tvid6);
+        prf = getSharedPreferences("Id", MODE_PRIVATE);
+        tvid.setText(String.valueOf(prf.getString("tvid", null)));
+
         tvdocentry4 = findViewById(R.id.tvdocentry4);
         TextView tvdocentry = findViewById(R.id.tvdocentry4);
         prf = getSharedPreferences("Docentry", MODE_PRIVATE);
         tvdocentry.setText(prf.getString("tvdocentry", null));
+        Log.e(TAG, "docentru = " + prf.getString("tvdocentry", null));
 
         lastId(tvdocentry4.getText().toString());
 
@@ -111,7 +118,7 @@ public class ResultScanRejectActivity extends AppCompatActivity {
 
                 if (tvRejectQty.length() != 0 && tvcodereject0.length() != 0) {
                     simpanReject();
-                    startActivity(new Intent(getApplicationContext(), RejectActivity.class));
+//                    startActivity(new Intent(getApplicationContext(), RejectActivity.class));
 
                 } else {
                     Toast.makeText(getApplicationContext(), "Reject Qty atau Reject tidak boleh kosong", Toast.LENGTH_SHORT).show();
@@ -139,6 +146,7 @@ public class ResultScanRejectActivity extends AppCompatActivity {
 
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/lastid?mobileId=" + mobile)
+            Log.e(TAG, "lastid = " + c.getAddress() + "shopfloor2/index.php/lastid?docEntry=" + docentry);
             AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/lastid?docEntry=" + docentry)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
@@ -288,12 +296,17 @@ public class ResultScanRejectActivity extends AppCompatActivity {
     public void simpanReject() {
         JSONObject jsonObject = new JSONObject();
         try {
+            JSONArray newArr = new JSONArray();
             jsonObject.put("hostHeadEntry", tvdocentry4.getText().toString());
             jsonObject.put("id", tvid6.getText().toString());
             jsonObject.put("lineNumber", tvlinenumb0.getText().toString());
             jsonObject.put("rejectCode", tvcodereject0.getText().toString());
             jsonObject.put("rejectName", tvReject3.getText().toString());
             jsonObject.put("rejectQty", tvRejectQty.getText().toString());
+
+            newArr.put(jsonObject);
+            Log.e(TAG,"coba input = "+ newArr.toString(1));
+
         }catch (JSONException e) {
             e.printStackTrace();
         }
@@ -315,6 +328,7 @@ public class ResultScanRejectActivity extends AppCompatActivity {
                             try {
                                 String message = response.getString("message");
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), RejectActivity.class));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                                 Toast.makeText(getApplicationContext(), "JSONEXceptions" + e, Toast.LENGTH_SHORT).show();
