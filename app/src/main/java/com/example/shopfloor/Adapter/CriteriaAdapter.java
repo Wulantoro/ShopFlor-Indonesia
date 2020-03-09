@@ -53,7 +53,7 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         final Criteria criteria = list_item.get(holder.getAdapterPosition());
 
         counter++;
@@ -64,15 +64,17 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
         holder.tvstandard1.setText(criteria.getUStandard());
         holder.tvvalue.setText(criteria.getUValueType());
         holder.tvlinenumber.setText(position+1+"");
+        holder.etactual1.setText(criteria.getUStandard());
         holder.etactual1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+//
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 criteria.setActualResult(s.toString());
+//
             }
 
             @Override
