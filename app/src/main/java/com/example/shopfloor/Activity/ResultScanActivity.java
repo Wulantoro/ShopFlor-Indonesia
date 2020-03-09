@@ -163,11 +163,13 @@ public class ResultScanActivity extends AppCompatActivity {
         //workcenter
         TextView tvwc = findViewById(R.id.tvwc1);
         prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
-        tvwc.setText(prf.getString("workcenter", null));
+        tvwc.setText(prf.getString("workcenter0", null));
+        Log.e(TAG, "workcenter = " + prf.getString("workcenter", null));
 
         TextView tvuserid = findViewById(R.id.tvusername2);
         prf = getSharedPreferences("userId", MODE_PRIVATE);
         tvuserid.setText(prf.getString("tvuserid", null));
+        Log.e(TAG, "username " + prf.getString("tvuserid", null));
 
         TextView tvnamawc = findViewById(R.id.tvnamawc2);
         prf = getSharedPreferences("Namewc", MODE_PRIVATE);
@@ -215,7 +217,7 @@ public class ResultScanActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         String wc = tvwc1.getText().toString();
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("tvworkcenter", wc);
+        editor.putString("workcenter0", wc);
         editor.commit();
 
         startActivity(intent);
@@ -233,7 +235,7 @@ public class ResultScanActivity extends AppCompatActivity {
 
         if (id == R.id.action_seq) {
             /*************jam mulaui************************/
-            String jam = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+            String jam = new SimpleDateFormat("HH:mm", Locale.getDefault()).format(new Date());
             TextView jam_mulai = findViewById(R.id.tvJam_mulai1);
             jam_mulai.setText(jam);
 
@@ -242,6 +244,8 @@ public class ResultScanActivity extends AppCompatActivity {
 
             SimpleDateFormat sdf1 = new SimpleDateFormat("EEEE");
             String getCurentDay = sdf1.format(c.getTime());
+
+            Log.e(TAG, "hari ini " + getCurentDay);
 
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
             String getCurentTime = sdf.format(c.getTime());
@@ -255,8 +259,10 @@ public class ResultScanActivity extends AppCompatActivity {
                 shift.setText(getCurentDay + " " + "-" + " " + "Shift 1");
             } else if (getCurentTime.compareTo(getTestTime1) > 0 && getTestTime2.compareTo(getCurentTime) > 0) {
                 shift.setText(getCurentDay + " " + "-" + " " + "Shift 2");
-            } else if (getCurentTime.compareTo(getTestTime2) > 0) {
-                shift.setText(getCurentDay + "-" + " " + "Shift 3");
+//            } else if (getCurentTime.compareTo(getTestTime2) > 0) {
+//                shift.setText(getCurentDay + "-" + " " + "Shift 3");
+            } else{
+                shift.setText(getCurentDay + " " + "-" + " " +"Shift 3");
             }
 
             //Code shift
@@ -544,11 +550,11 @@ public class ResultScanActivity extends AppCompatActivity {
             Log.e("docnumbaru", tvNo_Prod1.getText().toString());
             Log.e("seq11", tvSquence1.getText().toString());
             prf = getSharedPreferences("Workcenter", MODE_PRIVATE);
-            prf.getString("workcenter", null);
-            Log.e("workcenter1111 = ", prf.getString("workcenter", null));
+            prf.getString("workcenter0", null);
+            Log.e("workcenter1111 = ", prf.getString("workcenter0", null));
 
 //        AndroidNetworking.get(GlobalVars.BASE_IP + "index.php/poscan?wccode=" + prf.getString("workcenter", null) + "&DocNum=" + docnum1 + "&seq=" + seq1)
-            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/poscan?wccode=" + prf.getString("workcenter", null) + "&DocNum=" + docnum1 + "&seq=" + seq1)
+            AndroidNetworking.get(c.getAddress() + "shopfloor2/index.php/poscan?wccode=" + prf.getString("workcenter0", null) + "&DocNum=" + docnum1 + "&seq=" + seq1)
                     .setPriority(Priority.MEDIUM)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
