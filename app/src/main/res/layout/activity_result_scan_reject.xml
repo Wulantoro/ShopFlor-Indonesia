@@ -8,17 +8,17 @@
 
     <RelativeLayout
         android:id="@+id/lineReject"
-        android:layout_width="400dp"
-        android:layout_height="350dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
+        android:layout_width="@dimen/_200mdp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:layout_marginLeft="@dimen/_20mdp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvReject2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="@dimen/_13font_mdp"
             android:text="Choose Reject : "
             android:gravity="center_horizontal"
             />
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvReject2"
-            android:textColor="@color/white"
+
             android:text="docentryyyyy"/>
 
         <TextView
@@ -37,7 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvdocentry4"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
             android:text="line numb"/>
 
         <TextView
@@ -46,7 +45,6 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvlinenumb0"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
             android:text="id"/>
 
         <TextView
@@ -55,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tvid6"
             android:layout_marginLeft="5dp"
-            android:textColor="@color/white"
+
             android:text="mobileid"/>
 
 
@@ -64,8 +62,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvReject2"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
+            android:layout_marginTop="@dimen/_10mdp"
+            android:textSize="@dimen/_15font_mdp"
             android:hint="code reject"/>
 
         <TextView
@@ -75,10 +73,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_below="@id/tvReject2"
             android:layout_toRightOf="@id/tvcodereject0"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/_10mdp"
             android:text="Reject"
-            android:layout_marginTop="10dp"
-            android:textSize="20sp"
+            android:layout_marginTop="@dimen/_10mdp"
+            android:textSize="@dimen/_15font_mdp"
             />
 
 
@@ -91,17 +89,18 @@
             android:layout_below="@id/tvReject3"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="@dimen/_10mdp" />
 
         <Button
             android:id="@+id/btnSimpan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="SIMPAN"
-            android:textSize="20sp"
+            android:textSize="@dimen/_13font_mdp"
             android:layout_below="@id/btnReject"
             android:background="@drawable/button"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="@dimen/_20mdp"
+            android:layout_marginBottom="@dimen/_48mdp"/>
 
         <TextView
             android:id="@+id/tvip17"
@@ -132,11 +131,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvRejectQty"
-            android:layout_marginLeft="10dp">
+            android:layout_marginLeft="@dimen/_10mdp">
             <Button
                 android:id="@+id/btn1"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:background="@drawable/button"
                 android:text="1"
                 android:textSize="40sp"
@@ -144,8 +143,8 @@
 
             <Button
                 android:id="@+id/btn2"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_toRightOf="@id/btn1"
                 android:background="@drawable/button"
                 android:text="2"
@@ -154,8 +153,8 @@
 
             <Button
                 android:id="@+id/btn3"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_toRightOf="@id/btn2"
                 android:background="@drawable/button"
                 android:text="3"
@@ -164,8 +163,8 @@
 
             <Button
                 android:id="@+id/btn4"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn1"
                 android:background="@drawable/button"
                 android:text="4"
@@ -174,8 +173,8 @@
 
             <Button
                 android:id="@+id/btn5"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn2"
                 android:layout_toRightOf="@id/btn4"
                 android:background="@drawable/button"
@@ -185,8 +184,8 @@
 
             <Button
                 android:id="@+id/btn6"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn3"
                 android:layout_toRightOf="@id/btn5"
                 android:background="@drawable/button"
@@ -196,8 +195,8 @@
 
             <Button
                 android:id="@+id/btn7"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn4"
                 android:background="@drawable/button"
                 android:text="7"
@@ -206,8 +205,8 @@
 
             <Button
                 android:id="@+id/btn8"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn5"
                 android:layout_toRightOf="@id/btn7"
                 android:background="@drawable/button"
@@ -217,8 +216,8 @@
 
             <Button
                 android:id="@+id/btn9"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn6"
                 android:layout_toRightOf="@id/btn8"
                 android:background="@drawable/button"
@@ -228,8 +227,8 @@
 
             <Button
                 android:id="@+id/btnClear"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn7"
                 android:background="@drawable/button"
                 android:text="Clear"
@@ -239,8 +238,8 @@
 
             <Button
                 android:id="@+id/btn0"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
                 android:layout_below="@id/btn8"
                 android:layout_toRightOf="@id/btnClear"
                 android:background="@drawable/button"
@@ -251,8 +250,9 @@
 
             <Button
                 android:id="@+id/btnBack"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_55mdp"
+
                 android:layout_below="@id/btn9"
                 android:layout_toRightOf="@id/btn0"
                 android:background="@drawable/button"

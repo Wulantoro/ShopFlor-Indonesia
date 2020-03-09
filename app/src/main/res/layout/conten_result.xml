@@ -175,13 +175,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvQty_rencProd"
+                android:textColor="@color/white"
                 android:text="ini mworkcenter"/>
             <TextView
                 android:id="@+id/tvusername2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvQty_rencProd"
-
+                android:textColor="@color/white"
                 android:layout_toRightOf="@id/tvwc1"
                 android:text="usernameeeeeeee"/>
             <TextView
@@ -189,6 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvusername2"
+                android:textColor="@color/white"
                 android:text="wcname"/>
 
             <TextView
@@ -198,6 +200,7 @@
                 android:layout_below="@id/tvusername2"
                 android:layout_toRightOf="@id/tvnamawc2"
                 android:layout_marginLeft="5dp"
+                android:textColor="@color/white"
                 android:text="ip server"/>
 
 
@@ -385,7 +388,4 @@
         </RelativeLayout>
 
     </LinearLayout>
-
-
-
 </RelativeLayout>
