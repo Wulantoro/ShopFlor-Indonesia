@@ -64,11 +64,12 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
         holder.tvstandard1.setText(criteria.getUStandard());
         holder.tvvalue.setText(criteria.getUValueType());
         holder.tvlinenumber.setText(position+1+"");
-        holder.etactual1.setText(criteria.getUStandard());
+//        holder.etactual1.setText(criteria.getUStandard());
         holder.etactual1.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
+
+
             }
 
             @Override
@@ -79,6 +80,7 @@ public class CriteriaAdapter extends RecyclerView.Adapter<CriteriaAdapter.ViewHo
 
             @Override
             public void afterTextChanged(Editable s) {
+//                holder.etactual1.setText(criteria.getUStandard());
 
             }
         });

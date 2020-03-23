@@ -43,6 +43,7 @@ public class OpenDocAdapter extends RecyclerView.Adapter<OpenDocAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        String seqqty;
         final Header header = list_item.get(holder.getAdapterPosition());
 
         holder.tvdate1.setText(header.getDocDate().substring(0,10));
