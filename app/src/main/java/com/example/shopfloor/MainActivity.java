@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
 
                         @Override
                         public void onError(ANError anError) {
-                            Toasty .error(getApplicationContext(), "Gagal Login", Toast.LENGTH_LONG).show();
+                            Toasty.error(getApplicationContext(), "Gagal Login", Toast.LENGTH_LONG).show();
                         }
                     });
         }

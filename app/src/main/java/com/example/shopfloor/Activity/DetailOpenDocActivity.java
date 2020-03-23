@@ -184,7 +184,8 @@ public class DetailOpenDocActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                deleteHeader(tvdocentry1.getText().toString());
+//                deleteHeader(tvdocentry1.getText().toString());
+                Toasty.info(getApplicationContext(), "Fitur hapus ditiadakan", Toasty.LENGTH_LONG).show();
             }
         });
 
@@ -483,7 +484,7 @@ public class DetailOpenDocActivity extends AppCompatActivity {
                                        Workcenter workcenter =  gson.fromJson(dataArr.getJSONObject(i).toString(), Workcenter.class);
                                        result.add(workcenter);
 
-                                        tvnamawc3.setText(workcenter.getName());
+//                                        tvnamawc3.setText(workcenter.getName());
                                     }
                                 }
                             }
