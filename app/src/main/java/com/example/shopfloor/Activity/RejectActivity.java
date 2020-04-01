@@ -662,7 +662,8 @@ public class RejectActivity extends AppCompatActivity {
 
         int totNG = Integer.parseInt(tvtotreject.getText().toString());
 
-            if (id == R.id.upsap1 && totOk == totNG) {
+//            if (id == R.id.upsap1 && totOk == totNG) {
+        if (id == R.id.upsap1) {
             TextView tvposted1 = findViewById(R.id.tvposted7);
             tvposted1.setText("1");
 
